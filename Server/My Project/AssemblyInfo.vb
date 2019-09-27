@@ -8,17 +8,17 @@ Imports System.Runtime.InteropServices
 
 ' Werte der Assemblyattribute überprüfen
 
-<Assembly: AssemblyTitle("Forms")>
+<Assembly: AssemblyTitle("Server")>
 <Assembly: AssemblyDescription("")>
 <Assembly: AssemblyCompany("")>
-<Assembly: AssemblyProduct("Forms")>
+<Assembly: AssemblyProduct("Server")>
 <Assembly: AssemblyCopyright("Copyright ©  2019")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
 
 'Die folgende GUID wird für die typelib-ID verwendet, wenn dieses Projekt für COM verfügbar gemacht wird.
-<Assembly: Guid("a9e135a4-6f3c-454a-acfa-a7b9ca5c8c59")>
+<Assembly: Guid("f845eeb9-16c8-4e8b-806b-ceb2c1a167fa")>
 
 ' Versionsinformationen für eine Assembly bestehen aus den folgenden vier Werten:
 '
