@@ -96,6 +96,7 @@ Public Class ServerConnector
         Await networkStream.FlushAsync()
     End Sub
 
+
     ' sendet eine Nachricht an mehrere Clients
     Public Sub send(recievers As TcpClient(), msg As String)
         For Each socket In recievers
