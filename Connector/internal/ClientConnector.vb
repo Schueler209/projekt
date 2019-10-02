@@ -6,34 +6,14 @@ Public Class ClientConnector
     Private clientSocket As TcpClient
     Private Ip As String = "127.0.0.1"
     Private Port As Integer = 8080
-    Event RecievedMessage(ByVal str As String)
 
     ' recieve Event
-    Private recieveHandler As Action(Of String)
-
-    Public WriteOnly Property OnRecieve() As Action(Of String)
-        Set(value As Action(Of String))
-            recieveHandler = value
-        End Set
-    End Property
+    Public ReadOnly OnRecieve As EventNotifier(Of String) = New EventNotifier(Of String)
 
     ' connect Event
-    Private connectionHandler As Action
-
-    Public WriteOnly Property OnConnection() As Action
-        Set(value As Action)
-            connectionHandler = value
-        End Set
-    End Property
-
+    Public ReadOnly OnConnection As EventNotifier = New EventNotifier()
     ' disconnect Event
-    Private closingHandler As Action
-
-    Public WriteOnly Property OnClose() As Action
-        Set(value As Action)
-            closingHandler = value
-        End Set
-    End Property
+    Public ReadOnly OnClose As EventNotifier = New EventNotifier()
 
     Public Sub New()
 
@@ -54,9 +34,7 @@ Public Class ClientConnector
     Public Sub connect()
         ' Erstellt Socket mit IP und Port
         Me.clientSocket = New TcpClient(Ip, Port)
-        If connectionHandler IsNot Nothing Then
-            connectionHandler()
-        End If
+        OnConnection.Notify()
         ' Wartet auf Nachrichten(unendlich)
         recieveThread()
     End Sub
@@ -72,16 +50,12 @@ Public Class ClientConnector
         While True
             ' Gibt Nachricht als Event weiter
             Dim msg As String = Await recieve()
-            If recieveHandler IsNot Nothing Then
-                recieveHandler(msg)
-            End If
+            OnRecieve.Notify(msg)
         End While
     End Sub
 
     Public Sub disconnect()
-        If closingHandler IsNot Nothing Then
-            closingHandler()
-        End If
+        OnClose.Notify()
         clientSocket.Close()
         clientSocket.Dispose()
     End Sub
@@ -97,6 +71,17 @@ Public Class ClientConnector
         ' senden
         Await serverStream.WriteAsync(outStream, 0, outStream.Length)
         Await serverStream.FlushAsync()
+    End Sub
+
+    ' sendet eine Nachricht an mehrere Clients
+    Public Sub sendAndRecieve(msg As String, recieveHandler As Action(Of String))
+        OnRecieve.addHandler(
+            Sub(str As String)
+                recieveHandler(str)
+                OnRecieve.removeHandler(recieveHandler)
+            End Sub)
+        send(msg)
+
     End Sub
 
     ' Nachrichten bekommen

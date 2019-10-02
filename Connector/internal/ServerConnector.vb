@@ -15,31 +15,12 @@ Public Class ServerConnector
     End Property
 
     ' recieve Event
-    Private recieveHandler As Action(Of String, TcpClient)
-
-    Public WriteOnly Property OnRecieve() As Action(Of String, TcpClient)
-        Set(value As Action(Of String, TcpClient))
-            recieveHandler = value
-        End Set
-    End Property
+    Public ReadOnly OnRecieve As EventNotifier(Of String, TcpClient) = New EventNotifier(Of String, TcpClient)
 
     ' connect Event
-    Private connectionHandler As Action(Of TcpClient)
-
-    Public WriteOnly Property OnConnection() As Action(Of TcpClient)
-        Set(value As Action(Of TcpClient))
-            connectionHandler = value
-        End Set
-    End Property
-
+    Public ReadOnly OnConnection As EventNotifier(Of TcpClient) = New EventNotifier(Of TcpClient)
     ' disconnect Event
-    Private closingHandler As Action(Of TcpClient)
-
-    Public WriteOnly Property OnClose() As Action(Of TcpClient)
-        Set(value As Action(Of TcpClient))
-            closingHandler = value
-        End Set
-    End Property
+    Public ReadOnly OnClose As EventNotifier(Of TcpClient) = New EventNotifier(Of TcpClient)
 
     Private Ip As String = "0.0.0.0"
     Private Port As Integer = 8080
@@ -68,9 +49,7 @@ Public Class ServerConnector
             ' sucht nach neuem client
             Dim clientSocket As TcpClient = serverSocket.AcceptTcpClient()
             ' fügt client zu der Liste hinzu
-            If connectionHandler IsNot Nothing Then
-                connectionHandler(clientSocket)
-            End If
+            OnConnection.Notify(clientSocket)
 
             _sockets.Add(clientSocket)
             awaitMessage(clientSocket)
@@ -100,9 +79,7 @@ Public Class ServerConnector
                 closeConnection(client)
             Finally
                 result = result.Trim()
-                If recieveHandler IsNot Nothing Then
-                    recieveHandler(result, client)
-                End If
+                OnRecieve.Notify(result, client)
             End Try
 
         End While
@@ -129,6 +106,19 @@ Public Class ServerConnector
         send(Sockets.ToArray(), msg)
     End Sub
 
+    ' sendet eine Nachricht an mehrere Clients
+    Public Sub sendAndRecieve(recievers As TcpClient(), msg As String, recieveHandler As Action(Of String, TcpClient))
+        OnRecieve.addHandler(
+            Sub(str As String, client As TcpClient)
+                recieveHandler(str, client)
+                OnRecieve.removeHandler(recieveHandler)
+            End Sub
+            )
+        For Each socket In recievers
+            send(socket, msg)
+        Next
+    End Sub
+
     ' empfängt eine Nachricht asynchron
     Private Async Function recieve(sender As TcpClient) As Task(Of String)
         Dim serverStream As NetworkStream = sender.GetStream()
@@ -142,9 +132,7 @@ Public Class ServerConnector
 
     ' beendet eine Verbindung
     Public Sub closeConnection(client As TcpClient)
-        If closingHandler IsNot Nothing Then
-            closingHandler(client)
-        End If
+        OnClose.Notify(client)
         _sockets.Remove(client)
         client.Close()
         client.Dispose()
