@@ -69,7 +69,7 @@ Public Class ServerConnector
     ' Wartet Asynchron auf Nachricht
     Private Async Sub awaitMessage(client As TcpClient)
         While True
-            Dim result As String
+            Dim result As String = ""
             Try
                 ' Gibt Event aus
 
@@ -78,8 +78,10 @@ Public Class ServerConnector
             Catch ex As Exception
                 closeConnection(client)
             Finally
-                result = result.Trim()
-                OnRecieve.Notify(result, client)
+                If result IsNot "" Then
+                    result = result.Trim()
+                    OnRecieve.Notify(result, client)
+                End If
             End Try
 
         End While
