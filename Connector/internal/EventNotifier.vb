@@ -1,6 +1,6 @@
 ﻿Public Class EventNotifier(Of T)
 
-    Private handlers As List(Of Action(Of T))
+    Private handlers As New List(Of Action(Of T))
 
     Sub [addHandler](action As Action(Of T))
         handlers.Add(action)
@@ -18,7 +18,7 @@
 End Class
 Public Class EventNotifier(Of T1, T2)
 
-    Private handlers As List(Of Action(Of T1, T2))
+    Private handlers As New List(Of Action(Of T1, T2))
 
     Sub [addHandler](action As Action(Of T1, T2))
         handlers.Add(action)
@@ -36,7 +36,7 @@ Public Class EventNotifier(Of T1, T2)
 End Class
 Public Class EventNotifier(Of T1, T2, T3)
 
-    Private handlers As List(Of Action(Of T1, T2, T3))
+    Private handlers As New List(Of Action(Of T1, T2, T3))
 
     Sub [addHandler](action As Action(Of T1, T2, T3))
         handlers.Add(action)
@@ -55,7 +55,7 @@ End Class
 
 Public Class EventNotifier
 
-    Private handlers As List(Of Action)
+    Private handlers As New List(Of Action)
 
     Sub [addHandler](action As Action)
         handlers.Add(action)

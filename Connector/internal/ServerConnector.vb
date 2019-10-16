@@ -130,7 +130,7 @@ Public Class ServerConnector
         Await serverStream.ReadAsync(inStream, 0, sender.ReceiveBufferSize)
         Console.WriteLine(sender.ReceiveBufferSize)
         ' In String umwandeln
-        Return ASCII.GetString(inStream)
+        Return ASCII.GetString(inStream).Trim()
     End Function
 
     ' beendet eine Verbindung
