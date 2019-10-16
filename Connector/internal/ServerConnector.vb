@@ -15,7 +15,7 @@ Public Class ServerConnector
     End Property
 
     ' recieve Event
-    Public ReadOnly OnRecieve As EventNotifier(Of String, TcpClient) = New EventNotifier(Of String, TcpClient)
+    Public ReadOnly OnRecieve As EventNotifier(Of ConnectionData, TcpClient) = New EventNotifier(Of ConnectionData, TcpClient)
 
     ' connect Event
     Public ReadOnly OnConnection As EventNotifier(Of TcpClient) = New EventNotifier(Of TcpClient)
@@ -69,50 +69,45 @@ Public Class ServerConnector
     ' Wartet Asynchron auf Nachricht
     Private Async Sub awaitMessage(client As TcpClient)
         While True
-            Dim result As String = ""
+            Dim result As ConnectionData
             Try
                 ' Gibt Event aus
 
-                result = Await recieve(client)
+                result = recieve(client)
 
             Catch ex As Exception
                 closeConnection(client)
             Finally
-                If result IsNot "" Then
-                    result = result.Trim()
-                    OnRecieve.Notify(result, client)
-                End If
+                OnRecieve.Notify(result, client)
             End Try
 
         End While
     End Sub
 
     ' sendet eine Nachricht an einen Client
-    Public Async Sub send(reciever As TcpClient, msg As String)
+    Public Async Sub send(reciever As TcpClient, msg As ConnectionData)
         Dim networkStream As NetworkStream = reciever.GetStream()
-        Dim outStream As Byte() = ASCII.GetBytes(msg)
-
-        Await networkStream.WriteAsync(outStream, 0, outStream.Length)
+        msg.Serialize(networkStream)
         Await networkStream.FlushAsync()
     End Sub
 
 
     ' sendet eine Nachricht an mehrere Clients
-    Public Sub send(recievers As TcpClient(), msg As String)
+    Public Sub send(recievers As TcpClient(), msg As ConnectionData)
         For Each socket In recievers
             send(socket, msg)
         Next
     End Sub
 
     ' sendet eine Nachricht an alle Clients
-    Public Sub sendAll(msg As String)
+    Public Sub sendAll(msg As ConnectionData)
         send(Sockets.ToArray(), msg)
     End Sub
 
     ' sendet eine Nachricht an mehrere Clients
-    Public Sub sendAndRecieve(recievers As TcpClient(), msg As String, recieveHandler As Action(Of String, TcpClient))
+    Public Sub sendAndRecieve(recievers As TcpClient(), msg As ConnectionData, recieveHandler As Action(Of ConnectionData, TcpClient))
         OnRecieve.addHandler(
-            Sub(str As String, client As TcpClient)
+            Sub(str As ConnectionData, client As TcpClient)
                 recieveHandler(str, client)
                 OnRecieve.removeHandler(recieveHandler)
             End Sub
@@ -123,14 +118,11 @@ Public Class ServerConnector
     End Sub
 
     ' empfängt eine Nachricht asynchron
-    Private Async Function recieve(sender As TcpClient) As Task(Of String)
+    Private Function recieve(sender As TcpClient) As ConnectionData
         Dim serverStream As NetworkStream = sender.GetStream()
         Dim inStream(sender.ReceiveBufferSize) As Byte
         ' Nachrichten einlesen
-        Await serverStream.ReadAsync(inStream, 0, sender.ReceiveBufferSize)
-        Console.WriteLine(sender.ReceiveBufferSize)
-        ' In String umwandeln
-        Return ASCII.GetString(inStream).Trim()
+        Return ConnectionData.Serialized(serverStream)
     End Function
 
     ' beendet eine Verbindung

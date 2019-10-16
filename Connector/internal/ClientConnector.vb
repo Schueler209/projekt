@@ -8,7 +8,7 @@ Public Class ClientConnector
     Private Port As Integer = 8080
 
     ' recieve Event
-    Public ReadOnly OnRecieve As EventNotifier(Of String) = New EventNotifier(Of String)
+    Public ReadOnly OnRecieve As EventNotifier(Of ConnectionData) = New EventNotifier(Of ConnectionData)
 
     ' connect Event
     Public ReadOnly OnConnection As EventNotifier = New EventNotifier()
@@ -49,7 +49,7 @@ Public Class ClientConnector
     Private Async Sub recieveThreadSub()
         While True
             ' Gibt Nachricht als Event weiter
-            Dim msg As String = Await recieve()
+            Dim msg As ConnectionData = recieve()
             OnRecieve.Notify(msg)
         End While
     End Sub
@@ -61,22 +61,19 @@ Public Class ClientConnector
     End Sub
 
     ' Nachrichten senden
-    Public Async Sub send(msg As String)
+    Public Async Sub send(msg As ConnectionData)
 
         ' Verbindung
         Dim serverStream As NetworkStream = clientSocket.GetStream()
         ' Nachricht in Bytes umwandeln
-        Dim outStream As Byte() = ASCII.GetBytes(msg)
-
-        ' senden
-        Await serverStream.WriteAsync(outStream, 0, outStream.Length)
+        msg.Serialize(serverStream)
         Await serverStream.FlushAsync()
     End Sub
 
     ' sendet eine Nachricht an mehrere Clients
-    Public Sub sendAndRecieve(msg As String, recieveHandler As Action(Of String))
+    Public Sub sendAndRecieve(msg As ConnectionData, recieveHandler As Action(Of ConnectionData))
         OnRecieve.addHandler(
-            Sub(str As String)
+            Sub(str As ConnectionData)
                 recieveHandler(str)
                 OnRecieve.removeHandler(recieveHandler)
             End Sub)
@@ -85,14 +82,11 @@ Public Class ClientConnector
     End Sub
 
     ' Nachrichten bekommen
-    Private Async Function recieve() As Task(Of String)
+    Private Function recieve() As ConnectionData
         Dim serverStream As NetworkStream = clientSocket.GetStream()
         Dim inStream(clientSocket.ReceiveBufferSize) As Byte
         ' Nachrichten einlesen
-        Await serverStream.ReadAsync(inStream, 0, clientSocket.ReceiveBufferSize)
-        ' In String umwandeln
-
-        Return ASCII.GetString(inStream)
+        Return ConnectionData.Serialized(serverStream)
     End Function
 
 End Class
