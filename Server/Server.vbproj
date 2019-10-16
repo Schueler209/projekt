@@ -106,5 +106,11 @@
     </None>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Connector\Connector.vbproj">
+      <Project>{111C5A7D-FEAE-4DF4-9141-C5AAFA91B2C3}</Project>
+      <Name>Connector</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

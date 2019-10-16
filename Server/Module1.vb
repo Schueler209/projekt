@@ -1,5 +1,7 @@
-﻿Module Module1
+﻿Imports System.Net.Sockets
+Imports Connector
 
+Module Module1
     Public Sub Main()
     End Sub
     Public Sub register(name As String, password As String,username As String)

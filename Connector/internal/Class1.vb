@@ -6,7 +6,7 @@ Public Class Class1
     Public Sub sendRegister(benutzername As String, passwort As String)
         'Als function die wenn positive rückmeldung von server kriegt als rückgabewert bestätigung gibt
         'laura dann if besagte function = bestätigt then registrierung erfolgreich
-        connector.send(zusammenschreiben(benutzername, passwort))
+        'connector.send(zusammenschreiben(benutzername, passwort))
 
 
     End Sub
