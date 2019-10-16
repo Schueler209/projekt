@@ -1,4 +1,6 @@
-﻿Public Class Register
+﻿Imports Connector
+
+Public Class Register
     Private Sub btnRegistrieren_Click(sender As Object, e As EventArgs) Handles btnRegistrieren.Click
         If Not txbPasswortWdh.Text = txbPasswort.Text Then lblFehlermeldung.Text = "Passwörter ungleich"
         If txbAnzeigename.Text = "" Then lblFehlermeldung.Text = "kein Anzeigename angegeben"
@@ -6,10 +8,19 @@
         If txbPasswort.Text = "" Then lblFehlermeldung.Text = "kein Passwort angegeben"
         If txbPasswortWdh.Text = "" Then lblFehlermeldung.Text = "Passwort nicht wiederholt"
         If lblFehlermeldung.Text = "" Then
-            chatten.Show()
-            Me.Hide()
+            connect.Register(txbAnzeigename.Text, txbBenutzername.Text, txbPasswort.Text, AddressOf Registerconfirm)
+
 
         End If
+
+
+
+
+    End Sub
+
+    Sub Registerconfirm(wert As Boolean)
+        If wert = False Then lblFehlermeldung.Text = "Benutzer existiert schon, bitte anderen Benutzernamen wählen."
+        If wert = True Then chatten.Show()
 
     End Sub
 
@@ -29,6 +40,18 @@
     Private Sub txbPasswortWdh_TextChanged(sender As Object, e As EventArgs) Handles txbPasswortWdh.TextChanged
         txbPasswortWdh.PasswordChar = "*"
     End Sub
+
+    Private connect As NetClient = New NetClient
+
+    Private Sub Register_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        connect.connect()
+
+
+    End Sub
+
+
 End Class
+
+
 
 
