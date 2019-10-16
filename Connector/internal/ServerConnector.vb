@@ -87,7 +87,8 @@ Public Class ServerConnector
     ' sendet eine Nachricht an einen Client
     Public Async Sub send(reciever As TcpClient, msg As ConnectionData)
         Dim networkStream As NetworkStream = reciever.GetStream()
-        msg.Serialize(networkStream)
+        Dim data As Byte() = msg.Serialize()
+        networkStream.Write(data, 0, data.Length)
         Await networkStream.FlushAsync()
     End Sub
 
@@ -121,8 +122,9 @@ Public Class ServerConnector
     Private Function recieve(sender As TcpClient) As ConnectionData
         Dim serverStream As NetworkStream = sender.GetStream()
         Dim inStream(sender.ReceiveBufferSize) As Byte
+        serverStream.Read(inStream, 0, sender.ReceiveBufferSize)
         ' Nachrichten einlesen
-        Return ConnectionData.Serialized(serverStream)
+        Return ConnectionData.Serialized(inStream)
     End Function
 
     ' beendet eine Verbindung

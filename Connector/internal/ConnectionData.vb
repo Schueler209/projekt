@@ -14,31 +14,28 @@ Public Class ConnectionData
     Public Data As Dictionary(Of String, Object)
 
 
-    Sub Serialize(stream As Stream)
-
+    Function Serialize() As Byte()
+        Dim M As New MemoryStream
         Dim formatter As New BinaryFormatter
 
         Try
-            formatter.Serialize(stream, Me)
-        Catch e As SerializationException
-            Console.WriteLine("Failed to serialize. Reason: " & e.Message)
-        Finally
-            stream.Close()
-        End Try
-
-    End Sub
-    Shared Function Serialized(stream As Stream) As ConnectionData
-
-        Dim formatter As New BinaryFormatter
-        Dim val
-        Try
-            val = DirectCast(formatter.Deserialize(stream), ConnectionData)
+            formatter.Serialize(M, Me)
         Catch e As SerializationException
             Console.WriteLine("Failed to serialize. Reason: " & e.Message)
             Throw
-        Finally
-            stream.Close()
+        End Try
+        Return M.ToArray()
 
+    End Function
+    Shared Function Serialized(bytes As Byte()) As ConnectionData
+        Dim M As New MemoryStream(bytes, False)
+        Dim formatter As New BinaryFormatter
+        Dim val
+        Try
+            val = DirectCast(formatter.Deserialize(M), ConnectionData)
+        Catch e As SerializationException
+            Console.WriteLine("Failed to serialize. Reason: " & e.Message)
+            Throw
         End Try
 
         Return val

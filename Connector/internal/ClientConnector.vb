@@ -66,7 +66,8 @@ Public Class ClientConnector
         ' Verbindung
         Dim serverStream As NetworkStream = clientSocket.GetStream()
         ' Nachricht in Bytes umwandeln
-        msg.Serialize(serverStream)
+        Dim data As Byte() = msg.Serialize()
+        serverStream.Write(data, 0, data.Length)
         Await serverStream.FlushAsync()
     End Sub
 
@@ -85,8 +86,9 @@ Public Class ClientConnector
     Private Function recieve() As ConnectionData
         Dim serverStream As NetworkStream = clientSocket.GetStream()
         Dim inStream(clientSocket.ReceiveBufferSize) As Byte
+        serverStream.Read(inStream, 0, clientSocket.ReceiveBufferSize)
         ' Nachrichten einlesen
-        Return ConnectionData.Serialized(serverStream)
+        Return ConnectionData.Serialized(inStream)
     End Function
 
 End Class
