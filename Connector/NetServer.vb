@@ -12,6 +12,9 @@ Public Class NetServer
         connector = New ServerConnector()
         ' Einkommende Nachricht handeln
         connector.OnRecieve.addHandler(AddressOf onRequest)
+        connector.OnConnection.addHandler(Sub()
+                                              Console.WriteLine("Neuer Client!")
+                                          End Sub)
         connector.connect()
     End Sub
 
@@ -23,6 +26,7 @@ Public Class NetServer
     ' Falls neue Nachricht kommt:
     Private Sub onRequest(req As ConnectionData, client As TcpClient)
         ' Welcher Typ ist die Nachricht?
+        Console.WriteLine("Eingehende Nachricht des Typs " & req.Type)
         Select Case req.Type
             Case "register"
                 If OnRegister IsNot Nothing Then
@@ -54,6 +58,8 @@ Public Class NetServer
                         End Sub
                     )
                 End If
+            Case Else
+                Console.WriteLine("Eine Nachricht des Typs " & req.Type & " konnte nicht zugeordnet werden!")
         End Select
 
     End Sub

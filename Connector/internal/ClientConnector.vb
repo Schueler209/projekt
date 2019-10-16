@@ -1,6 +1,7 @@
 ﻿Imports System.Net.Sockets
 Imports System.Threading
 Imports System.Text.Encoding
+Imports System.ComponentModel
 
 Public Class ClientConnector
     Private clientSocket As TcpClient
@@ -37,21 +38,26 @@ Public Class ClientConnector
         OnConnection.Notify()
         ' Wartet auf Nachrichten(unendlich)
         recieveThread()
+        Console.WriteLine("Neue Verbindung!")
     End Sub
 
     ' Neuen Threat erstellen
-    Private Function recieveThread() As Thread
-        Dim t = New Thread(AddressOf recieveThreadSub)
-        t.Start()
-        Return t
-    End Function
+    Private Sub recieveThread()
+        Dim worker As New BackgroundWorker
+        AddHandler worker.DoWork, AddressOf recieveThreadSub
+        AddHandler worker.RunWorkerCompleted, AddressOf recieveThreadCompleted
+        worker.RunWorkerAsync()
+    End Sub
 
-    Private Async Sub recieveThreadSub()
-        While True
-            ' Gibt Nachricht als Event weiter
-            Dim msg As ConnectionData = recieve()
-            OnRecieve.Notify(msg)
-        End While
+    Private Sub recieveThreadSub(sender As BackgroundWorker, e As DoWorkEventArgs)
+        ' Gibt Nachricht als Event weiter
+        e.Result = recieve()
+    End Sub
+    Private Sub recieveThreadCompleted(sender As BackgroundWorker, e As RunWorkerCompletedEventArgs)
+        ' Ergebnis weitergeben
+        OnRecieve.Notify(e.Result)
+        ' Nächsten Thread starten
+        recieveThread()
     End Sub
 
     Public Sub disconnect()

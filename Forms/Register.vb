@@ -19,8 +19,14 @@ Public Class Register
     End Sub
 
     Sub Registerconfirm(wert As Boolean)
-        If wert = False Then lblFehlermeldung.Text = "Benutzer existiert schon, bitte anderen Benutzernamen wählen."
-        If wert = True Then chatten.Show()
+        If wert Then
+            chatten.Show()
+            Me.Hide()
+        Else
+
+            lblFehlermeldung.Text = "Benutzer existiert schon, bitte anderen Benutzernamen wählen."
+
+        End If
 
     End Sub
 

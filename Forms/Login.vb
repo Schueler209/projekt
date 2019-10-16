@@ -5,12 +5,8 @@ Public Class Login
         If txbBenutzername.Text = "" Then lblFehler.Text = "kein Benutzername angegeben"
         If txbPasswort.Text = "" Then lblFehler.Text = "kein Passwort angegeben"
         If lblFehler.Text = "" Then
-            chatten.Show()
-            Me.Hide()
 
-            If lblFehler.Text = "" Then
-                connect.Login(txbBenutzername.Text, txbPasswort.Text, AddressOf loginconfirm)
-            End If
+            connect.Login(txbBenutzername.Text, txbPasswort.Text, AddressOf Loginconfirm)
         End If
 
     End Sub
@@ -29,8 +25,15 @@ Public Class Login
     End Sub
 
     Sub Loginconfirm(wert As Boolean)
-        If wert = False Then lblFehler.Text = "Passwort und Benutzername stimmen nicht überein"
-        If wert = True Then chatten.Show()
+        If wert Then
+            chatten.Show()
+            Me.Hide()
+        Else
+
+            lblFehler.Text = "Passwort und Benutzername stimmen nicht überein"
+
+        End If
+
     End Sub
 End Class
 

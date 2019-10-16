@@ -59,7 +59,7 @@ Public Class NetClient
         Dim data As New Dictionary(Of String, Object)
         data.Add("username", username)
         data.Add("password", password)
-        Dim req As New ConnectionData("loginconfirm", data)
+        Dim req As New ConnectionData("login", data)
         connector.send(req)
         ' Callback setzen
         OnLoginConfirm = callback

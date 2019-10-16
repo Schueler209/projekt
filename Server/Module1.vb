@@ -5,7 +5,6 @@ Module Module1
     Public Sub Main()
         Dim connect As NetServer = New NetServer
         connect.OnRegister = AddressOf register
-
         connect.connect()
     End Sub
 
