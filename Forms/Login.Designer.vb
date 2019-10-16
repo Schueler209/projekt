@@ -65,35 +65,38 @@ Partial Class Login
         '
         'btnLogin
         '
+        Me.btnLogin.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.btnLogin.ForeColor = System.Drawing.SystemColors.ControlText
         Me.btnLogin.Location = New System.Drawing.Point(656, 83)
         Me.btnLogin.Name = "btnLogin"
         Me.btnLogin.Size = New System.Drawing.Size(139, 40)
         Me.btnLogin.TabIndex = 4
         Me.btnLogin.Text = "Login"
-        Me.btnLogin.UseVisualStyleBackColor = True
+        Me.btnLogin.UseVisualStyleBackColor = False
         '
         'btnZumRegistrieren
         '
+        Me.btnZumRegistrieren.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.btnZumRegistrieren.Location = New System.Drawing.Point(643, 288)
         Me.btnZumRegistrieren.Name = "btnZumRegistrieren"
         Me.btnZumRegistrieren.Size = New System.Drawing.Size(168, 53)
         Me.btnZumRegistrieren.TabIndex = 5
         Me.btnZumRegistrieren.Text = "Zum Registrieren"
-        Me.btnZumRegistrieren.UseVisualStyleBackColor = True
+        Me.btnZumRegistrieren.UseVisualStyleBackColor = False
         '
         'lblFehler
         '
         Me.lblFehler.AutoSize = True
-        Me.lblFehler.Location = New System.Drawing.Point(110, 357)
+        Me.lblFehler.Location = New System.Drawing.Point(113, 406)
         Me.lblFehler.Name = "lblFehler"
-        Me.lblFehler.Size = New System.Drawing.Size(102, 17)
+        Me.lblFehler.Size = New System.Drawing.Size(0, 17)
         Me.lblFehler.TabIndex = 6
-        Me.lblFehler.Text = "Fehlermeldung"
         '
         'Login
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(968, 550)
         Me.Controls.Add(Me.lblFehler)
         Me.Controls.Add(Me.btnZumRegistrieren)
@@ -102,6 +105,7 @@ Partial Class Login
         Me.Controls.Add(Me.lblBenutzername)
         Me.Controls.Add(Me.txbPasswort)
         Me.Controls.Add(Me.txbBenutzername)
+        Me.ForeColor = System.Drawing.SystemColors.InfoText
         Me.Name = "Login"
         Me.Text = "Form1"
         Me.ResumeLayout(False)

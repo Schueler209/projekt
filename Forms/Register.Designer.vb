@@ -86,9 +86,8 @@ Partial Class Register
         Me.lblFehlermeldung.AutoSize = True
         Me.lblFehlermeldung.Location = New System.Drawing.Point(157, 420)
         Me.lblFehlermeldung.Name = "lblFehlermeldung"
-        Me.lblFehlermeldung.Size = New System.Drawing.Size(102, 17)
+        Me.lblFehlermeldung.Size = New System.Drawing.Size(0, 17)
         Me.lblFehlermeldung.TabIndex = 6
-        Me.lblFehlermeldung.Text = "Fehlermeldung"
         '
         'lblPasswort
         '
@@ -110,26 +109,29 @@ Partial Class Register
         '
         'btnRegistrieren
         '
+        Me.btnRegistrieren.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.btnRegistrieren.Location = New System.Drawing.Point(723, 391)
         Me.btnRegistrieren.Name = "btnRegistrieren"
         Me.btnRegistrieren.Size = New System.Drawing.Size(103, 46)
         Me.btnRegistrieren.TabIndex = 9
         Me.btnRegistrieren.Text = "Registrieren"
-        Me.btnRegistrieren.UseVisualStyleBackColor = True
+        Me.btnRegistrieren.UseVisualStyleBackColor = False
         '
         'btnLogin
         '
+        Me.btnLogin.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.btnLogin.Location = New System.Drawing.Point(724, 469)
         Me.btnLogin.Name = "btnLogin"
         Me.btnLogin.Size = New System.Drawing.Size(102, 44)
         Me.btnLogin.TabIndex = 10
         Me.btnLogin.Text = "zum Login"
-        Me.btnLogin.UseVisualStyleBackColor = True
+        Me.btnLogin.UseVisualStyleBackColor = False
         '
         'Register
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1067, 554)
         Me.Controls.Add(Me.btnLogin)
         Me.Controls.Add(Me.btnRegistrieren)
