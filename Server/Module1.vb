@@ -3,11 +3,8 @@
 
 
 Module Module1
-    Private connect As NetServer
-
-
+    Private connect As NetServer = New NetServer
     Public Sub Main()
-
     End Sub
 
     Public Sub register(name As String, username As String, password As String)
