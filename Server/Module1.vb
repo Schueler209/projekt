@@ -2,8 +2,8 @@
 Imports Connector
 
 Module Module1
+    Private connect As NetServer = New NetServer
     Public Sub Main()
-
     End Sub
     Public Sub register()
 
