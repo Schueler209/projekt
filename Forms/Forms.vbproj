@@ -79,6 +79,19 @@
     <Compile Include="chatten.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Class1.vb" />
+    <Compile Include="chat.Designer.vb">
+      <DependentUpon>chat.vb</DependentUpon>
+    </Compile>
+    <Compile Include="chat.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="benutzer.Designer.vb">
+      <DependentUpon>benutzer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="benutzer.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Login.Designer.vb">
       <DependentUpon>Login.vb</DependentUpon>
     </Compile>
@@ -110,6 +123,12 @@
   <ItemGroup>
     <EmbeddedResource Include="chatten.resx">
       <DependentUpon>chatten.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="chat.resx">
+      <DependentUpon>chat.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="benutzer.resx">
+      <DependentUpon>benutzer.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.vb</DependentUpon>
