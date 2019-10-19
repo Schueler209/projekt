@@ -13,8 +13,11 @@ Module Module1
     Public Sub register(name As String, username As String, password As String, done As Action(Of Boolean))
         Dim connString As String = "provider= microsoft.jet.oledb.4.0; " & "data source=db.mdb;" & ""
         Dim conn As New OleDbConnection(connString)
-        Dim command As New OleDbCommand("INSERT INTO users values('1," & name & "','" & username & "','" & password & "')")
+        Dim command As New OleDbCommand("INSERT INTO Users ([Name],Username,[Password]) VALUES (@displayname,@username,@password);")
         command.Connection = conn
+        command.Parameters.Add("@displayname", OleDbType.Char).Value = name
+        command.Parameters.Add("@username", OleDbType.Char).Value = username
+        command.Parameters.Add("@password", OleDbType.Char).Value = password
         Try
             conn.Open()
             command.ExecuteNonQuery()
