@@ -92,7 +92,7 @@ Partial Class chat
         Me.lblChatpartner.TabIndex = 6
         Me.lblChatpartner.Text = "Chatpartner"
         '
-        'Form1
+        'chat
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -104,7 +104,7 @@ Partial Class chat
         Me.Controls.Add(Me.btnNeuerKontakt)
         Me.Controls.Add(Me.lblKontakte)
         Me.Controls.Add(Me.ltbKontakte)
-        Me.Name = "Form1"
+        Me.Name = "chat"
         Me.Text = "Form1"
         Me.ResumeLayout(False)
         Me.PerformLayout()
