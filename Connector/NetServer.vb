@@ -19,6 +19,7 @@ Public Class NetServer
     Public OnRegister As Action(Of String, String, String, Action(Of Boolean))
     ' Event für login Neue Methode zuweisen!
     Public OnLogin As Action(Of String, String, Action(Of Boolean))
+    Public OnUserlist As Action(Of Action(Of String()))
 
     ' Falls neue Nachricht kommt:
     Private Sub onRequest(req As ConnectionData, client As TcpClient)
@@ -54,6 +55,18 @@ Public Class NetServer
                         End Sub
                     )
                 End If
+
+            Case "all users"
+                If OnUserlist IsNot Nothing Then
+                    OnUserlist(
+                    Sub(val As String())
+
+                    End Sub)
+                End If
+
+
+
+
         End Select
 
     End Sub
@@ -71,5 +84,11 @@ Public Class NetServer
         data.Add("success", res)
         Dim req As New ConnectionData("loginconfirm", data)
         connector.send(client, req)
+    End Sub
+
+    Sub AllUsersSend(ans As String(), client As TcpClient)
+        Dim data As New Dictionary(Of String, Object)
+        data.add("All users", ans)
+        connector.send(client, data)
     End Sub
 End Class
