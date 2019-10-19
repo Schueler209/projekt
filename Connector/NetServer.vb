@@ -12,9 +12,6 @@ Public Class NetServer
         connector = New ServerConnector()
         ' Einkommende Nachricht handeln
         connector.OnRecieve.addHandler(AddressOf onRequest)
-        connector.OnConnection.addHandler(Sub()
-                                              Console.WriteLine("Neuer Client!")
-                                          End Sub)
         connector.connect()
     End Sub
 
@@ -65,14 +62,14 @@ Public Class NetServer
     End Sub
 
     ' Sende Antwort für Registrieren
-    Sub RegisterConfirm(res As Boolean, client As TcpClient)
+    Private Sub RegisterConfirm(res As Boolean, client As TcpClient)
         Dim data As New Dictionary(Of String, Object)
         data.Add("success", res)
         Dim req As New ConnectionData("registerconfirm", data)
         connector.send(client, req)
     End Sub
     ' Sende Antwort für Login
-    Sub LoginConfirm(res As Boolean, client As TcpClient)
+    Private Sub LoginConfirm(res As Boolean, client As TcpClient)
         Dim data As New Dictionary(Of String, Object)
         data.Add("success", res)
         Dim req As New ConnectionData("loginconfirm", data)

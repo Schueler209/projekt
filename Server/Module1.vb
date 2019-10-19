@@ -1,4 +1,6 @@
-﻿Imports System.Net.Sockets
+﻿Imports System.Data.OleDb
+Imports System.Data.SqlClient
+Imports System.Net.Sockets
 Imports Connector
 Module Module1
 
@@ -9,31 +11,45 @@ Module Module1
     End Sub
 
     Public Sub register(name As String, username As String, password As String, done As Action(Of Boolean))
-    Try
-        Dim con As New SqlConnection
-        Dim cmd As New SqlCommand
-        Dim dr As SqlDataReader
-
-         con.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Marten\Source\Repos\projekt\Server\databaseuser.mdb;Integrated Security=True"
-            con.Open()
-            cmd.Connection = con
-            cmd.CommandType = CommandType.Text
-            cmd.CommandText = "select * from databaseuser where username='" & username & "' "
-            dr = cmd.ExecuteReader
-            If dr.HasRows Then
-                done(False)
-                con.Close()
-            Else
-                con.Close()
-                con.Open()
-                cmd = New SqlCommand("INSERT INTO databaseuser values('" & name & "','" & username & "','" & password & "')", con)
-                cmd.ExecuteNonQuery()
-                done(True)
-            End If
-                con.Close()
+        Dim connString As String = "provider= microsoft.jet.oledb.4.0; " & "data source=db.mdb;" & ""
+        Dim conn As New OleDbConnection(connString)
+        Dim command As New OleDbCommand("INSERT INTO users values('1," & name & "','" & username & "','" & password & "')")
+        command.Connection = conn
+        Try
+            conn.Open()
+            command.ExecuteNonQuery()
         Catch ex As Exception
-            MsgBox("Error")
+            Console.WriteLine(ex.Message)
+        Finally
+            done(True)
         End Try
+        'Dim con As New SqlConnection
+        'Dim cmd As New SqlCommand
+        'Try
+
+        '    Dim dr As SqlDataReader
+
+        '    con.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Marten\Source\Repos\projekt\Server\databaseuser.mdb;Integrated Security=True"
+        '    con.Open()
+        '    cmd.Connection = con
+        '    cmd.CommandType = CommandType.Text
+        '    cmd.CommandText = "select * from databaseuser where username='" & username & "' "
+        '    dr = cmd.ExecuteReader
+        '    If dr.HasRows Then
+        '        done(False)
+        '        con.Close()
+        '    Else
+        '        con.Close()
+        '        con.Open()
+        '        cmd = New SqlCommand("INSERT INTO databaseuser values('" & name & "','" & username & "','" & password & "')", con)
+        '        cmd.ExecuteNonQuery()
+        '        done(True)
+        '    End If
+        '    con.Close()
+        'Catch ex As Exception
+        '    Console.WriteLine(ex.Message)
+        '    MsgBox("Error")
+        'End Try
 
         'Dim con As New OleDb.OleDbConnection
         'Dim cmd As New OleDb.OleDbCommand
@@ -42,44 +58,25 @@ Module Module1
         'reader = cmd.ExecuteReader
         'cmd.Connection = con
         'cmd.CommandType = CommandType.Text
-       ' cmd.CommandText = "select * databaseuser ='" & username & "' "
+        ' cmd.CommandText = "select * databaseuser ='" & username & "' "
         'reader = cmd.ExecuteReader
         'If reader.HasRows Then
-         '   done(False)
-          '  Console.WriteLine("Hallo")
-           ' con.Close()
+        '   done(False)
+        '  Console.WriteLine("Hallo")
+        ' con.Close()
         'Else
-         '   con.Close()
-          '  con.Open() 'Verbindung aufbauen
-           ' cmd = New OleDb.OleDbCommand("INSERT INTO databaseuser values('" & name & "','" & username & "','" & password & "')", con) 'Eingabe von den Daten in Datenbank
-            'con.Close() 'Verbindung schließen
-            'done(True)
+        '   con.Close()
+        '  con.Open() 'Verbindung aufbauen
+        ' cmd = New OleDb.OleDbCommand("INSERT INTO databaseuser values('" & name & "','" & username & "','" & password & "')", con) 'Eingabe von den Daten in Datenbank
+        'con.Close() 'Verbindung schließen
+        'done(True)
         'End If
 
 
     End Sub
 
-    Public Sub logincheck(username As String, password As String,done As Action(Of Boolean))
+    Public Sub logincheck(username As String, password As String, done As Action(Of Boolean))
 
-         Dim con As New SqlConnection
-        Dim cmd As New SqlCommand
-        Dim dr As SqlDataReader
-
-         con.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Marten\Source\Repos\projekt\Server\databaseuser.mdb;Integrated Security=True"
-            con.Open()
-            cmd.Connection = con
-            cmd.CommandType = CommandType.Text
-            cmd.CommandText = "select * from databaseuser where username='" & username & "' " and "select * from databaseuser where password='" & password & "'"
-            dr = cmd.ExecuteReader
-            If dr.HasRows Then
-                done(True)
-                con.Close()
-            Else
-            done(False)
-            End if   
-        'Verbindung aufbauen
-        'Verbindung mit databaseuser
-        'Daten überprüfen und bestätigen/Fehlermeldung
 
 
 

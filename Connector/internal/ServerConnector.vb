@@ -54,7 +54,6 @@ Public Class ServerConnector
             _sockets.Add(clientSocket)
             awaitMessage(clientSocket)
 
-
         End While
 
     End Sub
@@ -72,7 +71,6 @@ Public Class ServerConnector
             Dim result As ConnectionData
             Try
                 ' Gibt Event aus
-
                 result = recieve(client)
 
             Catch ex As Exception
