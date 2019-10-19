@@ -2,11 +2,13 @@
 
 Public Class Register
     Private Sub btnRegistrieren_Click(sender As Object, e As EventArgs) Handles btnRegistrieren.Click
+        lblFehlermeldung.Text = ""
         If Not txbPasswortWdh.Text = txbPasswort.Text Then lblFehlermeldung.Text = "Passwörter ungleich"
         If txbAnzeigename.Text = "" Then lblFehlermeldung.Text = "kein Anzeigename angegeben"
         If txbBenutzername.Text = "" Then lblFehlermeldung.Text = "kein Benutzername angegeben"
         If txbPasswort.Text = "" Then lblFehlermeldung.Text = "kein Passwort angegeben"
         If txbPasswortWdh.Text = "" Then lblFehlermeldung.Text = "Passwort nicht wiederholt"
+
         If lblFehlermeldung.Text = "" Then
             connect.Register(txbAnzeigename.Text, txbBenutzername.Text, txbPasswort.Text, AddressOf Registerconfirm)
 
@@ -19,8 +21,14 @@ Public Class Register
     End Sub
 
     Sub Registerconfirm(wert As Boolean)
-        If wert = False Then lblFehlermeldung.Text = "Benutzer existiert schon, bitte anderen Benutzernamen wählen."
-        If wert = True Then chatten.Show()
+        If wert Then
+            chatten.Show()
+            Me.Hide()
+        Else
+
+            lblFehlermeldung.Text = "Benutzer existiert schon, bitte anderen Benutzernamen wählen."
+
+        End If
 
     End Sub
 

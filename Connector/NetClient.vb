@@ -27,7 +27,7 @@ Public Class NetClient
             Case "registerconfirm"
                 If OnRegisterConfirm IsNot Nothing Then
                     ' Argumente bekommen
-                    Dim res As String = req.Data.Item("success")
+                    Dim res As Boolean = req.Data.Item("success")
 
                     ' Methode aufrufen + Callback 
                     OnRegisterConfirm(res)
@@ -35,7 +35,7 @@ Public Class NetClient
             Case "loginconfirm"
                 If OnLoginConfirm IsNot Nothing Then
                     ' Argumente bekommen
-                    Dim res As String = req.Data.Item("success")
+                    Dim res As Boolean = req.Data.Item("success")
                     ' Methode aufrufen + Callback 
                     OnLoginConfirm(res)
                 End If
@@ -59,7 +59,7 @@ Public Class NetClient
         Dim data As New Dictionary(Of String, Object)
         data.Add("username", username)
         data.Add("password", password)
-        Dim req As New ConnectionData("loginconfirm", data)
+        Dim req As New ConnectionData("login", data)
         connector.send(req)
         ' Callback setzen
         OnLoginConfirm = callback
