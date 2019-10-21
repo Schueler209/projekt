@@ -1,6 +1,7 @@
 ﻿Imports System.Net.Sockets
 Imports System.Net
 Imports System.Text.Encoding
+Imports System.ComponentModel
 
 Public Class ServerConnector
     Private serverSocket As TcpListener
@@ -52,21 +53,36 @@ Public Class ServerConnector
             OnConnection.Notify(clientSocket)
 
             _sockets.Add(clientSocket)
-            awaitMessage(clientSocket)
+
+            ' startet neuen Threat, der auf Nachricht wartet
+            RecieveThread(clientSocket)
 
         End While
 
     End Sub
 
-    Private Sub AcceptClient(ByVal ar As IAsyncResult)
-        Dim clientSocket As TcpClient = serverSocket.EndAcceptTcpClient(ar)
-        _sockets.Add(clientSocket)
-        awaitMessage(clientSocket)
-        serverSocket.BeginAcceptTcpClient(New AsyncCallback(AddressOf AcceptClient), serverSocket)
+    Private Sub RecieveThread(client As TcpClient)
+        Dim worker As New BackgroundWorker
+        AddHandler worker.DoWork, AddressOf RecieveThreadWork
+        AddHandler worker.RunWorkerCompleted, Sub(sender As BackgroundWorker, e As RunWorkerCompletedEventArgs)
+                                                  RecieveThreadCompleted(sender, e, client)
+                                              End Sub
+
+        worker.RunWorkerAsync(client)
+    End Sub
+    Private Sub RecieveThreadWork(sender As BackgroundWorker, e As DoWorkEventArgs)
+        e.Result = awaitMessage(e.Argument)
+    End Sub
+
+    Private Sub RecieveThreadCompleted(sender As BackgroundWorker, e As RunWorkerCompletedEventArgs, client As TcpClient)
+        ' Ergebnis weitergeben
+        OnRecieve.Notify(e.Result, client)
+        ' Nächsten Thread starten
+        RecieveThread(client)
     End Sub
 
     ' Wartet Asynchron auf Nachricht
-    Private Async Sub awaitMessage(client As TcpClient)
+    Private Function awaitMessage(client As TcpClient) As ConnectionData
         While True
             Dim result As ConnectionData
             Try
@@ -75,12 +91,12 @@ Public Class ServerConnector
 
             Catch ex As Exception
                 closeConnection(client)
-            Finally
-                OnRecieve.Notify(result, client)
+                Return Nothing
             End Try
+            Return result
 
         End While
-    End Sub
+    End Function
 
     ' sendet eine Nachricht an einen Client
     Public Async Sub send(reciever As TcpClient, msg As ConnectionData)

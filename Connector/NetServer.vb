@@ -23,6 +23,7 @@ Public Class NetServer
 
     ' Falls neue Nachricht kommt:
     Private Sub onRequest(req As ConnectionData, client As TcpClient)
+        Console.WriteLine("Einkommende Nachricht des Typs " & req.Type)
         ' Welcher Typ ist die Nachricht?
         Select Case req.Type
             Case "register"
@@ -42,7 +43,7 @@ Public Class NetServer
                     )
                 End If
             Case "login"
-                If OnRegister IsNot Nothing Then
+                If OnLogin IsNot Nothing Then
                     ' Argumente bekommen
                     Dim username As String = req.Data.Item("username")
                     Dim password As String = req.Data.Item("password")
@@ -89,6 +90,6 @@ Public Class NetServer
     Sub AllUsersSend(ans As String(), client As TcpClient)
         Dim data As New Dictionary(Of String, Object)
         data.add("All users", ans)
-        connector.send(client, data)
+        connector.send(client, New ConnectionData("users", data))
     End Sub
 End Class
