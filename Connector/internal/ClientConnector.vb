@@ -2,6 +2,7 @@
 Imports System.Threading
 Imports System.Text.Encoding
 Imports System.ComponentModel
+Imports System.IO
 
 Public Class ClientConnector
     Private clientSocket As TcpClient
@@ -15,6 +16,8 @@ Public Class ClientConnector
     Public ReadOnly OnConnection As EventNotifier = New EventNotifier()
     ' disconnect Event
     Public ReadOnly OnClose As EventNotifier = New EventNotifier()
+    ' connection lost Event
+    Public ReadOnly OnConnectionLost As EventNotifier = New EventNotifier()
 
     Public Sub New()
 
@@ -54,10 +57,19 @@ Public Class ClientConnector
         e.Result = recieve()
     End Sub
     Private Sub recieveThreadCompleted(sender As BackgroundWorker, e As RunWorkerCompletedEventArgs)
-        ' Ergebnis weitergeben
-        OnRecieve.Notify(e.Result)
-        ' Nächsten Thread starten
-        recieveThread()
+
+        ' Wenn verbindung abbricht
+        If CType(e.Result, ConnectionData).Type = "ConnectionLost" Then
+            ' Schließe die Verbindung
+            disconnect()
+            ' sende Disconnect Event
+            OnConnectionLost.Notify()
+        Else
+            ' Ergebnis weitergeben
+            OnRecieve.Notify(e.Result)
+            ' Nächsten Thread starten
+            recieveThread()
+        End If
     End Sub
 
     Public Sub disconnect()
@@ -90,11 +102,16 @@ Public Class ClientConnector
 
     ' Nachrichten bekommen
     Private Function recieve() As ConnectionData
-        Dim serverStream As NetworkStream = clientSocket.GetStream()
-        Dim inStream(clientSocket.ReceiveBufferSize) As Byte
-        serverStream.Read(inStream, 0, clientSocket.ReceiveBufferSize)
-        ' Nachrichten einlesen
-        Return ConnectionData.Serialized(inStream)
+        Try
+            Dim serverStream As NetworkStream = clientSocket.GetStream()
+            Dim inStream(clientSocket.ReceiveBufferSize) As Byte
+            serverStream.Read(inStream, 0, clientSocket.ReceiveBufferSize)
+            ' Nachrichten einlesen
+            Return ConnectionData.Serialized(inStream)
+        Catch ex As IOException
+            Return New ConnectionData("ConnectionLost", New Dictionary(Of String, Object))
+        End Try
+
     End Function
 
 End Class
