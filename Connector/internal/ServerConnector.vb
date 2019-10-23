@@ -71,32 +71,28 @@ Public Class ServerConnector
         worker.RunWorkerAsync(client)
     End Sub
     Private Sub RecieveThreadWork(sender As BackgroundWorker, e As DoWorkEventArgs)
-        e.Result = awaitMessage(e.Argument)
+        Try
+            e.Result = recieve(e.Argument)
+        Catch ex As Exception
+            e.Result = Nothing
+        End Try
+
     End Sub
 
     Private Sub RecieveThreadCompleted(sender As BackgroundWorker, e As RunWorkerCompletedEventArgs, client As TcpClient)
-        ' Ergebnis weitergeben
-        OnRecieve.Notify(e.Result, client)
-        ' Nächsten Thread starten
-        RecieveThread(client)
+
+        If (e.Result Is Nothing) Then
+            ' Verbindung abbrechen
+            closeConnection(client)
+        Else
+            ' Ergebnis weitergeben
+            OnRecieve.Notify(e.Result, client)
+            ' Nächsten Thread starten
+            RecieveThread(client)
+
+        End If
+
     End Sub
-
-    ' Wartet Asynchron auf Nachricht
-    Private Function awaitMessage(client As TcpClient) As ConnectionData
-        While True
-            Dim result As ConnectionData
-            Try
-                ' Gibt Event aus
-                result = recieve(client)
-
-            Catch ex As Exception
-                closeConnection(client)
-                Return Nothing
-            End Try
-            Return result
-
-        End While
-    End Function
 
     ' sendet eine Nachricht an einen Client
     Public Async Sub send(reciever As TcpClient, msg As ConnectionData)
