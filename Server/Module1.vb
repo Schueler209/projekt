@@ -13,6 +13,7 @@ Module Module1
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
         Dim dr As SqlDataReader
+       
 
          con.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Marten\Source\Repos\projekt\Server\databaseuser.mdb;Integrated Security=True"
             con.Open()
