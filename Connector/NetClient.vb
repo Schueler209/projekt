@@ -19,6 +19,12 @@ Public Class NetClient
     Public OnRegisterConfirm As Action(Of Boolean)
     ' Event für login Neue Methode zuweisen!
     Public OnLoginConfirm As Action(Of Boolean)
+    'Event für alle Benutzernamenn empfangen
+    Public OnUserList As Action(Of String())
+    'Event für Freunde empfangen
+    Public OnFriends As Action(Of String())
+    'Event für neuen Freund hinzufügen
+    Public OnNewFriendConfirm As Action(Of Boolean)
 
     ' Falls neue Nachricht kommt:
     Private Sub onRequest(req As ConnectionData)
@@ -39,6 +45,26 @@ Public Class NetClient
                     ' Methode aufrufen + Callback 
                     OnLoginConfirm(res)
                 End If
+            Case "userlist"
+                If OnUserList IsNot Nothing Then
+                    Dim list As String() = req.Data.Item("All users")
+                    OnUserList(list)
+                End If
+
+            Case "friends"
+                If OnFriends IsNot Nothing Then
+                    Dim list As String() = req.Data.Item("Friends")
+                    OnFriends(list)
+                End If
+
+            Case "new Friend confirm"
+                If OnNewFriend IsNot Nothing Then
+                    Dim ans As Boolean = req.Data.Item("succes")
+                    OnNewFriend(ans)
+                End If
+
+
+
         End Select
 
     End Sub
@@ -64,4 +90,27 @@ Public Class NetClient
         ' Callback setzen
         OnLoginConfirm = callback
     End Sub
+
+    'Userlist
+    Sub getAllUsers(callback As String())
+        Dim data As New Dictionary(Of String, Object)
+        Dim req As New ConnectionData("all users")
+        connector.send(req)
+        OnUserList = callback
+    End Sub
+
+    'Friends
+    Sub getFriends(callback As String())
+        Dim data As New Dictionary(Of String, Object)
+        Dim req As New ConnectionData("Friends")
+        connector.send(req)
+        OnUserList = callback
+    End Sub
+
+    'NewFriends
+    Sub NewFriendConfirm(callback As Action(Of Boolean))
+        Dim data As New Dictionary
+
+    End Sub
+
 End Class
