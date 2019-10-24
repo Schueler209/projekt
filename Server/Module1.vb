@@ -95,7 +95,10 @@ Module Module1
 
     Public Sub logincheck(username As String, password As String, done As Action(Of Boolean))
 
-
+        Dim connString As String = "provider= microsoft.jet.oledb.4.0; " & "data source=db.mdb;" & ""
+        Dim conn As New OleDbConnection(connString)
+        Dim command As New OleDbCommand()
+        Dim reader
 
 
 
