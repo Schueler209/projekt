@@ -1,13 +1,20 @@
 ﻿Imports System.Data.OleDb
-Imports System.Data.SqlClient
 Imports System.Net.Sockets
-Imports Connector
+'Imports connector
+Imports Server.dbTableAdapters
+
 Module Module1
 
     Public Sub Main()
-        Dim connect As NetServer = New NetServer
-        connect.OnRegister = AddressOf register
-        connect.connect()
+        'Dim users As New usersTableAdapter
+        'users.GetData().
+
+        'Dim connect As NetServer = New NetServer
+        'connect.OnRegister = AddressOf register
+        'connect.connect()
+        register("Till", "Till1234", "123", Sub(g As Boolean)
+                                            End Sub)
+
     End Sub
 
     Public Sub register(name As String, username As String, password As String, done As Action(Of Boolean))
@@ -18,19 +25,27 @@ Module Module1
         command.Parameters.Add("@displayname", OleDbType.Char).Value = name
         command.Parameters.Add("@username", OleDbType.Char).Value = username
         command.Parameters.Add("@password", OleDbType.Char).Value = password
-        Try
-            conn.Open()
-            command.ExecuteNonQuery()
-        Catch ex As Exception
-            Console.WriteLine(ex.Message)
-        Finally
-            done(True)
-        End Try
-        'Dim con As New SqlConnection
-        'Dim cmd As New SqlCommand
+
+        command.CommandType = CommandType.Text
+        command.CommandText = "select * from users where Username = '" & username & "'"
+        Dim reader = command.ExecuteReader
+        If reader.HasRows Then
+            done(False)
+            conn.Close()
+        Else
+            Try
+                conn.Open()
+                command.ExecuteNonQuery()
+            Catch ex As Exception
+                Console.WriteLine(ex.Message)
+            Finally
+                done(True)
+            End Try
+        End If
+
         'Try
 
-        '    Dim dr As SqlDataReader
+
 
         '    con.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Marten\Source\Repos\projekt\Server\databaseuser.mdb;Integrated Security=True"
         '    con.Open()
