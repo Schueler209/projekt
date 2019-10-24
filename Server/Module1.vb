@@ -96,9 +96,18 @@ Module Module1
         Dim connString As String = "provider= microsoft.jet.oledb.4.0; " & "data source=db.mdb;" & ""
         Dim conn As New OleDbConnection(connString)
         Dim command As New OleDbCommand()
-        Dim reader
+        command.Connection = conn
 
-
+        command.CommandType = CommandType.Text
+        command.CommandText = "select * from users where Username = '" & username & "'" And "select * from users where Password = '" & password & "'"
+        Dim reader = command.ExecuteReader
+        If reader.HasRows Then
+            done(True)
+            conn.Close()
+        Else
+            done(False)
+            conn.Close()
+        End If
 
     End Sub
 End Module
