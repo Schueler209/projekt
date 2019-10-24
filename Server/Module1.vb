@@ -1,6 +1,6 @@
 ﻿Imports System.Data.OleDb
 Imports System.Net.Sockets
-'Imports connector
+Imports Connector
 Imports Server.dbTableAdapters
 
 Module Module1
@@ -9,11 +9,9 @@ Module Module1
         'Dim users As New usersTableAdapter
         'users.GetData().
 
-        'Dim connect As NetServer = New NetServer
-        'connect.OnRegister = AddressOf register
-        'connect.connect()
-        register("Till", "Till1234", "123", Sub(g As Boolean)
-                                            End Sub)
+        Dim connect As NetServer = New NetServer
+        connect.OnRegister = AddressOf register
+        connect.connect()
 
     End Sub
 

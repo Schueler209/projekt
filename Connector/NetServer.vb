@@ -22,9 +22,9 @@ Public Class NetServer
     'Event für alle Benutzernamen senden
     Public OnUserlist As Action(Of Action(Of String()))
     'Event für Freunde senden
-    Public OnFriends As Action(Of Action(Of String)))
+    Public OnFriends As Action(Of Action(Of String()))
     'Event für Neue Freunde
-    Public OnNewFriend As Action(Of String)
+    Public OnNewFriend As Action(Of String, Action(Of Boolean))
 
 
     ' Falls neue Nachricht kommt:
@@ -125,9 +125,9 @@ Public Class NetServer
         connector.send(client, New ConnectionData("friends", data))
     End Sub
 
-    Sub NewFriendConfirm(val As Boolean, client)
+    Sub NewFriendConfirm(val As Boolean, client As TcpClient)
         Dim data As New Dictionary(Of String, Object)
-        data.Add("succes", val)
-        connector.send(data)
+        data.Add("success", val)
+        connector.send(client, New ConnectionData("friendconfirm", data))
     End Sub
 End Class
