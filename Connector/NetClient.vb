@@ -58,9 +58,9 @@ Public Class NetClient
                 End If
 
             Case "new Friend confirm"
-                If OnNewFriend IsNot Nothing Then
+                If OnNewFriendConfirm IsNot Nothing Then
                     Dim ans As Boolean = req.Data.Item("succes")
-                    OnNewFriend(ans)
+                    OnNewFriendConfirm(ans)
                 End If
 
 
@@ -92,24 +92,24 @@ Public Class NetClient
     End Sub
 
     'Userlist
-    Sub getAllUsers(callback As String())
+    Sub getAllUsers(callback As Action(Of String()))
         Dim data As New Dictionary(Of String, Object)
-        Dim req As New ConnectionData("all users")
-        connector.send(req)
+        Dim res As New ConnectionData("all users", data)
+        connector.send(res)
         OnUserList = callback
     End Sub
 
     'Friends
-    Sub getFriends(callback As String())
+    Sub getFriends(callback As Action(Of String()))
         Dim data As New Dictionary(Of String, Object)
-        Dim req As New ConnectionData("Friends")
-        connector.send(req)
+        Dim res As New ConnectionData("Friends", data)
+        connector.send(res)
         OnUserList = callback
     End Sub
 
     'NewFriends
     Sub NewFriendConfirm(callback As Action(Of Boolean))
-        Dim data As New Dictionary
+        Dim data As New Dictionary(Of String, Object)
 
     End Sub
 

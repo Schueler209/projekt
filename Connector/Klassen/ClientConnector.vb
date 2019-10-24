@@ -4,7 +4,7 @@ Imports System.Text.Encoding
 Imports System.ComponentModel
 Imports System.IO
 
-Public Class ClientConnector
+Friend Class ClientConnector
     Private clientSocket As TcpClient
     Private Ip As String = "127.0.0.1"
     Private Port As Integer = 8080

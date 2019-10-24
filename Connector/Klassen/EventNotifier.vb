@@ -10,7 +10,7 @@
     End Sub
 
     Sub Notify(value As T)
-        For Each handler In handlers
+        For Each handler As Action(Of T) In handlers
             handler(value)
         Next
     End Sub
@@ -28,7 +28,7 @@ Public Class EventNotifier(Of T1, T2)
     End Sub
 
     Sub Notify(value1 As T1, value2 As T2)
-        For Each handler In handlers
+        For Each handler As Action(Of T1, T2) In handlers
             handler(value1, value2)
         Next
     End Sub
@@ -46,7 +46,7 @@ Public Class EventNotifier(Of T1, T2, T3)
     End Sub
 
     Sub Notify(value1 As T1, value2 As T2, value3 As T3)
-        For Each handler In handlers
+        For Each handler As Action(Of T1, T2, T3) In handlers
             handler(value1, value2, value3)
         Next
     End Sub
@@ -65,7 +65,7 @@ Public Class EventNotifier
     End Sub
 
     Sub Notify()
-        For Each handler In handlers
+        For Each handler As Action In handlers
             handler()
         Next
     End Sub

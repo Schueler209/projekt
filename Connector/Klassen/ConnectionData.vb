@@ -3,7 +3,11 @@ Imports System.Runtime.Serialization
 Imports System.Runtime.Serialization.Formatters.Binary
 
 <Serializable()>
-Public Class ConnectionData
+Friend Class ConnectionData
+    Sub New(_type As String)
+        Type = _type
+        Data = New Dictionary(Of String, Object)
+    End Sub
     Sub New(_type As String, _data As Dictionary(Of String, Object))
         Type = _type
         Data = _data
@@ -12,6 +16,18 @@ Public Class ConnectionData
 
     Public Type As String
     Public Data As Dictionary(Of String, Object)
+
+    Public Sub addData(key As String, obj As Object)
+        Data.Add(key, obj)
+    End Sub
+
+
+    Public Function getData(key As String) As Object
+        Return Data.Item(key)
+    End Function
+    Public Function getData(Of T)(key As String) As Object
+        Return CType(Data.Item(key), T)
+    End Function
 
 
     Function Serialize() As Byte()

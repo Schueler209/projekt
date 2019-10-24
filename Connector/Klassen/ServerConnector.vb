@@ -3,7 +3,7 @@ Imports System.Net
 Imports System.Text.Encoding
 Imports System.ComponentModel
 
-Public Class ServerConnector
+Friend Class ServerConnector
     Private serverSocket As TcpListener
     ' Liste aller verbundener Clients
     Private ReadOnly _sockets As New List(Of TcpClient)
@@ -105,8 +105,8 @@ Public Class ServerConnector
 
     ' sendet eine Nachricht an mehrere Clients
     Public Sub send(recievers As TcpClient(), msg As ConnectionData)
-        For Each socket In recievers
-            send(socket, msg)
+        For Each client As TcpClient In recievers
+            send(client, msg)
         Next
     End Sub
 
@@ -123,8 +123,8 @@ Public Class ServerConnector
                 OnRecieve.removeHandler(recieveHandler)
             End Sub
             )
-        For Each socket In recievers
-            send(socket, msg)
+        For Each client As TcpClient In recievers
+            send(client, msg)
         Next
     End Sub
 
@@ -148,7 +148,7 @@ Public Class ServerConnector
 
     ' beendet alle Verbindungen
     Public Sub closeConnections()
-        For Each client In Sockets
+        For Each client As TcpClient In Sockets
             closeConnection(client)
         Next
     End Sub
