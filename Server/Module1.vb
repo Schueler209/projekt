@@ -51,7 +51,7 @@ Module Module1
         command.Connection = conn
 
         command.CommandType = CommandType.Text
-        command.CommandText = "select * from users where Username = '" & username & "'" And "select * from users where Password = '" & password & "'"
+        command.CommandText = "SELECT * FROM users WHERE Username = '" & username & "'" And "select * from users where Password = '" & password & "'"
         conn.Open()
         Dim reader = command.ExecuteReader
         If reader.HasRows Then
@@ -61,6 +61,45 @@ Module Module1
             done(False)
             conn.Close()
         End If
+    End Sub
+
+    Public Function GetID(ByVal username As String, ByRef ID As Integer) As Boolean
+        Dim success As Boolean = False
+        Dim connString As String = "provider= microsoft.jet.oledb.4.0; " & "data source=db.mdb;" & ""
+        Dim conn As New OleDbConnection(connString)
+        Dim command As New OleDbCommand()
+        command.Connection = conn
+        command.CommandText = "SELECT ID-User FROM users WHERE [username] = ? "
+
+        command.Parameters.AddWithValue("?", username)
+        conn.Open()
+        Dim reader = command.ExecuteReader
+        If reader.HasRows Then
+            ID = reader.GetInt32(0)
+            success = True
+            conn.Close()
+        Else
+            success = False
+            conn.Close()
+        End If
+        Return success
+    End Function
+
+
+
+
+    Public Sub freundhinzufügen(username As String, usernamehinzugefügterfreund As String)
+
+        Dim connString As String = "provider= microsoft.jet.oledb.4.0; " & "data source=db.mdb;" & ""
+        Dim conn As New OleDbConnection(connString)
+        Dim command As New OleDbCommand()
+
+        command.Connection = conn
+        command.CommandType = CommandType.Text
+        command.CommandText = "select * from users where username = '" & username & "'" And "select * from users where usernamehinzugefügterfreund = '" & username & "'"
+
+
+
     End Sub
 
 End Module
