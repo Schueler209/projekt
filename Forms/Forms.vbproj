@@ -73,31 +73,31 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="chatten.Designer.vb">
+    <Compile Include="Formen\chatten.Designer.vb">
       <DependentUpon>chatten.vb</DependentUpon>
     </Compile>
-    <Compile Include="chatten.vb">
+    <Compile Include="Formen\chatten.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Class1.vb" />
-    <Compile Include="chat.Designer.vb">
+    <Compile Include="Formen\chat.Designer.vb">
       <DependentUpon>chat.vb</DependentUpon>
     </Compile>
-    <Compile Include="chat.vb">
+    <Compile Include="Formen\chat.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="benutzer.Designer.vb">
+    <Compile Include="Formen\benutzer.Designer.vb">
       <DependentUpon>benutzer.vb</DependentUpon>
     </Compile>
-    <Compile Include="benutzer.vb">
+    <Compile Include="Formen\benutzer.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login.Designer.vb">
+    <Compile Include="Formen\Login.Designer.vb">
       <DependentUpon>Login.vb</DependentUpon>
     </Compile>
-    <Compile Include="Login.vb">
+    <Compile Include="Formen\Login.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Klassen\NetworkClass.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -113,24 +113,24 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Register.Designer.vb">
+    <Compile Include="Formen\Register.Designer.vb">
       <DependentUpon>Register.vb</DependentUpon>
     </Compile>
-    <Compile Include="Register.vb">
+    <Compile Include="Formen\Register.vb">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="chatten.resx">
+    <EmbeddedResource Include="Formen\chatten.resx">
       <DependentUpon>chatten.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="chat.resx">
+    <EmbeddedResource Include="Formen\chat.resx">
       <DependentUpon>chat.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="benutzer.resx">
+    <EmbeddedResource Include="Formen\benutzer.resx">
       <DependentUpon>benutzer.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login.resx">
+    <EmbeddedResource Include="Formen\Login.resx">
       <DependentUpon>Login.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -139,7 +139,7 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Register.resx">
+    <EmbeddedResource Include="Formen\Register.resx">
       <DependentUpon>Register.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
@@ -161,5 +161,6 @@
       <Name>Connector</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

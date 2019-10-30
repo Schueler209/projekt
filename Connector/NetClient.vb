@@ -9,10 +9,13 @@ Public Class NetClient
 
     ' Erstellt neue Instanz und verbindet sich
     Public Sub connect()
-        connector = New ClientConnector()
-        ' Einkommende Nachricht handeln
-        connector.OnRecieve.addHandler(AddressOf onRequest)
-        connector.connect()
+        If connector Is Nothing Then
+            connector = New ClientConnector()
+            ' Einkommende Nachricht handeln
+            connector.OnRecieve.addHandler(AddressOf onRequest)
+            connector.connect()
+        End If
+
     End Sub
 
     ' Event für Registrierung Neue Methode zuweisen!
