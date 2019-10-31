@@ -9,14 +9,16 @@ Public Class NetClient
 
     ' Erstellt neue Instanz und verbindet sich
     Public Sub connect()
-        If connector Is Nothing Then
-            connector = New ClientConnector()
-            ' Einkommende Nachricht handeln
-            connector.OnRecieve.addHandler(AddressOf onRequest)
-            connector.connect()
-        End If
+        connector = New ClientConnector()
+        ' Einkommende Nachricht handeln
+        connector.OnRecieve.addHandler(AddressOf onRequest)
+        connector.OnConnectionLost.addHandler(OnConnectionLost)
+        connector.connect()
 
     End Sub
+
+    ' Event für Registrierung Neue Methode zuweisen!
+    Public OnConnectionLost As Action
 
     ' Event für Registrierung Neue Methode zuweisen!
     Public OnRegisterConfirm As Action(Of Boolean)

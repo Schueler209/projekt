@@ -37,11 +37,16 @@ Friend Class ClientConnector
     ' Verbinden
     Public Sub connect()
         ' Erstellt Socket mit IP und Port
-        Me.clientSocket = New TcpClient(Ip, Port)
-        OnConnection.Notify()
-        ' Wartet auf Nachrichten(unendlich)
-        recieveThread()
-        Console.WriteLine("Neue Verbindung!")
+        Try
+            Me.clientSocket = New TcpClient(Ip, Port)
+        Catch ex As Exception
+            OnConnectionLost.Notify()
+        Finally
+            OnConnection.Notify()
+            ' Wartet auf Nachrichten(unendlich)
+            recieveThread()
+        End Try
+
     End Sub
 
     ' Neuen Threat erstellen
@@ -74,8 +79,11 @@ Friend Class ClientConnector
 
     Public Sub disconnect()
         OnClose.Notify()
-        clientSocket.Close()
-        clientSocket.Dispose()
+        If (clientSocket IsNot Nothing) Then
+            clientSocket.Close()
+            clientSocket.Dispose()
+        End If
+
     End Sub
 
     ' Nachrichten senden
@@ -102,6 +110,9 @@ Friend Class ClientConnector
 
     ' Nachrichten bekommen
     Private Function recieve() As ConnectionData
+        If clientSocket Is Nothing Then
+            Return New ConnectionData("ConnectionLost")
+        End If
         Try
             Dim serverStream As NetworkStream = clientSocket.GetStream()
             Dim inStream(clientSocket.ReceiveBufferSize) As Byte
@@ -109,7 +120,7 @@ Friend Class ClientConnector
             ' Nachrichten einlesen
             Return ConnectionData.Serialized(inStream)
         Catch ex As IOException
-            Return New ConnectionData("ConnectionLost", New Dictionary(Of String, Object))
+            Return New ConnectionData("ConnectionLost")
         End Try
 
     End Function
