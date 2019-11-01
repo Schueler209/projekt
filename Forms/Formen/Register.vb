@@ -24,7 +24,7 @@ Public Class Register
 
     Sub Registerconfirm(wert As Boolean)
         If wert Then
-            chatten.Show()
+            chat.Show()
             Me.Hide()
         Else
 

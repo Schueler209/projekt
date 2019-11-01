@@ -73,12 +73,6 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Formen\chatten.Designer.vb">
-      <DependentUpon>chatten.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Formen\chatten.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Formen\chat.Designer.vb">
       <DependentUpon>chat.vb</DependentUpon>
     </Compile>
@@ -121,9 +115,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Formen\chatten.resx">
-      <DependentUpon>chatten.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Formen\chat.resx">
       <DependentUpon>chat.vb</DependentUpon>
     </EmbeddedResource>

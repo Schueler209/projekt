@@ -26,7 +26,7 @@ Public Class Login
 
     Sub Loginconfirm(wert As Boolean)
         If wert Then
-            chatten.Show()
+            chat.Show()
             Me.Hide()
         Else
             lblFehler.Text = "Passwort und Benutzername stimmen nicht überein"

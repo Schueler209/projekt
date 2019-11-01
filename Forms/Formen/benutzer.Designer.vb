@@ -22,43 +22,35 @@ Partial Class benutzer
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ltbAlleBesucher = New System.Windows.Forms.ListBox()
+        Me.ltbAlleBenutzer = New System.Windows.Forms.ListBox()
         Me.txbBenutzerSuchen = New System.Windows.Forms.TextBox()
-        Me.btnSuchen = New System.Windows.Forms.Button()
         Me.btnZuKontakte = New System.Windows.Forms.Button()
         Me.lblBenutzerSuchen = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
-        'ltbAlleBesucher
+        'ltbAlleBenutzer
         '
-        Me.ltbAlleBesucher.FormattingEnabled = True
-        Me.ltbAlleBesucher.ItemHeight = 16
-        Me.ltbAlleBesucher.Location = New System.Drawing.Point(155, 102)
-        Me.ltbAlleBesucher.Name = "ltbAlleBesucher"
-        Me.ltbAlleBesucher.Size = New System.Drawing.Size(245, 308)
-        Me.ltbAlleBesucher.TabIndex = 0
+        Me.ltbAlleBenutzer.FormattingEnabled = True
+        Me.ltbAlleBenutzer.Location = New System.Drawing.Point(116, 83)
+        Me.ltbAlleBenutzer.Margin = New System.Windows.Forms.Padding(2)
+        Me.ltbAlleBenutzer.Name = "ltbAlleBenutzer"
+        Me.ltbAlleBenutzer.Size = New System.Drawing.Size(185, 251)
+        Me.ltbAlleBenutzer.TabIndex = 0
         '
         'txbBenutzerSuchen
         '
-        Me.txbBenutzerSuchen.Location = New System.Drawing.Point(155, 49)
+        Me.txbBenutzerSuchen.Location = New System.Drawing.Point(116, 40)
+        Me.txbBenutzerSuchen.Margin = New System.Windows.Forms.Padding(2)
         Me.txbBenutzerSuchen.Name = "txbBenutzerSuchen"
-        Me.txbBenutzerSuchen.Size = New System.Drawing.Size(245, 22)
+        Me.txbBenutzerSuchen.Size = New System.Drawing.Size(185, 20)
         Me.txbBenutzerSuchen.TabIndex = 1
-        '
-        'btnSuchen
-        '
-        Me.btnSuchen.Location = New System.Drawing.Point(572, 38)
-        Me.btnSuchen.Name = "btnSuchen"
-        Me.btnSuchen.Size = New System.Drawing.Size(75, 23)
-        Me.btnSuchen.TabIndex = 2
-        Me.btnSuchen.Text = "Suchen "
-        Me.btnSuchen.UseVisualStyleBackColor = True
         '
         'btnZuKontakte
         '
-        Me.btnZuKontakte.Location = New System.Drawing.Point(572, 360)
+        Me.btnZuKontakte.Location = New System.Drawing.Point(429, 292)
+        Me.btnZuKontakte.Margin = New System.Windows.Forms.Padding(2)
         Me.btnZuKontakte.Name = "btnZuKontakte"
-        Me.btnZuKontakte.Size = New System.Drawing.Size(152, 23)
+        Me.btnZuKontakte.Size = New System.Drawing.Size(114, 19)
         Me.btnZuKontakte.TabIndex = 3
         Me.btnZuKontakte.Text = "Zu den Kontakten"
         Me.btnZuKontakte.UseVisualStyleBackColor = True
@@ -66,22 +58,23 @@ Partial Class benutzer
         'lblBenutzerSuchen
         '
         Me.lblBenutzerSuchen.AutoSize = True
-        Me.lblBenutzerSuchen.Location = New System.Drawing.Point(285, 9)
+        Me.lblBenutzerSuchen.Location = New System.Drawing.Point(214, 7)
+        Me.lblBenutzerSuchen.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblBenutzerSuchen.Name = "lblBenutzerSuchen"
-        Me.lblBenutzerSuchen.Size = New System.Drawing.Size(115, 17)
+        Me.lblBenutzerSuchen.Size = New System.Drawing.Size(87, 13)
         Me.lblBenutzerSuchen.TabIndex = 4
         Me.lblBenutzerSuchen.Text = "Benutzer suchen"
         '
         'benutzer
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.ClientSize = New System.Drawing.Size(600, 366)
         Me.Controls.Add(Me.lblBenutzerSuchen)
         Me.Controls.Add(Me.btnZuKontakte)
-        Me.Controls.Add(Me.btnSuchen)
         Me.Controls.Add(Me.txbBenutzerSuchen)
-        Me.Controls.Add(Me.ltbAlleBesucher)
+        Me.Controls.Add(Me.ltbAlleBenutzer)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "benutzer"
         Me.Text = "Form1"
         Me.ResumeLayout(False)
@@ -89,9 +82,8 @@ Partial Class benutzer
 
     End Sub
 
-    Friend WithEvents ltbAlleBesucher As ListBox
+    Friend WithEvents ltbAlleBenutzer As ListBox
     Friend WithEvents txbBenutzerSuchen As TextBox
-    Friend WithEvents btnSuchen As Button
     Friend WithEvents btnZuKontakte As Button
     Friend WithEvents lblBenutzerSuchen As Label
 End Class
