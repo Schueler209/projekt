@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class benutzer
+Partial Class AddFriend
     Inherits System.Windows.Forms.Form
 
     'Das Formular überschreibt den Löschvorgang, um die Komponentenliste zu bereinigen.
@@ -31,7 +31,7 @@ Partial Class benutzer
         'ltbAlleBenutzer
         '
         Me.ltbAlleBenutzer.FormattingEnabled = True
-        Me.ltbAlleBenutzer.Location = New System.Drawing.Point(116, 83)
+        Me.ltbAlleBenutzer.Location = New System.Drawing.Point(11, 57)
         Me.ltbAlleBenutzer.Margin = New System.Windows.Forms.Padding(2)
         Me.ltbAlleBenutzer.Name = "ltbAlleBenutzer"
         Me.ltbAlleBenutzer.Size = New System.Drawing.Size(185, 251)
@@ -39,7 +39,7 @@ Partial Class benutzer
         '
         'txbBenutzerSuchen
         '
-        Me.txbBenutzerSuchen.Location = New System.Drawing.Point(116, 40)
+        Me.txbBenutzerSuchen.Location = New System.Drawing.Point(11, 24)
         Me.txbBenutzerSuchen.Margin = New System.Windows.Forms.Padding(2)
         Me.txbBenutzerSuchen.Name = "txbBenutzerSuchen"
         Me.txbBenutzerSuchen.Size = New System.Drawing.Size(185, 20)
@@ -47,35 +47,35 @@ Partial Class benutzer
         '
         'btnZuKontakte
         '
-        Me.btnZuKontakte.Location = New System.Drawing.Point(429, 292)
+        Me.btnZuKontakte.Location = New System.Drawing.Point(11, 324)
         Me.btnZuKontakte.Margin = New System.Windows.Forms.Padding(2)
         Me.btnZuKontakte.Name = "btnZuKontakte"
-        Me.btnZuKontakte.Size = New System.Drawing.Size(114, 19)
+        Me.btnZuKontakte.Size = New System.Drawing.Size(185, 19)
         Me.btnZuKontakte.TabIndex = 3
-        Me.btnZuKontakte.Text = "Zu den Kontakten"
+        Me.btnZuKontakte.Text = "Abbrechen"
         Me.btnZuKontakte.UseVisualStyleBackColor = True
         '
         'lblBenutzerSuchen
         '
         Me.lblBenutzerSuchen.AutoSize = True
-        Me.lblBenutzerSuchen.Location = New System.Drawing.Point(214, 7)
+        Me.lblBenutzerSuchen.Location = New System.Drawing.Point(11, 9)
         Me.lblBenutzerSuchen.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblBenutzerSuchen.Name = "lblBenutzerSuchen"
         Me.lblBenutzerSuchen.Size = New System.Drawing.Size(87, 13)
         Me.lblBenutzerSuchen.TabIndex = 4
         Me.lblBenutzerSuchen.Text = "Benutzer suchen"
         '
-        'benutzer
+        'AddFriend
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(600, 366)
+        Me.ClientSize = New System.Drawing.Size(210, 366)
         Me.Controls.Add(Me.lblBenutzerSuchen)
         Me.Controls.Add(Me.btnZuKontakte)
         Me.Controls.Add(Me.txbBenutzerSuchen)
         Me.Controls.Add(Me.ltbAlleBenutzer)
         Me.Margin = New System.Windows.Forms.Padding(2)
-        Me.Name = "benutzer"
+        Me.Name = "AddFriend"
         Me.Text = "Form1"
         Me.ResumeLayout(False)
         Me.PerformLayout()

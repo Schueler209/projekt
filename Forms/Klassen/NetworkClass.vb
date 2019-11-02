@@ -3,6 +3,7 @@
 Public Class NetworkClass
     Public Shared ReadOnly net As New NetClient
     Private Shared connected As Boolean = False
+    Public Shared loginID As Integer
 
     Public Shared Sub ensureConnection()
         If Not connected Then

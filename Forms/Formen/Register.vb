@@ -24,6 +24,7 @@ Public Class Register
 
     Sub Registerconfirm(wert As Boolean)
         If wert Then
+            NetworkClass.loginID = 1 'TODO: richtige ID hinzufügen
             chat.Show()
             Me.Hide()
         Else

@@ -73,16 +73,16 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Formen\chat.Designer.vb">
-      <DependentUpon>chat.vb</DependentUpon>
+    <Compile Include="Formen\Chat.Designer.vb">
+      <DependentUpon>Chat.vb</DependentUpon>
     </Compile>
-    <Compile Include="Formen\chat.vb">
+    <Compile Include="Formen\Chat.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Formen\benutzer.Designer.vb">
-      <DependentUpon>benutzer.vb</DependentUpon>
+    <Compile Include="Formen\AddFriend.Designer.vb">
+      <DependentUpon>AddFriend.vb</DependentUpon>
     </Compile>
-    <Compile Include="Formen\benutzer.vb">
+    <Compile Include="Formen\AddFriend.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Formen\Login.Designer.vb">
@@ -115,11 +115,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Formen\chat.resx">
-      <DependentUpon>chat.vb</DependentUpon>
+    <EmbeddedResource Include="Formen\Chat.resx">
+      <DependentUpon>Chat.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Formen\benutzer.resx">
-      <DependentUpon>benutzer.vb</DependentUpon>
+    <EmbeddedResource Include="Formen\AddFriend.resx">
+      <DependentUpon>AddFriend.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formen\Login.resx">
       <DependentUpon>Login.vb</DependentUpon>

@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class chat
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+Partial Class Chat
     Inherits System.Windows.Forms.Form
 
     'Das Formular überschreibt den Löschvorgang, um die Komponentenliste zu bereinigen.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class chat
     'Hinweis: Die folgende Prozedur ist für den Windows Form-Designer erforderlich.
     'Das Bearbeiten ist mit dem Windows Form-Designer möglich.  
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.ltbKontakte = New System.Windows.Forms.ListBox()
         Me.lblKontakte = New System.Windows.Forms.Label()
@@ -34,42 +34,46 @@ Partial Class chat
         'ltbKontakte
         '
         Me.ltbKontakte.FormattingEnabled = True
-        Me.ltbKontakte.ItemHeight = 16
-        Me.ltbKontakte.Location = New System.Drawing.Point(88, 48)
+        Me.ltbKontakte.Location = New System.Drawing.Point(14, 24)
+        Me.ltbKontakte.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.ltbKontakte.Name = "ltbKontakte"
-        Me.ltbKontakte.Size = New System.Drawing.Size(120, 324)
+        Me.ltbKontakte.Size = New System.Drawing.Size(125, 303)
         Me.ltbKontakte.TabIndex = 0
         '
         'lblKontakte
         '
         Me.lblKontakte.AutoSize = True
-        Me.lblKontakte.Location = New System.Drawing.Point(85, 19)
+        Me.lblKontakte.Location = New System.Drawing.Point(11, 9)
+        Me.lblKontakte.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblKontakte.Name = "lblKontakte"
-        Me.lblKontakte.Size = New System.Drawing.Size(146, 17)
+        Me.lblKontakte.Size = New System.Drawing.Size(82, 13)
         Me.lblKontakte.TabIndex = 1
-        Me.lblKontakte.Text = "Meine Kontakte/Chats"
+        Me.lblKontakte.Text = "Meine Kontakte"
         '
         'btnNeuerKontakt
         '
-        Me.btnNeuerKontakt.Location = New System.Drawing.Point(88, 403)
+        Me.btnNeuerKontakt.Location = New System.Drawing.Point(14, 336)
+        Me.btnNeuerKontakt.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.btnNeuerKontakt.Name = "btnNeuerKontakt"
-        Me.btnNeuerKontakt.Size = New System.Drawing.Size(118, 23)
+        Me.btnNeuerKontakt.Size = New System.Drawing.Size(125, 19)
         Me.btnNeuerKontakt.TabIndex = 2
-        Me.btnNeuerKontakt.Text = "Neuer Kontakt"
+        Me.btnNeuerKontakt.Text = "+ Hinzufügen"
         Me.btnNeuerKontakt.UseVisualStyleBackColor = True
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(360, 349)
+        Me.TextBox1.Location = New System.Drawing.Point(270, 284)
+        Me.TextBox1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(329, 22)
+        Me.TextBox1.Size = New System.Drawing.Size(248, 20)
         Me.TextBox1.TabIndex = 3
         '
         'btnSenden
         '
-        Me.btnSenden.Location = New System.Drawing.Point(713, 348)
+        Me.btnSenden.Location = New System.Drawing.Point(535, 283)
+        Me.btnSenden.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.btnSenden.Name = "btnSenden"
-        Me.btnSenden.Size = New System.Drawing.Size(75, 23)
+        Me.btnSenden.Size = New System.Drawing.Size(56, 19)
         Me.btnSenden.TabIndex = 4
         Me.btnSenden.Text = "Senden"
         Me.btnSenden.UseVisualStyleBackColor = True
@@ -77,26 +81,27 @@ Partial Class chat
         'ListBox1
         '
         Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.ItemHeight = 16
-        Me.ListBox1.Location = New System.Drawing.Point(360, 57)
+        Me.ListBox1.Location = New System.Drawing.Point(270, 46)
+        Me.ListBox1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(357, 260)
+        Me.ListBox1.Size = New System.Drawing.Size(269, 212)
         Me.ListBox1.TabIndex = 5
         '
         'lblChatpartner
         '
         Me.lblChatpartner.AutoSize = True
-        Me.lblChatpartner.Location = New System.Drawing.Point(393, 28)
+        Me.lblChatpartner.Location = New System.Drawing.Point(295, 23)
+        Me.lblChatpartner.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblChatpartner.Name = "lblChatpartner"
-        Me.lblChatpartner.Size = New System.Drawing.Size(83, 17)
+        Me.lblChatpartner.Size = New System.Drawing.Size(62, 13)
         Me.lblChatpartner.TabIndex = 6
         Me.lblChatpartner.Text = "Chatpartner"
         '
-        'chat
+        'Chat
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.ClientSize = New System.Drawing.Size(600, 366)
         Me.Controls.Add(Me.lblChatpartner)
         Me.Controls.Add(Me.ListBox1)
         Me.Controls.Add(Me.btnSenden)
@@ -104,7 +109,8 @@ Partial Class chat
         Me.Controls.Add(Me.btnNeuerKontakt)
         Me.Controls.Add(Me.lblKontakte)
         Me.Controls.Add(Me.ltbKontakte)
-        Me.Name = "chat"
+        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Name = "Chat"
         Me.Text = "Form1"
         Me.ResumeLayout(False)
         Me.PerformLayout()
