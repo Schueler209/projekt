@@ -60,28 +60,36 @@ Module Module1
         End If
     End Sub
 
-    'Public Sub addFriend(ID As Integer, ID2 As Integer)
-    '    Dim conn As New OleDbConnection(ConnectionStr)
-    '    conn.Open()
+    Public Function getUser(ID As Integer) As User
+        Dim conn As New OleDbConnection(ConnectionStr)
+        Dim command As New OleDbCommand("SELECT username, [name] FROM Users WHERE ID = '" & ID & "'")
+        command.Connection = conn
+        conn.Open()
+        Dim reader = command.ExecuteReader
+        If reader.HasRows Then
+            reader.Read()
+            Return New User(reader.GetString(0), reader.GetString(1), ID)
+        Else
+            Return Nothing
+        End If
+    End Function
+    Public Sub addFriend(ID As Integer, ID2 As Integer, done As Action(Of User))
+        Dim conn As New OleDbConnection(ConnectionStr)
+        conn.Open()
 
-    '    Dim insertCommand As New OleDbCommand("INSERT INTO Friendship (UserID1, UserID2) VALUES (@displayname,@username,@password);")
-    '    insertCommand.Connection = conn
-    '    insertCommand.Parameters.Add("@displayname", OleDbType.Char).Value = name
-    '    insertCommand.Parameters.Add("@username", OleDbType.Char).Value = username
-
-    '    insertCommand.CommandType = CommandType.Text
-    '    Try
-    '        insertCommand.ExecuteNonQuery()
-    '    Catch ex As Exception
-    '        Console.WriteLine(ex.Message)
-    '    Finally
-    '        done(True)
-    '    End Try
-    '    End If
-
-    'End Sub
-
-
+        Dim insertCommand As New OleDbCommand("INSERT INTO Friendship (UserID1, UserID2) VALUES (@UserID1,@UserID2);")
+        insertCommand.Connection = conn
+        insertCommand.Parameters.Add("@UserID1", OleDbType.Char).Value = ID
+        insertCommand.Parameters.Add("@UserID2", OleDbType.Char).Value = ID2
+        insertCommand.CommandType = CommandType.Text
+        Try
+            insertCommand.ExecuteNonQuery()
+        Catch ex As Exception
+            Console.WriteLine(ex.Message)
+        Finally
+            done(getUser(ID2))
+        End Try
+    End Sub
 
     Public Sub Userlist(done As Action(Of User()))
         Dim conn As New OleDbConnection(ConnectionStr)

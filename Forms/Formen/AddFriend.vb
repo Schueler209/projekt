@@ -7,7 +7,7 @@ Public Class AddFriend
         ltbAlleBenutzer.Items.Clear()
         For Each user In users
             ' Ist der Name in der Suche enthalten?
-            If user.benutzername.Contains(txbBenutzerSuchen.Text) Then
+            If user.benutzername.ToLower.Contains(txbBenutzerSuchen.Text.ToLower) Then
                 ltbAlleBenutzer.Items.Add(user.benutzername)
             End If
         Next
