@@ -1,12 +1,14 @@
-﻿Public Class AddFriend
-    Private users As String()
+﻿Imports Connector
+
+Public Class AddFriend
+    Private users As User()
     Private Sub txbBenutzerSuchen_TextChanged(sender As Object, e As EventArgs) Handles txbBenutzerSuchen.TextChanged
         ' Vorherige Anzeige löschen
         ltbAlleBenutzer.Items.Clear()
         For Each user In users
             ' Ist der Name in der Suche enthalten?
-            If user.Contains(txbBenutzerSuchen.Text) Then
-                ltbAlleBenutzer.Items.Add(user)
+            If user.benutzername.Contains(txbBenutzerSuchen.Text) Then
+                ltbAlleBenutzer.Items.Add(user.benutzername)
             End If
         Next
     End Sub
@@ -16,11 +18,11 @@
     End Sub
 
     Private Sub benutzer_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        NetworkClass.net.getAllUsers(Sub(AllUsers As String())
+        NetworkClass.net.getAllUsers(Sub(AllUsers As User())
                                          Console.WriteLine(AllUsers)
                                          users = AllUsers
                                          For Each user In users
-                                             ltbAlleBenutzer.Items.Add(user)
+                                             ltbAlleBenutzer.Items.Add(user.benutzername)
                                          Next
                                      End Sub)
 

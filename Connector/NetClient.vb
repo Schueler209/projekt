@@ -98,7 +98,7 @@ Public Class NetClient
     End Sub
 
     'Userlist
-    Sub getAllUsers(callback As Action(Of String()))
+    Sub getAllUsers(callback As Action(Of User()))
         Dim data As New Dictionary(Of String, Object)
         Dim res As New ConnectionData("userlist", data)
         connector.send(res)
@@ -106,7 +106,7 @@ Public Class NetClient
     End Sub
 
     'Friends
-    Sub getFriends(callback As Action(Of String()))
+    Sub getFriends(callback As Action(Of User()))
         Dim data As New Dictionary(Of String, Object)
         Dim res As New ConnectionData("Friends", data)
         connector.send(res)
