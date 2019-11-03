@@ -22,12 +22,12 @@ Public Class Register
 
     End Sub
 
-    Sub Registerconfirm(wert As Integer)
+    Sub Registerconfirm(wert As User)
 
         If IsNothing(wert) Then
             lblFehlermeldung.Text = "Benutzer existiert schon, bitte anderen Benutzernamen wählen."
         Else
-            NetworkClass.loginID = wert
+            NetworkClass.login = wert
             Chat.Show()
 
             Me.Hide()

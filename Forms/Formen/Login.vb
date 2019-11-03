@@ -24,11 +24,11 @@ Public Class Login
         txbPasswort.PasswordChar = "*"
     End Sub
 
-    Sub Loginconfirm(wert As Integer)
+    Sub Loginconfirm(wert As User)
         If IsNothing(wert) Then
-            lblFehler.Text = "Passwort und Benutzername stimmen nicht überein"
+            lblFehler.Text = "Passwort oder Benutzername ist falsch!"
         Else
-            NetworkClass.loginID = wert
+            NetworkClass.login = wert
             Chat.Show()
 
             Me.Hide()
