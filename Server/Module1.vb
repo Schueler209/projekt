@@ -12,6 +12,7 @@ Module Module1
         Dim connect As NetServer = New NetServer
         connect.OnRegister = AddressOf register
         connect.OnLogin = AddressOf logincheck
+        connect.OnNewFriend = AddressOf addFriend
         connect.OnUserlist = AddressOf Userlist
         connect.connect()
 
@@ -62,7 +63,8 @@ Module Module1
 
     Public Function getUser(ID As Integer) As User
         Dim conn As New OleDbConnection(ConnectionStr)
-        Dim command As New OleDbCommand("SELECT username, [name] FROM Users WHERE ID = '" & ID & "'")
+        Dim command As New OleDbCommand("SELECT username, [name] FROM Users WHERE ID = @id")
+        command.Parameters.Add("@id", OleDbType.Integer).Value = ID
         command.Connection = conn
         conn.Open()
         Dim reader = command.ExecuteReader

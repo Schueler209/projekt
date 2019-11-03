@@ -65,7 +65,7 @@ Public Class NetClient
 
             Case "AddNewFriend"
                 If OnNewFriendConfirm IsNot Nothing Then
-                    Dim ans As User = req.Data.Item("succes")
+                    Dim ans As User = req.Data.Item("success")
                     OnNewFriendConfirm(ans)
                 End If
 

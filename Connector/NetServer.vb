@@ -24,7 +24,7 @@ Public Class NetServer
     'Event für Freunde senden
     Public OnFriends As Action(Of Action(Of User()))
     'Event für Neue Freunde
-    Public OnNewFriend As Action(Of String, Action(Of User))
+    Public OnNewFriend As Action(Of Integer, Integer, Action(Of User))
 
 
     ' Falls neue Nachricht kommt:
