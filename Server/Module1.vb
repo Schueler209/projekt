@@ -12,7 +12,7 @@ Module Module1
         Dim connect As NetServer = New NetServer
         connect.OnRegister = AddressOf register
         connect.OnLogin = AddressOf logincheck
-        'connect.OnNewFriend = AddressOf freundhinzufügen
+        'connect.OnNewFriend = AddressOf addFriends
         'connect.OnFriends = AddressOf getFriends
         connect.connect()
         'register("Till", "Till1234", "123", Sub(g As Boolean)
@@ -86,15 +86,11 @@ Module Module1
 
 
 
-    Public Sub freundhinzufügen(username As String, usernamehinzugefügterfreund As String)
-
+    Public Sub addFriends(username As String, usernamehinzugefügterfreund As String)
         Dim connString As String = "provider= microsoft.jet.oledb.4.0; " & "data source=db.mdb;" & ""
         Dim conn As New OleDbConnection(connString)
+        conn.Open()
         Dim command As New OleDbCommand()
-
-        command.Connection = conn
-        command.CommandType = CommandType.Text
-        command.CommandText = "select * from users where username = '" & username & "'And usernamehinzugefügterfreund = '" & username & "'"
 
 
 
