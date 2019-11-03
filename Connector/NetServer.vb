@@ -16,15 +16,15 @@ Public Class NetServer
     End Sub
 
     ' Event für Registrierung Neue Methode zuweisen!
-    Public OnRegister As Action(Of String, String, String, Action(Of Integer))
+    Public OnRegister As Action(Of String, String, String, Action(Of User))
     ' Event für login Neue Methode zuweisen!
-    Public OnLogin As Action(Of String, String, Action(Of Integer))
+    Public OnLogin As Action(Of String, String, Action(Of User))
     'Event für alle Benutzernamen senden
-    Public OnUserlist As Action(Of Action(Of String()))
+    Public OnUserlist As Action(Of Action(Of User()))
     'Event für Freunde senden
-    Public OnFriends As Action(Of Action(Of String()))
+    Public OnFriends As Action(Of Action(Of User()))
     'Event für Neue Freunde
-    Public OnNewFriend As Action(Of String, Action(Of Boolean))
+    Public OnNewFriend As Action(Of String, Action(Of User))
 
 
     ' Falls neue Nachricht kommt:
@@ -44,8 +44,8 @@ Public Class NetServer
                         name,
                         username,
                         password,
-                        Sub(id As Integer)
-                            RegisterConfirm(id, client)
+                        Sub(User As User)
+                            RegisterConfirm(User, client)
                         End Sub
                     )
                 End If
@@ -60,16 +60,16 @@ Public Class NetServer
                     OnLogin(
                         username,
                         password,
-                        Sub(id As Integer)
-                            LoginConfirm(id, client)
+                        Sub(User As User)
+                            LoginConfirm(User, client)
                         End Sub
                     )
                 End If
 
-            Case "all users"
+            Case "userlist"
                 If OnUserlist IsNot Nothing Then
                     OnUserlist(
-                    Sub(val As String())
+                    Sub(val As User())
                         AllUsersSend(val, client)
                     End Sub)
 
@@ -78,17 +78,17 @@ Public Class NetServer
             Case "Friends"
                 If OnFriends IsNot Nothing Then
                     OnFriends(
-                        Sub(list As String())
+                        Sub(list As User())
                             FriendsSend(list, client)
                         End Sub)
                 End If
 
             Case "new Friend confirm"
                 If OnNewFriend IsNot Nothing Then
-                    Dim username As String = req.Data.Item("username")
-                    OnNewFriend(username,
-                                Sub(val As Boolean)
-                                    NewFriendConfirm(val, client)
+                    Dim id As String = req.Data.Item("id")
+                    OnNewFriend(id,
+                                Sub(User As User)
+                                    NewFriendConfirm(User, client)
                                 End Sub)
 
 
@@ -100,35 +100,35 @@ Public Class NetServer
     End Sub
 
     ' Sende Antwort für Registrieren
-    Sub RegisterConfirm(id As Integer, client As TcpClient)
+    Sub RegisterConfirm(User As User, client As TcpClient)
         Dim data As New Dictionary(Of String, Object)
-        data.Add("id", id)
+        data.Add("user", User)
         Dim req As New ConnectionData("registerconfirm", data)
         connector.send(client, req)
     End Sub
 
     ' Sende Antwort für Login
-    Sub LoginConfirm(id As Integer, client As TcpClient)
+    Sub LoginConfirm(User As User, client As TcpClient)
         Dim data As New Dictionary(Of String, Object)
-        data.Add("id", id)
+        data.Add("user", User)
         Dim req As New ConnectionData("loginconfirm", data)
         connector.send(client, req)
     End Sub
 
 
-    Sub AllUsersSend(ans As String(), client As TcpClient)
+    Sub AllUsersSend(ans As User(), client As TcpClient)
         Dim data As New Dictionary(Of String, Object)
-        data.add("All users", ans)
+        data.Add("userlist", ans)
         connector.send(client, New ConnectionData("users", data))
     End Sub
 
-    Sub FriendsSend(ans As String(), client As TcpClient)
+    Sub FriendsSend(ans As User(), client As TcpClient)
         Dim data As New Dictionary(Of String, Object)
-        data.add("Friends", ans)
+        data.Add("Friends", ans)
         connector.send(client, New ConnectionData("friends", data))
     End Sub
 
-    Sub NewFriendConfirm(val As Boolean, client As TcpClient)
+    Sub NewFriendConfirm(val As User, client As TcpClient)
         Dim data As New Dictionary(Of String, Object)
         data.Add("success", val)
         connector.send(client, New ConnectionData("friendconfirm", data))
