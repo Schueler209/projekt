@@ -1,11 +1,18 @@
-﻿Public Class Chat
+﻿Imports Connector
 
-    Private users As String() = {"marten1", "laura1", "till1"}
+Public Class Chat
+
+    Private users As New List(Of User)
+
 
     Private Sub Chat_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        For Each user As String In users
-            ltbKontakte.Items.Add(user)
-        Next
+        NetworkClass.net.getFriends(Sub(Friends As User())
+
+                                        For Each user As User In Friends
+                                            ltbKontakte.Items.Add(user.benutzername)
+                                            users.Add(user)
+                                        Next
+                                    End Sub)
     End Sub
 
     Private Sub btnNeuerKontakt_Click(sender As Object, e As EventArgs) Handles btnNeuerKontakt.Click
@@ -22,4 +29,16 @@
         NetworkClass.login = Nothing
         Me.Hide()
     End Sub
+
+    Public Sub addFriendToList(ByVal user As User)
+        users.Add(user)
+        ltbKontakte.Items.Clear()
+
+        For Each val As User In users.ToArray
+            ltbKontakte.Items.Add(val.benutzername)
+        Next
+
+    End Sub
+
+
 End Class
