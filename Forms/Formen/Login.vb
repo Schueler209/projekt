@@ -24,14 +24,14 @@ Public Class Login
         txbPasswort.PasswordChar = "*"
     End Sub
 
-    Sub Loginconfirm(wert As Boolean)
-        If wert Then
-            NetworkClass.loginID = 1 'TODO: richtige ID hinzufügen
-            chat.Show()
+    Sub Loginconfirm(wert As Integer)
+        If IsNothing(wert) Then
+            lblFehler.Text = "Passwort und Benutzername stimmen nicht überein"
+        Else
+            NetworkClass.loginID = wert
+            Chat.Show()
 
             Me.Hide()
-        Else
-            lblFehler.Text = "Passwort und Benutzername stimmen nicht überein"
 
         End If
 

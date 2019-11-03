@@ -22,14 +22,15 @@ Public Class Register
 
     End Sub
 
-    Sub Registerconfirm(wert As Boolean)
-        If wert Then
-            NetworkClass.loginID = 1 'TODO: richtige ID hinzufügen
-            chat.Show()
-            Me.Hide()
-        Else
+    Sub Registerconfirm(wert As Integer)
 
+        If IsNothing(wert) Then
             lblFehlermeldung.Text = "Benutzer existiert schon, bitte anderen Benutzernamen wählen."
+        Else
+            NetworkClass.loginID = wert
+            Chat.Show()
+
+            Me.Hide()
 
         End If
 
