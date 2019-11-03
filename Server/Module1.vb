@@ -106,4 +106,19 @@ Module Module1
         Loop
         done(userlist.ToArray())
     End Sub
+
+    Public Sub friends(ID As Integer, done As Action(Of User()))
+        Dim conn As New OleDbConnection(ConnectionStr)
+        conn.Open()
+        Dim command As New OleDbCommand("SELECT UserID2 FROM Friendship WHERE UserID1 =" + ID + "; SELECT UserID1 FROM Friendship WHERE UserID2 =" + ID)
+        command.Connection = conn
+        Dim reader = command.ExecuteReader
+        Dim friendlist As New List(Of User)
+        Do While reader.Read
+            friendlist.Add(getUser(reader.GetInt32(0)))
+        Loop
+
+        done(friendlist.ToArray)
+    End Sub
+
 End Module
