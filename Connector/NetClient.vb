@@ -63,7 +63,7 @@ Public Class NetClient
                     OnFriends(list)
                 End If
 
-            Case "new Friend confirm"
+            Case "AddNewFriend"
                 If OnNewFriendConfirm IsNot Nothing Then
                     Dim ans As User = req.Data.Item("succes")
                     OnNewFriendConfirm(ans)
@@ -114,9 +114,11 @@ Public Class NetClient
     End Sub
 
     'NewFriends
-    Sub NewFriendConfirm(callback As Action(Of User))
+    Sub AddNewFriend(idself As Integer, idfriend As Integer, callback As Action(Of User))
         Dim data As New Dictionary(Of String, Object)
-        Dim res As New ConnectionData("new Friend confirm")
+        Dim res As New ConnectionData("AddNewFriend")
+        res.addData("IDself", idself)
+        res.addData("IDfriend", idfriend)
         connector.send(res)
         OnNewFriendConfirm = callback
     End Sub

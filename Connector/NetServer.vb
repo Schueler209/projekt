@@ -83,14 +83,15 @@ Public Class NetServer
                         End Sub)
                 End If
 
-            Case "new Friend confirm"
+            Case "AddNewFriend"
                 If OnNewFriend IsNot Nothing Then
-                    Dim id As String = req.Data.Item("id")
-                    OnNewFriend(id,
+                    Dim idself As Integer = req.Data.Item("IDself")
+                    Dim idfriend As Integer = req.Data.Item("IDfriend")
+                    OnNewFriend(idself,
+                                idfriend,
                                 Sub(User As User)
                                     NewFriendConfirm(User, client)
                                 End Sub)
-
 
                 End If
 
@@ -131,6 +132,6 @@ Public Class NetServer
     Sub NewFriendConfirm(val As User, client As TcpClient)
         Dim data As New Dictionary(Of String, Object)
         data.Add("success", val)
-        connector.send(client, New ConnectionData("friendconfirm", data))
+        connector.send(client, New ConnectionData("AddNewFriend", data))
     End Sub
 End Class
