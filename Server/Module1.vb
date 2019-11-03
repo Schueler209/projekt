@@ -14,11 +14,13 @@ Module Module1
         connect.OnLogin = AddressOf logincheck
         connect.OnUserlist = AddressOf Userlist
         connect.connect()
+
         'register("Till", "Till1234", "123", Sub(g As Boolean)
         '                                    End Sub)
     End Sub
 
-    Public Sub register(name As String, username As String, password As String, done As Action(Of Integer))
+    Public Sub register(name As String, username As String, password As String, done As Action(Of User))
+
         Dim conn As New OleDbConnection(ConnectionStr)
         conn.Open()
 
@@ -37,48 +39,26 @@ Module Module1
             insertCommand.CommandType = CommandType.Text
             insertCommand.ExecuteNonQuery()
             command.Connection = conn
-            done(command.ExecuteScalar())
+            done(New User(username, name, reader.GetInt32(0)))
 
         End If
     End Sub
 
-    Public Sub logincheck(username As String, password As String, done As Action(Of Integer))
+    Public Sub logincheck(username As String, password As String, done As Action(Of User))
 
         Dim conn As New OleDbConnection(ConnectionStr)
-        Dim command As New OleDbCommand("SELECT ID FROM Users WHERE Username = '" & username & "'And [Password] = '" & password & "'")
+        Dim command As New OleDbCommand("SELECT ID, [name] FROM Users WHERE Username = '" & username & "'And [Password] = '" & password & "'")
         command.Connection = conn
 
         conn.Open()
         Dim reader = command.ExecuteReader
         If reader.HasRows Then
             reader.Read()
-            done(reader.GetInt32(0))
+            done(New User(username, reader.GetString(1), reader.GetInt32(0)))
         Else
             done(Nothing)
         End If
     End Sub
-
-    'Public Function GetID(ByVal username As String, ByRef ID As Integer) As Boolean
-    '    Dim success As Boolean = False
-    '    Dim connString As String = "provider= microsoft.jet.oledb.4.0; " & "data source=db.mdb;" & ""
-    '    Dim conn As New OleDbConnection(connString)
-    '    Dim command As New OleDbCommand()
-    '    command.Connection = conn
-    '    command.CommandText = "SELECT ID FROM users WHERE Username = ? "
-
-    '    command.Parameters.AddWithValue("?", username)
-    '    conn.Open()
-    '    Dim reader = command.ExecuteReader
-    '    If reader.HasRows Then
-    '        ID = reader.GetInt32(0)
-    '        success = True
-    '        conn.Close()
-    '    Else
-    '        success = False
-    '        conn.Close()
-    '    End If
-    '    Return success
-    'End Function
 
     'Public Sub addFriend(ID As Integer, ID2 As Integer)
     '    Dim conn As New OleDbConnection(ConnectionStr)
@@ -103,16 +83,17 @@ Module Module1
 
 
 
-    Public Sub Userlist(done As Action(Of String()))
+    Public Sub Userlist(done As Action(Of User()))
         Dim conn As New OleDbConnection(ConnectionStr)
         conn.Open()
-        Dim checkCommand As New OleDbCommand("SELECT username FROM users")
+        Dim checkCommand As New OleDbCommand("SELECT ID ,username, [name] FROM users")
         checkCommand.Connection = conn
         Dim reader = checkCommand.ExecuteReader
-        Dim userlist As New List(Of String)
+        Dim userlist As New List(Of User)
         Do While reader.Read
-            userlist.Add(reader.GetString(0))
+            userlist.Add(New User(reader.GetString(1), reader.GetString(2), reader.GetInt32(0)))
+
         Loop
-        done(userlist.ToArray)
+        done(userlist.ToArray())
     End Sub
 End Module
