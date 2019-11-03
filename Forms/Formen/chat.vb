@@ -1,10 +1,13 @@
-﻿Public Class Chat
+﻿Imports Connector
 
-    Private users As String() = {"marten1", "laura1", "till1"}
+Public Class Chat
+
+    Private users As New List(Of User)
+
 
     Private Sub Chat_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        For Each user As String In users
-            ltbKontakte.Items.Add(user)
+        For Each user As User In users.ToArray
+            ltbKontakte.Items.Add(user.benutzername)
         Next
     End Sub
 
@@ -22,4 +25,16 @@
         NetworkClass.login = Nothing
         Me.Hide()
     End Sub
+
+    Public Sub addFriendToList(ByVal user As User)
+        users.Add(user)
+        ltbKontakte.Items.Clear()
+
+        For Each val As User In users.ToArray
+            ltbKontakte.Items.Add(val.benutzername)
+        Next
+
+    End Sub
+
+
 End Class
