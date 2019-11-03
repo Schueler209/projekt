@@ -30,8 +30,20 @@ Public Class AddFriend
     End Sub
 
     Private Sub ltbAlleBenutzer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ltbAlleBenutzer.SelectedIndexChanged
-        'NetworkClass.net.
-        Console.WriteLine(ltbAlleBenutzer.SelectedItem)
+        Dim selecteduser As User
+        For Each user In users
+            If user.benutzername = ltbAlleBenutzer.SelectedItem Then
+                selecteduser = user
+            End If
+        Next
+        If selecteduser IsNot Nothing Then
+            NetworkClass.net.addFriend(NetworkClass.login.id, selecteduser.id, Sub(res As User)
+                                                                                   Console.WriteLine(res.benutzername)
+                                                                                   Me.Hide()
+                                                                               End Sub)
+        End If
+
+
     End Sub
 
 End Class
