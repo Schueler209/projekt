@@ -16,4 +16,10 @@
     Private Sub LtbKontakte_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ltbKontakte.SelectedIndexChanged
         ' Chat wechseln
     End Sub
+
+    Private Sub btnAbmelden_Click(sender As Object, e As EventArgs) Handles btnAbmelden.Click
+        Login.Show()
+        NetworkClass.loginID = Nothing
+        Me.Hide()
+    End Sub
 End Class
