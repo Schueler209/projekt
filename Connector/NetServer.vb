@@ -16,9 +16,9 @@ Public Class NetServer
     End Sub
 
     ' Event für Registrierung Neue Methode zuweisen!
-    Public OnRegister As Action(Of String, String, String, Action(Of Boolean))
+    Public OnRegister As Action(Of String, String, String, Action(Of Integer)
     ' Event für login Neue Methode zuweisen!
-    Public OnLogin As Action(Of String, String, Action(Of Boolean))
+    Public OnLogin As Action(Of String, String, Action(Of Integer))
     'Event für alle Benutzernamen senden
     Public OnUserlist As Action(Of Action(Of String()))
     'Event für Freunde senden
@@ -38,13 +38,14 @@ Public Class NetServer
                     Dim name As String = req.Data.Item("name")
                     Dim username As String = req.Data.Item("username")
                     Dim password As String = req.Data.Item("password")
+
                     ' Methode aufrufen + Callback 
                     OnRegister(
                         name,
                         username,
                         password,
-                        Sub(val As Boolean)
-                            RegisterConfirm(val, client)
+                        Sub(id As Integer)
+                            RegisterConfirm(id, client)
                         End Sub
                     )
                 End If
@@ -53,12 +54,14 @@ Public Class NetServer
                     ' Argumente bekommen
                     Dim username As String = req.Data.Item("username")
                     Dim password As String = req.Data.Item("password")
+
+
                     ' Methode aufrufen + Callback 
                     OnLogin(
                         username,
                         password,
-                        Sub(val As Boolean)
-                            LoginConfirm(val, client)
+                        Sub(id As Integer)
+                            LoginConfirm(id, client)
                         End Sub
                     )
                 End If
@@ -97,17 +100,17 @@ Public Class NetServer
     End Sub
 
     ' Sende Antwort für Registrieren
-    Sub RegisterConfirm(res As Boolean, client As TcpClient)
+    Sub RegisterConfirm(id As Integer, client As TcpClient)
         Dim data As New Dictionary(Of String, Object)
-        data.Add("success", res)
+        data.Add("id", id)
         Dim req As New ConnectionData("registerconfirm", data)
         connector.send(client, req)
     End Sub
 
     ' Sende Antwort für Login
-    Sub LoginConfirm(res As Boolean, client As TcpClient)
+    Sub LoginConfirm(id As Integer, client As TcpClient)
         Dim data As New Dictionary(Of String, Object)
-        data.Add("success", res)
+        data.Add("id", id)
         Dim req As New ConnectionData("loginconfirm", data)
         connector.send(client, req)
     End Sub

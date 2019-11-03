@@ -21,9 +21,9 @@ Public Class NetClient
     Public OnConnectionLost As Action
 
     ' Event für Registrierung Neue Methode zuweisen!
-    Public OnRegisterConfirm As Action(Of Boolean)
+    Public OnRegisterConfirm As Action(Of Integer)
     ' Event für login Neue Methode zuweisen!
-    Public OnLoginConfirm As Action(Of Boolean)
+    Public OnLoginConfirm As Action(Of Integer)
     'Event für alle Benutzernamenn empfangen
     Public OnUserList As Action(Of String())
     'Event für Freunde empfangen
@@ -38,17 +38,17 @@ Public Class NetClient
             Case "registerconfirm"
                 If OnRegisterConfirm IsNot Nothing Then
                     ' Argumente bekommen
-                    Dim res As Boolean = req.Data.Item("success")
+                    Dim id As Integer = req.Data.Item("id")
 
                     ' Methode aufrufen + Callback 
-                    OnRegisterConfirm(res)
+                    OnRegisterConfirm(id)
                 End If
             Case "loginconfirm"
                 If OnLoginConfirm IsNot Nothing Then
                     ' Argumente bekommen
-                    Dim res As Boolean = req.Data.Item("success")
+                    Dim id As Integer = req.Data.Item("id")
                     ' Methode aufrufen + Callback 
-                    OnLoginConfirm(res)
+                    OnLoginConfirm(id)
                 End If
             Case "userlist"
                 If OnUserList IsNot Nothing Then
@@ -86,7 +86,7 @@ Public Class NetClient
         OnRegisterConfirm = callback
     End Sub
     ' Einloggen
-    Sub Login(username As String, password As String, callback As Action(Of Boolean))
+    Sub Login(username As String, password As String, id As Integer, callback As Action(Of Boolean))
         Dim data As New Dictionary(Of String, Object)
         data.Add("username", username)
         data.Add("password", password)
@@ -115,7 +115,9 @@ Public Class NetClient
     'NewFriends
     Sub NewFriendConfirm(callback As Action(Of Boolean))
         Dim data As New Dictionary(Of String, Object)
-
+        Dim res As New ConnectionData("new Friend confirm")
+        connector.send(res)
+        OnNewFriendConfirm = callback
     End Sub
 
 End Class
