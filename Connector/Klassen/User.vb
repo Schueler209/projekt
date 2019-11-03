@@ -1,4 +1,6 @@
-﻿Public Class User
+﻿
+<Serializable()>
+Public Class User
     Public benutzername As String
     Public name As String
     Public id As Integer

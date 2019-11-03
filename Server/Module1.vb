@@ -39,7 +39,7 @@ Module Module1
             insertCommand.CommandType = CommandType.Text
             insertCommand.ExecuteNonQuery()
             command.Connection = conn
-            done(New User(username, name, reader.GetInt32(0)))
+            done(New User(username, name, command.ExecuteScalar()))
 
         End If
     End Sub
@@ -66,17 +66,17 @@ Module Module1
 
     '    Dim insertCommand As New OleDbCommand("INSERT INTO Friendship (UserID1, UserID2) VALUES (@displayname,@username,@password);")
     '    insertCommand.Connection = conn
-    '        insertCommand.Parameters.Add("@displayname", OleDbType.Char).Value = name
+    '    insertCommand.Parameters.Add("@displayname", OleDbType.Char).Value = name
     '    insertCommand.Parameters.Add("@username", OleDbType.Char).Value = username
 
     '    insertCommand.CommandType = CommandType.Text
-    '        Try
-    '            insertCommand.ExecuteNonQuery()
-    '        Catch ex As Exception
-    '            Console.WriteLine(ex.Message)
-    '        Finally
-    '            done(True)
-    '        End Try
+    '    Try
+    '        insertCommand.ExecuteNonQuery()
+    '    Catch ex As Exception
+    '        Console.WriteLine(ex.Message)
+    '    Finally
+    '        done(True)
+    '    End Try
     '    End If
 
     'End Sub

@@ -53,7 +53,7 @@ Public Class NetClient
                 End If
             Case "userlist"
                 If OnUserList IsNot Nothing Then
-                    Dim list As User() = req.Data.Item("All users")
+                    Dim list As User() = req.Data.Item("userlist")
                     OnUserList(list)
                 End If
 
@@ -114,7 +114,7 @@ Public Class NetClient
     End Sub
 
     'NewFriends
-    Sub NewFriendConfirm(callback As Action(Of Boolean))
+    Sub NewFriendConfirm(callback As Action(Of User))
         Dim data As New Dictionary(Of String, Object)
         Dim res As New ConnectionData("new Friend confirm")
         connector.send(res)

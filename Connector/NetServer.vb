@@ -119,7 +119,7 @@ Public Class NetServer
     Sub AllUsersSend(ans As User(), client As TcpClient)
         Dim data As New Dictionary(Of String, Object)
         data.Add("userlist", ans)
-        connector.send(client, New ConnectionData("users", data))
+        connector.send(client, New ConnectionData("userlist", data))
     End Sub
 
     Sub FriendsSend(ans As User(), client As TcpClient)

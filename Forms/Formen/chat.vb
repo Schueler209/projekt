@@ -19,7 +19,7 @@
 
     Private Sub btnAbmelden_Click(sender As Object, e As EventArgs) Handles btnAbmelden.Click
         Login.Show()
-        NetworkClass.loginID = Nothing
+        NetworkClass.login = Nothing
         Me.Hide()
     End Sub
 End Class
