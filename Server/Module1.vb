@@ -12,8 +12,7 @@ Module Module1
         Dim connect As NetServer = New NetServer
         connect.OnRegister = AddressOf register
         connect.OnLogin = AddressOf logincheck
-        'connect.OnNewFriend = AddressOf addFriends
-        'connect.OnFriends = AddressOf getFriends
+        connect.OnUserlist = AddressOf Userlist
         connect.connect()
         'register("Till", "Till1234", "123", Sub(g As Boolean)
         '                                    End Sub)
@@ -83,8 +82,18 @@ Module Module1
         Return success
     End Function
 
-
-
+    Public Sub Userlist(done As Action(Of String()))
+        Dim conn As New OleDbConnection(ConnectionStr)
+        conn.Open()
+        Dim checkCommand As New OleDbCommand("SELECT username FROM users")
+        checkCommand.Connection = conn
+        Dim reader = checkCommand.ExecuteReader
+        Dim userlist As New List(Of String)
+        Do While reader.Read
+            userlist.Add(reader.GetString(0))
+        Loop
+        done(userlist.ToArray)
+    End Sub
 
     Public Sub addFriends(username As String, usernamehinzugefügterfreund As String)
         Dim connString As String = "provider= microsoft.jet.oledb.4.0; " & "data source=db.mdb;" & ""
