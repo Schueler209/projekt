@@ -110,7 +110,7 @@ Public Class NetClient
         Dim res As New ConnectionData("Friends")
         res.addData("id", id)
         connector.send(res)
-        OnUserList = callback
+        OnFriends = callback
     End Sub
 
     'NewFriends

@@ -89,6 +89,7 @@ Module Module1
             insertCommand.ExecuteNonQuery()
         Catch ex As Exception
             Console.WriteLine(ex.Message)
+            done(Nothing)
         Finally
             done(getUser(ID2))
         End Try
@@ -111,10 +112,16 @@ Module Module1
     Public Sub friends(ID As Integer, done As Action(Of User()))
         Dim conn As New OleDbConnection(ConnectionStr)
         conn.Open()
-        Dim command As New OleDbCommand("SELECT UserID2 FROM Friendship WHERE UserID1 =" & ID.ToString()) '& "; SELECT UserID1 FROM Friendship WHERE UserID2 =" + ID.ToString())
+        Dim command As New OleDbCommand("SELECT UserID2 FROM Friendship WHERE UserID1 =" & ID.ToString())
         command.Connection = conn
         Dim reader = command.ExecuteReader
         Dim friendlist As New List(Of User)
+        Do While reader.Read
+            friendlist.Add(getUser(reader.GetInt32(0)))
+        Loop
+        reader.Close()
+        command.CommandText = "SELECT UserID1 FROM Friendship WHERE UserID2 =" + ID.ToString()
+        reader = command.ExecuteReader()
         Do While reader.Read
             friendlist.Add(getUser(reader.GetInt32(0)))
         Loop

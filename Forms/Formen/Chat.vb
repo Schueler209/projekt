@@ -7,7 +7,7 @@ Public Class Chat
 
     Private Sub Chat_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         NetworkClass.net.getFriends(NetworkClass.login.id, Sub(Friends As User())
-
+                                                               Console.WriteLine(Friends.Length)
                                                                For Each user As User In Friends
                                                                    ltbKontakte.Items.Add(user.benutzername)
                                                                    users.Add(user)
@@ -27,7 +27,7 @@ Public Class Chat
     Private Sub btnAbmelden_Click(sender As Object, e As EventArgs) Handles btnAbmelden.Click
         Login.Show()
         NetworkClass.login = Nothing
-        Me.Hide()
+        Me.Close()
     End Sub
 
     Public Sub addFriendToList(ByVal user As User)

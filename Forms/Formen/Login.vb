@@ -7,6 +7,7 @@ Public Class Login
     End Sub
 
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
+        lblFehler.Text = ""
         If txbBenutzername.Text = "" Then lblFehler.Text = "kein Benutzername angegeben"
         If txbPasswort.Text = "" Then lblFehler.Text = "kein Passwort angegeben"
         If lblFehler.Text = "" Then
@@ -31,7 +32,7 @@ Public Class Login
             NetworkClass.login = wert
             Chat.Show()
 
-            Me.Hide()
+            Me.Close()
 
         End If
 
