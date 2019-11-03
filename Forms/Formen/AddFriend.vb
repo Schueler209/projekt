@@ -38,7 +38,7 @@ Public Class AddFriend
         Next
         If selecteduser IsNot Nothing Then
             NetworkClass.net.AddNewFriend(NetworkClass.login.id, selecteduser.id, Sub(res As User)
-                                                                                      Console.WriteLine(res.benutzername)
+                                                                                      Chat.addFriendToList(res)
                                                                                       Me.Hide()
                                                                                   End Sub)
         End If

@@ -14,6 +14,7 @@ Module Module1
         connect.OnLogin = AddressOf logincheck
         connect.OnNewFriend = AddressOf addFriend
         connect.OnUserlist = AddressOf Userlist
+        connect.OnFriends = AddressOf friends
         connect.connect()
 
         'register("Till", "Till1234", "123", Sub(g As Boolean)
@@ -110,7 +111,7 @@ Module Module1
     Public Sub friends(ID As Integer, done As Action(Of User()))
         Dim conn As New OleDbConnection(ConnectionStr)
         conn.Open()
-        Dim command As New OleDbCommand("SELECT UserID2 FROM Friendship WHERE UserID1 =" + ID + "; SELECT UserID1 FROM Friendship WHERE UserID2 =" + ID)
+        Dim command As New OleDbCommand("SELECT UserID2 FROM Friendship WHERE UserID1 =" & ID.ToString()) '& "; SELECT UserID1 FROM Friendship WHERE UserID2 =" + ID.ToString())
         command.Connection = conn
         Dim reader = command.ExecuteReader
         Dim friendlist As New List(Of User)

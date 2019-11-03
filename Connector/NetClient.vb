@@ -106,9 +106,9 @@ Public Class NetClient
     End Sub
 
     'Friends
-    Sub getFriends(callback As Action(Of User()))
-        Dim data As New Dictionary(Of String, Object)
-        Dim res As New ConnectionData("Friends", data)
+    Sub getFriends(id As Integer, callback As Action(Of User()))
+        Dim res As New ConnectionData("Friends")
+        res.addData("id", id)
         connector.send(res)
         OnUserList = callback
     End Sub

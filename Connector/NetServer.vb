@@ -22,7 +22,7 @@ Public Class NetServer
     'Event für alle Benutzernamen senden
     Public OnUserlist As Action(Of Action(Of User()))
     'Event für Freunde senden
-    Public OnFriends As Action(Of Action(Of User()))
+    Public OnFriends As Action(Of Integer, Action(Of User()))
     'Event für Neue Freunde
     Public OnNewFriend As Action(Of Integer, Integer, Action(Of User))
 
@@ -77,7 +77,9 @@ Public Class NetServer
 
             Case "Friends"
                 If OnFriends IsNot Nothing Then
+                    Dim id As Integer = req.getData("id")
                     OnFriends(
+                        id,
                         Sub(list As User())
                             FriendsSend(list, client)
                         End Sub)
