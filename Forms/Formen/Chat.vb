@@ -6,9 +6,13 @@ Public Class Chat
 
 
     Private Sub Chat_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        For Each user As User In users.ToArray
-            ltbKontakte.Items.Add(user.benutzername)
-        Next
+        NetworkClass.net.getFriends(Sub(Friends As User())
+
+                                        For Each user As User In Friends
+                                            ltbKontakte.Items.Add(user.benutzername)
+                                            users.Add(user)
+                                        Next
+                                    End Sub)
     End Sub
 
     Private Sub btnNeuerKontakt_Click(sender As Object, e As EventArgs) Handles btnNeuerKontakt.Click
