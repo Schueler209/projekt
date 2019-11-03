@@ -75,7 +75,7 @@ Public Class NetClient
     End Sub
 
     ' Registrieren
-    Sub Register(name As String, username As String, password As String, callback As Action(Of Boolean))
+    Sub Register(name As String, username As String, password As String, callback As Action(Of Integer))
         Dim data As New Dictionary(Of String, Object)
         data.Add("name", name)
         data.Add("username", username)
@@ -86,7 +86,7 @@ Public Class NetClient
         OnRegisterConfirm = callback
     End Sub
     ' Einloggen
-    Sub Login(username As String, password As String, id As Integer, callback As Action(Of Boolean))
+    Sub Login(username As String, password As String, id As Integer, callback As Action(Of Integer))
         Dim data As New Dictionary(Of String, Object)
         data.Add("username", username)
         data.Add("password", password)

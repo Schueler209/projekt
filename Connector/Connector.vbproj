@@ -52,6 +52,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Klassen\User.vb" />
     <Compile Include="Klassen\ClientConnector.vb" />
     <Compile Include="Klassen\ConnectionData.vb" />
     <Compile Include="Klassen\EventNotifier.vb" />

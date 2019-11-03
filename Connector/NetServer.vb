@@ -16,7 +16,7 @@ Public Class NetServer
     End Sub
 
     ' Event für Registrierung Neue Methode zuweisen!
-    Public OnRegister As Action(Of String, String, String, Action(Of Integer)
+    Public OnRegister As Action(Of String, String, String, Action(Of Integer))
     ' Event für login Neue Methode zuweisen!
     Public OnLogin As Action(Of String, String, Action(Of Integer))
     'Event für alle Benutzernamen senden
