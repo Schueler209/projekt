@@ -17,11 +17,13 @@
 
     Private Sub benutzer_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         NetworkClass.net.getAllUsers(Sub(AllUsers As String())
+                                         Console.WriteLine(AllUsers)
                                          users = AllUsers
+                                         For Each user In users
+                                             ltbAlleBenutzer.Items.Add(user)
+                                         Next
                                      End Sub)
-        For Each user In users
-            ltbAlleBenutzer.Items.Add(user)
-        Next
+
     End Sub
 
     Private Sub ltbAlleBenutzer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ltbAlleBenutzer.SelectedIndexChanged
