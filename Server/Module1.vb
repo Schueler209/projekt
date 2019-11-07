@@ -129,5 +129,11 @@ Module Module1
         done(friendlist.ToArray)
     End Sub
 
+    Public Sub Messages(ID As Integer, Message As String)
+        Dim conn As New OleDbConnection(ConnectionStr)
+        conn.Open()
+
+        Dim insertcommand As New OleDbCommandmmand("INSERT INTO Messages (UserID, Messages"
+    End Sub
 
 End Module
