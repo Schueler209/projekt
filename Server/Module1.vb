@@ -61,21 +61,6 @@ Module Module1
             done(Nothing)
         End If
     End Sub
-
-    Public Function getUser(ID As Integer) As User
-        Dim conn As New OleDbConnection(ConnectionStr)
-        Dim command As New OleDbCommand("SELECT username, [name] FROM Users WHERE ID = @id")
-        command.Parameters.Add("@id", OleDbType.Integer).Value = ID
-        command.Connection = conn
-        conn.Open()
-        Dim reader = command.ExecuteReader
-        If reader.HasRows Then
-            reader.Read()
-            Return New User(reader.GetString(0), reader.GetString(1), ID)
-        Else
-            Return Nothing
-        End If
-    End Function
     Public Sub addFriend(ID As Integer, ID2 As Integer, done As Action(Of User))
         Dim conn As New OleDbConnection(ConnectionStr)
         conn.Open()
