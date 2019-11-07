@@ -74,6 +74,7 @@ Module Module1
         insertCommand.Connection = conn
         insertCommand.Parameters.Add("@UserID1", OleDbType.Char).Value = ID
         insertCommand.Parameters.Add("@UserID2", OleDbType.Char).Value = ID2
+        insertCommand.Parameters.Add("@Date", OleDbType.Date).Value = DateTime.Now
         insertCommand.CommandType = CommandType.Text
         Try
             insertCommand.ExecuteNonQuery()

@@ -14,7 +14,7 @@ Module DBUtils
 
 
     Public Function getUser(ID As Integer) As User
-        Dim reader = ReaderQuery("SELECT username, [name] FROM Users WHERE ID = " + ID)
+        Dim reader = ReaderQuery("SELECT username, [name] FROM Users WHERE ID = " + ID.ToString())
         If reader.HasRows Then
             reader.Read()
             Return New User(reader.GetString(0), reader.GetString(1), ID)
@@ -24,13 +24,14 @@ Module DBUtils
     End Function
 
     Public Function getFriendIDs(ID As Integer) As Integer()
-        Dim reader = ReaderQuery("SELECT UserID1, UserID2 FROM Chats WHERE UserID1 =" & ID & "OR UserID2 =" + ID)
+        Dim reader = ReaderQuery("SELECT UserID1, UserID2 FROM Chats WHERE UserID1 =" & ID & "OR UserID2 =" & ID) ' & " ORDER BY Datum")
         Dim friendlist As New List(Of Integer)
         Do While reader.Read
             Dim friendID As Integer = reader.GetInt32(0)
             If friendID = ID Then
                 friendID = reader.GetInt32(1)
             End If
+            Console.WriteLine(friendID)
             friendlist.Add(friendID)
         Loop
         Return friendlist.ToArray()
