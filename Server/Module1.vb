@@ -65,7 +65,7 @@ Module Module1
         Dim conn As New OleDbConnection(ConnectionStr)
         conn.Open()
 
-        Dim insertCommand As New OleDbCommand("INSERT INTO Friendship (UserID1, UserID2) VALUES (@UserID1,@UserID2);")
+        Dim insertCommand As New OleDbCommand("INSERT INTO Chats (UserID1, UserID2) VALUES (@UserID1,@UserID2);")
         insertCommand.Connection = conn
         insertCommand.Parameters.Add("@UserID1", OleDbType.Char).Value = ID
         insertCommand.Parameters.Add("@UserID2", OleDbType.Char).Value = ID2
@@ -97,7 +97,7 @@ Module Module1
     Public Sub friends(ID As Integer, done As Action(Of User()))
         Dim conn As New OleDbConnection(ConnectionStr)
         conn.Open()
-        Dim command As New OleDbCommand("SELECT UserID2 FROM Friendship WHERE UserID1 =" & ID.ToString())
+        Dim command As New OleDbCommand("SELECT UserID2 FROM Chats WHERE UserID1 =" & ID.ToString())
         command.Connection = conn
         Dim reader = command.ExecuteReader
         Dim friendlist As New List(Of User)
@@ -105,13 +105,20 @@ Module Module1
             friendlist.Add(getUser(reader.GetInt32(0)))
         Loop
         reader.Close()
-        command.CommandText = "SELECT UserID1 FROM Friendship WHERE UserID2 =" + ID.ToString()
+        command.CommandText = "SELECT UserID1 FROM Chats WHERE UserID2 =" + ID.ToString()
         reader = command.ExecuteReader()
         Do While reader.Read
             friendlist.Add(getUser(reader.GetInt32(0)))
         Loop
 
         done(friendlist.ToArray)
+    End Sub
+
+    Public Sub Messages(ID As Integer, Message As String)
+        Dim conn As New OleDbConnection(ConnectionStr)
+        conn.Open()
+
+        Dim insertcommand As New OleDbCommandmmand("INSERT INTO Messages (UserID, Messages"
     End Sub
 
 End Module

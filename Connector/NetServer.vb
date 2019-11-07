@@ -25,6 +25,8 @@ Public Class NetServer
     Public OnFriends As Action(Of Integer, Action(Of User()))
     'Event für Neue Freunde
     Public OnNewFriend As Action(Of Integer, Integer, Action(Of User))
+    'Event für alle Nachrichten
+    Public OnMessages As avtion(Of Integer, Integer, Action(Of Message()))
 
 
     ' Falls neue Nachricht kommt:
@@ -97,6 +99,14 @@ Public Class NetServer
 
                 End If
 
+            Case "messages"
+                If OnMessages IsNot Nothing Then
+                    OnMessages(
+                        Sub(val As Message())
+                            SendAllMessages(val, client)
+                        End Sub)
+
+                End If
 
         End Select
 
@@ -135,5 +145,11 @@ Public Class NetServer
         Dim data As New Dictionary(Of String, Object)
         data.Add("success", val)
         connector.send(client, New ConnectionData("AddNewFriend", data))
+    End Sub
+
+    Sub SendAllMessages(val As Message(), client As TcpClient)
+        Dim data As New Dictionary(Of String, Object)
+        data.Add("messages", data)
+        connector.send(client, New ConnectionData("messages", data))
     End Sub
 End Class
