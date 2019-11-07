@@ -132,7 +132,7 @@ Public Class NetClient
     'Messages bekommen
     Sub getMessages(idself As Integer, idfriend As Integer, callback As Action(Of Message()))
         Dim res As New ConnectionData("messages")
-        connetor.send(res)
+        connector.send(res)
         OnMessages = callback
     End Sub
 

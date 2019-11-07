@@ -40,7 +40,7 @@ Public Class AddFriend
             NetworkClass.net.AddNewFriend(NetworkClass.login.id, selecteduser.id, Sub(res As User)
                                                                                       If res IsNot Nothing Then
                                                                                           Chat.addFriendToList(res)
-                                                                                          Me.Hide()
+                                                                                          Me.Close()
                                                                                       End If
 
                                                                                   End Sub)
