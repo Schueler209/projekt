@@ -30,6 +30,8 @@ Public Class NetClient
     Public OnFriends As Action(Of User())
     'Event für neuen Freund hinzufügen
     Public OnNewFriendConfirm As Action(Of User)
+    'Event für alle Nschrichten
+    Public OnMessages As Action(Of Message())
 
     ' Falls neue Nachricht kommt:
     Private Sub onRequest(req As ConnectionData)
@@ -69,6 +71,11 @@ Public Class NetClient
                     OnNewFriendConfirm(ans)
                 End If
 
+            Case "messages"
+                If OnMessages IsNot Nothing Then
+                    Dim ans As Message() = req.Data.Item("messages")
+                    OnMessages(ans)
+                End If
 
 
         End Select
@@ -99,8 +106,7 @@ Public Class NetClient
 
     'Userlist
     Sub getAllUsers(callback As Action(Of User()))
-        Dim data As New Dictionary(Of String, Object)
-        Dim res As New ConnectionData("userlist", data)
+        Dim res As New ConnectionData("userlist")
         connector.send(res)
         OnUserList = callback
     End Sub
@@ -121,6 +127,13 @@ Public Class NetClient
         res.addData("IDfriend", idfriend)
         connector.send(res)
         OnNewFriendConfirm = callback
+    End Sub
+
+    'Messages bekommen
+    Sub getMessages(idself As Integer, idfriend As Integer, callback As Action(Of Message()))
+        Dim res As New ConnectionData("messages")
+        connetor.send(res)
+        OnMessages = callback
     End Sub
 
 End Class
