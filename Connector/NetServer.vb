@@ -74,7 +74,8 @@ Public Class NetServer
                     OnUserlist(
                     Sub(val As User())
                         AllUsersSend(val, client)
-                    End Sub)
+                    End Sub
+                    )
 
                 End If
 
