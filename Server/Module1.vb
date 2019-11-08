@@ -12,7 +12,7 @@ Module Module1
         Dim connect As NetServer = New NetServer With {
             .OnRegister = AddressOf Register,
             .OnLogin = AddressOf CheckLogin,
-            .OnNewFriend = AddressOf AddFriend,
+            .OnNewChat = AddressOf AddFriend,
             .OnUserlist = AddressOf GetAllUsers,
             .OnChats = AddressOf GetFriends
         }
@@ -117,19 +117,20 @@ Module Module1
 
     End Sub
 
-    Public Sub getMessages(ID As Integer, done As Action(Of Message()))
+    Public Sub getMessages(ChatID As Integer, done As Action(Of Message()))
 
         Dim conn As New OleDbConnection(ConnectionStr)
         conn.Open()
-        Dim reader = ReaderQuery("SELECT Message, Datum FROM Messages WHERE UserID = '" & ID & "'")
-        If reader.HasRows Then
-            reader.Read()
-            done(New Message(ID, reader.GetString(0), reader.GetString(1)))
-        Else
-            done(Nothing)
-        End If
+        Dim reader = ReaderQuery("SELECT Message, Datum, UserID FROM Messages WHERE ChatID = '" & ChatID & "'")
+        Dim messages As New List(Of Message)
 
+        Do While reader.Read
 
+            Dim msg As New Message(getUser(reader.GetInt32(2)), reader.GetString(1), reader.GetString(0))
+            messages.Add(msg)
+
+        Loop
+        done(messages.ToArray)
 
     End Sub
 End Module
