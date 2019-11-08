@@ -137,8 +137,9 @@ Public Class NetClient
     End Sub
 
     'Messages bekommen
-    Sub getMessages(idself As Integer, idfriend As Integer, callback As Action(Of Message()))
+    Sub getMessages(idchat As Integer, callback As Action(Of Message()))
         Dim res As New ConnectionData("messages")
+        res.addData("idchat", idchat)
         connector.send(res)
         OnMessages = callback
     End Sub
