@@ -61,32 +61,36 @@ Module Module1
 
     ' Freunde/Chatverwaltung
 
-    Public Sub GetAllUsers(done As Action(Of User()))
-        Dim id = 0 'TODO: Umbedingt richtige ID einbauen
+    Public Sub GetAllUsers(id As Integer, done As Action(Of User()))
         Dim ignore As Integer() = getFriendIDs(id).Concat({id}).ToArray()
         done(getAll(ignore))
     End Sub
     Public Sub AddFriend(ID As Integer, ID2 As Integer, done As Action(Of User))
-        Dim conn As New OleDbConnection(ConnectionStr)
-        conn.Open()
 
-        Dim insertCommand As New OleDbCommand("INSERT INTO Chats (UserID1, UserID2, Datum) VALUES (@UserID1,@UserID2,@Date);")
-        insertCommand.Connection = conn
-        insertCommand.Parameters.Add("@UserID1", OleDbType.Char).Value = ID
-        insertCommand.Parameters.Add("@UserID2", OleDbType.Char).Value = ID2
-        insertCommand.Parameters.Add("@Date", OleDbType.Date).Value = DateTime.Now
-        insertCommand.CommandType = CommandType.Text
-        Try
-            insertCommand.ExecuteNonQuery()
-        Catch ex As Exception
-            Console.WriteLine(ex.Message)
+        If areFriends(ID, ID2) Then
             done(Nothing)
-        Finally
-            done(getUser(ID2))
-        End Try
+        Else
+            Dim conn As New OleDbConnection(ConnectionStr)
+            conn.Open()
+
+            Dim insertCommand As New OleDbCommand("INSERT INTO Chats (UserID1, UserID2, Datum) VALUES (@UserID1,@UserID2,@Date);")
+            insertCommand.Connection = conn
+            insertCommand.Parameters.Add("@UserID1", OleDbType.Char).Value = ID
+            insertCommand.Parameters.Add("@UserID2", OleDbType.Char).Value = ID2
+            insertCommand.Parameters.Add("@Date", OleDbType.Date).Value = DateTime.Now
+            insertCommand.CommandType = CommandType.Text
+            Try
+                insertCommand.ExecuteNonQuery()
+            Catch ex As Exception
+                Console.WriteLine(ex.Message)
+                done(Nothing)
+            Finally
+                done(getUser(ID2))
+            End Try
+        End If
     End Sub
 
-    Public Sub GetFriends(ID As Integer, done As Action(Of User()))
+    Public Sub GetFriends(ID As Integer, done As Action(Of Chat()))
         done(getChats(ID))
     End Sub
 
