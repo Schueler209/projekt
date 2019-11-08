@@ -27,11 +27,13 @@ Public Class NetClient
     'Event für alle Benutzernamenn empfangen
     Public OnUserList As Action(Of User())
     'Event für Freunde empfangen
-    Public OnFriends As Action(Of User())
+    Public OnChats As Action(Of User())
     'Event für neuen Freund hinzufügen
-    Public OnNewFriendConfirm As Action(Of User)
+    Public OnNewChat As Action(Of User)
     'Event für alle Nschrichten
     Public OnMessages As Action(Of Message())
+    'Event für Nachricht senden
+    Public OnSendMessage As Action(Of Message)
 
     ' Falls neue Nachricht kommt:
     Private Sub onRequest(req As ConnectionData)
@@ -59,16 +61,16 @@ Public Class NetClient
                     OnUserList(list)
                 End If
 
-            Case "friends"
-                If OnFriends IsNot Nothing Then
-                    Dim list As User() = req.Data.Item("Friends")
+            Case "chats"
+                If OnChats IsNot Nothing Then
+                    Dim list As Chat() = req.Data.Item("chats")
                     OnFriends(list)
                 End If
 
-            Case "AddNewFriend"
-                If OnNewFriendConfirm IsNot Nothing Then
+            Case "NewChat"
+                If OnNewChat IsNot Nothing Then
                     Dim ans As User = req.Data.Item("success")
-                    OnNewFriendConfirm(ans)
+                    OnNewChat(ans)
                 End If
 
             Case "messages"
@@ -105,28 +107,29 @@ Public Class NetClient
     End Sub
 
     'Userlist
-    Sub getAllUsers(callback As Action(Of User()))
+    Sub getAllUsers(id As Integer, callback As Action(Of User()))
         Dim res As New ConnectionData("userlist")
+        res.addData("id", id)
         connector.send(res)
         OnUserList = callback
     End Sub
 
-    'Friends
-    Sub getFriends(id As Integer, callback As Action(Of User()))
-        Dim res As New ConnectionData("Friends")
+    'Chats
+    Sub getChats(id As Integer, callback As Action(Of User()))
+        Dim res As New ConnectionData("id")
         res.addData("id", id)
         connector.send(res)
         OnFriends = callback
     End Sub
 
-    'NewFriends
-    Sub AddNewFriend(idself As Integer, idfriend As Integer, callback As Action(Of User))
+    'NewChat
+    Sub NewChat(idself As Integer, idfriend As Integer, callback As Action(Of User))
         Dim data As New Dictionary(Of String, Object)
-        Dim res As New ConnectionData("AddNewFriend")
+        Dim res As New ConnectionData("NewChat")
         res.addData("IDself", idself)
         res.addData("IDfriend", idfriend)
         connector.send(res)
-        OnNewFriendConfirm = callback
+        OnNewChat = callback
     End Sub
 
     'Messages bekommen
