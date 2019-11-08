@@ -12,7 +12,7 @@ Module Module1
         Dim connect As NetServer = New NetServer With {
             .OnRegister = AddressOf Register,
             .OnLogin = AddressOf CheckLogin,
-            .OnNewFriend = AddressOf AddFriend,
+            .OnNewChat = AddressOf AddFriend,
             .OnUserlist = AddressOf GetAllUsers,
             .OnChats = AddressOf GetFriends
         }
