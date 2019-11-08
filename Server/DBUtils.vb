@@ -23,6 +23,11 @@ Module DBUtils
         End If
     End Function
 
+    Public Function areFriends(ID1 As Integer, ID2 As Integer) As Boolean
+        Dim reader = ReaderQuery("SELECT ID FROM Chats WHERE UserID1 =" & ID1.ToString() & "And UserID2 =" & ID2.ToString())
+        Return reader.HasRows
+    End Function
+
     Public Function getFriendIDs(ID As Integer) As Integer()
         Dim reader = ReaderQuery("SELECT UserID1, UserID2 FROM Chats WHERE UserID1 =" & ID & "OR UserID2 =" & ID) ' & " ORDER BY Datum")
         Dim friendlist As New List(Of Integer)
@@ -37,8 +42,17 @@ Module DBUtils
         Return friendlist.ToArray()
     End Function
 
-    Public Function getChats(ID As Integer) As User()
-        Return getFriendIDs(ID).Select(Function(x) getUser(x)).ToArray()
+    Public Function getChats(ID As Integer) As Chat()
+        Dim reader = ReaderQuery("SELECT ID, UserID1, UserID2, Datum FROM Chats WHERE UserID1 =" & ID & "OR UserID2 =" & ID) ' & " ORDER BY Datum")
+        Dim friendlist As New List(Of Chat)
+        Do While reader.Read
+            Dim friendID As Integer = reader.GetInt32(1)
+            If friendID = ID Then
+                friendID = reader.GetInt32(2)
+            End If
+            friendlist.Add(New Chat(reader.GetInt32(0), getUser(friendID), reader.GetDateTime(3)))
+        Loop
+        Return friendlist.ToArray()
     End Function
 
     Public Function getAll(exept As Integer()) As User()
