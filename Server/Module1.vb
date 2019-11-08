@@ -90,11 +90,42 @@ Module Module1
         done(getChats(ID))
     End Sub
 
-    Public Sub GetMessages(ID As Integer, Message As String)
+    Public Sub SafeMessages(ID As Integer, Messages As String, done As Action(Of Boolean))
+
         Dim conn As New OleDbConnection(ConnectionStr)
         conn.Open()
 
-        ' Dim insertcommand As New OleDbCommandmmand("INSERT INTO Messages (UserID, Messages"
+        Dim insertcommand As New OleDbCommand("INSERT INTO Messages (UserID, Messages, Datum) VALUES @UserID, @Messages, @Datum);")
+        insertcommand.Connection = conn
+        insertcommand.Parameters.Add("@UserID", OleDbType.Char).Value = ID
+        insertcommand.Parameters.Add("@Messages", OleDbType.Char).Value = Messages
+        insertcommand.Parameters.Add("@Datum", OleDbType.Date).Value = DateTime.Now
+        insertcommand.CommandType = CommandType.Text
+
+        Try
+            insertcommand.ExecuteNonQuery()
+        Catch ex As Exception
+            Console.WriteLine(ex.Message)
+            done(False)
+        Finally
+            done(True)
+        End Try
+
     End Sub
 
+    Public Sub getMessages(ID As Integer, done As Action(Of Message()))
+
+        Dim conn As New OleDbConnection(ConnectionStr)
+        conn.Open()
+        Dim reader = ReaderQuery("SELECT Message, Datum FROM Messages WHERE UserID = '" & ID & "'")
+        If reader.HasRows Then
+            reader.Read()
+            done(New Message(ID, reader.GetString(0), reader.GetString(1)))
+        Else
+            done(Nothing)
+        End If
+
+
+
+    End Sub
 End Module
