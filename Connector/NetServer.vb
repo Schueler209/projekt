@@ -27,6 +27,8 @@ Public Class NetServer
     Public OnNewChat As Action(Of Integer, Integer, Action(Of User))
     'Event für alle Nachrichten
     Public OnMessages As Action(Of Action(Of Message()))
+    'Event für Nachricht senden
+    Public OnSendMessage As Action(Of Integer, Action(Of Chat))
 
 
     ' Falls neue Nachricht kommt:
@@ -111,6 +113,17 @@ Public Class NetServer
 
                 End If
 
+
+            Case "send message"
+                If OnSendMessage IsNot Nothing Then
+                    Dim id As Integer = req.Data.Item("ID")
+                    OnSendMessage(id,
+                                 Sub(chat As Chat)
+                                     SendMessage(chat, client)
+
+                                 End Sub)
+                End If
+
         End Select
 
     End Sub
@@ -154,5 +167,11 @@ Public Class NetServer
         Dim data As New Dictionary(Of String, Object)
         data.Add("messages", data)
         connector.send(client, New ConnectionData("messages", data))
+    End Sub
+
+    Sub SendMessage(chat As Chat, client As TcpClient)
+        Dim data As New Dictionary(Of String, Object)
+        data.Add("chat", chat)
+        connector.send(client, New ConnectionData("chat", data))
     End Sub
 End Class

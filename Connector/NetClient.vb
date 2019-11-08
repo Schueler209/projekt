@@ -79,7 +79,11 @@ Public Class NetClient
                     OnMessages(ans)
                 End If
 
-
+            Case "send message"
+                If OnSendMessage IsNot Nothing Then
+                    Dim ans As Message = req.Data.Item("message")
+                    OnSendMessage(ans)
+                End If
         End Select
 
     End Sub
@@ -138,5 +142,18 @@ Public Class NetClient
         connector.send(res)
         OnMessages = callback
     End Sub
+
+
+    Sub SendMessage(id As Integer, message As String, callback As Action(Of Message))
+        Dim data As New Dictionary(Of String, Object)
+        Dim res As New ConnectionData("send message")
+        res.addData("ID", id)
+        res.addData("message", message)
+        connector.send(res)
+        OnSendMessage = callback
+
+    End Sub
+
+
 
 End Class
