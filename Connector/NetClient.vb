@@ -145,11 +145,12 @@ Public Class NetClient
     End Sub
 
 
-    Sub SendMessage(id As Integer, message As String, callback As Action(Of Message))
+    Sub SendMessage(id As Integer, idchat As Integer, message As String, callback As Action(Of Message))
         Dim data As New Dictionary(Of String, Object)
         Dim res As New ConnectionData("send message")
         res.addData("ID", id)
         res.addData("message", message)
+        res.addData("idchat", idchat)
         connector.send(res)
         OnSendMessage = callback
 
