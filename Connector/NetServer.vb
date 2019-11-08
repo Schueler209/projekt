@@ -27,6 +27,8 @@ Public Class NetServer
     Public OnNewChat As Action(Of Integer, Integer, Action(Of User))
     'Event für alle Nachrichten
     Public OnMessages As Action(Of Action(Of Message()))
+    'Event für Nachricht senden
+    Public OnSendMessage As Action(Of Integer, Action(Of Chat))
 
 
     ' Falls neue Nachricht kommt:
@@ -75,7 +77,8 @@ Public Class NetServer
                         id,
                     Sub(val As User())
                         AllUsersSend(val, client)
-                    End Sub)
+                    End Sub
+                    )
 
                 End If
 
@@ -93,10 +96,10 @@ Public Class NetServer
                 If OnNewChat IsNot Nothing Then
                     Dim idself As Integer = req.Data.Item("IDself")
                     Dim idfriend As Integer = req.Data.Item("IDfriend")
-                    OnNewFriend(idself,
+                    OnNewChat(idself,
                                 idfriend,
                                 Sub(User As User)
-                                    NewFriendConfirm(User, client)
+                                    NewChat(User, client)
                                 End Sub)
 
                 End If
@@ -108,6 +111,17 @@ Public Class NetServer
                             SendAllMessages(val, client)
                         End Sub)
 
+                End If
+
+
+            Case "send message"
+                If OnSendMessage IsNot Nothing Then
+                    Dim id As Integer = req.Data.Item("ID")
+                    OnSendMessage(id,
+                                 Sub(chat As Chat)
+                                     SendMessage(chat, client)
+
+                                 End Sub)
                 End If
 
         End Select
@@ -153,5 +167,11 @@ Public Class NetServer
         Dim data As New Dictionary(Of String, Object)
         data.Add("messages", data)
         connector.send(client, New ConnectionData("messages", data))
+    End Sub
+
+    Sub SendMessage(chat As Chat, client As TcpClient)
+        Dim data As New Dictionary(Of String, Object)
+        data.Add("chat", chat)
+        connector.send(client, New ConnectionData("chat", data))
     End Sub
 End Class
