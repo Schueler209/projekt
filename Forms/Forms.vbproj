@@ -73,6 +73,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ChatArea.Designer.vb">
+      <DependentUpon>ChatArea.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ChatArea.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Formen\Chat.Designer.vb">
       <DependentUpon>Chat.vb</DependentUpon>
     </Compile>
@@ -115,6 +121,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controls\ChatArea.resx">
+      <DependentUpon>ChatArea.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formen\Chat.resx">
       <DependentUpon>Chat.vb</DependentUpon>
     </EmbeddedResource>

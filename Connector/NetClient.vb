@@ -29,7 +29,7 @@ Public Class NetClient
     'Event für Freunde empfangen
     Public OnChats As Action(Of Chat())
     'Event für neuen Freund hinzufügen
-    Public OnNewChat As Action(Of User)
+    Public OnNewChat As Action(Of Chat)
     'Event für alle Nschrichten
     Public OnMessages As Action(Of Message())
     'Event für Nachricht senden
@@ -69,7 +69,7 @@ Public Class NetClient
 
             Case "NewChat"
                 If OnNewChat IsNot Nothing Then
-                    Dim ans As User = req.Data.Item("success")
+                    Dim ans As Chat = req.Data.Item("success")
                     OnNewChat(ans)
                 End If
 
@@ -127,7 +127,7 @@ Public Class NetClient
     End Sub
 
     'NewChat
-    Sub NewChat(idself As Integer, idfriend As Integer, callback As Action(Of User))
+    Sub NewChat(idself As Integer, idfriend As Integer, callback As Action(Of Chat))
         Dim data As New Dictionary(Of String, Object)
         Dim res As New ConnectionData("NewChat")
         res.addData("IDself", idself)

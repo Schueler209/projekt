@@ -2,16 +2,19 @@
 
 Public Class ChatForm
 
-    Private users As New List(Of User)
+    Private chats As New List(Of Chat)
 
 
     Private Sub Chat_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        NetworkClass.net.getChats(NetworkClass.login.id, Sub(Chats As Chat())
-                                                             For Each chat As Chat In Chats
-                                                                 ltbKontakte.Items.Add(chat.user.benutzername)
-                                                                 users.Add(chat.user)
-                                                             Next
-                                                         End Sub)
+        ChatArea.Hide()
+        NetworkClass.net.getChats(NetworkClass.login.id, AddressOf onGetChats)
+    End Sub
+
+    Private Sub onGetChats(FriendChats As Chat())
+        For Each chat As Chat In FriendChats
+            ltbKontakte.Items.Add(chat.user.benutzername)
+            chats.Add(chat)
+        Next
     End Sub
 
     Private Sub btnNeuerKontakt_Click(sender As Object, e As EventArgs) Handles btnNeuerKontakt.Click
@@ -21,6 +24,9 @@ Public Class ChatForm
 
     Private Sub LtbKontakte_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ltbKontakte.SelectedIndexChanged
         ' Chat wechseln
+
+        ChatArea.Chat = chats(ltbKontakte.SelectedIndex)
+        ChatArea.Show()
     End Sub
 
     Private Sub btnAbmelden_Click(sender As Object, e As EventArgs) Handles btnAbmelden.Click
@@ -29,15 +35,13 @@ Public Class ChatForm
         Me.Close()
     End Sub
 
-    Public Sub addFriendToList(ByVal user As User)
-        users.Add(user)
+    Public Sub addChatToList(ByVal user As Chat)
+        chats.Add(user)
         ltbKontakte.Items.Clear()
 
-        For Each val As User In users.ToArray
-            ltbKontakte.Items.Add(val.benutzername)
+        For Each chat As Chat In chats
+            ltbKontakte.Items.Add(chat.user.benutzername)
         Next
 
     End Sub
-
-
 End Class

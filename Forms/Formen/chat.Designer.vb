@@ -25,11 +25,8 @@ Partial Class ChatForm
         Me.ltbKontakte = New System.Windows.Forms.ListBox()
         Me.lblKontakte = New System.Windows.Forms.Label()
         Me.btnNeuerKontakt = New System.Windows.Forms.Button()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.btnSenden = New System.Windows.Forms.Button()
-        Me.ListBox1 = New System.Windows.Forms.ListBox()
-        Me.lblChatpartner = New System.Windows.Forms.Label()
         Me.btnAbmelden = New System.Windows.Forms.Button()
+        Me.ChatArea = New Forms.ChatArea()
         Me.SuspendLayout()
         '
         'ltbKontakte
@@ -61,43 +58,6 @@ Partial Class ChatForm
         Me.btnNeuerKontakt.Text = "+ Hinzufügen"
         Me.btnNeuerKontakt.UseVisualStyleBackColor = True
         '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(270, 284)
-        Me.TextBox1.Margin = New System.Windows.Forms.Padding(2)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(248, 20)
-        Me.TextBox1.TabIndex = 3
-        '
-        'btnSenden
-        '
-        Me.btnSenden.Location = New System.Drawing.Point(535, 283)
-        Me.btnSenden.Margin = New System.Windows.Forms.Padding(2)
-        Me.btnSenden.Name = "btnSenden"
-        Me.btnSenden.Size = New System.Drawing.Size(56, 19)
-        Me.btnSenden.TabIndex = 4
-        Me.btnSenden.Text = "Senden"
-        Me.btnSenden.UseVisualStyleBackColor = True
-        '
-        'ListBox1
-        '
-        Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.Location = New System.Drawing.Point(270, 46)
-        Me.ListBox1.Margin = New System.Windows.Forms.Padding(2)
-        Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(269, 212)
-        Me.ListBox1.TabIndex = 5
-        '
-        'lblChatpartner
-        '
-        Me.lblChatpartner.AutoSize = True
-        Me.lblChatpartner.Location = New System.Drawing.Point(295, 23)
-        Me.lblChatpartner.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.lblChatpartner.Name = "lblChatpartner"
-        Me.lblChatpartner.Size = New System.Drawing.Size(62, 13)
-        Me.lblChatpartner.TabIndex = 6
-        Me.lblChatpartner.Text = "Chatpartner"
-        '
         'btnAbmelden
         '
         Me.btnAbmelden.Location = New System.Drawing.Point(14, 9)
@@ -107,21 +67,29 @@ Partial Class ChatForm
         Me.btnAbmelden.Text = "Abmelden"
         Me.btnAbmelden.UseVisualStyleBackColor = True
         '
-        'Chat
+        'ChatArea
+        '
+        Me.ChatArea.AutoSize = True
+        Me.ChatArea.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ChatArea.Chat = Nothing
+        Me.ChatArea.Dock = System.Windows.Forms.DockStyle.Right
+        Me.ChatArea.Location = New System.Drawing.Point(173, 0)
+        Me.ChatArea.Name = "ChatArea"
+        Me.ChatArea.Size = New System.Drawing.Size(427, 366)
+        Me.ChatArea.TabIndex = 9
+        '
+        'ChatForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(600, 366)
+        Me.Controls.Add(Me.ChatArea)
         Me.Controls.Add(Me.btnAbmelden)
-        Me.Controls.Add(Me.lblChatpartner)
-        Me.Controls.Add(Me.ListBox1)
-        Me.Controls.Add(Me.btnSenden)
-        Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.btnNeuerKontakt)
         Me.Controls.Add(Me.lblKontakte)
         Me.Controls.Add(Me.ltbKontakte)
         Me.Margin = New System.Windows.Forms.Padding(2)
-        Me.Name = "Chat"
+        Me.Name = "ChatForm"
         Me.Text = "Form1"
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -131,9 +99,6 @@ Partial Class ChatForm
     Friend WithEvents ltbKontakte As ListBox
     Friend WithEvents lblKontakte As Label
     Friend WithEvents btnNeuerKontakt As Button
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents btnSenden As Button
-    Friend WithEvents ListBox1 As ListBox
-    Friend WithEvents lblChatpartner As Label
     Friend WithEvents btnAbmelden As Button
+    Friend WithEvents ChatArea As ChatArea
 End Class
