@@ -24,7 +24,7 @@ Public Class NetServer
     'Event für Freunde senden
     Public OnChats As Action(Of Integer, Action(Of Chat()))
     'Event für Neue Freunde
-    Public OnNewFriend As Action(Of Integer, Integer, Action(Of User))
+    Public OnNewChat As Action(Of Integer, Integer, Action(Of User))
     'Event für alle Nachrichten
     Public OnMessages As Action(Of Action(Of Message()))
 
@@ -88,8 +88,8 @@ Public Class NetServer
                         End Sub)
                 End If
 
-            Case "AddNewFriend"
-                If OnNewFriend IsNot Nothing Then
+            Case "NewChat"
+                If OnNewChat IsNot Nothing Then
                     Dim idself As Integer = req.Data.Item("IDself")
                     Dim idfriend As Integer = req.Data.Item("IDfriend")
                     OnNewFriend(idself,
@@ -142,10 +142,10 @@ Public Class NetServer
         connector.send(client, New ConnectionData("friends", data))
     End Sub
 
-    Sub NewFriendConfirm(val As User, client As TcpClient)
+    Sub NewChat(val As User, client As TcpClient)
         Dim data As New Dictionary(Of String, Object)
         data.Add("success", val)
-        connector.send(client, New ConnectionData("AddNewFriend", data))
+        connector.send(client, New ConnectionData("NewChat", data))
     End Sub
 
     Sub SendAllMessages(val As Message(), client As TcpClient)
