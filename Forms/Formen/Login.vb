@@ -30,7 +30,7 @@ Public Class Login
             lblFehler.Text = "Passwort oder Benutzername ist falsch!"
         Else
             NetworkClass.login = wert
-            Chat.Show()
+            ChatForm.Show()
 
             Me.Close()
 

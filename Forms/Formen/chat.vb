@@ -1,18 +1,17 @@
 ﻿Imports Connector
 
-Public Class Chat
+Public Class ChatForm
 
     Private users As New List(Of User)
 
 
     Private Sub Chat_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        NetworkClass.net.getFriends(NetworkClass.login.id, Sub(Friends As User())
-                                                               Console.WriteLine(Friends.Length)
-                                                               For Each user As User In Friends
-                                                                   ltbKontakte.Items.Add(user.benutzername)
-                                                                   users.Add(user)
-                                                               Next
-                                                           End Sub)
+        NetworkClass.net.getChats(NetworkClass.login.id, Sub(Chats As Chat())
+                                                             For Each chat As Chat In Chats
+                                                                 ltbKontakte.Items.Add(chat.user.benutzername)
+                                                                 users.Add(chat.user)
+                                                             Next
+                                                         End Sub)
     End Sub
 
     Private Sub btnNeuerKontakt_Click(sender As Object, e As EventArgs) Handles btnNeuerKontakt.Click
