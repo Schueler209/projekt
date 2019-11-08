@@ -27,7 +27,7 @@ Public Class NetClient
     'Event für alle Benutzernamenn empfangen
     Public OnUserList As Action(Of User())
     'Event für Freunde empfangen
-    Public OnFriends As Action(Of User())
+    Public OnChats As Action(Of User())
     'Event für neuen Freund hinzufügen
     Public OnNewFriendConfirm As Action(Of User)
     'Event für alle Nschrichten
@@ -59,9 +59,9 @@ Public Class NetClient
                     OnUserList(list)
                 End If
 
-            Case "friends"
-                If OnFriends IsNot Nothing Then
-                    Dim list As User() = req.Data.Item("Friends")
+            Case "chats"
+                If OnChats IsNot Nothing Then
+                    Dim list As Chat() = req.Data.Item("chats")
                     OnFriends(list)
                 End If
 
@@ -105,15 +105,16 @@ Public Class NetClient
     End Sub
 
     'Userlist
-    Sub getAllUsers(callback As Action(Of User()))
+    Sub getAllUsers(id As Integer, callback As Action(Of User()))
         Dim res As New ConnectionData("userlist")
+        res.addData("id", id)
         connector.send(res)
         OnUserList = callback
     End Sub
 
-    'Friends
-    Sub getFriends(id As Integer, callback As Action(Of User()))
-        Dim res As New ConnectionData("Friends")
+    'Chats
+    Sub getChats(id As Integer, callback As Action(Of User()))
+        Dim res As New ConnectionData("id")
         res.addData("id", id)
         connector.send(res)
         OnFriends = callback

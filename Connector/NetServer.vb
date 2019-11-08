@@ -20,9 +20,9 @@ Public Class NetServer
     ' Event für login Neue Methode zuweisen!
     Public OnLogin As Action(Of String, String, Action(Of User))
     'Event für alle Benutzernamen senden
-    Public OnUserlist As Action(Of Action(Of User()))
+    Public OnUserlist As Action(Of Integer, Action(Of User()))
     'Event für Freunde senden
-    Public OnFriends As Action(Of Integer, Action(Of User()))
+    Public OnChats As Action(Of Integer, Action(Of Chat()))
     'Event für Neue Freunde
     Public OnNewFriend As Action(Of Integer, Integer, Action(Of User))
     'Event für alle Nachrichten
@@ -70,6 +70,7 @@ Public Class NetServer
 
             Case "userlist"
                 If OnUserlist IsNot Nothing Then
+                    Dim id As Integer = req.getData("id")
                     OnUserlist(
                     Sub(val As User())
                         AllUsersSend(val, client)
@@ -77,12 +78,12 @@ Public Class NetServer
 
                 End If
 
-            Case "Friends"
-                If OnFriends IsNot Nothing Then
+            Case "chats"
+                If OnChats IsNot Nothing Then
                     Dim id As Integer = req.getData("id")
                     OnFriends(
                         id,
-                        Sub(list As User())
+                        Sub(list As Chat())
                             FriendsSend(list, client)
                         End Sub)
                 End If
@@ -135,7 +136,7 @@ Public Class NetServer
         connector.send(client, New ConnectionData("userlist", data))
     End Sub
 
-    Sub FriendsSend(ans As User(), client As TcpClient)
+    Sub ChatsSend(ans As Chat(), client As TcpClient)
         Dim data As New Dictionary(Of String, Object)
         data.Add("Friends", ans)
         connector.send(client, New ConnectionData("friends", data))
