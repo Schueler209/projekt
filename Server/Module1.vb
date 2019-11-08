@@ -14,7 +14,7 @@ Module Module1
             .OnLogin = AddressOf CheckLogin,
             .OnNewFriend = AddressOf AddFriend,
             .OnUserlist = AddressOf GetAllUsers,
-            .OnFriends = AddressOf GetFriends
+            .OnChats = AddressOf GetFriends
         }
 
         connect.connect()

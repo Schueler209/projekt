@@ -72,6 +72,7 @@ Public Class NetServer
                 If OnUserlist IsNot Nothing Then
                     Dim id As Integer = req.getData("id")
                     OnUserlist(
+                        id,
                     Sub(val As User())
                         AllUsersSend(val, client)
                     End Sub)
@@ -81,10 +82,10 @@ Public Class NetServer
             Case "chats"
                 If OnChats IsNot Nothing Then
                     Dim id As Integer = req.getData("id")
-                    OnFriends(
+                    OnChats(
                         id,
                         Sub(list As Chat())
-                            FriendsSend(list, client)
+                            ChatsSend(list, client)
                         End Sub)
                 End If
 
@@ -138,8 +139,8 @@ Public Class NetServer
 
     Sub ChatsSend(ans As Chat(), client As TcpClient)
         Dim data As New Dictionary(Of String, Object)
-        data.Add("Friends", ans)
-        connector.send(client, New ConnectionData("friends", data))
+        data.Add("chats", ans)
+        connector.send(client, New ConnectionData("chats", data))
     End Sub
 
     Sub NewFriendConfirm(val As User, client As TcpClient)

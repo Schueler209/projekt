@@ -1,4 +1,6 @@
-﻿Public Class Chat
+﻿
+<Serializable()>
+Public Class Chat
 
     Public ID As Integer
     Public user As User
