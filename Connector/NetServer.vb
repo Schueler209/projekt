@@ -93,10 +93,10 @@ Public Class NetServer
                 If OnNewChat IsNot Nothing Then
                     Dim idself As Integer = req.Data.Item("IDself")
                     Dim idfriend As Integer = req.Data.Item("IDfriend")
-                    OnNewFriend(idself,
+                    OnNewChat(idself,
                                 idfriend,
                                 Sub(User As User)
-                                    NewFriendConfirm(User, client)
+                                    NewChat(User, client)
                                 End Sub)
 
                 End If
