@@ -29,9 +29,10 @@ Public Class ChatArea
 
     Private Sub SendMessage()
         If txtEingabe.Text.Length > 0 Then
-            ltbChat.Items.Add(txtEingabe.Text)
+
+            ltbChat.Items.Add(NetworkClass.login.name & "- " & txtEingabe.Text)
             txtEingabe.Clear()
-            ltbChat.Items.Add(NetworkClass.login.name & "-" & txtEingabe.Text)
+
         End If
     End Sub
 
