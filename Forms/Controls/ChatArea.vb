@@ -18,7 +18,10 @@ Public Class ChatArea
             Return selectedChat
         End Get
         Set(value As Chat)
-            selectedChat = value
+            If value IsNot Nothing Then
+                selectedChat = value
+                lblChatpartner.Text = value.user.name
+            End If
         End Set
     End Property
 
