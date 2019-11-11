@@ -24,12 +24,14 @@ Public Class ChatArea
 
     Private Sub BtnSenden_Click(sender As Object, e As EventArgs) Handles btnSenden.Click
         SendMessage()
+
     End Sub
 
     Private Sub SendMessage()
         If txtEingabe.Text.Length > 0 Then
             ltbChat.Items.Add(txtEingabe.Text)
             txtEingabe.Clear()
+            ltbChat.Items.Add(NetworkClass.login.name & "-" & txtEingabe.Text)
         End If
     End Sub
 
@@ -38,4 +40,6 @@ Public Class ChatArea
             SendMessage()
         End If
     End Sub
+
+
 End Class
