@@ -1,7 +1,7 @@
 ﻿Imports System.Net.Sockets
 
 Public Class NetServer
-
+    Public loggedIn As Dictionary(Of TcpClient, Integer)
     Private connector As ServerConnector
 
     Sub New()
@@ -12,6 +12,7 @@ Public Class NetServer
         connector = New ServerConnector()
         ' Einkommende Nachricht handeln
         connector.OnRecieve.addHandler(AddressOf onRequest)
+        connector.OnClose.addHandler(AddressOf loggedOut)
         connector.connect()
     End Sub
 
@@ -61,6 +62,7 @@ Public Class NetServer
                         username,
                         password
                     )
+
                     LoginConfirm(User, client)
                 End If
             Case "userlist"
@@ -96,7 +98,9 @@ Public Class NetServer
             Case "send message"
                 If OnSendMessage IsNot Nothing Then
                     Dim id As Integer = req.Data.Item("ID")
-                    Dim Chat = OnSendMessage(id)
+                    Dim idchat As Integer = req.Data("idchat")
+                    Dim message As String = req.Data("message")
+                    Dim Chat As Chat = OnSendMessage(id)
                     Dim data As New ConnectionData("chat")
                     data.addData("chat", Chat)
                     connector.send(client, data)
@@ -119,6 +123,7 @@ Public Class NetServer
         data.Add("user", User)
         Dim req As New ConnectionData("loginconfirm", data)
         connector.send(client, req)
+        loggedIn.Add(client, User.id)
     End Sub
 
 
@@ -133,5 +138,12 @@ Public Class NetServer
         data.Add("chats", ans)
         connector.send(client, New ConnectionData("chats", data))
     End Sub
+
+    Public Sub loggedOut(client As TcpClient)
+
+        loggedIn.Remove()
+    End Sub
+
+
 
 End Class

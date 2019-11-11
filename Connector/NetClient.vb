@@ -54,6 +54,7 @@ Public Class NetClient
                     Dim user As User = req.Data.Item("user")
                     ' Methode aufrufen + Callback 
                     OnLoginConfirm(user)
+
                 End If
             Case "userlist"
                 If OnUserList IsNot Nothing Then
