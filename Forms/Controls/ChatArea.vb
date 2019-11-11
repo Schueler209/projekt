@@ -18,7 +18,7 @@ Public Class ChatArea
             Return selectedChat
         End Get
         Set(value As Chat)
-            selectedChat = Chat
+            selectedChat = value
         End Set
     End Property
 
