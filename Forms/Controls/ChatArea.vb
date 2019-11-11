@@ -20,10 +20,16 @@ Public Class ChatArea
         Set(value As Chat)
             If value IsNot Nothing Then
                 selectedChat = value
-                lblChatpartner.Text = value.user.name
+                lblChatpartner.Text = value.recuser.name
+
+                NetworkClass.net.getMessages(value.ID, AddressOf recievemessages)
             End If
         End Set
     End Property
+
+    Private Sub recievemessages(msg As Message())
+
+    End Sub
 
     Private Sub BtnSenden_Click(sender As Object, e As EventArgs) Handles btnSenden.Click
         SendMessage()
