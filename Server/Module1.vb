@@ -90,7 +90,7 @@ Module Module1
             Dim command As New OleDbCommand("SELECT @@IDENTITY")
             command.Connection = conn
 
-            Return New Chat(command.ExecuteReader().GetInt32(0), getUser(ID2), DateTime.Now)
+            Return New Chat(command.ExecuteScalar(), getUser(ID2), DateTime.Now)
         End If
     End Function
 
