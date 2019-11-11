@@ -36,7 +36,7 @@ Public Class ChatForm
     End Sub
 
     Public Sub addChatToList(ByVal user As Chat)
-        chats.Add(user)
+        chats.Insert(0, user)
         ltbKontakte.Items.Clear()
 
         For Each chat As Chat In chats
