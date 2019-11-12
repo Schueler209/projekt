@@ -25,8 +25,13 @@ Public Class ChatForm
     Private Sub LtbKontakte_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ltbKontakte.SelectedIndexChanged
         ' Chat wechseln
 
-        ChatArea.Chat = chats(ltbKontakte.SelectedIndex)
-        ChatArea.Show()
+        Dim chat = chats(ltbKontakte.SelectedIndex)
+        If chat IsNot Nothing Then
+            ChatArea.Chat = chat
+            ChatArea.Show()
+
+        End If
+
     End Sub
 
     Private Sub btnAbmelden_Click(sender As Object, e As EventArgs) Handles btnAbmelden.Click
@@ -36,7 +41,7 @@ Public Class ChatForm
     End Sub
 
     Public Sub addChatToList(ByVal user As Chat)
-        chats.Add(user)
+        chats.Insert(0, user)
         ltbKontakte.Items.Clear()
 
         For Each chat As Chat In chats
