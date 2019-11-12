@@ -1,7 +1,7 @@
 ﻿Imports System.Net.Sockets
 
 Public Class NetServer
-    Public loggedIn As Dictionary(Of TcpClient, Integer)
+    Public loggedIn As New Dictionary(Of TcpClient, Integer)
     Private connector As ServerConnector
 
     Sub New()
@@ -27,9 +27,9 @@ Public Class NetServer
     'Event für Neue Freunde
     Public OnNewChat As Func(Of Integer, Integer, Chat)
     'Event für alle Nachrichten
-    Public OnMessages As Func(Of Message())
+    Public OnMessages As Func(Of Integer, Message())
     'Event für Nachricht senden
-    Public OnSendMessage As Func(Of Integer, Chat)
+    Public OnSendMessage As Func(Of Integer, Integer, String, Boolean)
 
 
     ' Falls neue Nachricht kommt:
@@ -90,7 +90,8 @@ Public Class NetServer
                 End If
             Case "messages"
                 If OnMessages IsNot Nothing Then
-                    Dim messages = OnMessages()
+                    Dim idchat As Integer = req.Data.Item("idchat")
+                    Dim messages = OnMessages(idchat)
                     Dim data As New ConnectionData("messages")
                     data.addData("messages", messages)
                     connector.send(client, data)
@@ -100,9 +101,9 @@ Public Class NetServer
                     Dim id As Integer = req.Data.Item("ID")
                     Dim idchat As Integer = req.Data("idchat")
                     Dim message As String = req.Data("message")
-                    Dim Chat As Chat = OnSendMessage(id)
+                    Dim success As Boolean = OnSendMessage(id, idchat, message)
                     Dim data As New ConnectionData("chat")
-                    data.addData("chat", Chat)
+                    data.addData("success", success)
                     connector.send(client, data)
                 End If
         End Select
@@ -141,7 +142,7 @@ Public Class NetServer
 
     Public Sub loggedOut(client As TcpClient)
 
-        loggedIn.Remove()
+        'loggedIn.Remove()
     End Sub
 
 

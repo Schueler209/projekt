@@ -20,7 +20,10 @@ Public Class ChatArea
         Set(value As Chat)
             If value IsNot Nothing Then
                 selectedChat = value
-                lblChatpartner.Text = value.recuser.name
+                lblChatpartner.Text = value.user.name
+
+                ' Vorherigen Chat löschen
+                ltbChat.Items.Clear()
 
                 NetworkClass.net.getMessages(value.ID, AddressOf recievemessages)
             End If
@@ -29,20 +32,30 @@ Public Class ChatArea
 
     Private Sub recievemessages(msg As Message())
 
+        ' Hier müsste noch hin, dass alle Nachrichten mit der addMessage Methode hinzugefügt werden
+
+        ' Nach unten scrollen
+        ltbChat.TopIndex = ltbChat.Items.Count - 1
     End Sub
 
     Private Sub BtnSenden_Click(sender As Object, e As EventArgs) Handles btnSenden.Click
         SendMessage()
+    End Sub
 
+    Private Sub addMessage(msg As Message)
+        ltbChat.Items.Add(msg.user.name & "- " & msg.message)
     End Sub
 
     Private Sub SendMessage()
         If txtEingabe.Text.Length > 0 Then
 
-            ltbChat.Items.Add(NetworkClass.login.name & "- " & txtEingabe.Text)
-            txtEingabe.Clear()
-
+            NetworkClass.net.SendMessage(NetworkClass.login.id, selectedChat.ID, txtEingabe.Text, AddressOf SendMessageSuccess)
         End If
+    End Sub
+
+    Private Sub SendMessageSuccess(s As Boolean)
+        ltbChat.Items.Add(NetworkClass.login.name & "- " & txtEingabe.Text)
+        txtEingabe.Clear()
     End Sub
 
     Private Sub txtEingabe_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtEingabe.KeyPress

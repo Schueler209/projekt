@@ -15,6 +15,10 @@ Public Class ChatForm
             ltbKontakte.Items.Add(chat.user.benutzername)
             chats.Add(chat)
         Next
+        If FriendChats.Length > 0 Then
+            ' Ersten als ausgewählten Chat setzen
+            ltbKontakte.SelectedIndex = 0
+        End If
     End Sub
 
     Private Sub btnNeuerKontakt_Click(sender As Object, e As EventArgs) Handles btnNeuerKontakt.Click
@@ -47,6 +51,10 @@ Public Class ChatForm
         For Each chat As Chat In chats
             ltbKontakte.Items.Add(chat.user.benutzername)
         Next
+
+
+        ' Als Ausgewählten Chat setzen
+        ltbKontakte.SelectedIndex = 0
 
     End Sub
 End Class
