@@ -136,6 +136,24 @@ Module Module1
 
         Loop
         Return messages.ToArray()
-
     End Function
+
+
+    'Benutzernamen ändern
+    Public Sub changeUsername(ID As Integer, done As Action(Of Boolean))
+        Dim conn As New OleDbConnection(ConnectionStr)
+        conn.Open()
+
+
+
+    End Sub
+
+
+
+    'Passwort ändern
+    Public Sub changePassword(ID As Integer, done As Action(Of Boolean))
+
+
+
+    End Sub
 End Module

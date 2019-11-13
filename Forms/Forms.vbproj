@@ -97,6 +97,12 @@
     <Compile Include="Formen\Login.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formen\Setting.Designer.vb">
+      <DependentUpon>Setting.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formen\Setting.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Klassen\NetworkClass.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -132,6 +138,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formen\Login.resx">
       <DependentUpon>Login.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formen\Setting.resx">
+      <DependentUpon>Setting.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
