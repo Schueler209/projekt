@@ -30,6 +30,8 @@ Public Class NetServer
     Public OnMessages As Func(Of Integer, Message())
     'Event für Nachricht senden
     Public OnSendMessage As Func(Of Integer, Integer, String, Boolean)
+    'Event für Logout
+    Public OnLogOut As Func(Of Integer)
 
 
     ' Falls neue Nachricht kommt:
@@ -105,6 +107,11 @@ Public Class NetServer
                     Dim data As New ConnectionData("message")
                     data.addData("success", success)
                     connector.send(client, data)
+                End If
+
+            Case "loggedOut"
+
+                loggedOut(client)
                 End If
         End Select
 
