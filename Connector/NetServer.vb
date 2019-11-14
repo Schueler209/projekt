@@ -104,15 +104,22 @@ Public Class NetServer
                     Dim idchat As Integer = req.Data("idchat")
                     Dim message As String = req.Data("message")
                     Dim success As Boolean = OnSendMessage(id, idchat, message)
+                    Dim msg As New ConnectionData("messsage")
+                    msg.addData("message", message)
+                    For Each c As KeyValuePair(Of TcpClient, Integer) In loggedIn
+                        Console.WriteLine(c.Value)
+                        If c.Value = id Then
+                            connector.send(c.Key, msg)
+                            Exit For
+                        End If
+                    Next
                     Dim data As New ConnectionData("message")
                     data.addData("success", success)
                     connector.send(client, data)
                 End If
 
             Case "loggedOut"
-
                 loggedOut(client)
-                End If
         End Select
 
     End Sub

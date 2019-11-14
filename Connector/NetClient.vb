@@ -155,6 +155,7 @@ Public Class NetClient
         OnSendMessage = callback
     End Sub
 
+
     Sub logOut(id As Integer)
         Dim res As New ConnectionData("loggedOut")
         connector.send(res)
