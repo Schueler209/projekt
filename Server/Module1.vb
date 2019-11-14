@@ -100,7 +100,7 @@ Module Module1
         Return getChats(ID)
     End Function
 
-    Public Function AddMessage(UserID As Integer, ChatID As Integer, Message As String) As Message
+    Public Function AddMessage(UserID As Integer, ChatID As Integer, Message As String) As Tuple(Of Message, Integer())
 
         Dim conn As New OleDbConnection(ConnectionStr)
         conn.Open()
@@ -110,7 +110,7 @@ Module Module1
         insertcommand.Parameters.Add("@ChatID", OleDbType.Integer).Value = ChatID
         insertcommand.Parameters.Add("@UserID", OleDbType.Integer).Value = UserID
         insertcommand.Parameters.Add("@Message", OleDbType.Char).Value = Message
-        insertcommand.Parameters.Add("@Datum", OleDbType.Date).Value = DateTime.Now
+        insertcommand.Parameters.Add("@Datum", OleDbType.Date).Value = Date.Now
         insertcommand.CommandType = CommandType.Text
 
         Try
@@ -119,7 +119,12 @@ Module Module1
             Console.WriteLine(ex.Message)
             Return Nothing
         End Try
-        Return New Message(getUser(UserID), ChatID, DateTime.Now, Message)
+
+        Dim msg As New Message(getUser(UserID), ChatID, Date.Now, Message)
+
+        Dim recievers As Integer() = {getFriendID(UserID, ChatID)}
+
+        Return New Tuple(Of Message, Integer())(msg, recievers)
     End Function
 
     Public Function getMessages(ChatID As Integer) As Message()

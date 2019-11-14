@@ -14,6 +14,7 @@ Public Class Chats
     End Sub
 
     Sub OnRecieveMessage(msg As Message)
+
         If ChatArea.Chat IsNot Nothing AndAlso msg.chat = ChatArea.Chat.ID Then
             ChatArea.addMessage(msg)
         End If

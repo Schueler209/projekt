@@ -1,7 +1,7 @@
 ﻿Imports System.Net.Sockets
 
 Public Class NetServer
-    Public loggedIn As New Dictionary(Of TcpClient, Integer)
+    Public loggedIn As New Dictionary(Of Integer, TcpClient)
     Private connector As ServerConnector
 
     Sub New()
@@ -29,7 +29,7 @@ Public Class NetServer
     'Event für alle Nachrichten
     Public OnMessages As Func(Of Integer, Message())
     'Event für Nachricht senden
-    Public OnSendMessage As Func(Of Integer, Integer, String, Message)
+    Public OnSendMessage As Func(Of Integer, Integer, String, Tuple(Of Message, Integer()))
     'Event für Logout
     Public OnLogOut As Func(Of Integer)
 
@@ -103,21 +103,23 @@ Public Class NetServer
                     Dim id As Integer = req.Data.Item("ID")
                     Dim idchat As Integer = req.Data("idchat")
                     Dim message As String = req.Data("message")
-                    Dim msg As Message = OnSendMessage(id, idchat, message)
-                    Dim res As New ConnectionData("messsage")
+
+                    Dim sendmsg As Tuple(Of Message, Integer()) = OnSendMessage(id, idchat, message)
 
 
-                    res.addData("message", msg)
+                    Dim res As New ConnectionData("message")
+                    res.addData("message", sendmsg.Item1)
                     connector.send(client, res)
 
-                    Dim otherClient As TcpClient
-                    If msg IsNot Nothing Then
-                        otherClient = loggedIn.FirstOrDefault(Function(x As KeyValuePair(Of TcpClient, Integer)) x.Value = msg.user.id).Key
-                        If otherClient IsNot Nothing Then
-                            Dim data As New ConnectionData("message")
-                            data.addData("message", msg)
-                            connector.send(otherClient, data)
-                        End If
+                    If sendmsg.Item1 IsNot Nothing Then
+                        For Each reciever As Integer In sendmsg.Item2
+                            If loggedIn.ContainsKey(reciever) Then
+                                Dim data As New ConnectionData("message")
+                                data.addData("message", sendmsg.Item1)
+                                connector.send(loggedIn(reciever), data)
+                            End If
+                        Next
+
 
                     End If
 
@@ -134,6 +136,10 @@ Public Class NetServer
 
     ' Sende Antwort für Registrieren
     Private Sub RegisterConfirm(User As User, client As TcpClient)
+        If User IsNot Nothing Then
+            loggedIn(User.id) = client
+        End If
+
         Dim data As New Dictionary(Of String, Object)
         data.Add("user", User)
         Dim req As New ConnectionData("registerconfirm", data)
@@ -143,12 +149,9 @@ Public Class NetServer
     ' Sende Antwort für Login
     Private Sub LoginConfirm(User As User, client As TcpClient)
         If User IsNot Nothing Then
-            loggedIn(client) = User.id
+            loggedIn(User.id) = client
         End If
 
-        'For Each c As KeyValuePair(Of TcpClient, Integer) In loggedIn
-        '    Console.WriteLine(c.Value)
-        'Next
         Dim data As New Dictionary(Of String, Object)
         data.Add("user", User)
         Dim req As New ConnectionData("loginconfirm", data)
@@ -169,7 +172,14 @@ Public Class NetServer
     End Sub
 
     Public Sub loggedOut(client As TcpClient)
-        loggedIn.Remove(client)
+        Dim id As Integer = 0
+        For Each c As KeyValuePair(Of Integer, TcpClient) In loggedIn
+            If c.Value.Equals(client) Then
+                id = c.Key
+            End If
+        Next
+
+        loggedIn.Remove(id)
     End Sub
 
 
