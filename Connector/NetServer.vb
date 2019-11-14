@@ -120,12 +120,15 @@ Public Class NetServer
 
     ' Sende Antwort für Login
     Private Sub LoginConfirm(User As User, client As TcpClient)
+        If loggedIn(client) < 0 Then
+            loggedIn.Add(client, User.id)
+        Else
+            loggedIn(client) = User.id
+        End If
 
-        loggedIn.Add(client, User.id)
         For Each c As KeyValuePair(Of TcpClient, Integer) In loggedIn
             Console.WriteLine(c.Value)
         Next
-
         Dim data As New Dictionary(Of String, Object)
         data.Add("user", User)
         Dim req As New ConnectionData("loginconfirm", data)
