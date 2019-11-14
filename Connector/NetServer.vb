@@ -102,7 +102,7 @@ Public Class NetServer
                     Dim idchat As Integer = req.Data("idchat")
                     Dim message As String = req.Data("message")
                     Dim success As Boolean = OnSendMessage(id, idchat, message)
-                    Dim data As New ConnectionData("chat")
+                    Dim data As New ConnectionData("message")
                     data.addData("success", success)
                     connector.send(client, data)
                 End If

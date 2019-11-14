@@ -80,7 +80,7 @@ Public Class NetClient
                     OnMessages(ans)
                 End If
 
-            Case "send message"
+            Case "message"
                 If OnSendMessage IsNot Nothing Then
                     Dim ans As Boolean = req.Data.Item("success")
                     OnSendMessage(ans)
