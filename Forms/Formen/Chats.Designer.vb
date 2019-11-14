@@ -35,7 +35,7 @@ Partial Class Chats
         Me.ChatArea.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ChatArea.Chat = Nothing
         Me.ChatArea.Dock = System.Windows.Forms.DockStyle.Right
-        Me.ChatArea.Location = New System.Drawing.Point(373, 0)
+        Me.ChatArea.Location = New System.Drawing.Point(263, 0)
         Me.ChatArea.Name = "ChatArea"
         Me.ChatArea.Size = New System.Drawing.Size(427, 450)
         Me.ChatArea.TabIndex = 14
@@ -82,7 +82,7 @@ Partial Class Chats
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.ClientSize = New System.Drawing.Size(690, 450)
         Me.Controls.Add(Me.ChatArea)
         Me.Controls.Add(Me.btnAbmelden)
         Me.Controls.Add(Me.btnNeuerKontakt)

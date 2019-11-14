@@ -8,6 +8,7 @@ Public Class Chats
     Private Sub Chat_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ChatArea.Hide()
         NetworkClass.net.getChats(NetworkClass.login.id, AddressOf onGetChats)
+
     End Sub
 
     Private Sub onGetChats(FriendChats As Chat())
@@ -15,6 +16,10 @@ Public Class Chats
             ltbKontakte.Items.Add(chat.user.benutzername)
             chats.Add(chat)
         Next
+        If FriendChats.Length > 0 Then
+            ltbKontakte.SelectedIndex = 0
+        End If
+
     End Sub
 
     Private Sub btnNeuerKontakt_Click(sender As Object, e As EventArgs) Handles btnNeuerKontakt.Click
@@ -46,6 +51,6 @@ Public Class Chats
         For Each chat As Chat In chats
             ltbKontakte.Items.Add(chat.user.benutzername)
         Next
-
+        ltbKontakte.SelectedIndex = 0
     End Sub
 End Class
