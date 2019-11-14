@@ -1,7 +1,7 @@
 ﻿Imports System.Net.Sockets
 
 Public Class NetServer
-
+    Public loggedIn As New Dictionary(Of TcpClient, Integer)
     Private connector As ServerConnector
 
     Sub New()
@@ -12,21 +12,24 @@ Public Class NetServer
         connector = New ServerConnector()
         ' Einkommende Nachricht handeln
         connector.OnRecieve.addHandler(AddressOf onRequest)
+        connector.OnClose.addHandler(AddressOf loggedOut)
         connector.connect()
     End Sub
 
     ' Event für Registrierung Neue Methode zuweisen!
-    Public OnRegister As Action(Of String, String, String, Action(Of User))
+    Public OnRegister As Func(Of String, String, String, User)
     ' Event für login Neue Methode zuweisen!
-    Public OnLogin As Action(Of String, String, Action(Of User))
+    Public OnLogin As Func(Of String, String, User)
     'Event für alle Benutzernamen senden
-    Public OnUserlist As Action(Of Action(Of User()))
+    Public OnUserlist As Func(Of Integer, User())
     'Event für Freunde senden
-    Public OnFriends As Action(Of Integer, Action(Of User()))
+    Public OnChats As Func(Of Integer, Chat())
     'Event für Neue Freunde
-    Public OnNewFriend As Action(Of Integer, Integer, Action(Of User))
+    Public OnNewChat As Func(Of Integer, Integer, Chat)
     'Event für alle Nachrichten
-    Public OnMessages As avtion(Of Integer, Integer, Action(Of Message()))
+    Public OnMessages As Func(Of Integer, Message())
+    'Event für Nachricht senden
+    Public OnSendMessage As Func(Of Integer, Integer, String, Boolean)
 
 
     ' Falls neue Nachricht kommt:
@@ -42,78 +45,73 @@ Public Class NetServer
                     Dim password As String = req.Data.Item("password")
 
                     ' Methode aufrufen + Callback 
-                    OnRegister(
+                    Dim User = OnRegister(
                         name,
                         username,
-                        password,
-                        Sub(User As User)
-                            RegisterConfirm(User, client)
-                        End Sub
+                        password
                     )
+                    RegisterConfirm(User, client)
                 End If
             Case "login"
                 If OnLogin IsNot Nothing Then
                     ' Argumente bekommen
                     Dim username As String = req.Data.Item("username")
                     Dim password As String = req.Data.Item("password")
-
-
                     ' Methode aufrufen + Callback 
-                    OnLogin(
+                    Dim User = OnLogin(
                         username,
-                        password,
-                        Sub(User As User)
-                            LoginConfirm(User, client)
-                        End Sub
+                        password
                     )
-                End If
 
+                    LoginConfirm(User, client)
+                End If
             Case "userlist"
                 If OnUserlist IsNot Nothing Then
-                    OnUserlist(
-                    Sub(val As User())
-                        AllUsersSend(val, client)
-                    End Sub)
-
-                End If
-
-            Case "Friends"
-                If OnFriends IsNot Nothing Then
                     Dim id As Integer = req.getData("id")
-                    OnFriends(
-                        id,
-                        Sub(list As User())
-                            FriendsSend(list, client)
-                        End Sub)
-                End If
+                    Dim Users = OnUserlist(id)
+                    SendUserlist(Users, client)
 
-            Case "AddNewFriend"
-                If OnNewFriend IsNot Nothing Then
+                End If
+            Case "chats"
+                If OnChats IsNot Nothing Then
+                    Dim id As Integer = req.getData("id")
+                    Dim chats = OnChats(id)
+                    SendChats(chats, client)
+                End If
+            Case "NewChat"
+                If OnNewChat IsNot Nothing Then
                     Dim idself As Integer = req.Data.Item("IDself")
                     Dim idfriend As Integer = req.Data.Item("IDfriend")
-                    OnNewFriend(idself,
-                                idfriend,
-                                Sub(User As User)
-                                    NewFriendConfirm(User, client)
-                                End Sub)
+                    Dim Chat = OnNewChat(idself, idfriend)
 
+                    Dim data As New ConnectionData("NewChat")
+                    data.AddData("success", Chat)
+                    connector.send(client, data)
                 End If
-
             Case "messages"
                 If OnMessages IsNot Nothing Then
-                    OnMessages(
-                        Sub(val As Message())
-                            SendAllMessages(val, client)
-                        End Sub)
-
+                    Dim idchat As Integer = req.Data.Item("idchat")
+                    Dim messages = OnMessages(idchat)
+                    Dim data As New ConnectionData("messages")
+                    data.addData("messages", messages)
+                    connector.send(client, data)
                 End If
-
+            Case "send message"
+                If OnSendMessage IsNot Nothing Then
+                    Dim id As Integer = req.Data.Item("ID")
+                    Dim idchat As Integer = req.Data("idchat")
+                    Dim message As String = req.Data("message")
+                    Dim success As Boolean = OnSendMessage(id, idchat, message)
+                    Dim data As New ConnectionData("chat")
+                    data.addData("success", success)
+                    connector.send(client, data)
+                End If
         End Select
 
     End Sub
 
     ' Sende Antwort für Registrieren
-    Sub RegisterConfirm(User As User, client As TcpClient)
+    Private Sub RegisterConfirm(User As User, client As TcpClient)
         Dim data As New Dictionary(Of String, Object)
         data.Add("user", User)
         Dim req As New ConnectionData("registerconfirm", data)
@@ -121,7 +119,13 @@ Public Class NetServer
     End Sub
 
     ' Sende Antwort für Login
-    Sub LoginConfirm(User As User, client As TcpClient)
+    Private Sub LoginConfirm(User As User, client As TcpClient)
+
+        loggedIn.Add(client, User.id)
+        For Each c As KeyValuePair(Of TcpClient, Integer) In loggedIn
+            Console.WriteLine(c.Value)
+        Next
+
         Dim data As New Dictionary(Of String, Object)
         data.Add("user", User)
         Dim req As New ConnectionData("loginconfirm", data)
@@ -129,27 +133,22 @@ Public Class NetServer
     End Sub
 
 
-    Sub AllUsersSend(ans As User(), client As TcpClient)
+    Private Sub SendUserlist(ans As User(), client As TcpClient)
         Dim data As New Dictionary(Of String, Object)
         data.Add("userlist", ans)
         connector.send(client, New ConnectionData("userlist", data))
     End Sub
 
-    Sub FriendsSend(ans As User(), client As TcpClient)
+    Private Sub SendChats(ans As Chat(), client As TcpClient)
         Dim data As New Dictionary(Of String, Object)
-        data.Add("Friends", ans)
-        connector.send(client, New ConnectionData("friends", data))
+        data.Add("chats", ans)
+        connector.send(client, New ConnectionData("chats", data))
     End Sub
 
-    Sub NewFriendConfirm(val As User, client As TcpClient)
-        Dim data As New Dictionary(Of String, Object)
-        data.Add("success", val)
-        connector.send(client, New ConnectionData("AddNewFriend", data))
+    Public Sub loggedOut(client As TcpClient)
+        loggedIn.Remove(client)
     End Sub
 
-    Sub SendAllMessages(val As Message(), client As TcpClient)
-        Dim data As New Dictionary(Of String, Object)
-        data.Add("messages", data)
-        connector.send(client, New ConnectionData("messages", data))
-    End Sub
+
+
 End Class

@@ -19,13 +19,13 @@ Public Class AddFriend
     End Sub
 
     Private Sub benutzer_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        NetworkClass.net.getAllUsers(Sub(AllUsers As User())
-                                         Console.WriteLine(AllUsers)
-                                         users = AllUsers
-                                         For Each user In users
-                                             ltbAlleBenutzer.Items.Add(user.benutzername)
-                                         Next
-                                     End Sub)
+        NetworkClass.net.getAllUsers(NetworkClass.login.id, Sub(AllUsers As User())
+                                                                Console.WriteLine(AllUsers)
+                                                                users = AllUsers
+                                                                For Each user In users
+                                                                    ltbAlleBenutzer.Items.Add(user.benutzername)
+                                                                Next
+                                                            End Sub)
 
     End Sub
 
@@ -37,13 +37,13 @@ Public Class AddFriend
             End If
         Next
         If selecteduser IsNot Nothing Then
-            NetworkClass.net.AddNewFriend(NetworkClass.login.id, selecteduser.id, Sub(res As User)
-                                                                                      If res IsNot Nothing Then
-                                                                                          Chat.addFriendToList(res)
-                                                                                          Me.Hide()
-                                                                                      End If
+            NetworkClass.net.NewChat(NetworkClass.login.id, selecteduser.id, Sub(res As Chat)
+                                                                                 If res IsNot Nothing Then
+                                                                                     Chats.addChatToList(res)
+                                                                                     Me.Close()
+                                                                                 End If
 
-                                                                                  End Sub)
+                                                                             End Sub)
         End If
 
 

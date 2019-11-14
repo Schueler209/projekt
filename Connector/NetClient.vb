@@ -27,11 +27,13 @@ Public Class NetClient
     'Event für alle Benutzernamenn empfangen
     Public OnUserList As Action(Of User())
     'Event für Freunde empfangen
-    Public OnFriends As Action(Of User())
+    Public OnChats As Action(Of Chat())
     'Event für neuen Freund hinzufügen
-    Public OnNewFriendConfirm As Action(Of User)
+    Public OnNewChat As Action(Of Chat)
     'Event für alle Nschrichten
     Public OnMessages As Action(Of Message())
+    'Event für Nachricht senden
+    Public OnSendMessage As Action(Of Boolean)
 
     ' Falls neue Nachricht kommt:
     Private Sub onRequest(req As ConnectionData)
@@ -52,6 +54,7 @@ Public Class NetClient
                     Dim user As User = req.Data.Item("user")
                     ' Methode aufrufen + Callback 
                     OnLoginConfirm(user)
+
                 End If
             Case "userlist"
                 If OnUserList IsNot Nothing Then
@@ -59,16 +62,16 @@ Public Class NetClient
                     OnUserList(list)
                 End If
 
-            Case "friends"
-                If OnFriends IsNot Nothing Then
-                    Dim list As User() = req.Data.Item("Friends")
-                    OnFriends(list)
+            Case "chats"
+                If OnChats IsNot Nothing Then
+                    Dim list As Chat() = req.Data.Item("chats")
+                    OnChats(list)
                 End If
 
-            Case "AddNewFriend"
-                If OnNewFriendConfirm IsNot Nothing Then
-                    Dim ans As User = req.Data.Item("success")
-                    OnNewFriendConfirm(ans)
+            Case "NewChat"
+                If OnNewChat IsNot Nothing Then
+                    Dim ans As Chat = req.Data.Item("success")
+                    OnNewChat(ans)
                 End If
 
             Case "messages"
@@ -77,7 +80,11 @@ Public Class NetClient
                     OnMessages(ans)
                 End If
 
-
+            Case "send message"
+                If OnSendMessage IsNot Nothing Then
+                    Dim ans As Boolean = req.Data.Item("success")
+                    OnSendMessage(ans)
+                End If
         End Select
 
     End Sub
@@ -105,35 +112,51 @@ Public Class NetClient
     End Sub
 
     'Userlist
-    Sub getAllUsers(callback As Action(Of User()))
+    Sub getAllUsers(id As Integer, callback As Action(Of User()))
         Dim res As New ConnectionData("userlist")
+        res.addData("id", id)
         connector.send(res)
         OnUserList = callback
     End Sub
 
-    'Friends
-    Sub getFriends(id As Integer, callback As Action(Of User()))
-        Dim res As New ConnectionData("Friends")
+    'Chats
+    Sub getChats(id As Integer, callback As Action(Of Chat()))
+        Dim res As New ConnectionData("chats")
         res.addData("id", id)
         connector.send(res)
-        OnFriends = callback
+        OnChats = callback
     End Sub
 
-    'NewFriends
-    Sub AddNewFriend(idself As Integer, idfriend As Integer, callback As Action(Of User))
+    'NewChat
+    Sub NewChat(idself As Integer, idfriend As Integer, callback As Action(Of Chat))
         Dim data As New Dictionary(Of String, Object)
-        Dim res As New ConnectionData("AddNewFriend")
+        Dim res As New ConnectionData("NewChat")
         res.addData("IDself", idself)
         res.addData("IDfriend", idfriend)
         connector.send(res)
-        OnNewFriendConfirm = callback
+        OnNewChat = callback
     End Sub
 
     'Messages bekommen
-    Sub getMessages(idself As Integer, idfriend As Integer, callback As Action(Of Message()))
+    Sub getMessages(idchat As Integer, callback As Action(Of Message()))
         Dim res As New ConnectionData("messages")
-        connetor.send(res)
+        res.addData("idchat", idchat)
+        connector.send(res)
         OnMessages = callback
     End Sub
+
+
+    Sub SendMessage(id As Integer, idchat As Integer, message As String, callback As Action(Of Boolean))
+        Dim data As New Dictionary(Of String, Object)
+        Dim res As New ConnectionData("send message")
+        res.addData("ID", id)
+        res.addData("message", message)
+        res.addData("idchat", idchat)
+        connector.send(res)
+        OnSendMessage = callback
+
+    End Sub
+
+
 
 End Class

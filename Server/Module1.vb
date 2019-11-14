@@ -8,20 +8,24 @@ Module Module1
     Private ReadOnly ConnectionStr = "provider= microsoft.jet.oledb.4.0;data source=db.mdb;"
 
     Public Sub Main()
+        ' Verbindungsobjekt erstellen und EventHandler hinzufügen
+        Dim connect As NetServer = New NetServer With {
+            .OnRegister = AddressOf Register,
+            .OnLogin = AddressOf CheckLogin,
+            .OnNewChat = AddressOf AddFriend,
+            .OnUserlist = AddressOf GetAllUsers,
+            .OnChats = AddressOf GetFriends,
+            .OnMessages = AddressOf getMessages,
+            .OnSendMessage = AddressOf AddMessage
+        }
 
-        Dim connect As NetServer = New NetServer
-        connect.OnRegister = AddressOf register
-        connect.OnLogin = AddressOf logincheck
-        connect.OnNewFriend = AddressOf addFriend
-        connect.OnUserlist = AddressOf Userlist
-        connect.OnFriends = AddressOf friends
         connect.connect()
 
-        'register("Till", "Till1234", "123", Sub(g As Boolean)
-        '                                    End Sub)
     End Sub
 
-    Public Sub register(name As String, username As String, password As String, done As Action(Of User))
+    ' Benutzerverwaltung
+
+    Public Function Register(name As String, username As String, password As String) As User
 
         Dim conn As New OleDbConnection(ConnectionStr)
         conn.Open()
@@ -30,7 +34,7 @@ Module Module1
         checkCommand.Connection = conn
         Dim reader = checkCommand.ExecuteReader
         If reader.HasRows Then
-            done(Nothing)
+            Return Nothing
         Else
             Dim insertCommand As New OleDbCommand("INSERT INTO Users ([Name],Username,[Password]) VALUES (@displayname,@username,@password); ")
             Dim command As New OleDbCommand("SELECT @@IDENTITY")
@@ -41,93 +45,115 @@ Module Module1
             insertCommand.CommandType = CommandType.Text
             insertCommand.ExecuteNonQuery()
             command.Connection = conn
-            done(New User(username, name, command.ExecuteScalar()))
+            Return New User(username, name, command.ExecuteScalar())
 
         End If
-    End Sub
+    End Function
 
-    Public Sub logincheck(username As String, password As String, done As Action(Of User))
 
-        Dim conn As New OleDbConnection(ConnectionStr)
-        Dim command As New OleDbCommand("SELECT ID, [name] FROM Users WHERE Username = '" & username & "'And [Password] = '" & password & "'")
-        command.Connection = conn
-
-        conn.Open()
-        Dim reader = command.ExecuteReader
+    Public Function CheckLogin(username As String, password As String) As User
+        Dim reader = ReaderQuery("SELECT ID, [name] FROM Users WHERE Username = '" & username & "'And [Password] = '" & password & "'")
         If reader.HasRows Then
             reader.Read()
-            done(New User(username, reader.GetString(1), reader.GetInt32(0)))
-        Else
-            done(Nothing)
-        End If
-    End Sub
-
-    Public Function getUser(ID As Integer) As User
-        Dim conn As New OleDbConnection(ConnectionStr)
-        Dim command As New OleDbCommand("SELECT username, [name] FROM Users WHERE ID = @id")
-        command.Parameters.Add("@id", OleDbType.Integer).Value = ID
-        command.Connection = conn
-        conn.Open()
-        Dim reader = command.ExecuteReader
-        If reader.HasRows Then
-            reader.Read()
-            Return New User(reader.GetString(0), reader.GetString(1), ID)
+            Return New User(username, reader.GetString(1), reader.GetInt32(0))
         Else
             Return Nothing
         End If
     End Function
-    Public Sub addFriend(ID As Integer, ID2 As Integer, done As Action(Of User))
+
+    ' Freunde/Chatverwaltung
+
+    Public Function GetAllUsers(id As Integer) As User()
+        Dim ignore As Integer() = getFriendIDs(id).Concat({id}).ToArray()
+        Return getAll(ignore)
+    End Function
+    Public Function AddFriend(ID As Integer, ID2 As Integer) As Chat
+
+        If areFriends(ID, ID2) Then
+            Return Nothing
+        Else
+            Dim conn As New OleDbConnection(ConnectionStr)
+            conn.Open()
+
+            Dim insertCommand As New OleDbCommand("INSERT INTO Chats (UserID1, UserID2, Datum) VALUES (@UserID1,@UserID2,@Date);")
+            insertCommand.Connection = conn
+            insertCommand.Parameters.Add("@UserID1", OleDbType.Char).Value = ID
+            insertCommand.Parameters.Add("@UserID2", OleDbType.Char).Value = ID2
+            insertCommand.Parameters.Add("@Date", OleDbType.Date).Value = DateTime.Now
+            insertCommand.CommandType = CommandType.Text
+            Try
+                insertCommand.ExecuteNonQuery()
+
+
+            Catch ex As Exception
+                Console.WriteLine(ex.Message)
+                Return Nothing
+            End Try
+            Dim command As New OleDbCommand("SELECT @@IDENTITY")
+            command.Connection = conn
+
+            Return New Chat(command.ExecuteScalar(), getUser(ID2), DateTime.Now)
+        End If
+    End Function
+
+    Public Function GetFriends(ID As Integer) As Chat()
+        Return getChats(ID)
+    End Function
+
+    Public Function AddMessage(UserID As Integer, ChatID As Integer, Message As String) As Boolean
+
         Dim conn As New OleDbConnection(ConnectionStr)
         conn.Open()
 
-        Dim insertCommand As New OleDbCommand("INSERT INTO Chats (UserID1, UserID2) VALUES (@UserID1,@UserID2);")
-        insertCommand.Connection = conn
-        insertCommand.Parameters.Add("@UserID1", OleDbType.Char).Value = ID
-        insertCommand.Parameters.Add("@UserID2", OleDbType.Char).Value = ID2
-        insertCommand.CommandType = CommandType.Text
+        Dim insertcommand As New OleDbCommand("INSERT INTO Messages (ChatID, UserID, Message, Datum) VALUES (@ChatID, @UserID, @Message, @Datum);")
+        insertcommand.Connection = conn
+        insertcommand.Parameters.Add("@ChatID", OleDbType.Integer).Value = ChatID
+        insertcommand.Parameters.Add("@UserID", OleDbType.Integer).Value = UserID
+        insertcommand.Parameters.Add("@Message", OleDbType.Char).Value = Message
+        insertcommand.Parameters.Add("@Datum", OleDbType.Date).Value = DateTime.Now
+        insertcommand.CommandType = CommandType.Text
+
         Try
-            insertCommand.ExecuteNonQuery()
+            insertcommand.ExecuteNonQuery()
         Catch ex As Exception
             Console.WriteLine(ex.Message)
-            done(Nothing)
-        Finally
-            done(getUser(ID2))
+            Return False
         End Try
-    End Sub
+        Return True
+    End Function
 
-    Public Sub Userlist(done As Action(Of User()))
+    Public Function getMessages(ChatID As Integer) As Message()
+
         Dim conn As New OleDbConnection(ConnectionStr)
         conn.Open()
-        Dim checkCommand As New OleDbCommand("SELECT ID ,username, [name] FROM users")
-        checkCommand.Connection = conn
-        Dim reader = checkCommand.ExecuteReader
-        Dim userlist As New List(Of User)
+        Dim reader = ReaderQuery("SELECT Message, Datum, UserID FROM Messages WHERE ChatID = " & ChatID)
+        Dim messages As New List(Of Message)
+
         Do While reader.Read
-            userlist.Add(New User(reader.GetString(1), reader.GetString(2), reader.GetInt32(0)))
+
+            Dim msg As New Message(getUser(reader.GetInt32(2)), reader.GetDateTime(1), reader.GetString(0))
+            messages.Add(msg)
 
         Loop
-        done(userlist.ToArray())
-    End Sub
+        Return messages.ToArray()
+    End Function
 
-    Public Sub friends(ID As Integer, done As Action(Of User()))
+
+    'Benutzernamen ändern
+    Public Sub changeUsername(ID As Integer, done As Action(Of Boolean))
         Dim conn As New OleDbConnection(ConnectionStr)
         conn.Open()
-        Dim command As New OleDbCommand("SELECT UserID2 FROM Chats WHERE UserID1 =" & ID.ToString())
-        command.Connection = conn
-        Dim reader = command.ExecuteReader
-        Dim friendlist As New List(Of User)
-        Do While reader.Read
-            friendlist.Add(getUser(reader.GetInt32(0)))
-        Loop
-        reader.Close()
-        command.CommandText = "SELECT UserID1 FROM Chats WHERE UserID2 =" + ID.ToString()
-        reader = command.ExecuteReader()
-        Do While reader.Read
-            friendlist.Add(getUser(reader.GetInt32(0)))
-        Loop
 
-        done(friendlist.ToArray)
+
+
     End Sub
 
 
+
+    'Passwort ändern
+    Public Sub changePassword(ID As Integer, done As Action(Of Boolean))
+
+
+
+    End Sub
 End Module

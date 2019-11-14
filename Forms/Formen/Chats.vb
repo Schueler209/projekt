@@ -1,6 +1,6 @@
 ﻿Imports Connector
 
-Public Class ChatForm
+Public Class Chats
 
     Private chats As New List(Of Chat)
 
@@ -23,7 +23,6 @@ Public Class ChatForm
     End Sub
 
     Private Sub LtbKontakte_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ltbKontakte.SelectedIndexChanged
-        ' Chat wechseln
 
         Dim chat = chats(ltbKontakte.SelectedIndex)
         If chat IsNot Nothing Then
