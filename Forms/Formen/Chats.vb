@@ -1,6 +1,6 @@
 ﻿Imports Connector
 
-Public Class ChatForm
+Public Class Chats
 
     Private chats As New List(Of Chat)
 
@@ -23,10 +23,7 @@ Public Class ChatForm
     End Sub
 
     Private Sub LtbKontakte_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ltbKontakte.SelectedIndexChanged
-        ' Chat wechseln
 
-        ChatArea.Chat = chats(ltbKontakte.SelectedIndex)
-        ChatArea.Show()
     End Sub
 
     Private Sub btnAbmelden_Click(sender As Object, e As EventArgs) Handles btnAbmelden.Click

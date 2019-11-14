@@ -24,7 +24,6 @@ Public Class ChatArea
 
     Private Sub BtnSenden_Click(sender As Object, e As EventArgs) Handles btnSenden.Click
         SendMessage()
-
     End Sub
 
     Private Sub SendMessage()
