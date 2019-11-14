@@ -23,6 +23,16 @@ Module DBUtils
         End If
     End Function
 
+    'Public Function getName(ID As Integer) As String
+    '    Dim reader = ReaderQuery("SELECT [name] FROM Users WHERE ID =" & ID & "")
+    '    If reader.HasRows Then
+    '        reader.Read()
+    '        Return reader.GetString(0)
+    '    Else
+    '        Return Nothing
+    '    End If
+    'End Function
+
     Public Function areFriends(ID1 As Integer, ID2 As Integer) As Boolean
         Dim reader = ReaderQuery("SELECT ID FROM Chats WHERE UserID1 =" & ID1.ToString() & "And UserID2 =" & ID2.ToString())
         Return reader.HasRows
