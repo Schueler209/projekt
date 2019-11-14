@@ -112,7 +112,7 @@ Public Class NetServer
             Case "loggedOut"
 
                 loggedOut(client)
-                End If
+
         End Select
 
     End Sub
