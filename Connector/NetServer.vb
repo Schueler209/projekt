@@ -120,10 +120,10 @@ Public Class NetServer
 
     ' Sende Antwort für Login
     Private Sub LoginConfirm(User As User, client As TcpClient)
-        If loggedIn(client) < 0 Then
-            loggedIn.Add(client, User.id)
-        Else
+        If loggedIn.ContainsKey(client) Then
             loggedIn(client) = User.id
+        Else
+            loggedIn.Add(client, User.id)
         End If
 
         For Each c As KeyValuePair(Of TcpClient, Integer) In loggedIn
