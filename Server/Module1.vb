@@ -100,7 +100,7 @@ Module Module1
         Return getChats(ID)
     End Function
 
-    Public Function AddMessage(UserID As Integer, ChatID As Integer, Message As String) As Boolean
+    Public Function AddMessage(UserID As Integer, ChatID As Integer, Message As String) As Message
 
         Dim conn As New OleDbConnection(ConnectionStr)
         conn.Open()
@@ -117,9 +117,9 @@ Module Module1
             insertcommand.ExecuteNonQuery()
         Catch ex As Exception
             Console.WriteLine(ex.Message)
-            Return False
+            Return Nothing
         End Try
-        Return True
+        Return New Message(getUser(UserID), ChatID, DateTime.Now, Message)
     End Function
 
     Public Function getMessages(ChatID As Integer) As Message()
@@ -131,7 +131,7 @@ Module Module1
 
         Do While reader.Read
 
-            Dim msg As New Message(getUser(reader.GetInt32(2)), reader.GetDateTime(1), reader.GetString(0))
+            Dim msg As New Message(getUser(reader.GetInt32(2)), ChatID, reader.GetDateTime(1), reader.GetString(0))
             messages.Add(msg)
 
         Loop

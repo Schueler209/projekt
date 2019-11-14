@@ -9,6 +9,14 @@ Public Class Chats
         ChatArea.Hide()
         NetworkClass.net.getChats(NetworkClass.login.id, AddressOf onGetChats)
 
+        NetworkClass.net.OnMessage = AddressOf OnRecieveMessage
+
+    End Sub
+
+    Sub OnRecieveMessage(msg As Message)
+        If ChatArea.Chat IsNot Nothing AndAlso msg.chat = ChatArea.Chat.ID Then
+            ChatArea.addMessage(msg)
+        End If
     End Sub
 
     Private Sub onGetChats(FriendChats As Chat())
@@ -30,7 +38,7 @@ Public Class Chats
     Private Sub LtbKontakte_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ltbKontakte.SelectedIndexChanged
 
         Dim chat = chats(ltbKontakte.SelectedIndex)
-        If chat IsNot Nothing Then
+        If chat IsNot Nothing And chat IsNot ChatArea.Chat Then
             ChatArea.Chat = chat
             ChatArea.Show()
 
