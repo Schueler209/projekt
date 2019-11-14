@@ -85,6 +85,12 @@
     <Compile Include="Formen\AddFriend.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formen\Chats.Designer.vb">
+      <DependentUpon>Chats.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formen\Chats.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formen\Login.Designer.vb">
       <DependentUpon>Login.vb</DependentUpon>
     </Compile>
@@ -126,6 +132,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formen\AddFriend.resx">
       <DependentUpon>AddFriend.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formen\Chats.resx">
+      <DependentUpon>Chats.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formen\Login.resx">
       <DependentUpon>Login.vb</DependentUpon>

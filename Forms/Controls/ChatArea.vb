@@ -31,6 +31,10 @@ Public Class ChatArea
     End Property
 
     Private Sub recievemessages(msg As Message())
+        For Each item In msg
+            addMessage(item)
+
+        Next
 
         ' Hier müsste noch hin, dass alle Nachrichten mit der addMessage Methode hinzugefügt werden
 
@@ -64,5 +68,7 @@ Public Class ChatArea
         End If
     End Sub
 
+    Private Sub ChatArea_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+    End Sub
 End Class

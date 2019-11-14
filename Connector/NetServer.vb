@@ -102,7 +102,7 @@ Public Class NetServer
                     Dim idchat As Integer = req.Data("idchat")
                     Dim message As String = req.Data("message")
                     Dim success As Boolean = OnSendMessage(id, idchat, message)
-                    Dim data As New ConnectionData("chat")
+                    Dim data As New ConnectionData("message")
                     data.addData("success", success)
                     connector.send(client, data)
                 End If
@@ -120,11 +120,19 @@ Public Class NetServer
 
     ' Sende Antwort für Login
     Private Sub LoginConfirm(User As User, client As TcpClient)
+        If loggedIn.ContainsKey(client) Then
+            loggedIn(client) = User.id
+        Else
+            loggedIn.Add(client, User.id)
+        End If
+
+        For Each c As KeyValuePair(Of TcpClient, Integer) In loggedIn
+            Console.WriteLine(c.Value)
+        Next
         Dim data As New Dictionary(Of String, Object)
         data.Add("user", User)
         Dim req As New ConnectionData("loginconfirm", data)
         connector.send(client, req)
-        loggedIn.Add(client, User.id)
     End Sub
 
 
@@ -141,8 +149,7 @@ Public Class NetServer
     End Sub
 
     Public Sub loggedOut(client As TcpClient)
-
-        'loggedIn.Remove()
+        loggedIn.Remove(client)
     End Sub
 
 

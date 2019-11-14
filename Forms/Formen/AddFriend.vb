@@ -39,7 +39,7 @@ Public Class AddFriend
         If selecteduser IsNot Nothing Then
             NetworkClass.net.NewChat(NetworkClass.login.id, selecteduser.id, Sub(res As Chat)
                                                                                  If res IsNot Nothing Then
-                                                                                     ChatForm.addChatToList(res)
+                                                                                     Chats.addChatToList(res)
                                                                                      Me.Close()
                                                                                  End If
 
