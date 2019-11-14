@@ -24,6 +24,13 @@ Public Class Chats
 
     Private Sub LtbKontakte_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ltbKontakte.SelectedIndexChanged
 
+        Dim chat = chats(ltbKontakte.SelectedIndex)
+        If chat IsNot Nothing Then
+            ChatArea.Chat = chat
+            ChatArea.Show()
+
+        End If
+
     End Sub
 
     Private Sub btnAbmelden_Click(sender As Object, e As EventArgs) Handles btnAbmelden.Click

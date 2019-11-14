@@ -14,7 +14,9 @@ Module Module1
             .OnLogin = AddressOf CheckLogin,
             .OnNewChat = AddressOf AddFriend,
             .OnUserlist = AddressOf GetAllUsers,
-            .OnChats = AddressOf GetFriends
+            .OnChats = AddressOf GetFriends,
+            .OnMessages = AddressOf getMessages,
+            .OnSendMessage = AddressOf AddMessage
         }
 
         connect.connect()
@@ -98,16 +100,16 @@ Module Module1
         Return getChats(ID)
     End Function
 
-    Public Function AddMessage(UserID As Integer, ChatID As Integer, Messages As String) As Boolean
+    Public Function AddMessage(UserID As Integer, ChatID As Integer, Message As String) As Boolean
 
         Dim conn As New OleDbConnection(ConnectionStr)
         conn.Open()
 
-        Dim insertcommand As New OleDbCommand("INSERT INTO Messages (ChatID, UserID, Messages, Datum) VALUES @ChatID, @UserID, @Messages, @Datum);")
+        Dim insertcommand As New OleDbCommand("INSERT INTO Messages (ChatID, UserID, Message, Datum) VALUES (@ChatID, @UserID, @Message, @Datum);")
         insertcommand.Connection = conn
         insertcommand.Parameters.Add("@ChatID", OleDbType.Integer).Value = ChatID
         insertcommand.Parameters.Add("@UserID", OleDbType.Integer).Value = UserID
-        insertcommand.Parameters.Add("@Messages", OleDbType.Char).Value = Messages
+        insertcommand.Parameters.Add("@Message", OleDbType.Char).Value = Message
         insertcommand.Parameters.Add("@Datum", OleDbType.Date).Value = DateTime.Now
         insertcommand.CommandType = CommandType.Text
 
@@ -124,16 +126,34 @@ Module Module1
 
         Dim conn As New OleDbConnection(ConnectionStr)
         conn.Open()
-        Dim reader = ReaderQuery("SELECT Message, Datum, UserID FROM Messages WHERE ChatID = '" & ChatID & "'")
+        Dim reader = ReaderQuery("SELECT Message, Datum, UserID FROM Messages WHERE ChatID = " & ChatID)
         Dim messages As New List(Of Message)
 
         Do While reader.Read
 
-            Dim msg As New Message(getUser(reader.GetInt32(2)), reader.GetString(1), reader.GetString(0))
+            Dim msg As New Message(getUser(reader.GetInt32(2)), reader.GetDateTime(1), reader.GetString(0))
             messages.Add(msg)
 
         Loop
         Return messages.ToArray()
-
     End Function
+
+
+    'Benutzernamen ändern
+    Public Sub changeUsername(ID As Integer, done As Action(Of Boolean))
+        Dim conn As New OleDbConnection(ConnectionStr)
+        conn.Open()
+
+
+
+    End Sub
+
+
+
+    'Passwort ändern
+    Public Sub changePassword(ID As Integer, done As Action(Of Boolean))
+
+
+
+    End Sub
 End Module

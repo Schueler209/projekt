@@ -1,4 +1,6 @@
-﻿Public Class Message
+﻿
+<Serializable()>
+Public Class Message
 
     Public user As User
     Public datum As Date

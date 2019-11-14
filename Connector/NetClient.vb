@@ -33,7 +33,7 @@ Public Class NetClient
     'Event für alle Nschrichten
     Public OnMessages As Action(Of Message())
     'Event für Nachricht senden
-    Public OnSendMessage As Action(Of Message)
+    Public OnSendMessage As Action(Of Boolean)
 
     ' Falls neue Nachricht kommt:
     Private Sub onRequest(req As ConnectionData)
@@ -54,6 +54,7 @@ Public Class NetClient
                     Dim user As User = req.Data.Item("user")
                     ' Methode aufrufen + Callback 
                     OnLoginConfirm(user)
+
                 End If
             Case "userlist"
                 If OnUserList IsNot Nothing Then
@@ -81,7 +82,7 @@ Public Class NetClient
 
             Case "send message"
                 If OnSendMessage IsNot Nothing Then
-                    Dim ans As Message = req.Data.Item("message")
+                    Dim ans As Boolean = req.Data.Item("success")
                     OnSendMessage(ans)
                 End If
         End Select
@@ -145,7 +146,7 @@ Public Class NetClient
     End Sub
 
 
-    Sub SendMessage(id As Integer, idchat As Integer, message As String, callback As Action(Of Message))
+    Sub SendMessage(id As Integer, idchat As Integer, message As String, callback As Action(Of Boolean))
         Dim data As New Dictionary(Of String, Object)
         Dim res As New ConnectionData("send message")
         res.addData("ID", id)
