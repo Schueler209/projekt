@@ -31,6 +31,10 @@ Public Class ChatArea
     End Property
 
     Private Sub recievemessages(msg As Message())
+        For Each item In msg
+            addMessage(item)
+
+        Next
 
         ' Hier müsste noch hin, dass alle Nachrichten mit der addMessage Methode hinzugefügt werden
 
@@ -42,21 +46,18 @@ Public Class ChatArea
         SendMessage()
     End Sub
 
-    Private Sub addMessage(msg As Message)
+    Public Sub addMessage(msg As Message)
         ltbChat.Items.Add(msg.user.name & "- " & msg.message)
     End Sub
 
     Private Sub SendMessage()
         If txtEingabe.Text.Length > 0 Then
 
-            NetworkClass.net.SendMessage(NetworkClass.login.id, selectedChat.ID, txtEingabe.Text, AddressOf SendMessageSuccess)
+            NetworkClass.net.SendMessage(NetworkClass.login.id, selectedChat.ID, txtEingabe.Text)
+            txtEingabe.Clear()
         End If
     End Sub
 
-    Private Sub SendMessageSuccess(s As Boolean)
-        ltbChat.Items.Add(NetworkClass.login.name & "- " & txtEingabe.Text)
-        txtEingabe.Clear()
-    End Sub
 
     Private Sub txtEingabe_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtEingabe.KeyPress
         If e.KeyChar = ChrW(Keys.Enter) Then
@@ -64,5 +65,7 @@ Public Class ChatArea
         End If
     End Sub
 
+    Private Sub ChatArea_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+    End Sub
 End Class

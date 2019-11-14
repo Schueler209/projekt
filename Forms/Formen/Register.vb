@@ -28,7 +28,7 @@ Public Class Register
             lblFehlermeldung.Text = "Benutzer existiert schon, bitte anderen Benutzernamen wählen."
         Else
             NetworkClass.login = wert
-            ChatForm.Show()
+            Chats.Show()
 
             Me.Hide()
 

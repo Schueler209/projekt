@@ -29,7 +29,9 @@ Public Class NetServer
     'Event für alle Nachrichten
     Public OnMessages As Func(Of Integer, Message())
     'Event für Nachricht senden
-    Public OnSendMessage As Func(Of Integer, Integer, String, Boolean)
+    Public OnSendMessage As Func(Of Integer, Integer, String, Message)
+    'Event für Logout
+    Public OnLogOut As Func(Of Integer)
 
 
     ' Falls neue Nachricht kommt:
@@ -85,7 +87,7 @@ Public Class NetServer
                     Dim Chat = OnNewChat(idself, idfriend)
 
                     Dim data As New ConnectionData("NewChat")
-                    data.AddData("success", Chat)
+                    data.addData("success", Chat)
                     connector.send(client, data)
                 End If
             Case "messages"
@@ -101,11 +103,31 @@ Public Class NetServer
                     Dim id As Integer = req.Data.Item("ID")
                     Dim idchat As Integer = req.Data("idchat")
                     Dim message As String = req.Data("message")
-                    Dim success As Boolean = OnSendMessage(id, idchat, message)
-                    Dim data As New ConnectionData("chat")
-                    data.addData("success", success)
-                    connector.send(client, data)
+                    Dim msg As Message = OnSendMessage(id, idchat, message)
+                    Dim res As New ConnectionData("messsage")
+
+
+                    res.addData("message", msg)
+                    connector.send(client, res)
+
+                    Dim otherClient As TcpClient
+                    If msg IsNot Nothing Then
+                        otherClient = loggedIn.FirstOrDefault(Function(x As KeyValuePair(Of TcpClient, Integer)) x.Value = msg.user.id).Key
+                        If otherClient IsNot Nothing Then
+                            Dim data As New ConnectionData("message")
+                            data.addData("message", msg)
+                            connector.send(otherClient, data)
+                        End If
+
+                    End If
+
+
+
+
                 End If
+
+            Case "loggedOut"
+                loggedOut(client)
         End Select
 
     End Sub
@@ -120,11 +142,17 @@ Public Class NetServer
 
     ' Sende Antwort für Login
     Private Sub LoginConfirm(User As User, client As TcpClient)
+        If User IsNot Nothing Then
+            loggedIn(client) = User.id
+        End If
+
+        'For Each c As KeyValuePair(Of TcpClient, Integer) In loggedIn
+        '    Console.WriteLine(c.Value)
+        'Next
         Dim data As New Dictionary(Of String, Object)
         data.Add("user", User)
         Dim req As New ConnectionData("loginconfirm", data)
         connector.send(client, req)
-        loggedIn.Add(client, User.id)
     End Sub
 
 
@@ -141,8 +169,7 @@ Public Class NetServer
     End Sub
 
     Public Sub loggedOut(client As TcpClient)
-
-        'loggedIn.Remove()
+        loggedIn.Remove(client)
     End Sub
 
 

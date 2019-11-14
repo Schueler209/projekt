@@ -32,8 +32,8 @@ Public Class NetClient
     Public OnNewChat As Action(Of Chat)
     'Event für alle Nschrichten
     Public OnMessages As Action(Of Message())
-    'Event für Nachricht senden
-    Public OnSendMessage As Action(Of Boolean)
+    'Event für Nachricht bekommen(eigene oder andere)
+    Public OnMessage As Action(Of Message)
 
     ' Falls neue Nachricht kommt:
     Private Sub onRequest(req As ConnectionData)
@@ -80,10 +80,10 @@ Public Class NetClient
                     OnMessages(ans)
                 End If
 
-            Case "send message"
-                If OnSendMessage IsNot Nothing Then
-                    Dim ans As Boolean = req.Data.Item("success")
-                    OnSendMessage(ans)
+            Case "message"
+                If OnMessage IsNot Nothing Then
+                    Dim ans As Message = req.Data.Item("message")
+                    OnMessage(ans)
                 End If
         End Select
 
@@ -146,17 +146,18 @@ Public Class NetClient
     End Sub
 
 
-    Sub SendMessage(id As Integer, idchat As Integer, message As String, callback As Action(Of Boolean))
-        Dim data As New Dictionary(Of String, Object)
+    Sub SendMessage(id As Integer, idchat As Integer, message As String)
         Dim res As New ConnectionData("send message")
         res.addData("ID", id)
         res.addData("message", message)
         res.addData("idchat", idchat)
         connector.send(res)
-        OnSendMessage = callback
-
     End Sub
 
 
+    Sub logOut()
+        Dim res As New ConnectionData("loggedOut")
+        connector.send(res)
+    End Sub
 
 End Class
