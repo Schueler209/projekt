@@ -27,6 +27,7 @@ Partial Class ChatForm
         Me.btnNeuerKontakt = New System.Windows.Forms.Button()
         Me.btnAbmelden = New System.Windows.Forms.Button()
         Me.ChatArea = New Forms.ChatArea()
+        Me.cmdSettignsOpen = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'ltbKontakte
@@ -73,16 +74,26 @@ Partial Class ChatForm
         Me.ChatArea.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ChatArea.Chat = Nothing
         Me.ChatArea.Dock = System.Windows.Forms.DockStyle.Right
-        Me.ChatArea.Location = New System.Drawing.Point(173, 0)
+        Me.ChatArea.Location = New System.Drawing.Point(223, 0)
         Me.ChatArea.Name = "ChatArea"
-        Me.ChatArea.Size = New System.Drawing.Size(427, 366)
+        Me.ChatArea.Size = New System.Drawing.Size(430, 364)
         Me.ChatArea.TabIndex = 9
+        '
+        'cmdSettignsOpen
+        '
+        Me.cmdSettignsOpen.Location = New System.Drawing.Point(95, 9)
+        Me.cmdSettignsOpen.Name = "cmdSettignsOpen"
+        Me.cmdSettignsOpen.Size = New System.Drawing.Size(87, 23)
+        Me.cmdSettignsOpen.TabIndex = 10
+        Me.cmdSettignsOpen.Text = "Einstellungen"
+        Me.cmdSettignsOpen.UseVisualStyleBackColor = True
         '
         'ChatForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(600, 366)
+        Me.ClientSize = New System.Drawing.Size(653, 364)
+        Me.Controls.Add(Me.cmdSettignsOpen)
         Me.Controls.Add(Me.ChatArea)
         Me.Controls.Add(Me.btnAbmelden)
         Me.Controls.Add(Me.btnNeuerKontakt)
@@ -101,4 +112,5 @@ Partial Class ChatForm
     Friend WithEvents btnNeuerKontakt As Button
     Friend WithEvents btnAbmelden As Button
     Friend WithEvents ChatArea As ChatArea
+    Friend WithEvents cmdSettignsOpen As Button
 End Class

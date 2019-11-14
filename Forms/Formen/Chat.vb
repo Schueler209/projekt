@@ -49,4 +49,9 @@ Public Class ChatForm
         Next
 
     End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles cmdSettignsOpen.Click
+        Einstellungen.Show()
+
+    End Sub
 End Class

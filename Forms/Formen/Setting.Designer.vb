@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class Setting
+Partial Class Einstellungen
     Inherits System.Windows.Forms.Form
 
     'Das Formular überschreibt den Löschvorgang, um die Komponentenliste zu bereinigen.
@@ -22,95 +22,80 @@ Partial Class Setting
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.lblUsername = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.lblName = New System.Windows.Forms.Label()
-        Me.cmdChangeName = New System.Windows.Forms.Button()
-        Me.cmdChangePassword = New System.Windows.Forms.Button()
+        Me.txtName = New System.Windows.Forms.TextBox()
+        Me.cmdSave = New System.Windows.Forms.Button()
         Me.SuspendLayout()
-        '
-        'lblUsername
-        '
-        Me.lblUsername.AutoSize = True
-        Me.lblUsername.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblUsername.Location = New System.Drawing.Point(319, 91)
-        Me.lblUsername.Name = "lblUsername"
-        Me.lblUsername.Size = New System.Drawing.Size(127, 24)
-        Me.lblUsername.TabIndex = 0
-        Me.lblUsername.Text = "lblUsername"
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(200, 129)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(71, 24)
-        Me.Label2.TabIndex = 1
-        Me.Label2.Text = "Name:"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(120, 91)
+        Me.Label3.Location = New System.Drawing.Point(165, 67)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(151, 24)
         Me.Label3.TabIndex = 2
         Me.Label3.Text = "Benutzername:"
         '
-        'lblName
+        'lblUsername
         '
-        Me.lblName.AutoSize = True
-        Me.lblName.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblName.Location = New System.Drawing.Point(322, 129)
-        Me.lblName.Name = "lblName"
-        Me.lblName.Size = New System.Drawing.Size(87, 24)
-        Me.lblName.TabIndex = 3
-        Me.lblName.Text = "lblName"
+        Me.lblUsername.AutoSize = True
+        Me.lblUsername.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblUsername.Location = New System.Drawing.Point(369, 70)
+        Me.lblUsername.Name = "lblUsername"
+        Me.lblUsername.Size = New System.Drawing.Size(109, 20)
+        Me.lblUsername.TabIndex = 3
+        Me.lblUsername.Text = "lblUsername"
         '
-        'cmdChangeName
+        'Label2
         '
-        Me.cmdChangeName.Location = New System.Drawing.Point(239, 249)
-        Me.cmdChangeName.Name = "cmdChangeName"
-        Me.cmdChangeName.Size = New System.Drawing.Size(207, 50)
-        Me.cmdChangeName.TabIndex = 4
-        Me.cmdChangeName.Text = "Benutzernamen ändern"
-        Me.cmdChangeName.UseVisualStyleBackColor = True
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(256, 139)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(60, 20)
+        Me.Label2.TabIndex = 4
+        Me.Label2.Text = "Name:"
         '
-        'cmdChangePassword
+        'txtName
         '
-        Me.cmdChangePassword.Location = New System.Drawing.Point(239, 337)
-        Me.cmdChangePassword.Name = "cmdChangePassword"
-        Me.cmdChangePassword.Size = New System.Drawing.Size(207, 51)
-        Me.cmdChangePassword.TabIndex = 5
-        Me.cmdChangePassword.Text = "Passwort ändern"
-        Me.cmdChangePassword.UseVisualStyleBackColor = True
+        Me.txtName.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtName.Location = New System.Drawing.Point(373, 136)
+        Me.txtName.Name = "txtName"
+        Me.txtName.Size = New System.Drawing.Size(100, 26)
+        Me.txtName.TabIndex = 5
         '
-        'Setting
+        'cmdSave
+        '
+        Me.cmdSave.Location = New System.Drawing.Point(301, 199)
+        Me.cmdSave.Name = "cmdSave"
+        Me.cmdSave.Size = New System.Drawing.Size(128, 39)
+        Me.cmdSave.TabIndex = 6
+        Me.cmdSave.Text = "Speichern"
+        Me.cmdSave.UseVisualStyleBackColor = True
+        '
+        'Einstellungen
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(490, 510)
-        Me.Controls.Add(Me.cmdChangePassword)
-        Me.Controls.Add(Me.cmdChangeName)
-        Me.Controls.Add(Me.lblName)
-        Me.Controls.Add(Me.Label3)
+        Me.ClientSize = New System.Drawing.Size(551, 447)
+        Me.Controls.Add(Me.cmdSave)
+        Me.Controls.Add(Me.txtName)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.lblUsername)
+        Me.Controls.Add(Me.Label3)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Name = "Setting"
+        Me.Name = "Einstellungen"
         Me.Text = "Einstellungen"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-
+    Friend WithEvents Label3 As Label
     Friend WithEvents lblUsername As Label
     Friend WithEvents Label2 As Label
-    Friend WithEvents Label3 As Label
-    Friend WithEvents lblName As Label
-    Friend WithEvents cmdChangeName As Button
-    Friend WithEvents cmdChangePassword As Button
+    Friend WithEvents txtName As TextBox
+    Friend WithEvents cmdSave As Button
 End Class

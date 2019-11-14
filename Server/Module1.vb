@@ -139,21 +139,20 @@ Module Module1
     End Function
 
 
-    'Benutzernamen ändern
-    Public Sub changeUsername(ID As Integer, done As Action(Of Boolean))
+    'Namen ändern
+    Public Function changeName(ID As Integer, NewName As String) As Boolean
         Dim conn As New OleDbConnection(ConnectionStr)
         conn.Open()
 
+        Dim updatecommand As New OleDbCommand("UPDATE Users SET Name = '" & NewName & "'" & " WHERE ID = = '" & ID & "'")
+        Try
+            updatecommand.ExecuteNonQuery()
+        Catch ex As Exception
+            Console.WriteLine(ex.Message)
+            Return False
+        End Try
+        Return True
+    End Function
 
 
-    End Sub
-
-
-
-    'Passwort ändern
-    Public Sub changePassword(ID As Integer, done As Action(Of Boolean))
-
-
-
-    End Sub
 End Module
