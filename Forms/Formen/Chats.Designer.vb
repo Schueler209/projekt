@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Chats
     Inherits System.Windows.Forms.Form
 
     'Das Formular überschreibt den Löschvorgang, um die Komponentenliste zu bereinigen.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,25 +20,14 @@ Partial Class Chats
     'Hinweis: Die folgende Prozedur ist für den Windows Form-Designer erforderlich.
     'Das Bearbeiten ist mit dem Windows Form-Designer möglich.  
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ChatArea = New Forms.ChatArea()
         Me.btnAbmelden = New System.Windows.Forms.Button()
         Me.btnNeuerKontakt = New System.Windows.Forms.Button()
         Me.lblKontakte = New System.Windows.Forms.Label()
         Me.ltbKontakte = New System.Windows.Forms.ListBox()
+        Me.ChatArea = New Forms.ChatArea()
         Me.SuspendLayout()
-        '
-        'ChatArea
-        '
-        Me.ChatArea.AutoSize = True
-        Me.ChatArea.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ChatArea.Chat = Nothing
-        Me.ChatArea.Dock = System.Windows.Forms.DockStyle.Right
-        Me.ChatArea.Location = New System.Drawing.Point(263, 0)
-        Me.ChatArea.Name = "ChatArea"
-        Me.ChatArea.Size = New System.Drawing.Size(427, 450)
-        Me.ChatArea.TabIndex = 14
         '
         'btnAbmelden
         '
@@ -77,6 +66,17 @@ Partial Class Chats
         Me.ltbKontakte.Name = "ltbKontakte"
         Me.ltbKontakte.Size = New System.Drawing.Size(125, 277)
         Me.ltbKontakte.TabIndex = 10
+        '
+        'ChatArea
+        '
+        Me.ChatArea.AutoSize = True
+        Me.ChatArea.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ChatArea.Chat = Nothing
+        Me.ChatArea.Dock = System.Windows.Forms.DockStyle.Right
+        Me.ChatArea.Location = New System.Drawing.Point(263, 0)
+        Me.ChatArea.Name = "ChatArea"
+        Me.ChatArea.Size = New System.Drawing.Size(427, 450)
+        Me.ChatArea.TabIndex = 14
         '
         'Chats
         '

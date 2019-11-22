@@ -64,4 +64,5 @@ Public Class Chats
         Next
         ltbKontakte.SelectedIndex = 0
     End Sub
+
 End Class
