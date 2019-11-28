@@ -79,6 +79,12 @@
     <Compile Include="Controls\ChatArea.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Controls\MessageControl.Designer.vb">
+      <DependentUpon>MessageControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MessageControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Formen\AddFriend.Designer.vb">
       <DependentUpon>AddFriend.vb</DependentUpon>
     </Compile>
@@ -88,7 +94,9 @@
     <Compile Include="Formen\Chats.Designer.vb">
       <DependentUpon>Chats.vb</DependentUpon>
     </Compile>
-    <Compile Include="Formen\Chats.vb" />
+    <Compile Include="Formen\Chats.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formen\Login.Designer.vb">
       <DependentUpon>Login.vb</DependentUpon>
     </Compile>
@@ -127,6 +135,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Controls\ChatArea.resx">
       <DependentUpon>ChatArea.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MessageControl.resx">
+      <DependentUpon>MessageControl.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formen\AddFriend.resx">
       <DependentUpon>AddFriend.vb</DependentUpon>

@@ -46,21 +46,18 @@ Public Class ChatArea
         SendMessage()
     End Sub
 
-    Private Sub addMessage(msg As Message)
+    Public Sub addMessage(msg As Message)
         ltbChat.Items.Add(msg.user.name & "- " & msg.message)
     End Sub
 
     Private Sub SendMessage()
         If txtEingabe.Text.Length > 0 Then
 
-            NetworkClass.net.SendMessage(NetworkClass.login.id, selectedChat.ID, txtEingabe.Text, AddressOf SendMessageSuccess)
+            NetworkClass.net.SendMessage(NetworkClass.login.id, selectedChat.ID, txtEingabe.Text)
+            txtEingabe.Clear()
         End If
     End Sub
 
-    Private Sub SendMessageSuccess(s As Boolean)
-        ltbChat.Items.Add(NetworkClass.login.name & "- " & txtEingabe.Text)
-        txtEingabe.Clear()
-    End Sub
 
     Private Sub txtEingabe_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtEingabe.KeyPress
         If e.KeyChar = ChrW(Keys.Enter) Then
