@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class IPundPort
     Inherits System.Windows.Forms.Form
 
     'Das Formular überschreibt den Löschvorgang, um die Komponentenliste zu bereinigen.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,14 +20,13 @@ Partial Class IPundPort
     'Hinweis: Die folgende Prozedur ist für den Windows Form-Designer erforderlich.
     'Das Bearbeiten ist mit dem Windows Form-Designer möglich.  
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.cmdSpeichern = New System.Windows.Forms.Button()
-        Me.cmdLaden = New System.Windows.Forms.Button()
+        Me.cmdSpeichernundLaden = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'TextBox2
@@ -62,31 +61,21 @@ Partial Class IPundPort
         Me.Label1.TabIndex = 11
         Me.Label1.Text = "IP:"
         '
-        'cmdSpeichern
+        'cmdSpeichernundLaden
         '
-        Me.cmdSpeichern.Location = New System.Drawing.Point(100, 115)
-        Me.cmdSpeichern.Name = "cmdSpeichern"
-        Me.cmdSpeichern.Size = New System.Drawing.Size(75, 23)
-        Me.cmdSpeichern.TabIndex = 15
-        Me.cmdSpeichern.Text = "Speichern"
-        Me.cmdSpeichern.UseVisualStyleBackColor = True
-        '
-        'cmdLaden
-        '
-        Me.cmdLaden.Location = New System.Drawing.Point(354, 115)
-        Me.cmdLaden.Name = "cmdLaden"
-        Me.cmdLaden.Size = New System.Drawing.Size(75, 23)
-        Me.cmdLaden.TabIndex = 16
-        Me.cmdLaden.Text = "Laden"
-        Me.cmdLaden.UseVisualStyleBackColor = True
+        Me.cmdSpeichernundLaden.Location = New System.Drawing.Point(211, 98)
+        Me.cmdSpeichernundLaden.Name = "cmdSpeichernundLaden"
+        Me.cmdSpeichernundLaden.Size = New System.Drawing.Size(94, 40)
+        Me.cmdSpeichernundLaden.TabIndex = 15
+        Me.cmdSpeichernundLaden.Text = "Speichern und Laden"
+        Me.cmdSpeichernundLaden.UseVisualStyleBackColor = True
         '
         'IPundPort
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(476, 173)
-        Me.Controls.Add(Me.cmdLaden)
-        Me.Controls.Add(Me.cmdSpeichern)
+        Me.Controls.Add(Me.cmdSpeichernundLaden)
         Me.Controls.Add(Me.TextBox2)
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.Label4)
@@ -102,6 +91,5 @@ Partial Class IPundPort
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents Label4 As Label
     Friend WithEvents Label1 As Label
-    Friend WithEvents cmdSpeichern As Button
-    Friend WithEvents cmdLaden As Button
+    Friend WithEvents cmdSpeichernundLaden As Button
 End Class

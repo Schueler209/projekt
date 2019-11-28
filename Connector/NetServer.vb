@@ -33,7 +33,7 @@ Public Class NetServer
     'Event für Logout
     Public OnLogOut As Func(Of Integer)
     'Event für Einstellungsänderungen
-    Public OnSettings As Func(Of Integer, String)
+    Public OnSettings As Func(Of Integer, String, String)
 
 
     ' Falls neue Nachricht kommt:
