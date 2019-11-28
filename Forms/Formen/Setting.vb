@@ -9,6 +9,7 @@ Public Class Einstellungen
     Public Sub cmdSave_Click(sender As Object, e As EventArgs) Handles cmdSave.Click
         Dim NewName As String
         NewName = txtName.Text
+        NetworkClass.net.changeSettings(NetworkClass.login.id, NewName)
     End Sub
 
 
