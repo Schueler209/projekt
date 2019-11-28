@@ -11,4 +11,5 @@ Public Class Einstellungen
         NewName = txtName.Text
     End Sub
 
+
 End Class

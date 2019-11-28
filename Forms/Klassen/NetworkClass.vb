@@ -15,14 +15,16 @@ Public Class NetworkClass
     End Sub
 
     Private Shared Sub OnConnectionLost()
-        Dim msg = MsgBox("Verbindung wurde unterbrochen!", vbRetryCancel, "Verbindung getrennt")
-        If msg = vbRetry Then
-            net.connect()
-        Else
-            ' Einstellungen öffnen
-            Application.Exit()
+        IPundPort.Show()
 
-            End
-        End If
+        'Dim msg = MsgBox("Verbindung wurde unterbrochen!", vbRetryCancel, "Verbindung getrennt")
+        'If msg = vbRetry Then
+        '    net.connect()
+        'Else
+        '    ' Einstellungen öffnen
+        '    Application.Exit()
+
+        '    End
+        'End If
     End Sub
 End Class

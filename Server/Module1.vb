@@ -17,6 +17,7 @@ Module Module1
             .OnChats = AddressOf GetFriends,
             .OnMessages = AddressOf getMessages,
             .OnSendMessage = AddressOf AddMessage
+            .OnSettings =
         }
 
         connect.connect()
