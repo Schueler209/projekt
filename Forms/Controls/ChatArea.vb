@@ -22,8 +22,6 @@ Public Class ChatArea
                 selectedChat = value
                 lblChatpartner.Text = value.user.name
 
-                ' Vorherigen Chat löschen
-                ltbChat.Items.Clear()
 
                 NetworkClass.net.getMessages(value.ID, AddressOf recievemessages)
             End If
@@ -39,7 +37,7 @@ Public Class ChatArea
         ' Hier müsste noch hin, dass alle Nachrichten mit der addMessage Methode hinzugefügt werden
 
         ' Nach unten scrollen
-        ltbChat.TopIndex = ltbChat.Items.Count - 1
+
     End Sub
 
     Private Sub BtnSenden_Click(sender As Object, e As EventArgs) Handles btnSenden.Click
@@ -47,7 +45,16 @@ Public Class ChatArea
     End Sub
 
     Public Sub addMessage(msg As Message)
-        ltbChat.Items.Add(msg.user.name & "- " & msg.message)
+        Dim messagecontrol As New MessageControl(msg)
+        messagecontrol.Top = messagecontrol.Height * Panel1.Controls.Count
+        If msg.user.id = NetworkClass.login.id Then
+            messagecontrol.Anchor = AnchorStyles.Right
+            messagecontrol.Left = Panel1.Width - messagecontrol.Width
+            messagecontrol.BackColor = Color.Coral
+        End If
+
+        Panel1.Controls.Add(messagecontrol)
+
     End Sub
 
     Private Sub SendMessage()
@@ -68,4 +75,5 @@ Public Class ChatArea
     Private Sub ChatArea_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
+
 End Class
