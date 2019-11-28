@@ -25,7 +25,9 @@ Partial Class ChatArea
         Me.lblChatpartner = New System.Windows.Forms.Label()
         Me.btnSenden = New System.Windows.Forms.Button()
         Me.txtEingabe = New System.Windows.Forms.TextBox()
-        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.ChatScrollPanel = New System.Windows.Forms.Panel()
+        Me.ChatPanel = New System.Windows.Forms.Panel()
+        Me.ChatScrollPanel.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblChatpartner
@@ -41,7 +43,7 @@ Partial Class ChatArea
         'btnSenden
         '
         Me.btnSenden.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSenden.Location = New System.Drawing.Point(459, 278)
+        Me.btnSenden.Location = New System.Drawing.Point(459, 259)
         Me.btnSenden.Margin = New System.Windows.Forms.Padding(2)
         Me.btnSenden.Name = "btnSenden"
         Me.btnSenden.Size = New System.Drawing.Size(75, 30)
@@ -53,34 +55,46 @@ Partial Class ChatArea
         '
         Me.txtEingabe.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtEingabe.Location = New System.Drawing.Point(18, 286)
+        Me.txtEingabe.Location = New System.Drawing.Point(18, 267)
         Me.txtEingabe.Margin = New System.Windows.Forms.Padding(2)
         Me.txtEingabe.Name = "txtEingabe"
         Me.txtEingabe.Size = New System.Drawing.Size(426, 20)
         Me.txtEingabe.TabIndex = 7
         '
-        'Panel1
+        'ChatScrollPanel
         '
-        Me.Panel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.ChatScrollPanel.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel1.AutoScroll = True
-        Me.Panel1.BackColor = System.Drawing.Color.White
-        Me.Panel1.Location = New System.Drawing.Point(18, 26)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(498, 234)
-        Me.Panel1.TabIndex = 11
+        Me.ChatScrollPanel.AutoScroll = True
+        Me.ChatScrollPanel.Controls.Add(Me.ChatPanel)
+        Me.ChatScrollPanel.Location = New System.Drawing.Point(18, 26)
+        Me.ChatScrollPanel.Name = "ChatScrollPanel"
+        Me.ChatScrollPanel.Size = New System.Drawing.Size(516, 228)
+        Me.ChatScrollPanel.TabIndex = 11
+        '
+        'ChatPanel
+        '
+        Me.ChatPanel.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ChatPanel.AutoScroll = True
+        Me.ChatPanel.Location = New System.Drawing.Point(0, 0)
+        Me.ChatPanel.Name = "ChatPanel"
+        Me.ChatPanel.Size = New System.Drawing.Size(516, 228)
+        Me.ChatPanel.TabIndex = 0
         '
         'ChatArea
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.Panel1)
+        Me.Controls.Add(Me.ChatScrollPanel)
         Me.Controls.Add(Me.lblChatpartner)
         Me.Controls.Add(Me.btnSenden)
         Me.Controls.Add(Me.txtEingabe)
         Me.Name = "ChatArea"
-        Me.Size = New System.Drawing.Size(554, 322)
+        Me.Size = New System.Drawing.Size(554, 303)
+        Me.ChatScrollPanel.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -89,5 +103,6 @@ Partial Class ChatArea
     Friend WithEvents lblChatpartner As Label
     Friend WithEvents btnSenden As Button
     Friend WithEvents txtEingabe As TextBox
-    Friend WithEvents Panel1 As Panel
+    Friend WithEvents ChatScrollPanel As Panel
+    Friend WithEvents ChatPanel As Panel
 End Class

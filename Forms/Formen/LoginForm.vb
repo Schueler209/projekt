@@ -1,6 +1,6 @@
 ﻿Imports Connector
 
-Public Class Login
+Public Class LoginForm
 
     Private Sub Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         NetworkClass.ensureConnection()

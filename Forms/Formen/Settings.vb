@@ -1,6 +1,6 @@
 ﻿
-Public Class Einstellungen
-    'Namen und Bernutzernamen anzeigen
+Public Class Settings
+    'Namen und Benutzernamen anzeigen
     Private Sub Einstellungen_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         txtName.Text = NetworkClass.login.name
         lblUsername.Text = NetworkClass.login.benutzername

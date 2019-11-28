@@ -4,8 +4,8 @@ Public Class NetworkClass
     Public Shared ReadOnly net As New NetClient
     Private Shared connected As Boolean = False
     Public Shared login As User
-    Public Shared Ip As String
-    Public Shared Port As String
+    Public Shared Ip As String = "127.0.0.1"
+    Public Shared Port As Integer = 8080
 
     Public Shared Sub ensureConnection()
         If Not connected Then
@@ -17,7 +17,14 @@ Public Class NetworkClass
     End Sub
 
     Private Shared Sub OnConnectionLost()
+        connected = False
         IPundPort.Show()
+        Register.Close()
+        LoginForm.Close()
+        Chats.Close()
+        Settings.Close()
+        AddFriend.Close()
+
 
         'Dim msg = MsgBox("Verbindung wurde unterbrochen!", vbRetryCancel, "Verbindung getrennt")
         'If msg = vbRetry Then

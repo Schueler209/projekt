@@ -103,16 +103,16 @@
     <Compile Include="Formen\IPundPort.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Formen\Login.Designer.vb">
-      <DependentUpon>Login.vb</DependentUpon>
+    <Compile Include="Formen\LoginForm.Designer.vb">
+      <DependentUpon>LoginForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="Formen\Login.vb">
+    <Compile Include="Formen\LoginForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Formen\Setting.Designer.vb">
-      <DependentUpon>Setting.vb</DependentUpon>
+    <Compile Include="Formen\Settings.Designer.vb">
+      <DependentUpon>Settings.vb</DependentUpon>
     </Compile>
-    <Compile Include="Formen\Setting.vb">
+    <Compile Include="Formen\Settings.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Klassen\NetworkClass.vb" />
@@ -154,11 +154,11 @@
     <EmbeddedResource Include="Formen\IPundPort.resx">
       <DependentUpon>IPundPort.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Formen\Login.resx">
-      <DependentUpon>Login.vb</DependentUpon>
+    <EmbeddedResource Include="Formen\LoginForm.resx">
+      <DependentUpon>LoginForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Formen\Setting.resx">
-      <DependentUpon>Setting.vb</DependentUpon>
+    <EmbeddedResource Include="Formen\Settings.resx">
+      <DependentUpon>Settings.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
