@@ -32,6 +32,8 @@ Public Class NetServer
     Public OnSendMessage As Func(Of Integer, Integer, String, Tuple(Of Message, Integer()))
     'Event für Logout
     Public OnLogOut As Func(Of Integer)
+    'Event für Einstellungsänderungen
+    Public OnSettings As Func(Of Integer, String)
 
 
     ' Falls neue Nachricht kommt:
@@ -122,14 +124,17 @@ Public Class NetServer
 
 
                     End If
-
-
-
-
                 End If
 
             Case "loggedOut"
                 loggedOut(client)
+
+            Case "settings"
+                If OnSettings IsNot Nothing Then
+                    Dim id As Integer = req.Data.Item("id")
+                    Dim name As String = req.Data.Item("name")
+
+                End If
         End Select
 
     End Sub
@@ -180,6 +185,11 @@ Public Class NetServer
         Next
 
         loggedIn.Remove(id)
+    End Sub
+
+    Public Sub changeSettings(ans As String, client As TcpClient)
+        Dim data As New Dictionary(Of String, Object)
+        data.Add("name", ans)
     End Sub
 
 
