@@ -41,9 +41,10 @@ Partial Class MessageControl
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
         Me.Controls.Add(Me.Label1)
         Me.Name = "MessageControl"
-        Me.Size = New System.Drawing.Size(150, 63)
+        Me.Size = New System.Drawing.Size(150, 59)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
