@@ -34,6 +34,9 @@ Public Class NetClient
     Public OnMessages As Action(Of Message())
     'Event für Nachricht bekommen(eigene oder andere)
     Public OnMessage As Action(Of Message)
+    'Event für Einstellungsänderungen
+    Public OnSettings As Action(Of String)
+
 
     ' Falls neue Nachricht kommt:
     Private Sub onRequest(req As ConnectionData)
@@ -84,6 +87,12 @@ Public Class NetClient
                 If OnMessage IsNot Nothing Then
                     Dim ans As Message = req.Data.Item("message")
                     OnMessage(ans)
+                End If
+
+            Case "settings"
+                If OnSettings IsNot Nothing Then
+                    Dim ans As String = req.Data.Item("name")
+                    OnSettings(ans)
                 End If
         End Select
 
@@ -157,6 +166,13 @@ Public Class NetClient
 
     Sub logOut()
         Dim res As New ConnectionData("loggedOut")
+        connector.send(res)
+    End Sub
+
+    Sub changeSettings(id As Integer, name As String)
+        Dim res As New ConnectionData("settings")
+        res.addData("id", id)
+        res.addData("name", name)
         connector.send(res)
     End Sub
 
