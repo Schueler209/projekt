@@ -33,7 +33,7 @@ Partial Class Einstellungen
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(96, 44)
+        Me.Label3.Location = New System.Drawing.Point(17, 28)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(151, 24)
         Me.Label3.TabIndex = 2
@@ -43,7 +43,7 @@ Partial Class Einstellungen
         '
         Me.lblUsername.AutoSize = True
         Me.lblUsername.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblUsername.Location = New System.Drawing.Point(300, 47)
+        Me.lblUsername.Location = New System.Drawing.Point(221, 31)
         Me.lblUsername.Name = "lblUsername"
         Me.lblUsername.Size = New System.Drawing.Size(109, 20)
         Me.lblUsername.TabIndex = 3
@@ -53,7 +53,7 @@ Partial Class Einstellungen
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(187, 116)
+        Me.Label2.Location = New System.Drawing.Point(108, 100)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(60, 20)
         Me.Label2.TabIndex = 4
@@ -62,14 +62,14 @@ Partial Class Einstellungen
         'txtName
         '
         Me.txtName.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtName.Location = New System.Drawing.Point(304, 113)
+        Me.txtName.Location = New System.Drawing.Point(225, 97)
         Me.txtName.Name = "txtName"
         Me.txtName.Size = New System.Drawing.Size(100, 26)
         Me.txtName.TabIndex = 5
         '
         'cmdSave
         '
-        Me.cmdSave.Location = New System.Drawing.Point(281, 178)
+        Me.cmdSave.Location = New System.Drawing.Point(202, 162)
         Me.cmdSave.Name = "cmdSave"
         Me.cmdSave.Size = New System.Drawing.Size(128, 39)
         Me.cmdSave.TabIndex = 6
@@ -80,7 +80,7 @@ Partial Class Einstellungen
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(559, 263)
+        Me.ClientSize = New System.Drawing.Size(627, 266)
         Me.Controls.Add(Me.cmdSave)
         Me.Controls.Add(Me.txtName)
         Me.Controls.Add(Me.Label2)

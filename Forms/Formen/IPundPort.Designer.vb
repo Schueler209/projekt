@@ -63,7 +63,7 @@ Partial Class IPundPort
         '
         'cmdSpeichernundLaden
         '
-        Me.cmdSpeichernundLaden.Location = New System.Drawing.Point(211, 98)
+        Me.cmdSpeichernundLaden.Location = New System.Drawing.Point(196, 104)
         Me.cmdSpeichernundLaden.Name = "cmdSpeichernundLaden"
         Me.cmdSpeichernundLaden.Size = New System.Drawing.Size(94, 40)
         Me.cmdSpeichernundLaden.TabIndex = 15

@@ -146,7 +146,7 @@ Module Module1
 
 
     'Namen ändern
-    Public Function changeName(ID As Integer, NewName As String) As String
+    Public Function changeName(ID As Integer, NewName As String) As Boolean
         Dim conn As New OleDbConnection(ConnectionStr)
         conn.Open()
 

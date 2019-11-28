@@ -10,7 +10,7 @@ Public Class NetworkClass
     Public Shared Sub ensureConnection()
         If Not connected Then
             net.OnConnectionLost = AddressOf OnConnectionLost
-            net.connect()
+            net.connect(Ip, Port)
             connected = True
         End If
 
@@ -18,6 +18,7 @@ Public Class NetworkClass
 
     Private Shared Sub OnConnectionLost()
         IPundPort.Show()
+
         'Dim msg = MsgBox("Verbindung wurde unterbrochen!", vbRetryCancel, "Verbindung getrennt")
         'If msg = vbRetry Then
         '    net.connect()
