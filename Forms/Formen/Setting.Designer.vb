@@ -69,7 +69,7 @@ Partial Class Einstellungen
         '
         'cmdSave
         '
-        Me.cmdSave.Location = New System.Drawing.Point(232, 176)
+        Me.cmdSave.Location = New System.Drawing.Point(281, 178)
         Me.cmdSave.Name = "cmdSave"
         Me.cmdSave.Size = New System.Drawing.Size(128, 39)
         Me.cmdSave.TabIndex = 6
@@ -80,7 +80,7 @@ Partial Class Einstellungen
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(551, 447)
+        Me.ClientSize = New System.Drawing.Size(559, 263)
         Me.Controls.Add(Me.cmdSave)
         Me.Controls.Add(Me.txtName)
         Me.Controls.Add(Me.Label2)

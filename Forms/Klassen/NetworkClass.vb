@@ -4,6 +4,8 @@ Public Class NetworkClass
     Public Shared ReadOnly net As New NetClient
     Private Shared connected As Boolean = False
     Public Shared login As User
+    Public Shared Ip As String
+    Public Shared Port As String
 
     Public Shared Sub ensureConnection()
         If Not connected Then
@@ -15,14 +17,15 @@ Public Class NetworkClass
     End Sub
 
     Private Shared Sub OnConnectionLost()
-        Dim msg = MsgBox("Verbindung wurde unterbrochen!", vbRetryCancel, "Verbindung getrennt")
-        If msg = vbRetry Then
-            net.connect()
-        Else
-            ' Einstellungen öffnen
-            Application.Exit()
+        IPundPort.Show()
+        'Dim msg = MsgBox("Verbindung wurde unterbrochen!", vbRetryCancel, "Verbindung getrennt")
+        'If msg = vbRetry Then
+        '    net.connect()
+        'Else
+        '    ' Einstellungen öffnen
+        '    Application.Exit()
 
-            End
-        End If
+        '    End
+        'End If
     End Sub
 End Class

@@ -97,6 +97,12 @@
     <Compile Include="Formen\Chats.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formen\IPundPort.Designer.vb">
+      <DependentUpon>IPundPort.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formen\IPundPort.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formen\Login.Designer.vb">
       <DependentUpon>Login.vb</DependentUpon>
     </Compile>
@@ -144,6 +150,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formen\Chats.resx">
       <DependentUpon>Chats.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formen\IPundPort.resx">
+      <DependentUpon>IPundPort.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formen\Login.resx">
       <DependentUpon>Login.vb</DependentUpon>

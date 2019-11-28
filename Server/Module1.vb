@@ -16,8 +16,9 @@ Module Module1
             .OnUserlist = AddressOf GetAllUsers,
             .OnChats = AddressOf GetFriends,
             .OnMessages = AddressOf getMessages,
-            .OnSendMessage = AddressOf AddMessage
-        }
+            .OnSendMessage = AddressOf AddMessage,
+            .OnSettings = AddressOf changeName
+ }
 
         connect.connect()
 
@@ -145,7 +146,7 @@ Module Module1
 
 
     'Namen ändern
-    Public Function changeName(ID As Integer, NewName As String) As Boolean
+    Public Function changeName(ID As Integer, NewName As String) As String
         Dim conn As New OleDbConnection(ConnectionStr)
         conn.Open()
 
