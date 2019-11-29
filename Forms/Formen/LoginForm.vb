@@ -43,9 +43,17 @@ Public Class LoginForm
     End Sub
 
     Private Sub txbPasswort_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txbPasswort.KeyPress
-        If e.KeyChar = ChrW(Keys.Enter) Then
-            SendMessage()
+        lblFehler.Text = ""
+        If txbBenutzername.Text = "" Then lblFehler.Text = "kein Benutzername angegeben"
+        If txbPasswort.Text = "" Then lblFehler.Text = "kein Passwort angegeben"
+        If lblFehler.Text = "" Then
+            NetworkClass.net.Login(txbBenutzername.Text, txbPasswort.Text, AddressOf Loginconfirm)
         End If
+        If e.KeyChar = ChrW(Keys.Enter) Then
+            Chats.Show()
+            Me.Hide()
+        End If
+
     End Sub
 End Class
 
