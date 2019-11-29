@@ -7,12 +7,7 @@ Public Class LoginForm
     End Sub
 
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
-        lblFehler.Text = ""
-        If txbBenutzername.Text = "" Then lblFehler.Text = "kein Benutzername angegeben"
-        If txbPasswort.Text = "" Then lblFehler.Text = "kein Passwort angegeben"
-        If lblFehler.Text = "" Then
-            NetworkClass.net.Login(txbBenutzername.Text, txbPasswort.Text, AddressOf Loginconfirm)
-        End If
+        login()
 
     End Sub
 
@@ -41,10 +36,20 @@ Public Class LoginForm
         End If
 
     End Sub
+    Private Sub login()
+        lblFehler.Text = ""
+        If txbBenutzername.Text = "" Then lblFehler.Text = "kein Benutzername angegeben"
+        If txbPasswort.Text = "" Then lblFehler.Text = "kein Passwort angegeben"
+        If lblFehler.Text = "" Then
+            NetworkClass.net.Login(txbBenutzername.Text, txbPasswort.Text, AddressOf Loginconfirm)
+        End If
+    End Sub
 
-    Private Sub txbPasswort_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txbPasswort.KeyPress
-        If e.KeyChar = ChrW(Keys.Enter) Then
-            SendMessage()
+
+    Private Sub txbPasswort_KeyDown(sender As Object, e As KeyEventArgs) Handles txbPasswort.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            login()
+            e.SuppressKeyPress = True
         End If
     End Sub
 End Class
