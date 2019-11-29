@@ -33,7 +33,7 @@ Public Class NetServer
     'Event für Logout
     Public OnLogOut As Func(Of Integer)
     'Event für Einstellungsänderungen
-    Public OnSettings As Func(Of Integer, String, String)
+    Public OnSettings As Func(Of Integer, String, Boolean)
 
 
     ' Falls neue Nachricht kommt:
@@ -133,7 +133,10 @@ Public Class NetServer
                 If OnSettings IsNot Nothing Then
                     Dim id As Integer = req.Data.Item("id")
                     Dim name As String = req.Data.Item("name")
-
+                    Dim success = OnSettings(id, name)
+                    Dim data As New ConnectionData("settingsSuccess")
+                    data.addData("success", success)
+                    connector.send(client, data)
                 End If
         End Select
 

@@ -65,4 +65,7 @@ Public Class Chats
         ltbKontakte.SelectedIndex = 0
     End Sub
 
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Settings.Show()
+    End Sub
 End Class
