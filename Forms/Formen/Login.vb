@@ -23,6 +23,10 @@ Public Class Login
 
     Private Sub txbPasswort_TextChanged(sender As Object, e As EventArgs) Handles txbPasswort.TextChanged
         txbPasswort.PasswordChar = "*"
+
+
+
+
     End Sub
 
     Sub Loginconfirm(wert As User)
@@ -36,6 +40,12 @@ Public Class Login
 
         End If
 
+    End Sub
+
+    Private Sub txbPasswort_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txbPasswort.KeyPress
+        If e.KeyChar = ChrW(Keys.Enter) Then
+            SendMessage()
+        End If
     End Sub
 End Class
 
