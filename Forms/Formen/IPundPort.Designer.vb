@@ -22,31 +22,32 @@ Partial Class IPundPort
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtPort = New System.Windows.Forms.TextBox()
+        Me.txtIp = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cmdSpeichernundLaden = New System.Windows.Forms.Button()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
-        'TextBox2
+        'txtPort
         '
-        Me.TextBox2.Location = New System.Drawing.Point(329, 48)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(100, 20)
-        Me.TextBox2.TabIndex = 14
+        Me.txtPort.Location = New System.Drawing.Point(328, 68)
+        Me.txtPort.Name = "txtPort"
+        Me.txtPort.Size = New System.Drawing.Size(100, 20)
+        Me.txtPort.TabIndex = 14
         '
-        'TextBox1
+        'txtIp
         '
-        Me.TextBox1.Location = New System.Drawing.Point(100, 48)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(100, 20)
-        Me.TextBox1.TabIndex = 13
+        Me.txtIp.Location = New System.Drawing.Point(99, 68)
+        Me.txtIp.Name = "txtIp"
+        Me.txtIp.Size = New System.Drawing.Size(100, 20)
+        Me.txtIp.TabIndex = 13
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(250, 51)
+        Me.Label4.Location = New System.Drawing.Point(249, 71)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(29, 13)
         Me.Label4.TabIndex = 12
@@ -55,7 +56,7 @@ Partial Class IPundPort
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(40, 51)
+        Me.Label1.Location = New System.Drawing.Point(39, 71)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(20, 13)
         Me.Label1.TabIndex = 11
@@ -63,21 +64,33 @@ Partial Class IPundPort
         '
         'cmdSpeichernundLaden
         '
-        Me.cmdSpeichernundLaden.Location = New System.Drawing.Point(211, 98)
+        Me.cmdSpeichernundLaden.Location = New System.Drawing.Point(196, 121)
         Me.cmdSpeichernundLaden.Name = "cmdSpeichernundLaden"
         Me.cmdSpeichernundLaden.Size = New System.Drawing.Size(94, 40)
         Me.cmdSpeichernundLaden.TabIndex = 15
-        Me.cmdSpeichernundLaden.Text = "Speichern und Laden"
+        Me.cmdSpeichernundLaden.Text = "Verbinden"
         Me.cmdSpeichernundLaden.UseVisualStyleBackColor = True
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.ForeColor = System.Drawing.Color.DarkRed
+        Me.Label2.Location = New System.Drawing.Point(10, 26)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(454, 13)
+        Me.Label2.TabIndex = 16
+        Me.Label2.Text = "Es scheint ein Verbindungsfehler aufgetreten zu sein. Bitte überprüfe deine Serve" &
+    "reinstellungen"
         '
         'IPundPort
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(476, 173)
+        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.cmdSpeichernundLaden)
-        Me.Controls.Add(Me.TextBox2)
-        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.txtPort)
+        Me.Controls.Add(Me.txtIp)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label1)
         Me.Name = "IPundPort"
@@ -87,9 +100,10 @@ Partial Class IPundPort
 
     End Sub
 
-    Friend WithEvents TextBox2 As TextBox
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtPort As TextBox
+    Friend WithEvents txtIp As TextBox
     Friend WithEvents Label4 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents cmdSpeichernundLaden As Button
+    Friend WithEvents Label2 As Label
 End Class

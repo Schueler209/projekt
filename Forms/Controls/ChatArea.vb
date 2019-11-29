@@ -29,14 +29,14 @@ Public Class ChatArea
     End Property
 
     Private Sub recievemessages(msg As Message())
+        ' Alle bisherigen Controls entfernen
+        ChatPanel.Controls.Clear()
         For Each item In msg
             addMessage(item)
-
         Next
 
-        ' Hier müsste noch hin, dass alle Nachrichten mit der addMessage Methode hinzugefügt werden
-
-        ' Nach unten scrollen
+        ' Scrollen
+        ChatPanel.VerticalScroll.Value = ChatPanel.VerticalScroll.Maximum
 
     End Sub
 
@@ -46,14 +46,17 @@ Public Class ChatArea
 
     Public Sub addMessage(msg As Message)
         Dim messagecontrol As New MessageControl(msg)
-        messagecontrol.Top = messagecontrol.Height * Panel1.Controls.Count
+        messagecontrol.Top = messagecontrol.Height * ChatPanel.Controls.Count
+        messagecontrol.Width = 0.8 * ChatPanel.Width
         If msg.user.id = NetworkClass.login.id Then
-            messagecontrol.Anchor = AnchorStyles.Right
-            messagecontrol.Left = Panel1.Width - messagecontrol.Width
-            messagecontrol.BackColor = Color.Coral
+            messagecontrol.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+            messagecontrol.Left = ChatPanel.Width - messagecontrol.Width
+            messagecontrol.BackColor = Color.AliceBlue
         End If
 
-        Panel1.Controls.Add(messagecontrol)
+        ChatPanel.Controls.Add(messagecontrol)
+
+        'ChatPanel.VerticalScroll.Value = ChatPanel.VerticalScroll.Maximum
 
     End Sub
 
@@ -66,14 +69,15 @@ Public Class ChatArea
     End Sub
 
 
-    Private Sub txtEingabe_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtEingabe.KeyPress
-        If e.KeyChar = ChrW(Keys.Enter) Then
-            SendMessage()
-        End If
-    End Sub
 
     Private Sub ChatArea_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        ChatPanel.VerticalScroll.Enabled = True
     End Sub
 
+    Private Sub txtEingabe_KeyDown(sender As Object, e As KeyEventArgs) Handles txtEingabe.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            SendMessage()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
 End Class

@@ -1,6 +1,6 @@
 ﻿
-Public Class Einstellungen
-    'Namen und Bernutzernamen anzeigen
+Public Class Settings
+    'Namen und Benutzernamen anzeigen
     Private Sub Einstellungen_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         txtName.Text = NetworkClass.login.name
         lblUsername.Text = NetworkClass.login.benutzername
@@ -9,6 +9,7 @@ Public Class Einstellungen
     Public Sub cmdSave_Click(sender As Object, e As EventArgs) Handles cmdSave.Click
         Dim NewName As String
         NewName = txtName.Text
+        NetworkClass.net.changeSettings(NetworkClass.login.id, NewName)
     End Sub
 
 

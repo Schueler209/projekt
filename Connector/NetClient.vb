@@ -8,8 +8,8 @@ Public Class NetClient
     End Sub
 
     ' Erstellt neue Instanz und verbindet sich
-    Public Sub connect()
-        connector = New ClientConnector()
+    Public Sub connect(Ip As String, Port As Integer)
+        connector = New ClientConnector(Ip, Port)
         ' Einkommende Nachricht handeln
         connector.OnRecieve.addHandler(AddressOf onRequest)
         connector.OnConnectionLost.addHandler(OnConnectionLost)

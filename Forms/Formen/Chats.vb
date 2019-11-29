@@ -48,7 +48,7 @@ Public Class Chats
     End Sub
 
     Private Sub btnAbmelden_Click(sender As Object, e As EventArgs) Handles btnAbmelden.Click
-        Login.Show()
+        LoginForm.Show()
         NetworkClass.login = Nothing
         NetworkClass.net.logOut()
         Me.Close()

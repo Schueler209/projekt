@@ -38,7 +38,7 @@ Public Class Register
 
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
-        Login.Show()
+        LoginForm.Show()
         Me.Hide()
 
     End Sub
