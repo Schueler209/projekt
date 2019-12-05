@@ -79,4 +79,8 @@ Public Class Chats
         NetworkClass.net.logOut()
         Me.Close()
     End Sub
+
+    Private Sub ChatArea_Load(sender As Object, e As EventArgs)
+
+    End Sub
 End Class

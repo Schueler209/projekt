@@ -31,8 +31,8 @@ Partial Class Chats
         Me.MenuStrip2 = New System.Windows.Forms.MenuStrip()
         Me.AbmeldenToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.EinstellungenToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ChatArea = New Forms.ChatArea()
         Me.ContactPanel = New System.Windows.Forms.Panel()
+        Me.ChatArea = New Forms.ChatArea()
         Me.MenuStrip1.SuspendLayout()
         Me.MenuStrip2.SuspendLayout()
         Me.ContactPanel.SuspendLayout()
@@ -68,7 +68,7 @@ Partial Class Chats
         Me.ltbKontakte.Location = New System.Drawing.Point(11, 21)
         Me.ltbKontakte.Margin = New System.Windows.Forms.Padding(2)
         Me.ltbKontakte.Name = "ltbKontakte"
-        Me.ltbKontakte.Size = New System.Drawing.Size(139, 303)
+        Me.ltbKontakte.Size = New System.Drawing.Size(128, 303)
         Me.ltbKontakte.TabIndex = 10
         '
         'MenuStrip1
@@ -94,6 +94,7 @@ Partial Class Chats
         '
         'MenuStrip2
         '
+        Me.MenuStrip2.BackColor = System.Drawing.SystemColors.ControlLight
         Me.MenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AbmeldenToolStripMenuItem1, Me.EinstellungenToolStripMenuItem1})
         Me.MenuStrip2.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip2.Name = "MenuStrip2"
@@ -113,18 +114,6 @@ Partial Class Chats
         Me.EinstellungenToolStripMenuItem1.Size = New System.Drawing.Size(90, 20)
         Me.EinstellungenToolStripMenuItem1.Text = "Einstellungen"
         '
-        'ChatArea
-        '
-        Me.ChatArea.AutoSize = True
-        Me.ChatArea.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ChatArea.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.ChatArea.Chat = Nothing
-        Me.ChatArea.Dock = System.Windows.Forms.DockStyle.Right
-        Me.ChatArea.Location = New System.Drawing.Point(263, 24)
-        Me.ChatArea.Name = "ChatArea"
-        Me.ChatArea.Size = New System.Drawing.Size(427, 339)
-        Me.ChatArea.TabIndex = 14
-        '
         'ContactPanel
         '
         Me.ContactPanel.Controls.Add(Me.ltbKontakte)
@@ -134,6 +123,18 @@ Partial Class Chats
         Me.ContactPanel.Name = "ContactPanel"
         Me.ContactPanel.Size = New System.Drawing.Size(152, 339)
         Me.ContactPanel.TabIndex = 16
+        '
+        'ChatArea
+        '
+        Me.ChatArea.AutoSize = True
+        Me.ChatArea.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ChatArea.BackColor = System.Drawing.SystemColors.Control
+        Me.ChatArea.Chat = Nothing
+        Me.ChatArea.Dock = System.Windows.Forms.DockStyle.Right
+        Me.ChatArea.Location = New System.Drawing.Point(263, 24)
+        Me.ChatArea.Name = "ChatArea"
+        Me.ChatArea.Size = New System.Drawing.Size(427, 339)
+        Me.ChatArea.TabIndex = 14
         '
         'Chats
         '
