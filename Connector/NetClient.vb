@@ -36,6 +36,8 @@ Public Class NetClient
     Public OnMessage As Action(Of Message)
     'Event für Einstellungsänderungen
     Public OnSettings As Action(Of String)
+    'Event für Chat löschen
+    Public OnDeleteChat As Action(Of Chat)
 
 
     ' Falls neue Nachricht kommt:
@@ -93,6 +95,12 @@ Public Class NetClient
                 If OnSettings IsNot Nothing Then
                     Dim ans As String = req.Data.Item("name")
                     OnSettings(ans)
+                End If
+
+            Case "delete Chat"
+                If OnDeleteChat IsNot Nothing Then
+                    Dim ans As Chat = req.Data.Item("chat")
+                    OnDeleteChat(ans)
                 End If
         End Select
 
@@ -173,6 +181,12 @@ Public Class NetClient
         Dim res As New ConnectionData("settings")
         res.addData("id", id)
         res.addData("name", name)
+        connector.send(res)
+    End Sub
+
+    Sub deleteChat(chat As Chat)
+        Dim res As New ConnectionData("delete Chat")
+        res.addData("chat", chat)
         connector.send(res)
     End Sub
 
