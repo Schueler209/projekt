@@ -61,10 +61,11 @@ Public Class ChatArea
     End Sub
 
     Private Sub SendMessage()
-        If txtEingabe.Text.Length > 0 Then
+        If txtEingabe.Text.Trim().Length > 0 Then
 
-            NetworkClass.net.SendMessage(NetworkClass.login.id, selectedChat.ID, txtEingabe.Text)
+            NetworkClass.net.SendMessage(NetworkClass.login.id, selectedChat.ID, txtEingabe.Text.Trim())
             txtEingabe.Clear()
+
         End If
     End Sub
 
@@ -89,4 +90,6 @@ Public Class ChatArea
             End If
         Next
     End Sub
+
+
 End Class
