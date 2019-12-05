@@ -32,27 +32,28 @@ Partial Class Chats
         '
         'btnAbmelden
         '
-        Me.btnAbmelden.Location = New System.Drawing.Point(9, 9)
+        Me.btnAbmelden.Location = New System.Drawing.Point(9, 12)
         Me.btnAbmelden.Name = "btnAbmelden"
-        Me.btnAbmelden.Size = New System.Drawing.Size(75, 23)
+        Me.btnAbmelden.Size = New System.Drawing.Size(79, 40)
         Me.btnAbmelden.TabIndex = 13
         Me.btnAbmelden.Text = "Abmelden"
         Me.btnAbmelden.UseVisualStyleBackColor = True
         '
         'btnNeuerKontakt
         '
-        Me.btnNeuerKontakt.Location = New System.Drawing.Point(9, 336)
+        Me.btnNeuerKontakt.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        Me.btnNeuerKontakt.Location = New System.Drawing.Point(34, 411)
         Me.btnNeuerKontakt.Margin = New System.Windows.Forms.Padding(2)
         Me.btnNeuerKontakt.Name = "btnNeuerKontakt"
-        Me.btnNeuerKontakt.Size = New System.Drawing.Size(125, 19)
+        Me.btnNeuerKontakt.Size = New System.Drawing.Size(125, 28)
         Me.btnNeuerKontakt.TabIndex = 12
         Me.btnNeuerKontakt.Text = "+ Hinzufügen"
-        Me.btnNeuerKontakt.UseVisualStyleBackColor = True
+        Me.btnNeuerKontakt.UseVisualStyleBackColor = False
         '
         'lblKontakte
         '
         Me.lblKontakte.AutoSize = True
-        Me.lblKontakte.Location = New System.Drawing.Point(6, 35)
+        Me.lblKontakte.Location = New System.Drawing.Point(6, 67)
         Me.lblKontakte.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblKontakte.Name = "lblKontakte"
         Me.lblKontakte.Size = New System.Drawing.Size(82, 13)
@@ -62,20 +63,11 @@ Partial Class Chats
         'ltbKontakte
         '
         Me.ltbKontakte.FormattingEnabled = True
-        Me.ltbKontakte.Location = New System.Drawing.Point(9, 50)
+        Me.ltbKontakte.Location = New System.Drawing.Point(9, 92)
         Me.ltbKontakte.Margin = New System.Windows.Forms.Padding(2)
         Me.ltbKontakte.Name = "ltbKontakte"
-        Me.ltbKontakte.Size = New System.Drawing.Size(125, 277)
+        Me.ltbKontakte.Size = New System.Drawing.Size(184, 277)
         Me.ltbKontakte.TabIndex = 10
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(102, 9)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(80, 23)
-        Me.Button1.TabIndex = 15
-        Me.Button1.Text = "Einstellungen"
-        Me.Button1.UseVisualStyleBackColor = True
         '
         'ChatArea
         '
