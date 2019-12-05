@@ -38,8 +38,9 @@ Public Class LoginForm
     End Sub
     Private Sub login()
         lblFehler.Text = ""
-        If txbBenutzername.Text = "" Then lblFehler.Text = "kein Benutzername angegeben"
+
         If txbPasswort.Text = "" Then lblFehler.Text = "kein Passwort angegeben"
+        If txbBenutzername.Text = "" Then lblFehler.Text = "kein Benutzername angegeben"
         If lblFehler.Text = "" Then
             NetworkClass.net.Login(txbBenutzername.Text, txbPasswort.Text, AddressOf Loginconfirm)
         End If

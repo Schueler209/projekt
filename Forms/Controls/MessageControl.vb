@@ -1,10 +1,12 @@
 ﻿Imports Connector
 Public Class MessageControl
     Public msg As Message
+    Public isOwn As Boolean = False
 
-    Public Sub New(msg_)
+    Public Sub New(msg_, isOwn_)
 
         msg = msg_
+        isOwn = isOwn_
 
 
         ' Dieser Aufruf ist für den Designer erforderlich.

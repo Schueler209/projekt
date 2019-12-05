@@ -45,19 +45,32 @@ Public Class ChatArea
     End Sub
 
     Public Sub addMessage(msg As Message)
-        Dim messagecontrol As New MessageControl(msg)
+        Dim isOwn = msg.user.id = NetworkClass.login.id
+
+
+        Dim savedScroll = ChatPanel.VerticalScroll.Value
+        ChatPanel.VerticalScroll.Value = 0
+
+
+        Dim messagecontrol As New MessageControl(msg, isOwn)
         messagecontrol.Top = messagecontrol.Height * ChatPanel.Controls.Count
         'If (ChatPanel.VerticalScroll.Value / 100) * messagecontrol.Height * ChatPanel.Controls.Count > messagecontrol.Height Then
         '    messagecontrol.Top = messagecontrol.Top - (ChatPanel.VerticalScroll.Value / 100) * messagecontrol.Height * ChatPanel.Controls.Count
         'End If
         messagecontrol.Width = 0.8 * ChatPanel.Width
-        If msg.user.id = NetworkClass.login.id Then
+        If isOwn Then
             messagecontrol.Anchor = AnchorStyles.Top Or AnchorStyles.Right
             messagecontrol.Left = ChatPanel.Width - messagecontrol.Width
             messagecontrol.BackColor = Color.AliceBlue
         End If
 
         ChatPanel.Controls.Add(messagecontrol)
+
+        If isOwn Then
+            ChatPanel.VerticalScroll.Value = ChatPanel.VerticalScroll.Maximum
+        Else
+            ChatPanel.VerticalScroll.Value = savedScroll
+        End If
 
         'ChatPanel.VerticalScroll.Value = ChatPanel.VerticalScroll.Maximum
 

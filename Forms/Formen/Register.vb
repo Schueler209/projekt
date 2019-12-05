@@ -19,7 +19,7 @@ Public Class Register
             NetworkClass.login = wert
             Chats.Show()
 
-            Me.Hide()
+            Me.Close()
 
         End If
 
