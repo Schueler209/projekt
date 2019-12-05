@@ -141,12 +141,14 @@ Partial Class Register
         '
         'lblRegister
         '
+        Me.lblRegister.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblRegister.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblRegister.Location = New System.Drawing.Point(174, 9)
         Me.lblRegister.Name = "lblRegister"
-        Me.lblRegister.Size = New System.Drawing.Size(80, 30)
+        Me.lblRegister.Size = New System.Drawing.Size(113, 30)
         Me.lblRegister.TabIndex = 11
-        Me.lblRegister.Text = "Register"
+        Me.lblRegister.Text = "Registrieren"
         '
         'Register
         '
