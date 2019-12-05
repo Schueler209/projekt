@@ -68,4 +68,8 @@ Public Class Chats
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Settings.Show()
     End Sub
+
+    Private Sub Chats_Resize(sender As Object, e As EventArgs) Handles Me.Resize
+        ChatArea.Width = Me.Width - 150
+    End Sub
 End Class

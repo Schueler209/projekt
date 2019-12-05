@@ -26,8 +26,8 @@ Partial Class Chats
         Me.btnNeuerKontakt = New System.Windows.Forms.Button()
         Me.lblKontakte = New System.Windows.Forms.Label()
         Me.ltbKontakte = New System.Windows.Forms.ListBox()
-        Me.ChatArea = New Forms.ChatArea()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.ChatArea = New Forms.ChatArea()
         Me.SuspendLayout()
         '
         'btnAbmelden
@@ -68,17 +68,6 @@ Partial Class Chats
         Me.ltbKontakte.Size = New System.Drawing.Size(125, 277)
         Me.ltbKontakte.TabIndex = 10
         '
-        'ChatArea
-        '
-        Me.ChatArea.AutoSize = True
-        Me.ChatArea.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ChatArea.Chat = Nothing
-        Me.ChatArea.Dock = System.Windows.Forms.DockStyle.Right
-        Me.ChatArea.Location = New System.Drawing.Point(263, 0)
-        Me.ChatArea.Name = "ChatArea"
-        Me.ChatArea.Size = New System.Drawing.Size(427, 450)
-        Me.ChatArea.TabIndex = 14
-        '
         'Button1
         '
         Me.Button1.Location = New System.Drawing.Point(102, 9)
@@ -88,17 +77,29 @@ Partial Class Chats
         Me.Button1.Text = "Einstellungen"
         Me.Button1.UseVisualStyleBackColor = True
         '
+        'ChatArea
+        '
+        Me.ChatArea.AutoSize = True
+        Me.ChatArea.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ChatArea.Chat = Nothing
+        Me.ChatArea.Dock = System.Windows.Forms.DockStyle.Right
+        Me.ChatArea.Location = New System.Drawing.Point(263, 0)
+        Me.ChatArea.Name = "ChatArea"
+        Me.ChatArea.Size = New System.Drawing.Size(427, 363)
+        Me.ChatArea.TabIndex = 14
+        '
         'Chats
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(690, 450)
+        Me.ClientSize = New System.Drawing.Size(690, 363)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.ChatArea)
         Me.Controls.Add(Me.btnAbmelden)
         Me.Controls.Add(Me.btnNeuerKontakt)
         Me.Controls.Add(Me.lblKontakte)
         Me.Controls.Add(Me.ltbKontakte)
+        Me.MinimumSize = New System.Drawing.Size(500, 300)
         Me.Name = "Chats"
         Me.Text = "Chats"
         Me.ResumeLayout(False)
