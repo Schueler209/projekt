@@ -38,7 +38,7 @@ Partial Class Register
         '
         'txbAnzeigename
         '
-        Me.txbAnzeigename.Location = New System.Drawing.Point(50, 93)
+        Me.txbAnzeigename.Location = New System.Drawing.Point(50, 90)
         Me.txbAnzeigename.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.txbAnzeigename.Name = "txbAnzeigename"
         Me.txbAnzeigename.Size = New System.Drawing.Size(76, 20)
@@ -71,7 +71,7 @@ Partial Class Register
         'lblAnzeigename
         '
         Me.lblAnzeigename.AutoSize = True
-        Me.lblAnzeigename.Location = New System.Drawing.Point(47, 54)
+        Me.lblAnzeigename.Location = New System.Drawing.Point(47, 75)
         Me.lblAnzeigename.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblAnzeigename.Name = "lblAnzeigename"
         Me.lblAnzeigename.Size = New System.Drawing.Size(71, 13)
@@ -81,7 +81,7 @@ Partial Class Register
         'lblBenutzername
         '
         Me.lblBenutzername.AutoSize = True
-        Me.lblBenutzername.Location = New System.Drawing.Point(47, 150)
+        Me.lblBenutzername.Location = New System.Drawing.Point(47, 180)
         Me.lblBenutzername.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblBenutzername.Name = "lblBenutzername"
         Me.lblBenutzername.Size = New System.Drawing.Size(75, 13)
@@ -100,7 +100,7 @@ Partial Class Register
         'lblPasswort
         '
         Me.lblPasswort.AutoSize = True
-        Me.lblPasswort.Location = New System.Drawing.Point(51, 248)
+        Me.lblPasswort.Location = New System.Drawing.Point(47, 274)
         Me.lblPasswort.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblPasswort.Name = "lblPasswort"
         Me.lblPasswort.Size = New System.Drawing.Size(50, 13)
@@ -110,7 +110,7 @@ Partial Class Register
         'lblPasswortWdh
         '
         Me.lblPasswortWdh.AutoSize = True
-        Me.lblPasswortWdh.Location = New System.Drawing.Point(47, 341)
+        Me.lblPasswortWdh.Location = New System.Drawing.Point(47, 372)
         Me.lblPasswortWdh.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblPasswortWdh.Name = "lblPasswortWdh"
         Me.lblPasswortWdh.Size = New System.Drawing.Size(113, 13)
