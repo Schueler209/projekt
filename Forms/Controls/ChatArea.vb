@@ -47,9 +47,8 @@ Public Class ChatArea
     Public Sub addMessage(msg As Message)
         Dim isOwn = msg.user.id = NetworkClass.login.id
 
+        ChatPanel.VerticalScroll.Value = ChatPanel.VerticalScroll.Minimum
 
-        Dim savedScroll = ChatPanel.VerticalScroll.Value
-        ChatPanel.VerticalScroll.Value = 0
 
 
         Dim messagecontrol As New MessageControl(msg, isOwn)
@@ -66,11 +65,7 @@ Public Class ChatArea
 
         ChatPanel.Controls.Add(messagecontrol)
 
-        If isOwn Then
-            ChatPanel.VerticalScroll.Value = ChatPanel.VerticalScroll.Maximum
-        Else
-            ChatPanel.VerticalScroll.Value = savedScroll
-        End If
+        ChatPanel.ScrollControlIntoView(messagecontrol)
 
         'ChatPanel.VerticalScroll.Value = ChatPanel.VerticalScroll.Maximum
 
