@@ -44,10 +44,10 @@ Partial Class ChatArea
         '
         Me.btnSenden.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnSenden.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
-        Me.btnSenden.Location = New System.Drawing.Point(459, 259)
+        Me.btnSenden.Location = New System.Drawing.Point(448, 259)
         Me.btnSenden.Margin = New System.Windows.Forms.Padding(2)
         Me.btnSenden.Name = "btnSenden"
-        Me.btnSenden.Size = New System.Drawing.Size(75, 30)
+        Me.btnSenden.Size = New System.Drawing.Size(86, 30)
         Me.btnSenden.TabIndex = 8
         Me.btnSenden.Text = "Senden"
         Me.btnSenden.UseVisualStyleBackColor = False
@@ -56,10 +56,11 @@ Partial Class ChatArea
         '
         Me.txtEingabe.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtEingabe.Location = New System.Drawing.Point(18, 267)
+        Me.txtEingabe.Location = New System.Drawing.Point(18, 259)
         Me.txtEingabe.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtEingabe.Multiline = True
         Me.txtEingabe.Name = "txtEingabe"
-        Me.txtEingabe.Size = New System.Drawing.Size(426, 20)
+        Me.txtEingabe.Size = New System.Drawing.Size(426, 28)
         Me.txtEingabe.TabIndex = 7
         '
         'ChatScrollPanel
@@ -89,7 +90,7 @@ Partial Class ChatArea
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.BackColor = System.Drawing.SystemColors.Window
         Me.Controls.Add(Me.ChatScrollPanel)
         Me.Controls.Add(Me.lblChatpartner)
         Me.Controls.Add(Me.btnSenden)

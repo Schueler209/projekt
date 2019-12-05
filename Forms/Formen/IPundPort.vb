@@ -2,16 +2,24 @@
 Public Class IPundPort
 
     Private Sub cmdSpeichern_Click(sender As Object, e As EventArgs) Handles cmdSpeichernundLaden.Click
-        NetworkClass.Ip = txtIp.Text
-        NetworkClass.Port = txtPort.Text
-        NetworkClass.ensureConnection()
-        Register.Show()
-        Me.Close()
+        If txtAddress.Text.Trim().Length > 0 Then
+            Dim input As String() = txtAddress.Text.Split(":")
+            NetworkClass.Ip = input(0)
+            If input.Length > 1 Then
+                NetworkClass.Port = input(1)
+            End If
 
+            NetworkClass.ensureConnection()
+            Register.Show()
+            Me.Close()
+        End If
     End Sub
 
     Private Sub IPundPort_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        txtIp.Text = NetworkClass.Ip
-        txtPort.Text = NetworkClass.Port
+        txtAddress.Text = NetworkClass.Ip
+        If Not NetworkClass.Port = 8080 Then
+            txtAddress.Text += ":" & NetworkClass.Port
+        End If
+        lblError.Text = "Es scheint ein Fehler bei der Verbindung zu " & NetworkClass.Ip & ":" & NetworkClass.Port & " aufgetreten zu sein. Bitte überprüfe deine Servereinstellungen"
     End Sub
 End Class

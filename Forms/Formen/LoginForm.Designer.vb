@@ -34,24 +34,30 @@ Partial Class LoginForm
         '
         'txbBenutzername
         '
-        Me.txbBenutzername.Location = New System.Drawing.Point(83, 110)
-        Me.txbBenutzername.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txbBenutzername.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txbBenutzername.Location = New System.Drawing.Point(65, 164)
+        Me.txbBenutzername.Margin = New System.Windows.Forms.Padding(2)
         Me.txbBenutzername.Name = "txbBenutzername"
-        Me.txbBenutzername.Size = New System.Drawing.Size(103, 20)
+        Me.txbBenutzername.Size = New System.Drawing.Size(158, 20)
         Me.txbBenutzername.TabIndex = 0
         '
         'txbPasswort
         '
-        Me.txbPasswort.Location = New System.Drawing.Point(82, 205)
-        Me.txbPasswort.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txbPasswort.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txbPasswort.Location = New System.Drawing.Point(64, 259)
+        Me.txbPasswort.Margin = New System.Windows.Forms.Padding(2)
         Me.txbPasswort.Name = "txbPasswort"
-        Me.txbPasswort.Size = New System.Drawing.Size(104, 20)
+        Me.txbPasswort.Size = New System.Drawing.Size(158, 20)
         Me.txbPasswort.TabIndex = 1
         '
         'lblBenutzername
         '
+        Me.lblBenutzername.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblBenutzername.AutoSize = True
-        Me.lblBenutzername.Location = New System.Drawing.Point(80, 75)
+        Me.lblBenutzername.Location = New System.Drawing.Point(62, 149)
         Me.lblBenutzername.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblBenutzername.Name = "lblBenutzername"
         Me.lblBenutzername.Size = New System.Drawing.Size(75, 13)
@@ -60,8 +66,10 @@ Partial Class LoginForm
         '
         'lblPasswort
         '
+        Me.lblPasswort.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblPasswort.AutoSize = True
-        Me.lblPasswort.Location = New System.Drawing.Point(80, 172)
+        Me.lblPasswort.Location = New System.Drawing.Point(61, 244)
         Me.lblPasswort.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblPasswort.Name = "lblPasswort"
         Me.lblPasswort.Size = New System.Drawing.Size(50, 13)
@@ -70,25 +78,29 @@ Partial Class LoginForm
         '
         'btnLogin
         '
+        Me.btnLogin.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnLogin.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
         Me.btnLogin.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.btnLogin.Location = New System.Drawing.Point(82, 269)
-        Me.btnLogin.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnLogin.Location = New System.Drawing.Point(22, 344)
+        Me.btnLogin.Margin = New System.Windows.Forms.Padding(2)
         Me.btnLogin.Name = "btnLogin"
-        Me.btnLogin.Size = New System.Drawing.Size(130, 43)
+        Me.btnLogin.Size = New System.Drawing.Size(228, 38)
         Me.btnLogin.TabIndex = 4
-        Me.btnLogin.Text = "Login"
+        Me.btnLogin.Text = "Anmelden"
         Me.btnLogin.UseVisualStyleBackColor = False
         '
         'btnZumRegistrieren
         '
-        Me.btnZumRegistrieren.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
-        Me.btnZumRegistrieren.Location = New System.Drawing.Point(82, 330)
-        Me.btnZumRegistrieren.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnZumRegistrieren.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnZumRegistrieren.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.btnZumRegistrieren.Location = New System.Drawing.Point(51, 386)
+        Me.btnZumRegistrieren.Margin = New System.Windows.Forms.Padding(2)
         Me.btnZumRegistrieren.Name = "btnZumRegistrieren"
-        Me.btnZumRegistrieren.Size = New System.Drawing.Size(129, 43)
+        Me.btnZumRegistrieren.Size = New System.Drawing.Size(172, 29)
         Me.btnZumRegistrieren.TabIndex = 5
-        Me.btnZumRegistrieren.Text = "Zum Registrieren"
+        Me.btnZumRegistrieren.Text = "oder neues Konto erstellen"
         Me.btnZumRegistrieren.UseVisualStyleBackColor = False
         '
         'lblFehler
@@ -102,20 +114,22 @@ Partial Class LoginForm
         '
         'lblLogin
         '
-        Me.lblLogin.AutoSize = True
+        Me.lblLogin.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblLogin.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblLogin.Location = New System.Drawing.Point(158, 22)
+        Me.lblLogin.Location = New System.Drawing.Point(61, 19)
         Me.lblLogin.Name = "lblLogin"
-        Me.lblLogin.Size = New System.Drawing.Size(53, 20)
-        Me.lblLogin.TabIndex = 7
-        Me.lblLogin.Text = "Login"
+        Me.lblLogin.Size = New System.Drawing.Size(161, 30)
+        Me.lblLogin.TabIndex = 12
+        Me.lblLogin.Text = "Anmeldung"
+        Me.lblLogin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'LoginForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.ClientSize = New System.Drawing.Size(354, 447)
+        Me.ClientSize = New System.Drawing.Size(273, 426)
         Me.Controls.Add(Me.lblLogin)
         Me.Controls.Add(Me.lblFehler)
         Me.Controls.Add(Me.btnZumRegistrieren)
@@ -125,9 +139,12 @@ Partial Class LoginForm
         Me.Controls.Add(Me.txbPasswort)
         Me.Controls.Add(Me.txbBenutzername)
         Me.ForeColor = System.Drawing.SystemColors.InfoText
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
+        Me.MinimumSize = New System.Drawing.Size(230, 406)
         Me.Name = "LoginForm"
-        Me.Text = "Form1"
+        Me.Text = "Anmeldung"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
