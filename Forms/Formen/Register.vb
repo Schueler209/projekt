@@ -7,18 +7,7 @@ Public Class Register
     End Sub
 
     Private Sub btnRegistrieren_Click(sender As Object, e As EventArgs) Handles btnRegistrieren.Click
-        lblFehlermeldung.Text = ""
-        If Not txbPasswortWdh.Text = txbPasswort.Text Then lblFehlermeldung.Text = "Passwörter ungleich"
-        If txbAnzeigename.Text = "" Then lblFehlermeldung.Text = "kein Anzeigename angegeben"
-        If txbBenutzername.Text = "" Then lblFehlermeldung.Text = "kein Benutzername angegeben"
-        If txbPasswort.Text = "" Then lblFehlermeldung.Text = "kein Passwort angegeben"
-        If txbPasswortWdh.Text = "" Then lblFehlermeldung.Text = "Passwort nicht wiederholt"
-
-        If lblFehlermeldung.Text = "" Then
-            NetworkClass.net.Register(txbAnzeigename.Text, txbBenutzername.Text, txbPasswort.Text, AddressOf Registerconfirm)
-
-
-        End If
+        register()
 
     End Sub
 
@@ -51,6 +40,27 @@ Public Class Register
         txbPasswortWdh.PasswordChar = "*"
     End Sub
 
+    Private Sub register()
+        lblFehlermeldung.Text = ""
+        If Not txbPasswortWdh.Text = txbPasswort.Text Then lblFehlermeldung.Text = "Passwörter ungleich"
+        If txbAnzeigename.Text = "" Then lblFehlermeldung.Text = "kein Anzeigename angegeben"
+        If txbBenutzername.Text = "" Then lblFehlermeldung.Text = "kein Benutzername angegeben"
+        If txbPasswort.Text = "" Then lblFehlermeldung.Text = "kein Passwort angegeben"
+        If txbPasswortWdh.Text = "" Then lblFehlermeldung.Text = "Passwort nicht wiederholt"
+
+        If lblFehlermeldung.Text = "" Then
+            NetworkClass.net.Register(txbAnzeigename.Text, txbBenutzername.Text, txbPasswort.Text, AddressOf Registerconfirm)
+        End If
+
+    End Sub
+
+    Private Sub txbPasswortWdh_KeyDown(sender As Object, e As KeyEventArgs) Handles txbPasswortWdh.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            Register()
+            e.SuppressKeyPress = True
+        End If
+
+    End Sub
 
 End Class
 

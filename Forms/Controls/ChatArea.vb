@@ -80,4 +80,13 @@ Public Class ChatArea
             e.SuppressKeyPress = True
         End If
     End Sub
+
+    Private Sub ChatArea_SizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
+        For Each control As Control In ChatPanel.Controls
+            control.Width = 0.8 * ChatPanel.Width
+            If control.Left > 20 Then
+                control.Left = ChatPanel.Width - control.Width
+            End If
+        Next
+    End Sub
 End Class

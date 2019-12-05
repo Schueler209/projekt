@@ -32,20 +32,30 @@ Partial Class Chats
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
+        'btnAbmelden
+        '
+        Me.btnAbmelden.Location = New System.Drawing.Point(9, 9)
+        Me.btnAbmelden.Name = "btnAbmelden"
+        Me.btnAbmelden.Size = New System.Drawing.Size(75, 23)
+        Me.btnAbmelden.TabIndex = 13
+        Me.btnAbmelden.Text = "Abmelden"
+        Me.btnAbmelden.UseVisualStyleBackColor = True
+        '
         'btnNeuerKontakt
         '
-        Me.btnNeuerKontakt.Location = New System.Drawing.Point(9, 336)
+        Me.btnNeuerKontakt.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        Me.btnNeuerKontakt.Location = New System.Drawing.Point(34, 411)
         Me.btnNeuerKontakt.Margin = New System.Windows.Forms.Padding(2)
         Me.btnNeuerKontakt.Name = "btnNeuerKontakt"
-        Me.btnNeuerKontakt.Size = New System.Drawing.Size(125, 19)
+        Me.btnNeuerKontakt.Size = New System.Drawing.Size(125, 28)
         Me.btnNeuerKontakt.TabIndex = 12
         Me.btnNeuerKontakt.Text = "+ Hinzufügen"
-        Me.btnNeuerKontakt.UseVisualStyleBackColor = True
+        Me.btnNeuerKontakt.UseVisualStyleBackColor = False
         '
         'lblKontakte
         '
         Me.lblKontakte.AutoSize = True
-        Me.lblKontakte.Location = New System.Drawing.Point(6, 35)
+        Me.lblKontakte.Location = New System.Drawing.Point(6, 67)
         Me.lblKontakte.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblKontakte.Name = "lblKontakte"
         Me.lblKontakte.Size = New System.Drawing.Size(82, 13)
@@ -55,10 +65,10 @@ Partial Class Chats
         'ltbKontakte
         '
         Me.ltbKontakte.FormattingEnabled = True
-        Me.ltbKontakte.Location = New System.Drawing.Point(9, 50)
+        Me.ltbKontakte.Location = New System.Drawing.Point(9, 92)
         Me.ltbKontakte.Margin = New System.Windows.Forms.Padding(2)
         Me.ltbKontakte.Name = "ltbKontakte"
-        Me.ltbKontakte.Size = New System.Drawing.Size(125, 277)
+        Me.ltbKontakte.Size = New System.Drawing.Size(184, 277)
         Me.ltbKontakte.TabIndex = 10
         '
         'MenuStrip1
@@ -90,20 +100,20 @@ Partial Class Chats
         Me.ChatArea.Dock = System.Windows.Forms.DockStyle.Right
         Me.ChatArea.Location = New System.Drawing.Point(263, 24)
         Me.ChatArea.Name = "ChatArea"
-        Me.ChatArea.Size = New System.Drawing.Size(427, 426)
+        Me.ChatArea.Size = New System.Drawing.Size(427, 363)
         Me.ChatArea.TabIndex = 14
         '
         'Chats
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(690, 450)
+        Me.ClientSize = New System.Drawing.Size(690, 363)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.ChatArea)
         Me.Controls.Add(Me.btnNeuerKontakt)
         Me.Controls.Add(Me.lblKontakte)
         Me.Controls.Add(Me.ltbKontakte)
-        Me.Controls.Add(Me.MenuStrip1)
-        Me.MainMenuStrip = Me.MenuStrip1
+        Me.MinimumSize = New System.Drawing.Size(500, 300)
         Me.Name = "Chats"
         Me.Text = "Chats"
         Me.MenuStrip1.ResumeLayout(False)

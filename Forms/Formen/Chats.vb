@@ -80,4 +80,8 @@ Public Class Chats
         NetworkClass.net.logOut()
         Me.Close()
     End Sub
+
+    Private Sub Chats_Resize(sender As Object, e As EventArgs) Handles Me.Resize
+        ChatArea.Width = Me.Width - 150
+    End Sub
 End Class

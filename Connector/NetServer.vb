@@ -34,6 +34,8 @@ Public Class NetServer
     Public OnLogOut As Func(Of Integer)
     'Event für Einstellungsänderungen
     Public OnSettings As Func(Of Integer, String, Boolean)
+    'Event für Chat löschen
+    Public OnDeleteChat As Func(Of Chat, Boolean)
 
 
     ' Falls neue Nachricht kommt:
@@ -138,6 +140,16 @@ Public Class NetServer
                     data.addData("success", success)
                     connector.send(client, data)
                 End If
+
+            Case "delete Chat"
+                If OnDeleteChat IsNot Nothing Then
+                    Dim chat As Chat = req.Data.Item("chat")
+                    Dim success = OnDeleteChat(chat)
+                    Dim data As New ConnectionData("chatDeleted")
+                    data.addData("success", success)
+                    connector.send(client, data)
+                End If
+
         End Select
 
     End Sub
@@ -190,10 +202,7 @@ Public Class NetServer
         loggedIn.Remove(id)
     End Sub
 
-    Public Sub changeSettings(ans As String, client As TcpClient)
-        Dim data As New Dictionary(Of String, Object)
-        data.Add("name", ans)
-    End Sub
+
 
 
 
