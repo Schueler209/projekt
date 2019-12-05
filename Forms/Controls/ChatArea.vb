@@ -47,6 +47,9 @@ Public Class ChatArea
     Public Sub addMessage(msg As Message)
         Dim messagecontrol As New MessageControl(msg)
         messagecontrol.Top = messagecontrol.Height * ChatPanel.Controls.Count
+        If (ChatPanel.VerticalScroll.Value / 100) * messagecontrol.Height * ChatPanel.Controls.Count > messagecontrol.Height Then
+            messagecontrol.Top = messagecontrol.Top - (ChatPanel.VerticalScroll.Value / 100) * messagecontrol.Height * ChatPanel.Controls.Count
+        End If
         messagecontrol.Width = 0.8 * ChatPanel.Width
         If msg.user.id = NetworkClass.login.id Then
             messagecontrol.Anchor = AnchorStyles.Top Or AnchorStyles.Right
