@@ -65,23 +65,18 @@ Public Class Chats
         ltbKontakte.SelectedIndex = 0
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs)
+    Private Sub Chats_Resize(sender As Object, e As EventArgs) Handles Me.Resize
+        ChatArea.Width = Me.Width - 150
+    End Sub
+
+    Private Sub EinstellungenToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles EinstellungenToolStripMenuItem1.Click
         Settings.Show()
     End Sub
 
-    Private Sub EinstellungenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EinstellungenToolStripMenuItem.Click
-        Settings.Show()
-    End Sub
-
-    Private Sub AbmeldenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AbmeldenToolStripMenuItem.Click
-
+    Private Sub AbmeldenToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles AbmeldenToolStripMenuItem1.Click
         LoginForm.Show()
         NetworkClass.login = Nothing
         NetworkClass.net.logOut()
         Me.Close()
-    End Sub
-
-    Private Sub Chats_Resize(sender As Object, e As EventArgs) Handles Me.Resize
-        ChatArea.Width = Me.Width - 150
     End Sub
 End Class

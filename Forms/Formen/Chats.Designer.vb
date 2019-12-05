@@ -26,20 +26,15 @@ Partial Class Chats
         Me.lblKontakte = New System.Windows.Forms.Label()
         Me.ltbKontakte = New System.Windows.Forms.ListBox()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
-        Me.EinstellungenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AbmeldenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EinstellungenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuStrip2 = New System.Windows.Forms.MenuStrip()
+        Me.AbmeldenToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EinstellungenToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ChatArea = New Forms.ChatArea()
         Me.MenuStrip1.SuspendLayout()
+        Me.MenuStrip2.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'btnAbmelden
-        '
-        Me.btnAbmelden.Location = New System.Drawing.Point(9, 9)
-        Me.btnAbmelden.Name = "btnAbmelden"
-        Me.btnAbmelden.Size = New System.Drawing.Size(75, 23)
-        Me.btnAbmelden.TabIndex = 13
-        Me.btnAbmelden.Text = "Abmelden"
-        Me.btnAbmelden.UseVisualStyleBackColor = True
         '
         'btnNeuerKontakt
         '
@@ -80,27 +75,49 @@ Partial Class Chats
         Me.MenuStrip1.TabIndex = 16
         Me.MenuStrip1.Text = "MenuStrip1"
         '
-        'EinstellungenToolStripMenuItem
-        '
-        Me.EinstellungenToolStripMenuItem.Name = "EinstellungenToolStripMenuItem"
-        Me.EinstellungenToolStripMenuItem.Size = New System.Drawing.Size(90, 20)
-        Me.EinstellungenToolStripMenuItem.Text = "Einstellungen"
-        '
         'AbmeldenToolStripMenuItem
         '
         Me.AbmeldenToolStripMenuItem.Name = "AbmeldenToolStripMenuItem"
         Me.AbmeldenToolStripMenuItem.Size = New System.Drawing.Size(74, 20)
         Me.AbmeldenToolStripMenuItem.Text = "Abmelden"
         '
+        'EinstellungenToolStripMenuItem
+        '
+        Me.EinstellungenToolStripMenuItem.Name = "EinstellungenToolStripMenuItem"
+        Me.EinstellungenToolStripMenuItem.Size = New System.Drawing.Size(90, 20)
+        Me.EinstellungenToolStripMenuItem.Text = "Einstellungen"
+        '
+        'MenuStrip2
+        '
+        Me.MenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AbmeldenToolStripMenuItem1, Me.EinstellungenToolStripMenuItem1})
+        Me.MenuStrip2.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip2.Name = "MenuStrip2"
+        Me.MenuStrip2.Size = New System.Drawing.Size(690, 24)
+        Me.MenuStrip2.TabIndex = 15
+        Me.MenuStrip2.Text = "MenuStrip2"
+        '
+        'AbmeldenToolStripMenuItem1
+        '
+        Me.AbmeldenToolStripMenuItem1.Name = "AbmeldenToolStripMenuItem1"
+        Me.AbmeldenToolStripMenuItem1.Size = New System.Drawing.Size(74, 20)
+        Me.AbmeldenToolStripMenuItem1.Text = "Abmelden"
+        '
+        'EinstellungenToolStripMenuItem1
+        '
+        Me.EinstellungenToolStripMenuItem1.Name = "EinstellungenToolStripMenuItem1"
+        Me.EinstellungenToolStripMenuItem1.Size = New System.Drawing.Size(90, 20)
+        Me.EinstellungenToolStripMenuItem1.Text = "Einstellungen"
+        '
         'ChatArea
         '
         Me.ChatArea.AutoSize = True
         Me.ChatArea.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ChatArea.BackColor = System.Drawing.Color.WhiteSmoke
         Me.ChatArea.Chat = Nothing
         Me.ChatArea.Dock = System.Windows.Forms.DockStyle.Right
         Me.ChatArea.Location = New System.Drawing.Point(263, 24)
         Me.ChatArea.Name = "ChatArea"
-        Me.ChatArea.Size = New System.Drawing.Size(427, 363)
+        Me.ChatArea.Size = New System.Drawing.Size(427, 339)
         Me.ChatArea.TabIndex = 14
         '
         'Chats
@@ -108,16 +125,19 @@ Partial Class Chats
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(690, 363)
-        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.ChatArea)
         Me.Controls.Add(Me.btnNeuerKontakt)
         Me.Controls.Add(Me.lblKontakte)
         Me.Controls.Add(Me.ltbKontakte)
+        Me.Controls.Add(Me.MenuStrip2)
+        Me.MainMenuStrip = Me.MenuStrip2
         Me.MinimumSize = New System.Drawing.Size(500, 300)
         Me.Name = "Chats"
         Me.Text = "Chats"
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
+        Me.MenuStrip2.ResumeLayout(False)
+        Me.MenuStrip2.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -130,4 +150,7 @@ Partial Class Chats
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents EinstellungenToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AbmeldenToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents MenuStrip2 As MenuStrip
+    Friend WithEvents AbmeldenToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents EinstellungenToolStripMenuItem1 As ToolStripMenuItem
 End Class
