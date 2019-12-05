@@ -29,11 +29,12 @@ Partial Class LoginForm
         Me.btnLogin = New System.Windows.Forms.Button()
         Me.btnZumRegistrieren = New System.Windows.Forms.Button()
         Me.lblFehler = New System.Windows.Forms.Label()
+        Me.lblLogin = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'txbBenutzername
         '
-        Me.txbBenutzername.Location = New System.Drawing.Point(84, 59)
+        Me.txbBenutzername.Location = New System.Drawing.Point(83, 110)
         Me.txbBenutzername.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.txbBenutzername.Name = "txbBenutzername"
         Me.txbBenutzername.Size = New System.Drawing.Size(103, 20)
@@ -41,7 +42,7 @@ Partial Class LoginForm
         '
         'txbPasswort
         '
-        Me.txbPasswort.Location = New System.Drawing.Point(83, 204)
+        Me.txbPasswort.Location = New System.Drawing.Point(82, 205)
         Me.txbPasswort.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.txbPasswort.Name = "txbPasswort"
         Me.txbPasswort.Size = New System.Drawing.Size(104, 20)
@@ -50,7 +51,7 @@ Partial Class LoginForm
         'lblBenutzername
         '
         Me.lblBenutzername.AutoSize = True
-        Me.lblBenutzername.Location = New System.Drawing.Point(81, 33)
+        Me.lblBenutzername.Location = New System.Drawing.Point(80, 75)
         Me.lblBenutzername.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblBenutzername.Name = "lblBenutzername"
         Me.lblBenutzername.Size = New System.Drawing.Size(75, 13)
@@ -60,7 +61,7 @@ Partial Class LoginForm
         'lblPasswort
         '
         Me.lblPasswort.AutoSize = True
-        Me.lblPasswort.Location = New System.Drawing.Point(85, 105)
+        Me.lblPasswort.Location = New System.Drawing.Point(80, 172)
         Me.lblPasswort.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblPasswort.Name = "lblPasswort"
         Me.lblPasswort.Size = New System.Drawing.Size(50, 13)
@@ -71,7 +72,7 @@ Partial Class LoginForm
         '
         Me.btnLogin.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
         Me.btnLogin.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.btnLogin.Location = New System.Drawing.Point(83, 269)
+        Me.btnLogin.Location = New System.Drawing.Point(82, 269)
         Me.btnLogin.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.btnLogin.Name = "btnLogin"
         Me.btnLogin.Size = New System.Drawing.Size(130, 43)
@@ -82,7 +83,7 @@ Partial Class LoginForm
         'btnZumRegistrieren
         '
         Me.btnZumRegistrieren.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
-        Me.btnZumRegistrieren.Location = New System.Drawing.Point(83, 330)
+        Me.btnZumRegistrieren.Location = New System.Drawing.Point(82, 330)
         Me.btnZumRegistrieren.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.btnZumRegistrieren.Name = "btnZumRegistrieren"
         Me.btnZumRegistrieren.Size = New System.Drawing.Size(129, 43)
@@ -99,12 +100,23 @@ Partial Class LoginForm
         Me.lblFehler.Size = New System.Drawing.Size(0, 13)
         Me.lblFehler.TabIndex = 6
         '
+        'lblLogin
+        '
+        Me.lblLogin.AutoSize = True
+        Me.lblLogin.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblLogin.Location = New System.Drawing.Point(158, 22)
+        Me.lblLogin.Name = "lblLogin"
+        Me.lblLogin.Size = New System.Drawing.Size(53, 20)
+        Me.lblLogin.TabIndex = 7
+        Me.lblLogin.Text = "Login"
+        '
         'LoginForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.WhiteSmoke
         Me.ClientSize = New System.Drawing.Size(354, 447)
+        Me.Controls.Add(Me.lblLogin)
         Me.Controls.Add(Me.lblFehler)
         Me.Controls.Add(Me.btnZumRegistrieren)
         Me.Controls.Add(Me.btnLogin)
@@ -128,4 +140,5 @@ Partial Class LoginForm
     Friend WithEvents btnLogin As Button
     Friend WithEvents btnZumRegistrieren As Button
     Friend WithEvents lblFehler As Label
+    Friend WithEvents lblLogin As Label
 End Class
