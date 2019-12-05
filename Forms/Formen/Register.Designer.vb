@@ -37,82 +37,92 @@ Partial Class Register
         '
         'txbAnzeigename
         '
-        Me.txbAnzeigename.Location = New System.Drawing.Point(138, 128)
+        Me.txbAnzeigename.Location = New System.Drawing.Point(104, 104)
+        Me.txbAnzeigename.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.txbAnzeigename.Name = "txbAnzeigename"
-        Me.txbAnzeigename.Size = New System.Drawing.Size(100, 22)
+        Me.txbAnzeigename.Size = New System.Drawing.Size(76, 20)
         Me.txbAnzeigename.TabIndex = 0
         '
         'txbBenutzername
         '
-        Me.txbBenutzername.Location = New System.Drawing.Point(147, 283)
+        Me.txbBenutzername.Location = New System.Drawing.Point(110, 230)
+        Me.txbBenutzername.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.txbBenutzername.Name = "txbBenutzername"
-        Me.txbBenutzername.Size = New System.Drawing.Size(100, 22)
+        Me.txbBenutzername.Size = New System.Drawing.Size(76, 20)
         Me.txbBenutzername.TabIndex = 1
         '
         'txbPasswort
         '
-        Me.txbPasswort.Location = New System.Drawing.Point(709, 128)
+        Me.txbPasswort.Location = New System.Drawing.Point(532, 104)
+        Me.txbPasswort.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.txbPasswort.Name = "txbPasswort"
-        Me.txbPasswort.Size = New System.Drawing.Size(100, 22)
+        Me.txbPasswort.Size = New System.Drawing.Size(76, 20)
         Me.txbPasswort.TabIndex = 2
         '
         'txbPasswortWdh
         '
-        Me.txbPasswortWdh.Location = New System.Drawing.Point(709, 283)
+        Me.txbPasswortWdh.Location = New System.Drawing.Point(532, 230)
+        Me.txbPasswortWdh.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.txbPasswortWdh.Name = "txbPasswortWdh"
-        Me.txbPasswortWdh.Size = New System.Drawing.Size(100, 22)
+        Me.txbPasswortWdh.Size = New System.Drawing.Size(76, 20)
         Me.txbPasswortWdh.TabIndex = 3
         '
         'lblAnzeigename
         '
         Me.lblAnzeigename.AutoSize = True
-        Me.lblAnzeigename.Location = New System.Drawing.Point(135, 91)
+        Me.lblAnzeigename.Location = New System.Drawing.Point(101, 74)
+        Me.lblAnzeigename.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblAnzeigename.Name = "lblAnzeigename"
-        Me.lblAnzeigename.Size = New System.Drawing.Size(94, 17)
+        Me.lblAnzeigename.Size = New System.Drawing.Size(71, 13)
         Me.lblAnzeigename.TabIndex = 4
         Me.lblAnzeigename.Text = "Anzeigename"
         '
         'lblBenutzername
         '
         Me.lblBenutzername.AutoSize = True
-        Me.lblBenutzername.Location = New System.Drawing.Point(144, 247)
+        Me.lblBenutzername.Location = New System.Drawing.Point(108, 201)
+        Me.lblBenutzername.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblBenutzername.Name = "lblBenutzername"
-        Me.lblBenutzername.Size = New System.Drawing.Size(100, 17)
+        Me.lblBenutzername.Size = New System.Drawing.Size(75, 13)
         Me.lblBenutzername.TabIndex = 5
         Me.lblBenutzername.Text = "Benutzername"
         '
         'lblFehlermeldung
         '
         Me.lblFehlermeldung.AutoSize = True
-        Me.lblFehlermeldung.Location = New System.Drawing.Point(157, 420)
+        Me.lblFehlermeldung.Location = New System.Drawing.Point(118, 341)
+        Me.lblFehlermeldung.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblFehlermeldung.Name = "lblFehlermeldung"
-        Me.lblFehlermeldung.Size = New System.Drawing.Size(0, 17)
+        Me.lblFehlermeldung.Size = New System.Drawing.Size(0, 13)
         Me.lblFehlermeldung.TabIndex = 6
         '
         'lblPasswort
         '
         Me.lblPasswort.AutoSize = True
-        Me.lblPasswort.Location = New System.Drawing.Point(734, 105)
+        Me.lblPasswort.Location = New System.Drawing.Point(550, 85)
+        Me.lblPasswort.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblPasswort.Name = "lblPasswort"
-        Me.lblPasswort.Size = New System.Drawing.Size(65, 17)
+        Me.lblPasswort.Size = New System.Drawing.Size(50, 13)
         Me.lblPasswort.TabIndex = 7
         Me.lblPasswort.Text = "Passwort"
         '
         'lblPasswortWdh
         '
         Me.lblPasswortWdh.AutoSize = True
-        Me.lblPasswortWdh.Location = New System.Drawing.Point(697, 247)
+        Me.lblPasswortWdh.Location = New System.Drawing.Point(523, 201)
+        Me.lblPasswortWdh.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblPasswortWdh.Name = "lblPasswortWdh"
-        Me.lblPasswortWdh.Size = New System.Drawing.Size(149, 17)
+        Me.lblPasswortWdh.Size = New System.Drawing.Size(113, 13)
         Me.lblPasswortWdh.TabIndex = 8
         Me.lblPasswortWdh.Text = "Passwort Wiederholen"
         '
         'btnRegistrieren
         '
         Me.btnRegistrieren.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.btnRegistrieren.Location = New System.Drawing.Point(723, 391)
+        Me.btnRegistrieren.Location = New System.Drawing.Point(542, 318)
+        Me.btnRegistrieren.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.btnRegistrieren.Name = "btnRegistrieren"
-        Me.btnRegistrieren.Size = New System.Drawing.Size(103, 46)
+        Me.btnRegistrieren.Size = New System.Drawing.Size(77, 37)
         Me.btnRegistrieren.TabIndex = 9
         Me.btnRegistrieren.Text = "Registrieren"
         Me.btnRegistrieren.UseVisualStyleBackColor = False
@@ -120,19 +130,20 @@ Partial Class Register
         'btnLogin
         '
         Me.btnLogin.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.btnLogin.Location = New System.Drawing.Point(724, 469)
+        Me.btnLogin.Location = New System.Drawing.Point(543, 381)
+        Me.btnLogin.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.btnLogin.Name = "btnLogin"
-        Me.btnLogin.Size = New System.Drawing.Size(102, 44)
+        Me.btnLogin.Size = New System.Drawing.Size(76, 36)
         Me.btnLogin.TabIndex = 10
         Me.btnLogin.Text = "zum Login"
         Me.btnLogin.UseVisualStyleBackColor = False
         '
         'Register
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(1067, 554)
+        Me.ClientSize = New System.Drawing.Size(800, 450)
         Me.Controls.Add(Me.btnLogin)
         Me.Controls.Add(Me.btnRegistrieren)
         Me.Controls.Add(Me.lblPasswortWdh)
@@ -144,7 +155,6 @@ Partial Class Register
         Me.Controls.Add(Me.txbPasswort)
         Me.Controls.Add(Me.txbBenutzername)
         Me.Controls.Add(Me.txbAnzeigename)
-        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "Register"
         Me.Text = "Register"
         Me.ResumeLayout(False)
