@@ -140,9 +140,11 @@ Partial Class LoginForm
         Me.Controls.Add(Me.txbBenutzername)
         Me.ForeColor = System.Drawing.SystemColors.InfoText
         Me.Margin = New System.Windows.Forms.Padding(2)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.MinimumSize = New System.Drawing.Size(230, 406)
         Me.Name = "LoginForm"
-        Me.Text = "Form1"
+        Me.Text = "Anmeldung"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

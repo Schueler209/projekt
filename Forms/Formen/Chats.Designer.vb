@@ -25,26 +25,24 @@ Partial Class Chats
         Me.btnNeuerKontakt = New System.Windows.Forms.Button()
         Me.lblKontakte = New System.Windows.Forms.Label()
         Me.ltbKontakte = New System.Windows.Forms.ListBox()
-        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
-        Me.AbmeldenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.EinstellungenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip2 = New System.Windows.Forms.MenuStrip()
         Me.AbmeldenToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.EinstellungenToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContactPanel = New System.Windows.Forms.Panel()
         Me.ChatArea = New Forms.ChatArea()
-        Me.MenuStrip1.SuspendLayout()
         Me.MenuStrip2.SuspendLayout()
         Me.ContactPanel.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnNeuerKontakt
         '
+        Me.btnNeuerKontakt.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnNeuerKontakt.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
-        Me.btnNeuerKontakt.Location = New System.Drawing.Point(34, 411)
+        Me.btnNeuerKontakt.Location = New System.Drawing.Point(11, 302)
         Me.btnNeuerKontakt.Margin = New System.Windows.Forms.Padding(2)
         Me.btnNeuerKontakt.Name = "btnNeuerKontakt"
-        Me.btnNeuerKontakt.Size = New System.Drawing.Size(125, 28)
+        Me.btnNeuerKontakt.Size = New System.Drawing.Size(128, 28)
         Me.btnNeuerKontakt.TabIndex = 12
         Me.btnNeuerKontakt.Text = "+ Hinzufügen"
         Me.btnNeuerKontakt.UseVisualStyleBackColor = False
@@ -68,29 +66,8 @@ Partial Class Chats
         Me.ltbKontakte.Location = New System.Drawing.Point(11, 21)
         Me.ltbKontakte.Margin = New System.Windows.Forms.Padding(2)
         Me.ltbKontakte.Name = "ltbKontakte"
-        Me.ltbKontakte.Size = New System.Drawing.Size(128, 303)
+        Me.ltbKontakte.Size = New System.Drawing.Size(128, 277)
         Me.ltbKontakte.TabIndex = 10
-        '
-        'MenuStrip1
-        '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AbmeldenToolStripMenuItem, Me.EinstellungenToolStripMenuItem})
-        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
-        Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(690, 24)
-        Me.MenuStrip1.TabIndex = 16
-        Me.MenuStrip1.Text = "MenuStrip1"
-        '
-        'AbmeldenToolStripMenuItem
-        '
-        Me.AbmeldenToolStripMenuItem.Name = "AbmeldenToolStripMenuItem"
-        Me.AbmeldenToolStripMenuItem.Size = New System.Drawing.Size(74, 20)
-        Me.AbmeldenToolStripMenuItem.Text = "Abmelden"
-        '
-        'EinstellungenToolStripMenuItem
-        '
-        Me.EinstellungenToolStripMenuItem.Name = "EinstellungenToolStripMenuItem"
-        Me.EinstellungenToolStripMenuItem.Size = New System.Drawing.Size(90, 20)
-        Me.EinstellungenToolStripMenuItem.Text = "Einstellungen"
         '
         'MenuStrip2
         '
@@ -98,6 +75,7 @@ Partial Class Chats
         Me.MenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AbmeldenToolStripMenuItem1, Me.EinstellungenToolStripMenuItem1})
         Me.MenuStrip2.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip2.Name = "MenuStrip2"
+        Me.MenuStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
         Me.MenuStrip2.Size = New System.Drawing.Size(690, 24)
         Me.MenuStrip2.TabIndex = 15
         Me.MenuStrip2.Text = "MenuStrip2"
@@ -118,6 +96,7 @@ Partial Class Chats
         '
         Me.ContactPanel.Controls.Add(Me.ltbKontakte)
         Me.ContactPanel.Controls.Add(Me.lblKontakte)
+        Me.ContactPanel.Controls.Add(Me.btnNeuerKontakt)
         Me.ContactPanel.Dock = System.Windows.Forms.DockStyle.Left
         Me.ContactPanel.Location = New System.Drawing.Point(0, 24)
         Me.ContactPanel.Name = "ContactPanel"
@@ -143,14 +122,12 @@ Partial Class Chats
         Me.ClientSize = New System.Drawing.Size(690, 363)
         Me.Controls.Add(Me.ContactPanel)
         Me.Controls.Add(Me.ChatArea)
-        Me.Controls.Add(Me.btnNeuerKontakt)
         Me.Controls.Add(Me.MenuStrip2)
+        Me.HelpButton = True
         Me.MainMenuStrip = Me.MenuStrip2
         Me.MinimumSize = New System.Drawing.Size(500, 300)
         Me.Name = "Chats"
         Me.Text = "Chats"
-        Me.MenuStrip1.ResumeLayout(False)
-        Me.MenuStrip1.PerformLayout()
         Me.MenuStrip2.ResumeLayout(False)
         Me.MenuStrip2.PerformLayout()
         Me.ContactPanel.ResumeLayout(False)
@@ -164,9 +141,6 @@ Partial Class Chats
     Friend WithEvents btnNeuerKontakt As Button
     Friend WithEvents lblKontakte As Label
     Friend WithEvents ltbKontakte As ListBox
-    Friend WithEvents MenuStrip1 As MenuStrip
-    Friend WithEvents EinstellungenToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents AbmeldenToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents MenuStrip2 As MenuStrip
     Friend WithEvents AbmeldenToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents EinstellungenToolStripMenuItem1 As ToolStripMenuItem

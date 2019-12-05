@@ -185,9 +185,11 @@ Partial Class Register
         Me.Controls.Add(Me.txbPasswort)
         Me.Controls.Add(Me.txbBenutzername)
         Me.Controls.Add(Me.txbAnzeigename)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.MinimumSize = New System.Drawing.Size(230, 406)
         Me.Name = "Register"
-        Me.Text = "Register"
+        Me.Text = "Registrierung"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
