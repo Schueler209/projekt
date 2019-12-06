@@ -110,9 +110,9 @@ Partial Class Chats
         Me.ChatArea.BackColor = System.Drawing.SystemColors.Control
         Me.ChatArea.Chat = Nothing
         Me.ChatArea.Dock = System.Windows.Forms.DockStyle.Right
-        Me.ChatArea.Location = New System.Drawing.Point(263, 24)
+        Me.ChatArea.Location = New System.Drawing.Point(153, 24)
         Me.ChatArea.Name = "ChatArea"
-        Me.ChatArea.Size = New System.Drawing.Size(427, 339)
+        Me.ChatArea.Size = New System.Drawing.Size(537, 339)
         Me.ChatArea.TabIndex = 14
         '
         'Chats
