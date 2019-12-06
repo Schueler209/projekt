@@ -4,12 +4,17 @@ Public Class Chats
 
     Private chats As New List(Of Chat)
 
+    Private Sub ondeletechat(delete As Integer)
+        ChatArea.Hide()
+
+    End Sub
 
     Private Sub Chat_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ChatArea.Hide()
         NetworkClass.net.getChats(NetworkClass.login.id, AddressOf onGetChats)
 
         NetworkClass.net.OnMessage = AddressOf OnRecieveMessage
+        NetworkClass.net.OnDeleteChat = AddressOf ondeletechat
 
     End Sub
 
