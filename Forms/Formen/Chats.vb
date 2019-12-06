@@ -6,6 +6,12 @@ Public Class Chats
 
     Private Sub ondeletechat(delete As Integer)
         ChatArea.Hide()
+        For Each chat In chats
+            If chat.ID = delete Then
+
+            End If
+        Next
+        chats.Remove()
 
     End Sub
 
@@ -88,4 +94,6 @@ Public Class Chats
     Private Sub ChatArea_Load(sender As Object, e As EventArgs)
 
     End Sub
+
+
 End Class

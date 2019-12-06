@@ -106,5 +106,6 @@ Public Class ChatArea
     Private Sub btnKonaktEntfernen_Click(sender As Object, e As EventArgs) Handles btnKonaktEntfernen.Click
         NetworkClass.net.deleteChat(selectedChat.ID, NetworkClass.login.id)
 
+
     End Sub
 End Class
