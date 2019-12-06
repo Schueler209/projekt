@@ -182,6 +182,7 @@ Public Class NetClient
         res.addData("id", id)
         res.addData("name", name)
         connector.send(res)
+
     End Sub
 
     Sub deleteChat(Chatid As Integer, Userid As Integer)
