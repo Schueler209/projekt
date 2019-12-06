@@ -101,7 +101,7 @@ Partial Class Register
         'lblFehlermeldung
         '
         Me.lblFehlermeldung.AutoSize = True
-        Me.lblFehlermeldung.Location = New System.Drawing.Point(208, 394)
+        Me.lblFehlermeldung.Location = New System.Drawing.Point(51, 309)
         Me.lblFehlermeldung.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblFehlermeldung.Name = "lblFehlermeldung"
         Me.lblFehlermeldung.Size = New System.Drawing.Size(0, 13)
@@ -147,7 +147,7 @@ Partial Class Register
         Me.btnLogin.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnLogin.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.btnLogin.Location = New System.Drawing.Point(50, 388)
+        Me.btnLogin.Location = New System.Drawing.Point(50, 379)
         Me.btnLogin.Margin = New System.Windows.Forms.Padding(2)
         Me.btnLogin.Name = "btnLogin"
         Me.btnLogin.Size = New System.Drawing.Size(172, 29)

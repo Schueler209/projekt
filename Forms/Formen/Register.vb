@@ -43,11 +43,12 @@ Public Class Register
     Private Sub register()
         lblFehlermeldung.Text = ""
         If Not txbPasswortWdh.Text = txbPasswort.Text Then lblFehlermeldung.Text = "Passwörter ungleich"
-        If txbAnzeigename.Text = "" Then lblFehlermeldung.Text = "kein Anzeigename angegeben"
-        If txbBenutzername.Text = "" Then lblFehlermeldung.Text = "kein Benutzername angegeben"
+        If txbAnzeigename.Text.Trim() = "" Then lblFehlermeldung.Text = "kein Anzeigename angegeben"
+        If txbBenutzername.Text.Trim() = "" Then lblFehlermeldung.Text = "kein Benutzername angegeben"
         If txbPasswortWdh.Text = "" Then lblFehlermeldung.Text = "Passwort nicht wiederholt"
         If txbPasswort.Text = "" Then lblFehlermeldung.Text = "kein Passwort angegeben"
-        If txbBenutzername.Text.Length > 15 Then lblFehlermeldung.Text = "Benutzername zu lang"
+        If txbBenutzername.Text.Trim().Length > 15 Then lblFehlermeldung.Text = "Benutzername zu lang"
+        If txbAnzeigename.Text.Trim().Length > 15 Then lblFehlermeldung.Text = "Name zu lang"
         If lblFehlermeldung.Text = "" Then
             NetworkClass.net.Register(txbAnzeigename.Text, txbBenutzername.Text, txbPasswort.Text, AddressOf Registerconfirm)
         End If
@@ -62,9 +63,7 @@ Public Class Register
 
     End Sub
 
-    Private Sub txbBenutzername_TextChanged(sender As Object, e As EventArgs) Handles txbBenutzername.TextChanged
 
-    End Sub
 End Class
 
 

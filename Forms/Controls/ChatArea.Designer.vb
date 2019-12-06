@@ -27,6 +27,7 @@ Partial Class ChatArea
         Me.txtEingabe = New System.Windows.Forms.TextBox()
         Me.ChatScrollPanel = New System.Windows.Forms.Panel()
         Me.ChatPanel = New System.Windows.Forms.Panel()
+        Me.btnKonaktEntfernen = New System.Windows.Forms.Button()
         Me.ChatScrollPanel.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -86,11 +87,22 @@ Partial Class ChatArea
         Me.ChatPanel.Size = New System.Drawing.Size(516, 228)
         Me.ChatPanel.TabIndex = 0
         '
+        'btnKonaktEntfernen
+        '
+        Me.btnKonaktEntfernen.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.btnKonaktEntfernen.Location = New System.Drawing.Point(448, 0)
+        Me.btnKonaktEntfernen.Name = "btnKonaktEntfernen"
+        Me.btnKonaktEntfernen.Size = New System.Drawing.Size(86, 23)
+        Me.btnKonaktEntfernen.TabIndex = 12
+        Me.btnKonaktEntfernen.Text = "Entfernen"
+        Me.btnKonaktEntfernen.UseVisualStyleBackColor = False
+        '
         'ChatArea
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Window
+        Me.Controls.Add(Me.btnKonaktEntfernen)
         Me.Controls.Add(Me.ChatScrollPanel)
         Me.Controls.Add(Me.lblChatpartner)
         Me.Controls.Add(Me.btnSenden)
@@ -108,4 +120,5 @@ Partial Class ChatArea
     Friend WithEvents txtEingabe As TextBox
     Friend WithEvents ChatScrollPanel As Panel
     Friend WithEvents ChatPanel As Panel
+    Friend WithEvents btnKonaktEntfernen As Button
 End Class

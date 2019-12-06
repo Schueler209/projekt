@@ -7,9 +7,14 @@ Module DBUtils
     Public Function ReaderQuery(Query As String) As OleDbDataReader
         Dim conn As New OleDbConnection(ConnectionStr)
         Dim command As New OleDbCommand(Query)
-        command.Connection = conn
-        conn.Open()
+        Try
+            command.Connection = conn
+            conn.Open()
+        Catch ex As Exception
+            Console.WriteLine(ex.Message)
+        End Try
         Return command.ExecuteReader
+
     End Function
 
 

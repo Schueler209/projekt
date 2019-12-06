@@ -149,8 +149,8 @@ Module Module1
     Public Function changeName(ID As Integer, NewName As String) As Boolean
         Dim conn As New OleDbConnection(ConnectionStr)
         conn.Open()
-
         Dim updatecommand As New OleDbCommand("UPDATE Users SET Name = '" & NewName & "'" & " WHERE ID = = '" & ID & "'")
+
         Try
             updatecommand.ExecuteNonQuery()
         Catch ex As Exception
@@ -158,7 +158,20 @@ Module Module1
             Return False
         End Try
         Return True
+
     End Function
 
-
+    'Chat löschen
+    Public Function deletechat(chatID As Integer, UserID As Integer) As Boolean
+        Dim conn As New OleDbConnection(ConnectionStr)
+        conn.Open()
+        Dim deletecommand As New OleDbCommand("DELETE * FROM Chats WHERE ID = " & chatID)
+        Try
+            deletecommand.ExecuteNonQuery()
+        Catch ex As Exception
+            Console.WriteLine(ex.Message)
+            Return False
+        End Try
+        Return True
+    End Function
 End Module
