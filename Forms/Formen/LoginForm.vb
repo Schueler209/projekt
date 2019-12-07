@@ -10,6 +10,7 @@ Public Class LoginForm
 
 
         ' gespeicherte Benutzername und Passwort abrufen
+
         If My.Settings.username IsNot "" And My.Settings.username IsNot "" Then
             txbBenutzername.Text = My.Settings.username
             txbPasswort.Text = My.Settings.password
@@ -50,9 +51,9 @@ Public Class LoginForm
                 My.Settings.Save()
             End If
             Chats.Show()
-                Me.Close()
+            Me.Close()
 
-            End If
+        End If
 
     End Sub
     Private Sub login()
