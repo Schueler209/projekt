@@ -6,12 +6,13 @@ Public Class Chats
 
     Private Sub ondeletechat(delete As Integer)
         ChatArea.Hide()
+
         For Each chat In chats
             If chat.ID = delete Then
-
+                chats.Remove(chat)
             End If
         Next
-        chats.Remove()
+
 
     End Sub
 
@@ -59,6 +60,10 @@ Public Class Chats
     End Sub
 
     Private Sub btnAbmelden_Click(sender As Object, e As EventArgs)
+
+        My.Settings.username = ""
+        My.Settings.password = ""
+
         LoginForm.Show()
         NetworkClass.login = Nothing
         NetworkClass.net.logOut()

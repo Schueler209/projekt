@@ -28,19 +28,20 @@ Partial Class Register
         Me.txbPasswortWdh = New System.Windows.Forms.TextBox()
         Me.lblAnzeigename = New System.Windows.Forms.Label()
         Me.lblBenutzername = New System.Windows.Forms.Label()
-        Me.lblFehlermeldung = New System.Windows.Forms.Label()
         Me.lblPasswort = New System.Windows.Forms.Label()
         Me.lblPasswortWdh = New System.Windows.Forms.Label()
         Me.btnRegistrieren = New System.Windows.Forms.Button()
         Me.btnLogin = New System.Windows.Forms.Button()
         Me.lblRegister = New System.Windows.Forms.Label()
+        Me.lblFehler = New System.Windows.Forms.Label()
+        Me.checkKeepLoggedIn = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'txbAnzeigename
         '
         Me.txbAnzeigename.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txbAnzeigename.Location = New System.Drawing.Point(54, 135)
+        Me.txbAnzeigename.Location = New System.Drawing.Point(54, 100)
         Me.txbAnzeigename.Margin = New System.Windows.Forms.Padding(2)
         Me.txbAnzeigename.Name = "txbAnzeigename"
         Me.txbAnzeigename.Size = New System.Drawing.Size(158, 20)
@@ -50,7 +51,7 @@ Partial Class Register
         '
         Me.txbBenutzername.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txbBenutzername.Location = New System.Drawing.Point(54, 184)
+        Me.txbBenutzername.Location = New System.Drawing.Point(54, 149)
         Me.txbBenutzername.Margin = New System.Windows.Forms.Padding(2)
         Me.txbBenutzername.Name = "txbBenutzername"
         Me.txbBenutzername.Size = New System.Drawing.Size(158, 20)
@@ -60,7 +61,7 @@ Partial Class Register
         '
         Me.txbPasswort.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txbPasswort.Location = New System.Drawing.Point(54, 233)
+        Me.txbPasswort.Location = New System.Drawing.Point(54, 198)
         Me.txbPasswort.Margin = New System.Windows.Forms.Padding(2)
         Me.txbPasswort.Name = "txbPasswort"
         Me.txbPasswort.Size = New System.Drawing.Size(158, 20)
@@ -70,7 +71,7 @@ Partial Class Register
         '
         Me.txbPasswortWdh.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txbPasswortWdh.Location = New System.Drawing.Point(54, 282)
+        Me.txbPasswortWdh.Location = New System.Drawing.Point(54, 247)
         Me.txbPasswortWdh.Margin = New System.Windows.Forms.Padding(20)
         Me.txbPasswortWdh.Name = "txbPasswortWdh"
         Me.txbPasswortWdh.Size = New System.Drawing.Size(158, 20)
@@ -80,7 +81,7 @@ Partial Class Register
         '
         Me.lblAnzeigename.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lblAnzeigename.AutoSize = True
-        Me.lblAnzeigename.Location = New System.Drawing.Point(51, 120)
+        Me.lblAnzeigename.Location = New System.Drawing.Point(51, 85)
         Me.lblAnzeigename.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblAnzeigename.Name = "lblAnzeigename"
         Me.lblAnzeigename.Size = New System.Drawing.Size(71, 13)
@@ -91,27 +92,18 @@ Partial Class Register
         '
         Me.lblBenutzername.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lblBenutzername.AutoSize = True
-        Me.lblBenutzername.Location = New System.Drawing.Point(51, 169)
+        Me.lblBenutzername.Location = New System.Drawing.Point(51, 134)
         Me.lblBenutzername.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblBenutzername.Name = "lblBenutzername"
         Me.lblBenutzername.Size = New System.Drawing.Size(75, 13)
         Me.lblBenutzername.TabIndex = 5
         Me.lblBenutzername.Text = "Benutzername"
         '
-        'lblFehlermeldung
-        '
-        Me.lblFehlermeldung.AutoSize = True
-        Me.lblFehlermeldung.Location = New System.Drawing.Point(51, 309)
-        Me.lblFehlermeldung.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.lblFehlermeldung.Name = "lblFehlermeldung"
-        Me.lblFehlermeldung.Size = New System.Drawing.Size(0, 13)
-        Me.lblFehlermeldung.TabIndex = 6
-        '
         'lblPasswort
         '
         Me.lblPasswort.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lblPasswort.AutoSize = True
-        Me.lblPasswort.Location = New System.Drawing.Point(51, 218)
+        Me.lblPasswort.Location = New System.Drawing.Point(51, 183)
         Me.lblPasswort.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblPasswort.Name = "lblPasswort"
         Me.lblPasswort.Size = New System.Drawing.Size(50, 13)
@@ -122,7 +114,7 @@ Partial Class Register
         '
         Me.lblPasswortWdh.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lblPasswortWdh.AutoSize = True
-        Me.lblPasswortWdh.Location = New System.Drawing.Point(51, 267)
+        Me.lblPasswortWdh.Location = New System.Drawing.Point(51, 232)
         Me.lblPasswortWdh.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblPasswortWdh.Name = "lblPasswortWdh"
         Me.lblPasswortWdh.Size = New System.Drawing.Size(113, 13)
@@ -167,18 +159,44 @@ Partial Class Register
         Me.lblRegister.Text = "Registrieren"
         Me.lblRegister.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'lblFehler
+        '
+        Me.lblFehler.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblFehler.Location = New System.Drawing.Point(24, 301)
+        Me.lblFehler.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblFehler.Name = "lblFehler"
+        Me.lblFehler.Size = New System.Drawing.Size(228, 27)
+        Me.lblFehler.TabIndex = 12
+        Me.lblFehler.Text = "lblFehler"
+        Me.lblFehler.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'checkKeepLoggedIn
+        '
+        Me.checkKeepLoggedIn.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.checkKeepLoggedIn.AutoSize = True
+        Me.checkKeepLoggedIn.Checked = True
+        Me.checkKeepLoggedIn.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.checkKeepLoggedIn.Location = New System.Drawing.Point(54, 281)
+        Me.checkKeepLoggedIn.Name = "checkKeepLoggedIn"
+        Me.checkKeepLoggedIn.Size = New System.Drawing.Size(119, 17)
+        Me.checkKeepLoggedIn.TabIndex = 13
+        Me.checkKeepLoggedIn.Text = "Angemeldet bleiben"
+        Me.checkKeepLoggedIn.UseVisualStyleBackColor = True
+        '
         'Register
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.WhiteSmoke
         Me.ClientSize = New System.Drawing.Size(273, 426)
+        Me.Controls.Add(Me.checkKeepLoggedIn)
+        Me.Controls.Add(Me.lblFehler)
         Me.Controls.Add(Me.lblRegister)
         Me.Controls.Add(Me.btnLogin)
         Me.Controls.Add(Me.btnRegistrieren)
         Me.Controls.Add(Me.lblPasswortWdh)
         Me.Controls.Add(Me.lblPasswort)
-        Me.Controls.Add(Me.lblFehlermeldung)
         Me.Controls.Add(Me.lblBenutzername)
         Me.Controls.Add(Me.lblAnzeigename)
         Me.Controls.Add(Me.txbPasswortWdh)
@@ -201,10 +219,11 @@ Partial Class Register
     Friend WithEvents txbPasswortWdh As TextBox
     Friend WithEvents lblAnzeigename As Label
     Friend WithEvents lblBenutzername As Label
-    Friend WithEvents lblFehlermeldung As Label
     Friend WithEvents lblPasswort As Label
     Friend WithEvents lblPasswortWdh As Label
     Friend WithEvents btnRegistrieren As Button
     Friend WithEvents btnLogin As Button
     Friend WithEvents lblRegister As Label
+    Friend WithEvents lblFehler As Label
+    Friend WithEvents checkKeepLoggedIn As CheckBox
 End Class

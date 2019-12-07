@@ -18,7 +18,7 @@ Public Class IPundPort
             My.Settings.Save()
 
             NetworkClass.ensureConnection()
-            Register.Show()
+            LoginForm.Show()
             Me.Close()
         End If
     End Sub
