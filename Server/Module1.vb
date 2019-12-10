@@ -149,7 +149,8 @@ Module Module1
     Public Function changeName(ID As Integer, NewName As String) As Boolean
         Dim conn As New OleDbConnection(ConnectionStr)
         conn.Open()
-        Dim updatecommand As New OleDbCommand("UPDATE Users SET Name = '" & NewName & "'" & " WHERE ID = = '" & ID & "'")
+        Dim updatecommand As New OleDbCommand("UPDATE Users SET Name = '" & NewName & "'" & " WHERE ID = " & ID & "")
+        updatecommand.Connection = conn
 
         Try
             updatecommand.ExecuteNonQuery()

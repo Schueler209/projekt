@@ -30,6 +30,7 @@ Partial Class LoginForm
         Me.btnZumRegistrieren = New System.Windows.Forms.Button()
         Me.lblFehler = New System.Windows.Forms.Label()
         Me.lblLogin = New System.Windows.Forms.Label()
+        Me.checkKeepLoggedIn = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'txbBenutzername
@@ -46,7 +47,7 @@ Partial Class LoginForm
         '
         Me.txbPasswort.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txbPasswort.Location = New System.Drawing.Point(64, 259)
+        Me.txbPasswort.Location = New System.Drawing.Point(65, 228)
         Me.txbPasswort.Margin = New System.Windows.Forms.Padding(2)
         Me.txbPasswort.Name = "txbPasswort"
         Me.txbPasswort.Size = New System.Drawing.Size(158, 20)
@@ -69,7 +70,7 @@ Partial Class LoginForm
         Me.lblPasswort.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblPasswort.AutoSize = True
-        Me.lblPasswort.Location = New System.Drawing.Point(61, 244)
+        Me.lblPasswort.Location = New System.Drawing.Point(62, 213)
         Me.lblPasswort.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblPasswort.Name = "lblPasswort"
         Me.lblPasswort.Size = New System.Drawing.Size(50, 13)
@@ -105,12 +106,15 @@ Partial Class LoginForm
         '
         'lblFehler
         '
-        Me.lblFehler.AutoSize = True
-        Me.lblFehler.Location = New System.Drawing.Point(85, 330)
+        Me.lblFehler.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblFehler.Location = New System.Drawing.Point(22, 295)
         Me.lblFehler.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblFehler.Name = "lblFehler"
-        Me.lblFehler.Size = New System.Drawing.Size(0, 13)
+        Me.lblFehler.Size = New System.Drawing.Size(228, 27)
         Me.lblFehler.TabIndex = 6
+        Me.lblFehler.Text = "lblFehler"
+        Me.lblFehler.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lblLogin
         '
@@ -124,12 +128,26 @@ Partial Class LoginForm
         Me.lblLogin.Text = "Anmeldung"
         Me.lblLogin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'checkKeepLoggedIn
+        '
+        Me.checkKeepLoggedIn.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.checkKeepLoggedIn.AutoSize = True
+        Me.checkKeepLoggedIn.Checked = True
+        Me.checkKeepLoggedIn.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.checkKeepLoggedIn.Location = New System.Drawing.Point(65, 263)
+        Me.checkKeepLoggedIn.Name = "checkKeepLoggedIn"
+        Me.checkKeepLoggedIn.Size = New System.Drawing.Size(119, 17)
+        Me.checkKeepLoggedIn.TabIndex = 14
+        Me.checkKeepLoggedIn.Text = "Angemeldet bleiben"
+        Me.checkKeepLoggedIn.UseVisualStyleBackColor = True
+        '
         'LoginForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.WhiteSmoke
         Me.ClientSize = New System.Drawing.Size(273, 426)
+        Me.Controls.Add(Me.checkKeepLoggedIn)
         Me.Controls.Add(Me.lblLogin)
         Me.Controls.Add(Me.lblFehler)
         Me.Controls.Add(Me.btnZumRegistrieren)
@@ -158,4 +176,5 @@ Partial Class LoginForm
     Friend WithEvents btnZumRegistrieren As Button
     Friend WithEvents lblFehler As Label
     Friend WithEvents lblLogin As Label
+    Friend WithEvents checkKeepLoggedIn As CheckBox
 End Class

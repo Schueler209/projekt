@@ -4,6 +4,9 @@ Public Class Register
 
     Private Sub Register_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         NetworkClass.ensureConnection()
+
+        ' Fehler label verstecken
+        lblFehler.Text = ""
     End Sub
 
     Private Sub btnRegistrieren_Click(sender As Object, e As EventArgs) Handles btnRegistrieren.Click
@@ -14,9 +17,14 @@ Public Class Register
     Sub Registerconfirm(wert As User)
 
         If IsNothing(wert) Then
-            lblFehlermeldung.Text = "Benutzer existiert schon, bitte anderen Benutzernamen wählen."
+            lblFehler.Text = "Benutzer existiert schon, bitte anderen Benutzernamen wählen."
         Else
+
             NetworkClass.login = wert
+            If checkKeepLoggedIn.Checked Then
+                My.Settings.username = txbBenutzername.Text
+                My.Settings.password = txbPasswort.Text
+            End If
             Chats.Show()
 
             Me.Close()
@@ -41,15 +49,15 @@ Public Class Register
     End Sub
 
     Private Sub register()
-        lblFehlermeldung.Text = ""
-        If Not txbPasswortWdh.Text = txbPasswort.Text Then lblFehlermeldung.Text = "Passwörter ungleich"
-        If txbAnzeigename.Text.Trim() = "" Then lblFehlermeldung.Text = "kein Anzeigename angegeben"
-        If txbBenutzername.Text.Trim() = "" Then lblFehlermeldung.Text = "kein Benutzername angegeben"
-        If txbPasswortWdh.Text = "" Then lblFehlermeldung.Text = "Passwort nicht wiederholt"
-        If txbPasswort.Text = "" Then lblFehlermeldung.Text = "kein Passwort angegeben"
-        If txbBenutzername.Text.Trim().Length > 15 Then lblFehlermeldung.Text = "Benutzername zu lang"
-        If txbAnzeigename.Text.Trim().Length > 15 Then lblFehlermeldung.Text = "Name zu lang"
-        If lblFehlermeldung.Text = "" Then
+        lblFehler.Text = ""
+        If Not txbPasswortWdh.Text = txbPasswort.Text Then lblFehler.Text = "Passwörter ungleich"
+        If txbAnzeigename.Text.Trim() = "" Then lblFehler.Text = "kein Anzeigename angegeben"
+        If txbBenutzername.Text.Trim() = "" Then lblFehler.Text = "kein Benutzername angegeben"
+        If txbPasswortWdh.Text = "" Then lblFehler.Text = "Passwort nicht wiederholt"
+        If txbPasswort.Text = "" Then lblFehler.Text = "kein Passwort angegeben"
+        If txbBenutzername.Text.Trim().Length > 15 Then lblFehler.Text = "Benutzername zu lang"
+        If txbAnzeigename.Text.Trim().Length > 15 Then lblFehler.Text = "Name zu lang"
+        If lblFehler.Text = "" Then
             NetworkClass.net.Register(txbAnzeigename.Text, txbBenutzername.Text, txbPasswort.Text, AddressOf Registerconfirm)
         End If
 
