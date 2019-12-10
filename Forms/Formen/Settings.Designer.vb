@@ -78,6 +78,8 @@ Partial Class Settings
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.lblUsername)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "Settings"
         Me.Text = "Einstellungen"
         Me.ResumeLayout(False)

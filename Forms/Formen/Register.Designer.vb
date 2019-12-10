@@ -84,9 +84,9 @@ Partial Class Register
         Me.lblAnzeigename.Location = New System.Drawing.Point(51, 85)
         Me.lblAnzeigename.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblAnzeigename.Name = "lblAnzeigename"
-        Me.lblAnzeigename.Size = New System.Drawing.Size(71, 13)
+        Me.lblAnzeigename.Size = New System.Drawing.Size(102, 13)
         Me.lblAnzeigename.TabIndex = 4
-        Me.lblAnzeigename.Text = "Anzeigename"
+        Me.lblAnzeigename.Text = "Vor- und Nachname"
         '
         'lblBenutzername
         '

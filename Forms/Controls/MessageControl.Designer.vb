@@ -35,7 +35,7 @@ Partial Class MessageControl
         Me.Label1.Location = New System.Drawing.Point(0, 23)
         Me.Label1.Name = "Label1"
         Me.Label1.Padding = New System.Windows.Forms.Padding(5)
-        Me.Label1.Size = New System.Drawing.Size(150, 44)
+        Me.Label1.Size = New System.Drawing.Size(150, 61)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Label1"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -58,7 +58,7 @@ Partial Class MessageControl
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Name = "MessageControl"
-        Me.Size = New System.Drawing.Size(150, 67)
+        Me.Size = New System.Drawing.Size(150, 84)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

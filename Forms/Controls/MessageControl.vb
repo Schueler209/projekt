@@ -18,10 +18,13 @@ Public Class MessageControl
 
     Private Sub MessageControl_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Label1.Text = msg.message
-        Label2.Text = msg.user.name & ":"
+
         If isOwn Then
-            Label1.BackColor = Color.DarkSeaGreen
-        Else Label1.BackColor = Color.LightBlue
+            Label1.BackColor = ColorTranslator.FromHtml("#73D4EC")
+            Label2.Text = ""
+        Else
+            Label1.BackColor = ColorTranslator.FromHtml("#C5D1D8")
+            Label2.Text = msg.user.name & ":"
 
 
         End If
