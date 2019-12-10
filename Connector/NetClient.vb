@@ -188,7 +188,7 @@ Public Class NetClient
     Sub deleteChat(Chatid As Integer, Userid As Integer)
         Dim res As New ConnectionData("delete Chat")
         res.addData("chat", Chatid)
-        res.addData("userID", Userid)
+        res.addData("UserID", Userid)
         connector.send(res)
     End Sub
 
