@@ -39,7 +39,7 @@ Public Class Chats
 
     Private Sub onGetChats(FriendChats As Chat())
         For Each chat As Chat In FriendChats
-            ltbKontakte.Items.Add(chat.user.benutzername)
+            ltbKontakte.Items.Add(chat.user.name)
             chats.Add(chat)
         Next
         If FriendChats.Length > 0 Then
@@ -70,7 +70,7 @@ Public Class Chats
         ltbKontakte.Items.Clear()
 
         For Each chat As Chat In chats
-            ltbKontakte.Items.Add(chat.user.benutzername)
+            ltbKontakte.Items.Add(chat.user.name)
         Next
         ltbKontakte.SelectedIndex = 0
     End Sub
