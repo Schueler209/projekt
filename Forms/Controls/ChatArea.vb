@@ -72,12 +72,13 @@ Public Class ChatArea
     End Sub
 
     Private Sub SendMessage()
-        If txtEingabe.Text.Trim().Length > 0 Then
+        If txtEingabe.Text.Trim().Length > 0 And txtEingabe.Text.Length > 2000 Then
 
             NetworkClass.net.SendMessage(NetworkClass.login.id, selectedChat.ID, txtEingabe.Text.Trim())
             txtEingabe.Clear()
 
         End If
+
     End Sub
 
 
@@ -102,5 +103,9 @@ Public Class ChatArea
         Next
     End Sub
 
+    Private Sub btnKonaktEntfernen_Click(sender As Object, e As EventArgs) Handles btnKonaktEntfernen.Click
+        NetworkClass.net.deleteChat(selectedChat.ID, NetworkClass.login.id)
 
+
+    End Sub
 End Class

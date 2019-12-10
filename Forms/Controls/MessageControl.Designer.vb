@@ -30,12 +30,12 @@ Partial Class MessageControl
         Me.Label1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(56, 23)
+        Me.Label1.Location = New System.Drawing.Point(3, 11)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(39, 13)
+        Me.Label1.Size = New System.Drawing.Size(144, 38)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Label1"
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'MessageControl
         '
@@ -46,7 +46,6 @@ Partial Class MessageControl
         Me.Name = "MessageControl"
         Me.Size = New System.Drawing.Size(150, 59)
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 

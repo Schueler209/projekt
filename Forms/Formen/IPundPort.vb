@@ -8,13 +8,17 @@ Public Class IPundPort
     Private Sub connect()
         If txtAddress.Text.Trim().Length > 0 Then
             Dim input As String() = txtAddress.Text.Split(":")
-            NetworkClass.Ip = input(0)
+
+
+            My.Settings.Ip = input(0)
+
             If input.Length > 1 Then
-                NetworkClass.Port = input(1)
+                My.Settings.Port = input(1)
             End If
+            My.Settings.Save()
 
             NetworkClass.ensureConnection()
-            Register.Show()
+            LoginForm.Show()
             Me.Close()
         End If
     End Sub

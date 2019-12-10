@@ -4,6 +4,19 @@ Public Class LoginForm
 
     Private Sub Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         NetworkClass.ensureConnection()
+
+        ' Fehler label verstecken
+        lblFehler.Text = ""
+
+
+        ' gespeicherte Benutzername und Passwort abrufen
+
+        If My.Settings.username IsNot "" And My.Settings.username IsNot "" Then
+            txbBenutzername.Text = My.Settings.username
+            txbPasswort.Text = My.Settings.password
+            checkKeepLoggedIn.Checked = True
+            login()
+        End If
     End Sub
 
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
@@ -29,8 +42,15 @@ Public Class LoginForm
             lblFehler.Text = "Passwort oder Benutzername ist falsch!"
         Else
             NetworkClass.login = wert
-            Chats.Show()
 
+            If checkKeepLoggedIn.Checked Then
+
+                ' Benutzername und Passwort speichern
+                My.Settings.username = txbBenutzername.Text
+                My.Settings.password = txbPasswort.Text
+                My.Settings.Save()
+            End If
+            Chats.Show()
             Me.Close()
 
         End If

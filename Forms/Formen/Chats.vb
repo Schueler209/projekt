@@ -4,12 +4,24 @@ Public Class Chats
 
     Private chats As New List(Of Chat)
 
+    Private Sub ondeletechat(delete As Integer)
+        ChatArea.Hide()
+
+        For Each chat In chats
+            If chat.ID = delete Then
+                chats.Remove(chat)
+            End If
+        Next
+
+
+    End Sub
 
     Private Sub Chat_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ChatArea.Hide()
         NetworkClass.net.getChats(NetworkClass.login.id, AddressOf onGetChats)
 
         NetworkClass.net.OnMessage = AddressOf OnRecieveMessage
+        NetworkClass.net.OnDeleteChat = AddressOf ondeletechat
 
     End Sub
 
@@ -47,13 +59,6 @@ Public Class Chats
 
     End Sub
 
-    Private Sub btnAbmelden_Click(sender As Object, e As EventArgs)
-        LoginForm.Show()
-        NetworkClass.login = Nothing
-        NetworkClass.net.logOut()
-        Me.Close()
-
-    End Sub
 
     Public Sub addChatToList(ByVal user As Chat)
         chats.Insert(0, user)
@@ -74,13 +79,23 @@ Public Class Chats
     End Sub
 
     Private Sub AbmeldenToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles AbmeldenToolStripMenuItem1.Click
-        LoginForm.Show()
+        My.Settings.Reload()
+        ' Passwort und Benutzername löschen
+        My.Settings.username = ""
+        My.Settings.password = ""
+        My.Settings.Save()
+
+
         NetworkClass.login = Nothing
         NetworkClass.net.logOut()
+
+        ' Zu Login zurück
+        LoginForm.Show()
+
         Me.Close()
+        AddFriend.Close()
+        Settings.Close()
     End Sub
 
-    Private Sub ChatArea_Load(sender As Object, e As EventArgs)
 
-    End Sub
 End Class

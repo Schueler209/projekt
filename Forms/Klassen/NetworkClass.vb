@@ -8,6 +8,14 @@ Public Class NetworkClass
     Public Shared Port As Integer = 8080
 
     Public Shared Sub ensureConnection()
+
+        If My.Settings.Ip IsNot Nothing Then
+            Ip = My.Settings.Ip
+        End If
+        If My.Settings.Port > 0 Then
+            Port = My.Settings.Port
+        End If
+
         If Not connected Then
             net.OnConnectionLost = AddressOf OnConnectionLost
             net.connect(Ip, Port)

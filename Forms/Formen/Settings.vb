@@ -10,6 +10,7 @@ Public Class Settings
         Dim NewName As String
         NewName = txtName.Text
         NetworkClass.net.changeSettings(NetworkClass.login.id, NewName)
+
     End Sub
 
 
