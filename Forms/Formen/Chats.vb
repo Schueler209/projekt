@@ -30,19 +30,14 @@ Public Class Chats
 
     End Sub
 
+
     Sub OnRecieveMessage(msg As Message)
 
         If ChatArea.Chat IsNot Nothing AndAlso msg.chat = ChatArea.Chat.ID Then
             ChatArea.addMessage(msg)
         End If
-        For Each chat In chats
-            If chat.ID = ChatArea.Chat.ID Then
-                chat.chatDate = Date.Now
-                chats.Remove(chat)
-                chats.Insert(0, chat)
+        Private chat As Chat = chats(ltb Selectedindex)
 
-            End If
-        Next
     End Sub
 
     Private Sub onGetChats(FriendChats As Chat())
