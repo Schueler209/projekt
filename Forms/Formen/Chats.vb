@@ -36,7 +36,7 @@ Public Class Chats
         If ChatArea.Chat IsNot Nothing AndAlso msg.chat = ChatArea.Chat.ID Then
             ChatArea.addMessage(msg)
         End If
-        Private chat As Chat = chats(ltb Selectedindex)
+        Dim chat As Chat = chats(ltbKontakte.SelectedIndex)
 
     End Sub
 
