@@ -11,7 +11,8 @@ Public Class Chats
             If chat.ID = delete Then
                 chats.Remove(chat)
 
-            Else ltbKontakte.Items.Add(chat.user.benutzername)
+            Else
+                ltbKontakte.Items.Add(chat.user.name)
 
             End If
 

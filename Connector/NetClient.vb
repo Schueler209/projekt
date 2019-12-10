@@ -37,7 +37,7 @@ Public Class NetClient
     'Event für Einstellungsänderungen
     Public OnSettings As Action(Of Boolean)
     'Event für Chat löschen
-    Public OnDeleteChat As Action(Of Boolean)
+    Public OnDeleteChat As Action(Of Integer)
 
 
     ' Falls neue Nachricht kommt:
@@ -99,7 +99,7 @@ Public Class NetClient
 
             Case "delete chat"
                 If OnDeleteChat IsNot Nothing Then
-                    Dim ans As Boolean = req.Data.Item("success")
+                    Dim ans As Integer = req.Data.Item("success")
                     OnDeleteChat(ans)
                 End If
         End Select

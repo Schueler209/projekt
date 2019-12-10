@@ -161,7 +161,7 @@ Module Module1
     End Function
 
     'Chat löschen
-    Public Function deletechat(chatID As Integer, UserID As Integer) As Boolean
+    Public Function deletechat(chatID As Integer, UserID As Integer) As Integer
         Dim conn As New OleDbConnection(ConnectionStr)
 
         conn.Open()
@@ -171,9 +171,9 @@ Module Module1
             deletecommand.ExecuteNonQuery()
         Catch ex As Exception
             Console.WriteLine(ex.Message)
-            Return False
+            Return Nothing
         End Try
         conn.Close()
-        Return True
+        Return chatID
     End Function
 End Module

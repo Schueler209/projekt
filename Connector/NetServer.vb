@@ -35,7 +35,7 @@ Public Class NetServer
     'Event für Einstellungsänderungen
     Public OnSettings As Func(Of Integer, String, Boolean)
     'Event für Chat löschen
-    Public OnDeleteChat As Func(Of Integer, Integer, Boolean)
+    Public OnDeleteChat As Func(Of Integer, Integer, Integer)
 
 
     ' Falls neue Nachricht kommt:
