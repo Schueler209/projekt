@@ -60,7 +60,7 @@ Public Class ChatArea
         If isOwn Then
             messagecontrol.Anchor = AnchorStyles.Top Or AnchorStyles.Right
             messagecontrol.Left = ChatPanel.Width - messagecontrol.Width
-            messagecontrol.BackColor = Color.AliceBlue
+
         End If
 
         ChatPanel.Controls.Add(messagecontrol)

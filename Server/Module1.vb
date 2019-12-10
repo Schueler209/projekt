@@ -17,7 +17,8 @@ Module Module1
             .OnChats = AddressOf GetFriends,
             .OnMessages = AddressOf getMessages,
             .OnSendMessage = AddressOf AddMessage,
-            .OnSettings = AddressOf changeName
+            .OnSettings = AddressOf changeName,
+            .OnDeleteChat = AddressOf deletechat
  }
 
         connect.connect()
@@ -134,12 +135,9 @@ Module Module1
         conn.Open()
         Dim reader = ReaderQuery("SELECT Message, Datum, UserID FROM Messages WHERE ChatID = " & ChatID)
         Dim messages As New List(Of Message)
-
         Do While reader.Read
-
             Dim msg As New Message(getUser(reader.GetInt32(2)), ChatID, reader.GetDateTime(1), reader.GetString(0))
             messages.Add(msg)
-
         Loop
         Return messages.ToArray()
     End Function
