@@ -93,7 +93,7 @@ Public Class NetClient
 
             Case "settingsSuccess"
                 If OnSettings IsNot Nothing Then
-                    Dim ans As String = req.Data.Item("succes")
+                    Dim ans As Boolean = req.Data.Item("success")
                     OnSettings(ans)
                 End If
 
