@@ -173,6 +173,7 @@ Module Module1
             Console.WriteLine(ex.Message)
             Return False
         End Try
+        conn.Close()
         Return True
     End Function
 End Module

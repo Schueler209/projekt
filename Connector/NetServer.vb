@@ -58,6 +58,7 @@ Public Class NetServer
                     )
                     RegisterConfirm(User, client)
                 End If
+
             Case "login"
                 If OnLogin IsNot Nothing Then
                     ' Argumente bekommen
