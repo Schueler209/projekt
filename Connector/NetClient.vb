@@ -35,7 +35,7 @@ Public Class NetClient
     'Event für Nachricht bekommen(eigene oder andere)
     Public OnMessage As Action(Of Message)
     'Event für Einstellungsänderungen
-    Public OnSettings As Action(Of String)
+    Public OnSettings As Action(Of Boolean)
     'Event für Chat löschen
     Public OnDeleteChat As Action(Of Integer)
 
@@ -91,9 +91,9 @@ Public Class NetClient
                     OnMessage(ans)
                 End If
 
-            Case "settings"
+            Case "settingsSuccess"
                 If OnSettings IsNot Nothing Then
-                    Dim ans As String = req.Data.Item("name")
+                    Dim ans As String = req.Data.Item("succes")
                     OnSettings(ans)
                 End If
 
