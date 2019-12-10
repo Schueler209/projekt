@@ -3,6 +3,7 @@
 Public Class Register
 
     Private Sub Register_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath)
         NetworkClass.ensureConnection()
 
         ' Fehler label verstecken
@@ -70,7 +71,6 @@ Public Class Register
         End If
 
     End Sub
-
 
 End Class
 

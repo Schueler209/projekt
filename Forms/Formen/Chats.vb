@@ -23,6 +23,9 @@ Public Class Chats
     End Sub
 
     Private Sub Chat_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        Me.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath)
+
         ChatArea.Hide()
         NetworkClass.net.getChats(NetworkClass.login.id, AddressOf onGetChats)
 

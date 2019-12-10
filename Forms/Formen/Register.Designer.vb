@@ -156,7 +156,7 @@ Partial Class Register
         Me.lblRegister.Name = "lblRegister"
         Me.lblRegister.Size = New System.Drawing.Size(172, 30)
         Me.lblRegister.TabIndex = 11
-        Me.lblRegister.Text = "Registrieren"
+        Me.lblRegister.Text = "Registrierung"
         Me.lblRegister.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lblFehler

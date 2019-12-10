@@ -89,7 +89,9 @@ Partial Class ChatArea
         '
         'btnKonaktEntfernen
         '
+        Me.btnKonaktEntfernen.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnKonaktEntfernen.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.btnKonaktEntfernen.FlatAppearance.BorderSize = 0
         Me.btnKonaktEntfernen.Location = New System.Drawing.Point(448, 0)
         Me.btnKonaktEntfernen.Name = "btnKonaktEntfernen"
         Me.btnKonaktEntfernen.Size = New System.Drawing.Size(86, 23)

@@ -24,6 +24,10 @@ Public Class IPundPort
     End Sub
 
     Private Sub IPundPort_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        Me.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath)
+
+
         txtAddress.Text = NetworkClass.Ip
         If Not NetworkClass.Port = 8080 Then
             txtAddress.Text += ":" & NetworkClass.Port
