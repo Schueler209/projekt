@@ -58,7 +58,7 @@ Public Class Register
         If txbBenutzername.Text.Trim().Length > 15 Then lblFehler.Text = "Benutzername zu lang"
         If txbAnzeigename.Text.Trim().Length > 15 Then lblFehler.Text = "Name zu lang"
         If lblFehler.Text = "" Then
-            NetworkClass.net.Register(txbAnzeigename.Text, txbBenutzername.Text, txbPasswort.Text, AddressOf Registerconfirm)
+            NetworkClass.net.Register(txbAnzeigename.Text.Trim(), txbBenutzername.Text.Trim(), txbPasswort.Text, AddressOf Registerconfirm)
         End If
 
     End Sub
