@@ -76,7 +76,7 @@ Partial Class AddFriend
         Me.Controls.Add(Me.ltbAlleBenutzer)
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "AddFriend"
-        Me.Text = "Form1"
+        Me.Text = "Chat Hinzufügen"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
