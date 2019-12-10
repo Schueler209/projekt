@@ -6,12 +6,17 @@ Public Class Chats
 
     Private Sub ondeletechat(delete As Integer)
         ChatArea.Hide()
-
+        ltbKontakte.Items.Clear()
         For Each chat In chats
             If chat.ID = delete Then
                 chats.Remove(chat)
+
+            Else ltbKontakte.Items.Add(chat.user.benutzername)
+
             End If
+
         Next
+
 
 
     End Sub
