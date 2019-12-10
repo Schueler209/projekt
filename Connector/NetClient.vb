@@ -177,11 +177,12 @@ Public Class NetClient
         connector.send(res)
     End Sub
 
-    Sub changeSettings(id As Integer, name As String)
+    Sub changeSettings(id As Integer, name As String, callback As Action(Of String))
         Dim res As New ConnectionData("settings")
         res.addData("id", id)
         res.addData("name", name)
         connector.send(res)
+        OnSettings = callback
     End Sub
 
     Sub deleteChat(Chatid As Integer, Userid As Integer)
