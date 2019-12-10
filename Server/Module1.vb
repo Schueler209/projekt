@@ -17,7 +17,8 @@ Module Module1
             .OnChats = AddressOf GetFriends,
             .OnMessages = AddressOf getMessages,
             .OnSendMessage = AddressOf AddMessage,
-            .OnSettings = AddressOf changeName
+            .OnSettings = AddressOf changeName,
+            .OnDeleteChat = AddressOf deletechat
  }
 
         connect.connect()
