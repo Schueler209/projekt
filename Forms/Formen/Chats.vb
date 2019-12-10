@@ -6,12 +6,17 @@ Public Class Chats
 
     Private Sub ondeletechat(delete As Integer)
         ChatArea.Hide()
-
+        ltbKontakte.Items.Clear()
         For Each chat In chats
             If chat.ID = delete Then
                 chats.Remove(chat)
+
+            Else ltbKontakte.Items.Add(chat.user.benutzername)
+
             End If
+
         Next
+
 
 
     End Sub
@@ -25,16 +30,19 @@ Public Class Chats
 
     End Sub
 
+
     Sub OnRecieveMessage(msg As Message)
 
         If ChatArea.Chat IsNot Nothing AndAlso msg.chat = ChatArea.Chat.ID Then
             ChatArea.addMessage(msg)
         End If
+        Dim chat As Chat = chats(ltbKontakte.SelectedIndex)
+
     End Sub
 
     Private Sub onGetChats(FriendChats As Chat())
         For Each chat As Chat In FriendChats
-            ltbKontakte.Items.Add(chat.user.benutzername)
+            ltbKontakte.Items.Add(chat.user.name)
             chats.Add(chat)
         Next
         If FriendChats.Length > 0 Then
@@ -65,7 +73,7 @@ Public Class Chats
         ltbKontakte.Items.Clear()
 
         For Each chat As Chat In chats
-            ltbKontakte.Items.Add(chat.user.benutzername)
+            ltbKontakte.Items.Add(chat.user.name)
         Next
         ltbKontakte.SelectedIndex = 0
     End Sub

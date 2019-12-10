@@ -2,13 +2,21 @@
 
 Public Class AddFriend
     Private users As User()
+    Private filteredUsers As New List(Of User)
+
     Private Sub txbBenutzerSuchen_TextChanged(sender As Object, e As EventArgs) Handles txbBenutzerSuchen.TextChanged
         ' Vorherige Anzeige löschen
+        showUsers()
+    End Sub
+
+    Private Sub showUsers()
         ltbAlleBenutzer.Items.Clear()
+        filteredUsers = New List(Of User)
         For Each user In users
             ' Ist der Name in der Suche enthalten?
             If user.benutzername.ToLower.Contains(txbBenutzerSuchen.Text.ToLower) Or user.name.ToLower.Contains(txbBenutzerSuchen.Text.ToLower) Then
-                ltbAlleBenutzer.Items.Add(user.benutzername)
+                ltbAlleBenutzer.Items.Add("@" & user.benutzername & " (" & user.name & ")")
+                filteredUsers.Add(user)
             End If
 
         Next
@@ -20,22 +28,14 @@ Public Class AddFriend
 
     Private Sub benutzer_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         NetworkClass.net.getAllUsers(NetworkClass.login.id, Sub(AllUsers As User())
-                                                                Console.WriteLine(AllUsers)
                                                                 users = AllUsers
-                                                                For Each user In users
-                                                                    ltbAlleBenutzer.Items.Add(user.benutzername)
-                                                                Next
+                                                                showUsers()
                                                             End Sub)
 
     End Sub
 
     Private Sub ltbAlleBenutzer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ltbAlleBenutzer.SelectedIndexChanged
-        Dim selecteduser As User
-        For Each user In users
-            If user.benutzername = ltbAlleBenutzer.SelectedItem Then
-                selecteduser = user
-            End If
-        Next
+        Dim selecteduser As User = filteredUsers(ltbAlleBenutzer.SelectedIndex)
         If selecteduser IsNot Nothing Then
             NetworkClass.net.NewChat(NetworkClass.login.id, selecteduser.id, Sub(res As Chat)
                                                                                  If res IsNot Nothing Then
