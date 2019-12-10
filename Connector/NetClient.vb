@@ -97,7 +97,7 @@ Public Class NetClient
                     OnSettings(ans)
                 End If
 
-            Case "delete Chat"
+            Case "delete chat"
                 If OnDeleteChat IsNot Nothing Then
                     Dim ans As Boolean = req.Data.Item("success")
                     OnDeleteChat(ans)
