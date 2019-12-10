@@ -145,6 +145,7 @@ Public Class NetServer
             Case "delete Chat"
                 If OnDeleteChat IsNot Nothing Then
                     Dim chat As Integer = req.Data.Item("chat")
+                    Dim userID As Integer = req.Data.Item("UserID")
                     Dim data As New ConnectionData("delete chat")
                     data.addData("success", chat)
                     connector.send(client, data)
