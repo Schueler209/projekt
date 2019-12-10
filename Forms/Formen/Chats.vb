@@ -35,6 +35,7 @@ Public Class Chats
         If ChatArea.Chat IsNot Nothing AndAlso msg.chat = ChatArea.Chat.ID Then
             ChatArea.addMessage(msg)
         End If
+
     End Sub
 
     Private Sub onGetChats(FriendChats As Chat())
