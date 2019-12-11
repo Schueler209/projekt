@@ -3,7 +3,9 @@ Public Class TicTacToeMessage
     Private user As Integer
 
     Public Sub New(user As Integer)
+        InitializeComponent()
         Me.user = user
+
     End Sub
 
     Private Sub MessageControl_Load(sender As Object, e As EventArgs) Handles MyBase.Load

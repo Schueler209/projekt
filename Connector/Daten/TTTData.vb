@@ -1,5 +1,5 @@
 ﻿Public Enum TTTType
-    Request
+    Restart
     RequestSuccess
     Update
     Won
@@ -17,6 +17,10 @@ Public Class TTTData
     Public Sub New(type As TTTType, state() As Integer)
         Me.type = type
         Me.state = state
+    End Sub
+    Public Sub New(type As TTTType)
+        Me.type = type
+        Me.state = {}
     End Sub
 End Class
 

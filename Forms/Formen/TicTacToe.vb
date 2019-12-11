@@ -1,8 +1,9 @@
-﻿Imports Connector
+﻿Imports System.ComponentModel
+Imports Connector
 
 Public Class TicTacToe
 
-    Private values As Integer() = {0, 0, 1, 2, 2, 1, 0, 1, 0}
+    Private values As Integer() = {0, 0, 0, 0, 0, 0, 0, 0, 0}
     Private buttons As Button()
 
     Public isInitiator As Boolean = False
@@ -49,10 +50,23 @@ Public Class TicTacToe
                 displayValues()
             Case TTTType.Won
                 lblOutput.Text = "Du hast leider verloren"
-
                 buttonGroup.Hide()
                 btnWiederholen.Show()
+            Case TTTType.Finished
+                Me.Close()
+            Case TTTType.Restart
+                restart()
         End Select
+    End Sub
+
+    Private Sub restart()
+        values = {0, 0, 0, 0, 0, 0, 0, 0, 0}
+        displayValues()
+        If isInitiator Then
+            lblOutput.Text = "Neue Runde gestartet! Du darfst anfangen!"
+        Else
+            lblOutput.Text = "Neue Runde gestartet! Warte auf Aktion..."
+        End If
     End Sub
 
     Private Sub displayValues()
@@ -142,5 +156,20 @@ Public Class TicTacToe
     End Sub
     Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
         ButtonClick(8)
+    End Sub
+
+    Private Sub TicTacToe_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+
+
+        Dim data As New TTTData(TTTType.Finished)
+        NetworkClass.net.updateTTT(NetworkClass.login.id, opponentId, data)
+
+
+    End Sub
+
+    Private Sub btnWiederholen_Click(sender As Object, e As EventArgs) Handles btnWiederholen.Click
+        restart()
+        Dim data As New TTTData(TTTType.Restart)
+        NetworkClass.net.updateTTT(NetworkClass.login.id, opponentId, data)
     End Sub
 End Class
