@@ -39,6 +39,12 @@ Public Class NetClient
     'Event für Chat löschen
     Public OnDeleteChat As Action(Of Integer)
 
+    'Event für TicTacToe Request
+    Public OnTTTRequest As Action(Of Integer)
+
+    'Event für TicTacToe Update
+    Public OnTTTUpdate As Action(Of Integer, TTTData)
+
 
     ' Falls neue Nachricht kommt:
     Private Sub onRequest(req As ConnectionData)
@@ -101,6 +107,17 @@ Public Class NetClient
                 If OnDeleteChat IsNot Nothing Then
                     Dim ans As Integer = req.Data.Item("success")
                     OnDeleteChat(ans)
+                End If
+            Case "TicTacToe/Request"
+                Dim sender As Integer = req.Data.Item("user")
+                If OnTTTRequest IsNot Nothing Then
+                    OnTTTRequest(sender)
+                End If
+            Case "TicTacToe/Update"
+                Dim sender As Integer = req.Data.Item("user")
+                Dim data As TTTData = req.Data.Item("data")
+                If OnTTTUpdate IsNot Nothing Then
+                    OnTTTUpdate(sender, data)
                 End If
         End Select
 
@@ -189,6 +206,20 @@ Public Class NetClient
         Dim res As New ConnectionData("delete Chat")
         res.addData("chat", Chatid)
         res.addData("UserID", Userid)
+        connector.send(res)
+    End Sub
+
+    Sub sendTTTRequest(ownId As Integer, Userid As Integer)
+        Dim res As New ConnectionData("TicTacToe/Request")
+        res.addData("user", ownId)
+        res.addData("reciever", Userid)
+        connector.send(res)
+    End Sub
+    Sub updateTTT(ownId As Integer, Userid As Integer, data As TTTData)
+        Dim res As New ConnectionData("TicTacToe/Update")
+        res.addData("user", ownId)
+        res.addData("reciever", Userid)
+        res.addData("data", data)
         connector.send(res)
     End Sub
 

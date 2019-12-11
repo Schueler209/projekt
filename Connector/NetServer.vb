@@ -151,6 +151,22 @@ Public Class NetServer
                     data.addData("success", success)
                     connector.send(client, data)
                 End If
+            Case "TicTacToe/Request"
+                Dim reciever As Integer = req.Data.Item("reciever")
+                If loggedIn.ContainsKey(reciever) Then
+                    Dim data As New ConnectionData("TicTacToe/Request", req.Data)
+                    connector.send(loggedIn(reciever), data)
+                End If
+            Case "TicTacToe/Update"
+                Dim reciever As Integer = req.Data.Item("reciever")
+                For Each r As Integer In loggedIn.Keys
+                    Console.WriteLine(r)
+                Next
+
+                If loggedIn.ContainsKey(reciever) Then
+                    Dim data As New ConnectionData("TicTacToe/Update", req.Data)
+                    connector.send(loggedIn(reciever), data)
+                End If
 
         End Select
 
