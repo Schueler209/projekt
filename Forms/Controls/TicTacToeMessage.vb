@@ -1,5 +1,10 @@
 ﻿Imports Connector
 Public Class TicTacToeMessage
+    Private user As Integer
+
+    Public Sub New(user As Integer)
+        Me.user = user
+    End Sub
 
     Private Sub MessageControl_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -7,6 +12,7 @@ Public Class TicTacToeMessage
     End Sub
 
     Private Sub btnStart_Click(sender As Object, e As EventArgs) Handles btnStart.Click
+        TicTacToe.opponentId = user
         TicTacToe.Show()
         Me.Hide()
     End Sub

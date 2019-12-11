@@ -39,7 +39,7 @@ Public Class ChatArea
     Public Sub onTicTacToeRequest(user As Integer)
         If Chat.user.id = user Then
             ChatPanel.VerticalScroll.Value = ChatPanel.VerticalScroll.Minimum
-            Dim messagecontrol As New TicTacToeMessage()
+            Dim messagecontrol As New TicTacToeMessage(user)
             messagecontrol.Top = messagecontrol.Height * ChatPanel.Controls.Count
             messagecontrol.Width = 0.8 * ChatPanel.Width
 
