@@ -62,6 +62,8 @@ Public Class TicTacToe
     Private Sub restart()
         values = {0, 0, 0, 0, 0, 0, 0, 0, 0}
         displayValues()
+        buttonGroup.Show()
+        btnWiederholen.Hide()
         If isInitiator Then
             lblOutput.Text = "Neue Runde gestartet! Du darfst anfangen!"
         Else
