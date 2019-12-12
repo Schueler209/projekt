@@ -97,6 +97,7 @@ Friend Class ClientConnector
             Await serverStream.FlushAsync()
         Catch ex As Exception
             Console.WriteLine(ex)
+            disconnect()
         End Try
 
     End Sub

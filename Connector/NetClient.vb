@@ -124,11 +124,12 @@ Public Class NetClient
     End Sub
 
     ' Registrieren
-    Sub Register(name As String, username As String, password As String, callback As Action(Of User))
+    Sub Register(name As String, username As String, password As String, colour As Integer, callback As Action(Of User))
         Dim data As New Dictionary(Of String, Object)
         data.Add("name", name)
         data.Add("username", username)
         data.Add("password", password)
+        data.Add("colour", colour)
         Dim req As New ConnectionData("register", data)
         connector.send(req)
         ' Callback setzen
@@ -194,10 +195,12 @@ Public Class NetClient
         connector.send(res)
     End Sub
 
-    Sub changeSettings(id As Integer, name As String)
+    Sub changeSettings(id As Integer, name As String, password As String, newPassword As String)
         Dim res As New ConnectionData("settings")
         res.addData("id", id)
         res.addData("name", name)
+        res.addData("password", password)
+        res.addData("newPassword", newPassword)
         connector.send(res)
 
     End Sub

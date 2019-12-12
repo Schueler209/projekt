@@ -17,7 +17,7 @@ Public Class NetServer
     End Sub
 
     ' Event für Registrierung Neue Methode zuweisen!
-    Public OnRegister As Func(Of String, String, String, User)
+    Public OnRegister As Func(Of String, String, String, Integer, User)
     ' Event für login Neue Methode zuweisen!
     Public OnLogin As Func(Of String, String, User)
     'Event für alle Benutzernamen senden
@@ -33,7 +33,7 @@ Public Class NetServer
     'Event für Logout
     Public OnLogOut As Func(Of Integer)
     'Event für Einstellungsänderungen
-    Public OnSettings As Func(Of Integer, String, Boolean)
+    Public OnSettings As Func(Of Integer, String, String, String, Boolean)
     'Event für Chat löschen
     Public OnDeleteChat As Func(Of Integer, Integer, Integer)
 
@@ -49,12 +49,13 @@ Public Class NetServer
                     Dim name As String = req.Data.Item("name")
                     Dim username As String = req.Data.Item("username")
                     Dim password As String = req.Data.Item("password")
-
+                    Dim colour As Integer = req.Data.Item("colour")
                     ' Methode aufrufen + Callback 
                     Dim User = OnRegister(
                         name,
                         username,
-                        password
+                        password,
+                     colour
                     )
                     RegisterConfirm(User, client)
                 End If
@@ -136,7 +137,9 @@ Public Class NetServer
                 If OnSettings IsNot Nothing Then
                     Dim id As Integer = req.Data.Item("id")
                     Dim name As String = req.Data.Item("name")
-                    Dim success = OnSettings(id, name)
+                    Dim password As String = req.Data.Item("password")
+                    Dim newPassword As String = req.Data.Item("newPassword")
+                    Dim success = OnSettings(id, name, password, newPassword)
                     Dim data As New ConnectionData("settingsSuccess")
                     data.addData("success", success)
                     connector.send(client, data)
@@ -146,7 +149,9 @@ Public Class NetServer
                 If OnDeleteChat IsNot Nothing Then
                     Dim chat As Integer = req.Data.Item("chat")
                     Dim userID As Integer = req.Data.Item("UserID")
-                    Dim success = OnDeleteChat(userID, chat)
+
+                    Dim success As Integer = OnDeleteChat(chat, userID)
+
                     Dim data As New ConnectionData("delete chat")
                     data.addData("success", success)
                     connector.send(client, data)
