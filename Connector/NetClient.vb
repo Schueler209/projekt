@@ -107,11 +107,12 @@ Public Class NetClient
     End Sub
 
     ' Registrieren
-    Sub Register(name As String, username As String, password As String, callback As Action(Of User))
+    Sub Register(name As String, username As String, password As String, colour As Integer, callback As Action(Of User))
         Dim data As New Dictionary(Of String, Object)
         data.Add("name", name)
         data.Add("username", username)
         data.Add("password", password)
+        data.Add("colour", colour)
         Dim req As New ConnectionData("register", data)
         connector.send(req)
         ' Callback setzen
