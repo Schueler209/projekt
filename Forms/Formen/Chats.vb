@@ -7,9 +7,12 @@ Public Class Chats
     Private Sub ondeletechat(delete As Integer)
         ChatArea.Hide()
         ltbKontakte.Items.Clear()
+        Dim deletedchat As Chat
+
         For Each chat In chats
             If chat.ID = delete Then
-                chats.Remove(chat)
+                deletedchat = chat
+
 
             Else
                 ltbKontakte.Items.Add(chat.user.name)
@@ -17,7 +20,7 @@ Public Class Chats
             End If
 
         Next
-
+        chats.Remove(deletedchat)
 
 
     End Sub
@@ -41,6 +44,14 @@ Public Class Chats
             ChatArea.addMessage(msg)
         End If
         Dim chat As Chat = chats(ltbKontakte.SelectedIndex)
+        chats.Remove(chat)
+        chats.Insert(0, chat)
+        ltbKontakte.Items.Clear()
+
+        For Each chatten As Chat In chats
+            ltbKontakte.Items.Add(chatten.user.name)
+        Next
+
 
     End Sub
 
@@ -62,11 +73,13 @@ Public Class Chats
 
     Private Sub LtbKontakte_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ltbKontakte.SelectedIndexChanged
 
-        Dim chat = chats(ltbKontakte.SelectedIndex)
-        If chat IsNot Nothing And chat IsNot ChatArea.Chat Then
-            ChatArea.Chat = chat
-            ChatArea.Show()
+        If ltbKontakte.SelectedIndex > 0 Then
+            Dim chat = chats(ltbKontakte.SelectedIndex)
+            If chat IsNot Nothing And chat IsNot ChatArea.Chat Then
+                ChatArea.Chat = chat
+                ChatArea.Show()
 
+            End If
         End If
 
     End Sub
