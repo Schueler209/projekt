@@ -51,6 +51,7 @@ Partial Class LoginForm
         Me.txbPasswort.Location = New System.Drawing.Point(65, 228)
         Me.txbPasswort.Margin = New System.Windows.Forms.Padding(2)
         Me.txbPasswort.Name = "txbPasswort"
+        Me.txbPasswort.PasswordChar = Global.Microsoft.VisualBasic.ChrW(9679)
         Me.txbPasswort.Size = New System.Drawing.Size(158, 20)
         Me.txbPasswort.TabIndex = 1
         '

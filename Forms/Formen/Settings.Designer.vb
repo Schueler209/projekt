@@ -80,7 +80,7 @@ Partial Class Settings
         Me.txtNewPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtNewPassword.Location = New System.Drawing.Point(31, 145)
         Me.txtNewPassword.Name = "txtNewPassword"
-        Me.txtNewPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
+        Me.txtNewPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(9679)
         Me.txtNewPassword.Size = New System.Drawing.Size(242, 26)
         Me.txtNewPassword.TabIndex = 8
         '
@@ -101,7 +101,7 @@ Partial Class Settings
         Me.txtPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtPassword.Location = New System.Drawing.Point(31, 199)
         Me.txtPassword.Name = "txtPassword"
-        Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
+        Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(9679)
         Me.txtPassword.Size = New System.Drawing.Size(242, 26)
         Me.txtPassword.TabIndex = 10
         '

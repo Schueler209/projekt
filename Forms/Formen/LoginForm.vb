@@ -30,14 +30,6 @@ Public Class LoginForm
         Me.Hide()
     End Sub
 
-    Private Sub txbPasswort_TextChanged(sender As Object, e As EventArgs) Handles txbPasswort.TextChanged
-        txbPasswort.PasswordChar = "*"
-
-
-
-
-    End Sub
-
     Sub Loginconfirm(wert As User)
         If IsNothing(wert) Then
             lblFehler.Text = "Passwort oder Benutzername ist falsch!"

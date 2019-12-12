@@ -65,6 +65,7 @@ Partial Class Register
         Me.txbPasswort.Location = New System.Drawing.Point(54, 215)
         Me.txbPasswort.Margin = New System.Windows.Forms.Padding(2)
         Me.txbPasswort.Name = "txbPasswort"
+        Me.txbPasswort.PasswordChar = Global.Microsoft.VisualBasic.ChrW(9679)
         Me.txbPasswort.Size = New System.Drawing.Size(158, 20)
         Me.txbPasswort.TabIndex = 2
         '
@@ -75,6 +76,7 @@ Partial Class Register
         Me.txbPasswortWdh.Location = New System.Drawing.Point(54, 264)
         Me.txbPasswortWdh.Margin = New System.Windows.Forms.Padding(20)
         Me.txbPasswortWdh.Name = "txbPasswortWdh"
+        Me.txbPasswortWdh.PasswordChar = Global.Microsoft.VisualBasic.ChrW(9679)
         Me.txbPasswortWdh.Size = New System.Drawing.Size(158, 20)
         Me.txbPasswortWdh.TabIndex = 3
         '
@@ -190,9 +192,9 @@ Partial Class Register
         Me.Profilfarbe1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Profilfarbe1.Location = New System.Drawing.Point(2, 307)
+        Me.Profilfarbe1.Location = New System.Drawing.Point(2, 294)
         Me.Profilfarbe1.Name = "Profilfarbe1"
-        Me.Profilfarbe1.Size = New System.Drawing.Size(259, 30)
+        Me.Profilfarbe1.Size = New System.Drawing.Size(259, 43)
         Me.Profilfarbe1.TabIndex = 14
         '
         'Register

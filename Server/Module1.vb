@@ -17,7 +17,7 @@ Module Module1
             .OnChats = AddressOf GetFriends,
             .OnMessages = AddressOf getMessages,
             .OnSendMessage = AddressOf AddMessage,
-            .OnSettings = AddressOf changeName,
+            .OnSettings = AddressOf changeSettings,
             .OnDeleteChat = AddressOf deletechat
  }
 
@@ -154,7 +154,7 @@ Module Module1
 
 
     'Namen ändern
-    Public Function changeName(ID As Integer, NewName As String, Password As String, NewPassword As String) As Boolean
+    Public Function changeSettings(ID As Integer, NewName As String, Password As String, NewPassword As String) As Boolean
 
         Dim reader = ReaderQuery("SELECT ID FROM Users WHERE ID = " & ID & " And [Password] = '" & Password & "'")
         If reader.HasRows Then
@@ -166,7 +166,7 @@ Module Module1
 
             Dim conn As New OleDbConnection(ConnectionStr)
             conn.Open()
-            Dim updatecommand As New OleDbCommand("UPDATE Users SET Name = '" & NewName & "' And [Password] = '" & NewPassword & "' WHERE ID = " & ID & "")
+            Dim updatecommand As New OleDbCommand("UPDATE Users SET Name = '" & NewName & "', [Password] = '" & NewPassword & "' WHERE ID = " & ID & "")
             updatecommand.Connection = conn
 
             Try
@@ -198,7 +198,6 @@ Module Module1
             Console.WriteLine(ex.Message)
             Return Nothing
         End Try
-        conn.Close()
         Return chatID
     End Function
 End Module

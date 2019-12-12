@@ -41,10 +41,6 @@ Public Class Register
 
     End Sub
 
-    Private Sub txbPasswort_TextChanged(sender As Object, e As EventArgs) Handles txbPasswort.TextChanged
-        txbPasswort.PasswordChar = "*"
-    End Sub
-
     Private Sub txbPasswortWdh_TextChanged(sender As Object, e As EventArgs) Handles txbPasswortWdh.TextChanged
         txbPasswortWdh.PasswordChar = "*"
     End Sub
