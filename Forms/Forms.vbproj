@@ -123,6 +123,12 @@
     <Compile Include="Controls\MessageControl.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Controls\profilfarbe.Designer.vb">
+      <DependentUpon>profilfarbe.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\profilfarbe.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Formen\AddFriend.Designer.vb">
       <DependentUpon>AddFriend.vb</DependentUpon>
     </Compile>
@@ -182,6 +188,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\MessageControl.resx">
       <DependentUpon>MessageControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\profilfarbe.resx">
+      <DependentUpon>profilfarbe.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formen\AddFriend.resx">
       <DependentUpon>AddFriend.vb</DependentUpon>
