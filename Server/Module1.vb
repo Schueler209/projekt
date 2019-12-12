@@ -144,19 +144,34 @@ Module Module1
 
 
     'Namen ändern
-    Public Function changeName(ID As Integer, NewName As String) As Boolean
-        Dim conn As New OleDbConnection(ConnectionStr)
-        conn.Open()
-        Dim updatecommand As New OleDbCommand("UPDATE Users SET Name = '" & NewName & "'" & " WHERE ID = " & ID & "")
-        updatecommand.Connection = conn
+    Public Function changeName(ID As Integer, NewName As String, Password As String, NewPassword As String) As Boolean
 
-        Try
-            updatecommand.ExecuteNonQuery()
-        Catch ex As Exception
-            Console.WriteLine(ex.Message)
+        Dim reader = ReaderQuery("SELECT ID FROM Users WHERE ID = " & ID & " And [Password] = '" & Password & "'")
+        If reader.HasRows Then
+
+            If NewPassword = "" Then
+                NewPassword = Password
+            End If
+            Console.WriteLine(NewPassword)
+
+            Dim conn As New OleDbConnection(ConnectionStr)
+            conn.Open()
+            Dim updatecommand As New OleDbCommand("UPDATE Users SET Name = '" & NewName & "' And [Password] = '" & NewPassword & "' WHERE ID = " & ID & "")
+            updatecommand.Connection = conn
+
+            Try
+                Console.WriteLine(updatecommand.ExecuteNonQuery())
+            Catch ex As Exception
+                Console.WriteLine(ex.Message)
+                Return False
+            End Try
+            Return True
+
+        Else
             Return False
-        End Try
-        Return True
+        End If
+
+
 
     End Function
 

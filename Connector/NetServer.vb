@@ -33,7 +33,7 @@ Public Class NetServer
     'Event für Logout
     Public OnLogOut As Func(Of Integer)
     'Event für Einstellungsänderungen
-    Public OnSettings As Func(Of Integer, String, Boolean)
+    Public OnSettings As Func(Of Integer, String, String, String, Boolean)
     'Event für Chat löschen
     Public OnDeleteChat As Func(Of Integer, Integer, Integer)
 
@@ -136,7 +136,9 @@ Public Class NetServer
                 If OnSettings IsNot Nothing Then
                     Dim id As Integer = req.Data.Item("id")
                     Dim name As String = req.Data.Item("name")
-                    Dim success = OnSettings(id, name)
+                    Dim password As String = req.Data.Item("password")
+                    Dim newPassword As String = req.Data.Item("newPassword")
+                    Dim success = OnSettings(id, name, password, newPassword)
                     Dim data As New ConnectionData("settingsSuccess")
                     data.addData("success", success)
                     connector.send(client, data)

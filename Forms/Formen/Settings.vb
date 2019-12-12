@@ -6,18 +6,30 @@ Public Class Settings
         NetworkClass.net.OnSettings = AddressOf onsettings
         txtName.Text = NetworkClass.login.name
         lblUsername.Text = "Dein Benutzername: " & NetworkClass.login.benutzername
+        lblFehler.Text = ""
     End Sub
 
     Public Sub cmdSave_Click(sender As Object, e As EventArgs) Handles cmdSave.Click
-        Dim NewName As String
-        NewName = txtName.Text
-        NetworkClass.net.changeSettings(NetworkClass.login.id, NewName)
+        If txtPassword.Text IsNot "" Then
+            Dim NewName As String = txtName.Text
+            NetworkClass.net.changeSettings(NetworkClass.login.id, NewName, txtPassword.Text, txtNewPassword.Text)
+        Else
+            lblFehler.Text = "Bitte zur Legimitierung dein aktuelles Passwort eingeben"
+        End If
+
 
         NetworkClass.net.OnSettings = AddressOf onsettings
+
+
     End Sub
     Public Sub onsettings(settings As Boolean)
-        NetworkClass.login.name = txtName.Text
-        Me.Close()
+        If settings Then
+            NetworkClass.login.name = txtName.Text
+            Me.Close()
+        Else
+            lblFehler.Text = "Passwort oder Eingabe ist falsch"
+        End If
+
     End Sub
 
 End Class

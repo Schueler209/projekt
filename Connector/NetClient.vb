@@ -177,10 +177,12 @@ Public Class NetClient
         connector.send(res)
     End Sub
 
-    Sub changeSettings(id As Integer, name As String)
+    Sub changeSettings(id As Integer, name As String, password As String, newPassword As String)
         Dim res As New ConnectionData("settings")
         res.addData("id", id)
         res.addData("name", name)
+        res.addData("password", password)
+        res.addData("newPassword", newPassword)
         connector.send(res)
 
     End Sub
