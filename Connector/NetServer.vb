@@ -17,7 +17,7 @@ Public Class NetServer
     End Sub
 
     ' Event für Registrierung Neue Methode zuweisen!
-    Public OnRegister As Func(Of String, String, String, User)
+    Public OnRegister As Func(Of String, String, String, Integer, User)
     ' Event für login Neue Methode zuweisen!
     Public OnLogin As Func(Of String, String, User)
     'Event für alle Benutzernamen senden
@@ -49,12 +49,13 @@ Public Class NetServer
                     Dim name As String = req.Data.Item("name")
                     Dim username As String = req.Data.Item("username")
                     Dim password As String = req.Data.Item("password")
-
+                    Dim colour As Integer = req.Data.Item("colour")
                     ' Methode aufrufen + Callback 
                     Dim User = OnRegister(
                         name,
                         username,
-                        password
+                        password,
+                     colour
                     )
                     RegisterConfirm(User, client)
                 End If

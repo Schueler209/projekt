@@ -27,29 +27,32 @@ Module Module1
 
     ' Benutzerverwaltung
 
-    Public Function Register(name As String, username As String, password As String) As User
+    Public Function Register(name As String, username As String, password As String, colour As Integer) As User
 
         Dim conn As New OleDbConnection(ConnectionStr)
         conn.Open()
 
         Dim checkCommand As New OleDbCommand("select * from users where Username = '" & username & "'")
         checkCommand.Connection = conn
+
         Dim reader = checkCommand.ExecuteReader
+
         If reader.HasRows Then
             Return Nothing
         Else
-            Dim insertCommand As New OleDbCommand("INSERT INTO Users ([Name],Username,[Password]) VALUES (@displayname,@username,@password); ")
+            Dim insertCommand As New OleDbCommand("INSERT INTO Users ([Name],Username,[Password],Colour) VALUES (@displayname,@username,@password,@colour); ")
             Dim command As New OleDbCommand("SELECT @@IDENTITY")
             insertCommand.Connection = conn
             insertCommand.Parameters.Add("@displayname", OleDbType.Char).Value = name
             insertCommand.Parameters.Add("@username", OleDbType.Char).Value = username
             insertCommand.Parameters.Add("@password", OleDbType.Char).Value = password
+            insertCommand.Parameters.Add("@colour", OleDbType.Char).Value = colour
             insertCommand.CommandType = CommandType.Text
             insertCommand.ExecuteNonQuery()
             command.Connection = conn
             Return New User(username, name, command.ExecuteScalar())
-
         End If
+
     End Function
 
 
