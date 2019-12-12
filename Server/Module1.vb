@@ -69,6 +69,7 @@ Module Module1
         Dim ignore As Integer() = getFriendIDs(id).Concat({id}).ToArray()
         Return getAll(ignore)
     End Function
+    'Chats erstellen
     Public Function AddFriend(ID As Integer, ID2 As Integer) As Chat
 
         If areFriends(ID, ID2) Then
@@ -85,23 +86,21 @@ Module Module1
             insertCommand.CommandType = CommandType.Text
             Try
                 insertCommand.ExecuteNonQuery()
-
-
             Catch ex As Exception
                 Console.WriteLine(ex.Message)
                 Return Nothing
             End Try
             Dim command As New OleDbCommand("SELECT @@IDENTITY")
             command.Connection = conn
-
             Return New Chat(command.ExecuteScalar(), getUser(ID2), DateTime.Now)
+
         End If
     End Function
 
     Public Function GetFriends(ID As Integer) As Chat()
         Return getChats(ID)
     End Function
-
+    'Nachricht schicken
     Public Function AddMessage(UserID As Integer, ChatID As Integer, Message As String) As Tuple(Of Message, Integer())
 
         Dim conn As New OleDbConnection(ConnectionStr)
@@ -122,15 +121,23 @@ Module Module1
             Return Nothing
         End Try
 
+        Dim updatecommand As New OleDbCommand("UPDATE Chats SET Datum = '" & Date.Now & "'" & " WHERE ID = " & ChatID & "")
+            updatecommand.Connection = conn
+        Try
+            updatecommand.ExecuteNonQuery()
+        Catch ex As Exception
+            Console.WriteLine(ex.Message)
+        End Try
+
         Dim msg As New Message(getUser(UserID), ChatID, Date.Now, Message)
 
         Dim recievers As Integer() = {getFriendID(UserID, ChatID)}
 
         Return New Tuple(Of Message, Integer())(msg, recievers)
+
     End Function
 
     Public Function getMessages(ChatID As Integer) As Message()
-
         Dim conn As New OleDbConnection(ConnectionStr)
         conn.Open()
         Dim reader = ReaderQuery("SELECT Message, Datum, UserID FROM Messages WHERE ChatID = " & ChatID)
