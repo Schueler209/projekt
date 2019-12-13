@@ -12,7 +12,7 @@ Public Class Settings
     Public Sub cmdSave_Click(sender As Object, e As EventArgs) Handles cmdSave.Click
         If txtPassword.Text IsNot "" Then
             Dim NewName As String = txtName.Text
-            NetworkClass.net.changeSettings(NetworkClass.login.id, NewName, txtPassword.Text, txtNewPassword.Text)
+            NetworkClass.net.changeSettings(NetworkClass.login.id, NewName, txtPassword.Text, txtNewPassword.Text, Profilfarbe1.selectedcolour())
         Else
             lblFehler.Text = "Bitte zur Legimitierung dein aktuelles Passwort eingeben"
         End If

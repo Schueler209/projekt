@@ -130,9 +130,9 @@ Partial Class Settings
         '
         'Profilfarbe1
         '
-        Me.Profilfarbe1.Location = New System.Drawing.Point(12, 199)
+        Me.Profilfarbe1.Location = New System.Drawing.Point(1, 199)
         Me.Profilfarbe1.Name = "Profilfarbe1"
-        Me.Profilfarbe1.Size = New System.Drawing.Size(297, 40)
+        Me.Profilfarbe1.Size = New System.Drawing.Size(308, 40)
         Me.Profilfarbe1.TabIndex = 12
         '
         'Settings
