@@ -50,7 +50,7 @@ Module Module1
             insertCommand.CommandType = CommandType.Text
             insertCommand.ExecuteNonQuery()
             command.Connection = conn
-            Return New User(username, name, command.ExecuteScalar())
+            Return New User(username, name, colour, command.ExecuteScalar())
         End If
 
     End Function
@@ -60,7 +60,7 @@ Module Module1
         Dim reader = ReaderQuery("SELECT ID, [name] FROM Users WHERE Username = '" & username & "'And [Password] = '" & password & "'")
         If reader.HasRows Then
             reader.Read()
-            Return New User(username, reader.GetString(1), reader.GetInt32(0))
+            Return New User(username, reader.GetString(1), reader.GetInt32(0), reader.GetInt32(2))
         Else
             Return Nothing
         End If
@@ -154,7 +154,7 @@ Module Module1
 
 
     'Namen ändern
-    Public Function changeSettings(ID As Integer, NewName As String, Password As String, NewPassword As String) As Boolean
+    Public Function changeSettings(ID As Integer, NewName As String, Password As String, NewPassword As String, Colour As Integer) As Boolean
 
         Dim reader = ReaderQuery("SELECT ID FROM Users WHERE ID = " & ID & " And [Password] = '" & Password & "'")
         If reader.HasRows Then

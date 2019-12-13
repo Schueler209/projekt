@@ -19,10 +19,10 @@ Module DBUtils
 
 
     Public Function getUser(ID As Integer) As User
-        Dim reader = ReaderQuery("SELECT username, [name] FROM Users WHERE ID = " + ID.ToString())
+        Dim reader = ReaderQuery("SELECT username, [name], colour FROM Users WHERE ID = " + ID.ToString())
         If reader.HasRows Then
             reader.Read()
-            Return New User(reader.GetString(0), reader.GetString(1), ID)
+            Return New User(reader.GetString(0), reader.GetString(1), ID, reader.GetInt32(2))
         Else
             Return Nothing
         End If
@@ -84,13 +84,13 @@ Module DBUtils
     End Function
 
     Public Function getAll(exept As Integer()) As User()
-        Dim reader = ReaderQuery("SELECT ID ,username, [name] FROM Users")
+        Dim reader = ReaderQuery("SELECT ID ,username, [name], colour FROM Users")
         Dim userlist As New List(Of User)
         Do While reader.Read
             Dim id As Integer = reader.GetInt32(0)
             ' Nehme nur die, die nicht in der Ausnahmeliste stehen
             If Not exept.Contains(id) Then
-                userlist.Add(New User(reader.GetString(1), reader.GetString(2), id))
+                userlist.Add(New User(reader.GetString(1), reader.GetString(2), reader.GetInt32(3), id))
             End If
         Loop
         Return userlist.ToArray()
