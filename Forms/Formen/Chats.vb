@@ -52,14 +52,17 @@ Public Class Chats
         If ChatArea.Chat IsNot Nothing AndAlso msg.chat = ChatArea.Chat.ID Then
             ChatArea.addMessage(msg)
         End If
-        Dim chat As Chat = chats(ltbKontakte.SelectedIndex)
-        chats.Remove(chat)
-        chats.Insert(0, chat)
-        ltbKontakte.Items.Clear()
+        If ltbKontakte.SelectedIndex >= 0 Then
+            Dim chat As Chat = chats(ltbKontakte.SelectedIndex)
+            chats.Remove(chat)
+            chats.Insert(0, chat)
+            ltbKontakte.Items.Clear()
 
-        For Each chatten As Chat In chats
-            ltbKontakte.Items.Add(chatten.user.name)
-        Next
+            For Each chatten As Chat In chats
+                ltbKontakte.Items.Add(chatten.user.name)
+            Next
+        End If
+
 
 
     End Sub

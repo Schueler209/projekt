@@ -63,6 +63,7 @@ Public Class Register
         If txbPasswort.Text = "" Then lblFehler.Text = "kein Passwort angegeben"
         If txbBenutzername.Text.Trim().Length > 15 Then lblFehler.Text = "Benutzername zu lang"
         If txbAnzeigename.Text.Trim().Length > 20 Then lblFehler.Text = "Vor- und Nachname zu lang"
+
         If lblFehler.Text = "" Then
             NetworkClass.net.Register(txbAnzeigename.Text.Trim(), txbBenutzername.Text.Trim(), txbPasswort.Text, Profilfarbe1.selectedcolour(), AddressOf Registerconfirm)
         End If
