@@ -125,7 +125,7 @@ Module Module1
         End Try
 
         Dim updatecommand As New OleDbCommand("UPDATE Chats SET Datum = '" & Date.Now & "'" & " WHERE ID = " & ChatID & "")
-            updatecommand.Connection = conn
+        updatecommand.Connection = conn
         Try
             updatecommand.ExecuteNonQuery()
         Catch ex As Exception
