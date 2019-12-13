@@ -3,6 +3,7 @@
 Public Class LoginForm
 
     Private Sub Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath)
         NetworkClass.ensureConnection()
 
         ' Fehler label verstecken
@@ -27,14 +28,6 @@ Public Class LoginForm
     Private Sub btnZumRegistrieren_Click(sender As Object, e As EventArgs) Handles btnZumRegistrieren.Click
         Register.Show()
         Me.Hide()
-    End Sub
-
-    Private Sub txbPasswort_TextChanged(sender As Object, e As EventArgs) Handles txbPasswort.TextChanged
-        txbPasswort.PasswordChar = "*"
-
-
-
-
     End Sub
 
     Sub Loginconfirm(wert As User)

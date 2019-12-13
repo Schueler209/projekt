@@ -22,6 +22,7 @@ Partial Class LoginForm
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(LoginForm))
         Me.txbBenutzername = New System.Windows.Forms.TextBox()
         Me.txbPasswort = New System.Windows.Forms.TextBox()
         Me.lblBenutzername = New System.Windows.Forms.Label()
@@ -50,6 +51,7 @@ Partial Class LoginForm
         Me.txbPasswort.Location = New System.Drawing.Point(65, 228)
         Me.txbPasswort.Margin = New System.Windows.Forms.Padding(2)
         Me.txbPasswort.Name = "txbPasswort"
+        Me.txbPasswort.PasswordChar = Global.Microsoft.VisualBasic.ChrW(9679)
         Me.txbPasswort.Size = New System.Drawing.Size(158, 20)
         Me.txbPasswort.TabIndex = 1
         '
@@ -157,6 +159,7 @@ Partial Class LoginForm
         Me.Controls.Add(Me.txbPasswort)
         Me.Controls.Add(Me.txbBenutzername)
         Me.ForeColor = System.Drawing.SystemColors.InfoText
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MaximizeBox = False
         Me.MinimizeBox = False

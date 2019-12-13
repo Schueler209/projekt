@@ -32,9 +32,10 @@ Partial Class MessageControl
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
-        Me.Label1.Location = New System.Drawing.Point(3, 23)
+        Me.Label1.Location = New System.Drawing.Point(0, 23)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(144, 44)
+        Me.Label1.Padding = New System.Windows.Forms.Padding(5)
+        Me.Label1.Size = New System.Drawing.Size(150, 61)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Label1"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -42,7 +43,7 @@ Partial Class MessageControl
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(-3, 0)
+        Me.Label2.Location = New System.Drawing.Point(-3, 10)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(39, 13)
         Me.Label2.TabIndex = 1
@@ -57,7 +58,7 @@ Partial Class MessageControl
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Name = "MessageControl"
-        Me.Size = New System.Drawing.Size(150, 67)
+        Me.Size = New System.Drawing.Size(150, 84)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

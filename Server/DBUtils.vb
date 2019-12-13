@@ -67,10 +67,11 @@ Module DBUtils
         End If
         Return Nothing
     End Function
-
+    'Alle Chats auflisten
     Public Function getChats(ID As Integer) As Chat()
-        Dim reader = ReaderQuery("SELECT ID, UserID1, UserID2, Datum FROM Chats WHERE UserID1 =" & ID & "OR UserID2 =" & ID) ' & " ORDER BY Datum")
+        Dim reader = ReaderQuery("SELECT ID, UserID1, UserID2, Datum FROM Chats WHERE UserID1 =" & ID & "OR UserID2 =" & ID & " ORDER BY Datum DESC;")
         Dim friendlist As New List(Of Chat)
+
         Do While reader.Read
             Dim friendID As Integer = reader.GetInt32(1)
             If friendID = ID Then
@@ -78,6 +79,7 @@ Module DBUtils
             End If
             friendlist.Add(New Chat(reader.GetInt32(0), getUser(friendID), reader.GetDateTime(3)))
         Loop
+
         Return friendlist.ToArray()
     End Function
 

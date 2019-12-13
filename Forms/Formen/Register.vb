@@ -3,6 +3,7 @@
 Public Class Register
 
     Private Sub Register_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath)
         NetworkClass.ensureConnection()
 
         ' Fehler label verstecken
@@ -40,10 +41,6 @@ Public Class Register
 
     End Sub
 
-    Private Sub txbPasswort_TextChanged(sender As Object, e As EventArgs) Handles txbPasswort.TextChanged
-        txbPasswort.PasswordChar = "*"
-    End Sub
-
     Private Sub txbPasswortWdh_TextChanged(sender As Object, e As EventArgs) Handles txbPasswortWdh.TextChanged
         txbPasswortWdh.PasswordChar = "*"
     End Sub
@@ -70,7 +67,6 @@ Public Class Register
         End If
 
     End Sub
-
 
 End Class
 

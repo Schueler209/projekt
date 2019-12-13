@@ -5,23 +5,38 @@ Public Class Chats
     Private chats As New List(Of Chat)
 
     Private Sub ondeletechat(delete As Integer)
-        ChatArea.Hide()
-        ltbKontakte.Items.Clear()
-        For Each chat In chats
-            If chat.ID = delete Then
-                chats.Remove(chat)
-
-            Else ltbKontakte.Items.Add(chat.user.benutzername)
-
+        If delete >= 0 Then
+            If ChatArea.Chat.ID = delete Then
+                ChatArea.Hide()
             End If
 
-        Next
+            ltbKontakte.Items.Clear()
+            Dim deletedchat As Chat
+
+            For Each chat In chats
+                If chat.ID = delete Then
+                    deletedchat = chat
+                Else
+                    ltbKontakte.Items.Add(chat.user.name)
+
+                End If
+
+            Next
+
+            If deletedchat IsNot Nothing Then
+                chats.Remove(deletedchat)
+            End If
+
+        End If
 
 
 
     End Sub
 
     Private Sub Chat_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        Me.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath)
+
         ChatArea.Hide()
         NetworkClass.net.getChats(NetworkClass.login.id, AddressOf onGetChats)
 
@@ -30,11 +45,21 @@ Public Class Chats
 
     End Sub
 
+
     Sub OnRecieveMessage(msg As Message)
 
         If ChatArea.Chat IsNot Nothing AndAlso msg.chat = ChatArea.Chat.ID Then
             ChatArea.addMessage(msg)
         End If
+        Dim chat As Chat = chats(ltbKontakte.SelectedIndex)
+        chats.Remove(chat)
+        chats.Insert(0, chat)
+        ltbKontakte.Items.Clear()
+
+        For Each chatten As Chat In chats
+            ltbKontakte.Items.Add(chatten.user.name)
+        Next
+
 
     End Sub
 
@@ -56,11 +81,13 @@ Public Class Chats
 
     Private Sub LtbKontakte_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ltbKontakte.SelectedIndexChanged
 
-        Dim chat = chats(ltbKontakte.SelectedIndex)
-        If chat IsNot Nothing And chat IsNot ChatArea.Chat Then
-            ChatArea.Chat = chat
-            ChatArea.Show()
+        If ltbKontakte.SelectedIndex >= 0 Then
+            Dim chat = chats(ltbKontakte.SelectedIndex)
+            If chat IsNot Nothing And chat IsNot ChatArea.Chat Then
+                ChatArea.Chat = chat
+                ChatArea.Show()
 
+            End If
         End If
 
     End Sub

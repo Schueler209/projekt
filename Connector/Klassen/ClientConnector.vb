@@ -88,13 +88,18 @@ Friend Class ClientConnector
 
     ' Nachrichten senden
     Public Async Sub send(msg As ConnectionData)
+        Try
+            ' Verbindung
+            Dim serverStream As NetworkStream = clientSocket.GetStream()
+            ' Nachricht in Bytes umwandeln
+            Dim data As Byte() = msg.Serialize()
+            serverStream.Write(data, 0, data.Length)
+            Await serverStream.FlushAsync()
+        Catch ex As Exception
+            Console.WriteLine(ex)
+            disconnect()
+        End Try
 
-        ' Verbindung
-        Dim serverStream As NetworkStream = clientSocket.GetStream()
-        ' Nachricht in Bytes umwandeln
-        Dim data As Byte() = msg.Serialize()
-        serverStream.Write(data, 0, data.Length)
-        Await serverStream.FlushAsync()
     End Sub
 
     ' sendet eine Nachricht an mehrere Clients

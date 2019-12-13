@@ -27,6 +27,7 @@ Public Class AddFriend
     End Sub
 
     Private Sub benutzer_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath)
         NetworkClass.net.getAllUsers(NetworkClass.login.id, Sub(AllUsers As User())
                                                                 users = AllUsers
                                                                 showUsers()
