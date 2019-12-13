@@ -19,7 +19,7 @@ Module DBUtils
 
 
     Public Function getUser(ID As Integer) As User
-        Dim reader = ReaderQuery("SELECT username, [name], colour FROM Users WHERE ID = " + ID.ToString())
+        Dim reader = ReaderQuery("SELECT username, [name], Colour FROM Users WHERE ID = " + ID.ToString())
         If reader.HasRows Then
             reader.Read()
             Return New User(reader.GetString(0), reader.GetString(1), ID, reader.GetInt32(2))
