@@ -90,11 +90,18 @@ Public Class NetServer
                 If OnNewChat IsNot Nothing Then
                     Dim idself As Integer = req.Data.Item("IDself")
                     Dim idfriend As Integer = req.Data.Item("IDfriend")
-                    Dim Chat = OnNewChat(idself, idfriend)
+                    Dim Chat As Chat = OnNewChat(idself, idfriend)
 
                     Dim data As New ConnectionData("NewChat")
                     data.addData("success", Chat)
+
                     connector.send(client, data)
+
+                    If loggedIn.ContainsKey(idfriend) Then
+
+                        connector.send(loggedIn(idfriend), data)
+                    End If
+
                 End If
             Case "messages"
                 If OnMessages IsNot Nothing Then
@@ -149,11 +156,19 @@ Public Class NetServer
                 If OnDeleteChat IsNot Nothing Then
                     Dim chat As Integer = req.Data.Item("chat")
                     Dim userID As Integer = req.Data.Item("UserID")
+                    Dim recieverId As Integer = req.Data.Item("reciever")
+
 
                     Dim success As Integer = OnDeleteChat(chat, userID)
 
                     Dim data As New ConnectionData("delete chat")
                     data.addData("success", success)
+
+                    If loggedIn.ContainsKey(recieverId) Then
+
+                        connector.send(loggedIn(recieverId), data)
+                    End If
+
                     connector.send(client, data)
                 End If
 
