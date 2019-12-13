@@ -62,7 +62,7 @@ Public Class Register
         If txbPasswortWdh.Text = "" Then lblFehler.Text = "Passwort nicht wiederholt"
         If txbPasswort.Text = "" Then lblFehler.Text = "kein Passwort angegeben"
         If txbBenutzername.Text.Trim().Length > 15 Then lblFehler.Text = "Benutzername zu lang"
-        If txbAnzeigename.Text.Trim().Length > 15 Then lblFehler.Text = "Name zu lang"
+        If txbAnzeigename.Text.Trim().Length > 20 Then lblFehler.Text = "Vor- und Nachname zu lang"
         If lblFehler.Text = "" Then
             NetworkClass.net.Register(txbAnzeigename.Text.Trim(), txbBenutzername.Text.Trim(), txbPasswort.Text, Profilfarbe1.selectedcolour(), AddressOf Registerconfirm)
         End If
