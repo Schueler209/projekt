@@ -166,9 +166,8 @@ Module Module1
 
             Dim conn As New OleDbConnection(ConnectionStr)
             conn.Open()
-            Dim updatecommand As New OleDbCommand("UPDATE Users SET Name = '" & NewName & "', [Password] = '" & NewPassword & "' WHERE ID = " & ID & "")
+            Dim updatecommand As New OleDbCommand("UPDATE Users SET Name = '" & NewName & "', [Password] = '" & NewPassword & "', Colour = '" & Colour & "' WHERE ID = " & ID & "")
             updatecommand.Connection = conn
-
             Try
                 Console.WriteLine(updatecommand.ExecuteNonQuery())
             Catch ex As Exception
@@ -176,10 +175,10 @@ Module Module1
                 Return False
             End Try
             Return True
-
         Else
             Return False
         End If
+
 
 
 

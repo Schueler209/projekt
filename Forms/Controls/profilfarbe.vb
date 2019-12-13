@@ -7,4 +7,23 @@
         btn5.ForeColor = ColorTranslator.FromHtml("#9BEB6F")
 
     End Sub
+
+    Public Function selectedcolour() As Integer
+        If btn1.Checked Then
+            Return 1
+        End If
+        If btn2.Checked Then
+            Return 2
+        End If
+        If btn3.Checked Then
+            Return 3
+        End If
+        If btn4.Checked Then
+            Return 4
+        End If
+        If btn5.Checked Then
+            Return 5
+        End If
+
+    End Function
 End Class

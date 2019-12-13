@@ -31,12 +31,13 @@ Partial Class Settings
         Me.txtPassword = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.lblFehler = New System.Windows.Forms.Label()
+        Me.Profilfarbe1 = New Forms.profilfarbe()
         Me.SuspendLayout()
         '
         'lblUsername
         '
         Me.lblUsername.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblUsername.Location = New System.Drawing.Point(27, 41)
+        Me.lblUsername.Location = New System.Drawing.Point(27, 9)
         Me.lblUsername.Name = "lblUsername"
         Me.lblUsername.Size = New System.Drawing.Size(262, 31)
         Me.lblUsername.TabIndex = 2
@@ -46,7 +47,7 @@ Partial Class Settings
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(28, 78)
+        Me.Label2.Location = New System.Drawing.Point(28, 35)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(48, 16)
         Me.Label2.TabIndex = 4
@@ -57,7 +58,7 @@ Partial Class Settings
         Me.txtName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtName.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtName.Location = New System.Drawing.Point(31, 97)
+        Me.txtName.Location = New System.Drawing.Point(31, 54)
         Me.txtName.Name = "txtName"
         Me.txtName.Size = New System.Drawing.Size(242, 26)
         Me.txtName.TabIndex = 5
@@ -78,7 +79,7 @@ Partial Class Settings
         Me.txtNewPassword.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtNewPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtNewPassword.Location = New System.Drawing.Point(31, 145)
+        Me.txtNewPassword.Location = New System.Drawing.Point(31, 102)
         Me.txtNewPassword.Name = "txtNewPassword"
         Me.txtNewPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(9679)
         Me.txtNewPassword.Size = New System.Drawing.Size(242, 26)
@@ -88,7 +89,7 @@ Partial Class Settings
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(28, 126)
+        Me.Label1.Location = New System.Drawing.Point(28, 83)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(108, 16)
         Me.Label1.TabIndex = 7
@@ -99,7 +100,7 @@ Partial Class Settings
         Me.txtPassword.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPassword.Location = New System.Drawing.Point(31, 199)
+        Me.txtPassword.Location = New System.Drawing.Point(31, 156)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(9679)
         Me.txtPassword.Size = New System.Drawing.Size(242, 26)
@@ -109,7 +110,7 @@ Partial Class Settings
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(28, 180)
+        Me.Label3.Location = New System.Drawing.Point(28, 137)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(120, 16)
         Me.Label3.TabIndex = 9
@@ -119,7 +120,7 @@ Partial Class Settings
         '
         Me.lblFehler.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lblFehler.Location = New System.Drawing.Point(28, 228)
+        Me.lblFehler.Location = New System.Drawing.Point(28, 242)
         Me.lblFehler.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblFehler.Name = "lblFehler"
         Me.lblFehler.Size = New System.Drawing.Size(245, 27)
@@ -127,11 +128,19 @@ Partial Class Settings
         Me.lblFehler.Text = "lblFehler"
         Me.lblFehler.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'Profilfarbe1
+        '
+        Me.Profilfarbe1.Location = New System.Drawing.Point(1, 199)
+        Me.Profilfarbe1.Name = "Profilfarbe1"
+        Me.Profilfarbe1.Size = New System.Drawing.Size(308, 40)
+        Me.Profilfarbe1.TabIndex = 12
+        '
         'Settings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(310, 323)
+        Me.Controls.Add(Me.Profilfarbe1)
         Me.Controls.Add(Me.lblFehler)
         Me.Controls.Add(Me.txtPassword)
         Me.Controls.Add(Me.Label3)
@@ -159,4 +168,5 @@ Partial Class Settings
     Friend WithEvents txtPassword As TextBox
     Friend WithEvents Label3 As Label
     Friend WithEvents lblFehler As Label
+    Friend WithEvents Profilfarbe1 As profilfarbe
 End Class
