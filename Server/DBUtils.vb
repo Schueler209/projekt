@@ -90,7 +90,7 @@ Module DBUtils
             Dim id As Integer = reader.GetInt32(0)
             ' Nehme nur die, die nicht in der Ausnahmeliste stehen
             If Not exept.Contains(id) Then
-                userlist.Add(New User(reader.GetString(1), reader.GetString(2), reader.GetInt32(3), id))
+                userlist.Add(New User(reader.GetString(1), reader.GetString(2), 0, id))
             End If
         Loop
         Return userlist.ToArray()
