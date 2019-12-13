@@ -46,6 +46,13 @@ Public Class Chats
 
     End Sub
 
+    Private Sub showChats()
+        ltbKontakte.Items.Clear()
+        For Each chatten As Chat In chats
+            ltbKontakte.Items.Add(chatten.user.name)
+        Next
+    End Sub
+
 
     Sub OnRecieveMessage(msg As Message)
 
@@ -56,11 +63,7 @@ Public Class Chats
             Dim chat As Chat = chats(ltbKontakte.SelectedIndex)
             chats.Remove(chat)
             chats.Insert(0, chat)
-            ltbKontakte.Items.Clear()
-
-            For Each chatten As Chat In chats
-                ltbKontakte.Items.Add(chatten.user.name)
-            Next
+            showChats()
         End If
 
 
@@ -68,15 +71,15 @@ Public Class Chats
     End Sub
 
     Private Sub onGetChats(FriendChats As Chat())
-        For Each chat As Chat In FriendChats
-            ltbKontakte.Items.Add(chat.user.name)
-            chats.Add(chat)
-        Next
+        chats = FriendChats.ToList()
+        showChats()
         If FriendChats.Length > 0 Then
             ltbKontakte.SelectedIndex = 0
         End If
 
     End Sub
+
+
 
     Private Sub btnNeuerKontakt_Click(sender As Object, e As EventArgs) Handles btnNeuerKontakt.Click
         AddFriend.Show()
@@ -101,9 +104,8 @@ Public Class Chats
         chats.Insert(0, user)
         ltbKontakte.Items.Clear()
 
-        For Each chat As Chat In chats
-            ltbKontakte.Items.Add(chat.user.name)
-        Next
+        showChats()
+
         ltbKontakte.SelectedIndex = 0
     End Sub
 

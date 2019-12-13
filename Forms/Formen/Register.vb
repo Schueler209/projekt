@@ -50,10 +50,6 @@ Public Class Register
 
     End Sub
 
-    Private Sub txbPasswortWdh_TextChanged(sender As Object, e As EventArgs) Handles txbPasswortWdh.TextChanged
-        txbPasswortWdh.PasswordChar = "*"
-    End Sub
-
     Private Sub register()
         lblFehler.Text = ""
         If Not txbPasswortWdh.Text = txbPasswort.Text Then lblFehler.Text = "Passwörter ungleich"

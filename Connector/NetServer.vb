@@ -97,10 +97,10 @@ Public Class NetServer
 
                     connector.send(client, data)
 
-                    If loggedIn.ContainsKey(idfriend) Then
+                    'If loggedIn.ContainsKey(idfriend) Then
 
-                        connector.send(loggedIn(idfriend), data)
-                    End If
+                    '    connector.send(loggedIn(idfriend), data)
+                    'End If
 
                 End If
             Case "messages"

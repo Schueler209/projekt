@@ -19,6 +19,8 @@ Public Class TicTacToe
 
     Private Sub TicTacToe_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        Me.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath)
+
         NetworkClass.net.OnTTTUpdate = AddressOf onUpdate
 
         buttons = {Button1, Button2, Button3, Button4, Button5, Button6, Button7, Button8, Button9}

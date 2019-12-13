@@ -36,15 +36,18 @@ Public Class AddFriend
     End Sub
 
     Private Sub ltbAlleBenutzer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ltbAlleBenutzer.SelectedIndexChanged
-        Dim selecteduser As User = filteredUsers(ltbAlleBenutzer.SelectedIndex)
-        If selecteduser IsNot Nothing Then
-            NetworkClass.net.NewChat(NetworkClass.login.id, selecteduser.id, Sub(res As Chat)
-                                                                                 If res IsNot Nothing Then
-                                                                                     Chats.addChatToList(res)
-                                                                                     Me.Close()
-                                                                                 End If
+        If ltbAlleBenutzer.SelectedIndex >= 0 Then
+            Dim selecteduser As User = filteredUsers(ltbAlleBenutzer.SelectedIndex)
+            If selecteduser IsNot Nothing Then
+                Console.WriteLine(selecteduser.benutzername)
+                NetworkClass.net.NewChat(NetworkClass.login.id, selecteduser.id, Sub(res As Chat)
+                                                                                     If res IsNot Nothing Then
+                                                                                         Chats.addChatToList(res)
+                                                                                         Me.Close()
+                                                                                     End If
 
-                                                                             End Sub)
+                                                                                 End Sub)
+            End If
         End If
 
 

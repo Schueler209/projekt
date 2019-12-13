@@ -133,7 +133,6 @@ Friend Class ServerConnector
         Dim serverStream As NetworkStream = sender.GetStream()
         Dim inStream(sender.ReceiveBufferSize) As Byte
         serverStream.Read(inStream, 0, sender.ReceiveBufferSize)
-        Console.WriteLine(sender.ReceiveBufferSize)
         ' Nachrichten einlesen
         Return ConnectionData.Serialized(inStream)
     End Function
