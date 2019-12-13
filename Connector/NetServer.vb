@@ -138,7 +138,12 @@ Public Class NetServer
                 End If
 
             Case "loggedOut"
-                loggedOut(client)
+                Dim id As Integer = req.Data.Item("userID")
+
+                If loggedIn.Keys.Contains(id) Then
+                    loggedIn.Remove(id)
+                End If
+
 
             Case "settings"
                 If OnSettings IsNot Nothing Then

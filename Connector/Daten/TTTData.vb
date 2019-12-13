@@ -4,6 +4,7 @@
     Update
     Won
     Finished
+    Draw
 End Enum
 
 <Serializable()>

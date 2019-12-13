@@ -11,7 +11,7 @@ Public Class Chats
             End If
 
             ltbKontakte.Items.Clear()
-            Dim deletedchat As Chat
+            Dim deletedchat As Chat = Nothing
 
             For Each chat In chats
                 If chat.ID = delete Then
@@ -126,9 +126,8 @@ Public Class Chats
 
         LoginForm.txbBenutzername.Text = NetworkClass.login.benutzername
 
+        NetworkClass.net.logOut(NetworkClass.login.id)
         NetworkClass.login = Nothing
-        NetworkClass.net.logOut()
-
 
         ' Zu Login zurück
         LoginForm.Show()

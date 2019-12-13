@@ -190,8 +190,9 @@ Public Class NetClient
     End Sub
 
 
-    Sub logOut()
+    Sub logOut(id As Integer)
         Dim res As New ConnectionData("loggedOut")
+        res.addData("userID", id)
         connector.send(res)
     End Sub
 

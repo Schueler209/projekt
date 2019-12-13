@@ -54,6 +54,10 @@ Public Class TicTacToe
                 lblOutput.Text = "Du hast leider verloren"
                 buttonGroup.Hide()
                 btnWiederholen.Show()
+            Case TTTType.Draw
+                lblOutput.Text = "Diese Runde ging unentschieden aus."
+                buttonGroup.Hide()
+                btnWiederholen.Show()
             Case TTTType.Finished
                 Me.Close()
             Case TTTType.Restart
@@ -126,6 +130,14 @@ Public Class TicTacToe
 
             Dim data As New TTTData(TTTType.Won, values)
             NetworkClass.net.updateTTT(NetworkClass.login.id, opponentId, data)
+
+            buttonGroup.Hide()
+            btnWiederholen.Show()
+        ElseIf values.All(Function(z) (z > 0)) Then
+            lblOutput.Text = "Diese Runde ging unentschieden aus."
+            Dim data As New TTTData(TTTType.Draw)
+            NetworkClass.net.updateTTT(NetworkClass.login.id, opponentId, data)
+
 
             buttonGroup.Hide()
             btnWiederholen.Show()
