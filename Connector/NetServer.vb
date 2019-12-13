@@ -55,7 +55,7 @@ Public Class NetServer
                         name,
                         username,
                         password,
-                     colour
+                        colour
                     )
                     RegisterConfirm(User, client)
                 End If

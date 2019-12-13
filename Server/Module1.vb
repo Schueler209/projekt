@@ -50,7 +50,7 @@ Module Module1
             insertCommand.CommandType = CommandType.Text
             insertCommand.ExecuteNonQuery()
             command.Connection = conn
-            Return New User(username, name, colour, command.ExecuteScalar())
+            Return New User(username, name, command.ExecuteScalar(), colour)
         End If
 
     End Function
