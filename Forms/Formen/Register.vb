@@ -36,6 +36,15 @@ Public Class Register
 
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
+        If txbBenutzername.Text IsNot "" Then
+            LoginForm.txbBenutzername.Text = txbBenutzername.Text
+        End If
+
+        If txbPasswort.Text IsNot "" Then
+            LoginForm.txbPasswort.Text = txbPasswort.Text
+        End If
+
+
         LoginForm.Show()
         Me.Close()
 

@@ -118,9 +118,11 @@ Public Class Chats
         My.Settings.password = ""
         My.Settings.Save()
 
+        LoginForm.txbBenutzername.Text = NetworkClass.login.benutzername
 
         NetworkClass.login = Nothing
         NetworkClass.net.logOut()
+
 
         ' Zu Login zurück
         LoginForm.Show()
