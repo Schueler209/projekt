@@ -50,7 +50,7 @@ Module Module1
             insertCommand.CommandType = CommandType.Text
             insertCommand.ExecuteNonQuery()
             command.Connection = conn
-            Return New User(username, name, command.ExecuteScalar())
+            Return New User(username, name, colour, command.ExecuteScalar())
         End If
 
     End Function
@@ -60,7 +60,7 @@ Module Module1
         Dim reader = ReaderQuery("SELECT ID, [name] FROM Users WHERE Username = '" & username & "'And [Password] = '" & password & "'")
         If reader.HasRows Then
             reader.Read()
-            Return New User(username, reader.GetString(1), reader.GetInt32(0))
+            Return New User(username, reader.GetString(1), reader.GetInt32(0), reader.GetInt32(2))
         Else
             Return Nothing
         End If
