@@ -193,6 +193,9 @@ Public Class NetServer
         connector.send(client, New ConnectionData("chats", data))
     End Sub
 
+
+
+
     Public Sub loggedOut(client As TcpClient)
         Dim id As Integer = 0
         For Each c As KeyValuePair(Of Integer, TcpClient) In loggedIn
