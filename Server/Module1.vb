@@ -154,7 +154,7 @@ Module Module1
 
 
     'Namen ändern
-    Public Function changeSettings(ID As Integer, NewName As String, Password As String, NewPassword As String) As Boolean
+    Public Function changeSettings(ID As Integer, NewName As String, Password As String, NewPassword As String, Colour As Integer) As Boolean
 
         Dim reader = ReaderQuery("SELECT ID FROM Users WHERE ID = " & ID & " And [Password] = '" & Password & "'")
         If reader.HasRows Then
