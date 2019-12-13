@@ -33,7 +33,7 @@ Public Class NetServer
     'Event für Logout
     Public OnLogOut As Func(Of Integer)
     'Event für Einstellungsänderungen
-    Public OnSettings As Func(Of Integer, String, String, String, Boolean)
+    Public OnSettings As Func(Of Integer, String, String, String, Integer, Boolean)
     'Event für Chat löschen
     Public OnDeleteChat As Func(Of Integer, Integer, Integer)
 
@@ -90,11 +90,18 @@ Public Class NetServer
                 If OnNewChat IsNot Nothing Then
                     Dim idself As Integer = req.Data.Item("IDself")
                     Dim idfriend As Integer = req.Data.Item("IDfriend")
-                    Dim Chat = OnNewChat(idself, idfriend)
+                    Dim Chat As Chat = OnNewChat(idself, idfriend)
 
                     Dim data As New ConnectionData("NewChat")
                     data.addData("success", Chat)
+
                     connector.send(client, data)
+
+                    If loggedIn.ContainsKey(idfriend) Then
+
+                        connector.send(loggedIn(idfriend), data)
+                    End If
+
                 End If
             Case "messages"
                 If OnMessages IsNot Nothing Then
@@ -139,7 +146,8 @@ Public Class NetServer
                     Dim name As String = req.Data.Item("name")
                     Dim password As String = req.Data.Item("password")
                     Dim newPassword As String = req.Data.Item("newPassword")
-                    Dim success = OnSettings(id, name, password, newPassword)
+                    Dim colour As Integer = req.Data.Item("colour")
+                    Dim success = OnSettings(id, name, password, newPassword, colour)
                     Dim data As New ConnectionData("settingsSuccess")
                     data.addData("success", success)
                     connector.send(client, data)
@@ -149,11 +157,19 @@ Public Class NetServer
                 If OnDeleteChat IsNot Nothing Then
                     Dim chat As Integer = req.Data.Item("chat")
                     Dim userID As Integer = req.Data.Item("UserID")
+                    Dim recieverId As Integer = req.Data.Item("reciever")
+
 
                     Dim success As Integer = OnDeleteChat(chat, userID)
 
                     Dim data As New ConnectionData("delete chat")
                     data.addData("success", success)
+
+                    If loggedIn.ContainsKey(recieverId) Then
+
+                        connector.send(loggedIn(recieverId), data)
+                    End If
+
                     connector.send(client, data)
                 End If
 
@@ -197,6 +213,9 @@ Public Class NetServer
         data.Add("chats", ans)
         connector.send(client, New ConnectionData("chats", data))
     End Sub
+
+
+
 
     Public Sub loggedOut(client As TcpClient)
         Dim id As Integer = 0
