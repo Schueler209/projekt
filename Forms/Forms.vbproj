@@ -117,6 +117,12 @@
     <Compile Include="Controls\ChatArea.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Controls\TicTacToeMessage.Designer.vb">
+      <DependentUpon>TicTacToeMessage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TicTacToeMessage.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controls\MessageControl.Designer.vb">
       <DependentUpon>MessageControl.vb</DependentUpon>
     </Compile>
@@ -159,6 +165,12 @@
     <Compile Include="Formen\Settings.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formen\TicTacToe.Designer.vb">
+      <DependentUpon>TicTacToe.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formen\TicTacToe.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Klassen\NetworkClass.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -186,6 +198,9 @@
     <EmbeddedResource Include="Controls\ChatArea.resx">
       <DependentUpon>ChatArea.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TicTacToeMessage.resx">
+      <DependentUpon>TicTacToeMessage.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\MessageControl.resx">
       <DependentUpon>MessageControl.vb</DependentUpon>
     </EmbeddedResource>
@@ -206,6 +221,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formen\Settings.resx">
       <DependentUpon>Settings.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formen\TicTacToe.resx">
+      <DependentUpon>TicTacToe.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

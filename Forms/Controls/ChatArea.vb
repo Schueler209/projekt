@@ -3,13 +3,8 @@
 Public Class ChatArea
     Inherits UserControl
 
-    Public Sub New()
-
-        ' Dieser Aufruf ist für den Designer erforderlich.
-        InitializeComponent()
-
-        ' Fügen Sie Initialisierungen nach dem InitializeComponent()-Aufruf hinzu.
-
+    Private Sub ChatArea_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ChatPanel.VerticalScroll.Enabled = True
     End Sub
 
     Private selectedChat As Chat
@@ -33,11 +28,25 @@ Public Class ChatArea
         ChatPanel.Controls.Clear()
         For Each item In msg
             addMessage(item)
+
         Next
 
         ' Scrollen
         ChatPanel.VerticalScroll.Value = ChatPanel.VerticalScroll.Maximum
 
+    End Sub
+
+    Public Sub onTicTacToeRequest(user As Integer)
+        If Chat.user.id = user Then
+            ChatPanel.VerticalScroll.Value = ChatPanel.VerticalScroll.Minimum
+            Dim messagecontrol As New TicTacToeMessage(user)
+            messagecontrol.Top = messagecontrol.Height * ChatPanel.Controls.Count
+            messagecontrol.Width = 0.8 * ChatPanel.Width
+
+            ChatPanel.Controls.Add(messagecontrol)
+
+            ChatPanel.ScrollControlIntoView(messagecontrol)
+        End If
     End Sub
 
     Private Sub BtnSenden_Click(sender As Object, e As EventArgs) Handles btnSenden.Click
@@ -53,9 +62,6 @@ Public Class ChatArea
 
         Dim messagecontrol As New MessageControl(msg, isOwn)
         messagecontrol.Top = messagecontrol.Height * ChatPanel.Controls.Count
-        'If (ChatPanel.VerticalScroll.Value / 100) * messagecontrol.Height * ChatPanel.Controls.Count > messagecontrol.Height Then
-        '    messagecontrol.Top = messagecontrol.Top - (ChatPanel.VerticalScroll.Value / 100) * messagecontrol.Height * ChatPanel.Controls.Count
-        'End If
         messagecontrol.Width = 0.8 * ChatPanel.Width
         If isOwn Then
             messagecontrol.Anchor = AnchorStyles.Top Or AnchorStyles.Right
@@ -66,13 +72,18 @@ Public Class ChatArea
         ChatPanel.Controls.Add(messagecontrol)
 
         ChatPanel.ScrollControlIntoView(messagecontrol)
-
-        'ChatPanel.VerticalScroll.Value = ChatPanel.VerticalScroll.Maximum
-
     End Sub
 
     Private Sub SendMessage()
-        If txtEingabe.Text.Trim().Length > 0 And txtEingabe.Text.Length < 500 Then
+        If txtEingabe.Text.ToLower = "ttt" Then
+            TicTacToe.isInitiator = True
+            TicTacToe.opponentId = Chat.user.id
+            TicTacToe.Show()
+
+            txtEingabe.Clear()
+        ElseIf txtEingabe.Text.Length > 500 Then
+            MsgBox("Deine Eingabe darf maximal 500 Zeichen lang sein!")
+        ElseIf txtEingabe.Text.Trim().Length Then
 
             NetworkClass.net.SendMessage(NetworkClass.login.id, selectedChat.ID, txtEingabe.Text.Trim())
             txtEingabe.Clear()
@@ -81,11 +92,6 @@ Public Class ChatArea
 
     End Sub
 
-
-
-    Private Sub ChatArea_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ChatPanel.VerticalScroll.Enabled = True
-    End Sub
 
     Private Sub txtEingabe_KeyDown(sender As Object, e As KeyEventArgs) Handles txtEingabe.KeyDown
         If e.KeyCode = Keys.Enter Then

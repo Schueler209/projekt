@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Daten\Chat.vb" />
     <Compile Include="Daten\Message.vb" />
+    <Compile Include="Daten\TTTData.vb" />
     <Compile Include="Daten\User.vb" />
     <Compile Include="Klassen\ClientConnector.vb" />
     <Compile Include="Klassen\ConnectionData.vb" />

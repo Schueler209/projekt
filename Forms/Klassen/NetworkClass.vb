@@ -32,6 +32,7 @@ Public Class NetworkClass
         Chats.Close()
         Settings.Close()
         AddFriend.Close()
+        TicTacToe.Close()
 
 
         'Dim msg = MsgBox("Verbindung wurde unterbrochen!", vbRetryCancel, "Verbindung getrennt")

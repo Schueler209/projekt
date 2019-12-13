@@ -42,6 +42,7 @@ Public Class Chats
 
         NetworkClass.net.OnMessage = AddressOf OnRecieveMessage
         NetworkClass.net.OnDeleteChat = AddressOf ondeletechat
+        NetworkClass.net.OnTTTRequest = AddressOf ChatArea.onTicTacToeRequest
 
     End Sub
 
