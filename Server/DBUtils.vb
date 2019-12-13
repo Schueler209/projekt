@@ -22,7 +22,7 @@ Module DBUtils
         Dim reader = ReaderQuery("SELECT username, [name], Colour FROM Users WHERE ID = " + ID.ToString())
         If reader.HasRows Then
             reader.Read()
-            Return New User(reader.GetString(0), reader.GetString(1), ID, reader.GetInt32(2))
+            Return New User(reader.GetString(0), reader.GetString(1), ID, 0)
         Else
             Return Nothing
         End If
