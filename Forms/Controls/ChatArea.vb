@@ -112,8 +112,12 @@ Public Class ChatArea
     Private Sub btnKonaktEntfernen_Click(sender As Object, e As EventArgs) Handles btnKonaktEntfernen.Click
         Dim msg = MsgBox("Diesen Chat wirklich für immer entfernen?", vbYesNo, "Chat wirklich entfernen?")
         If msg = vbYes Then
-            NetworkClass.net.deleteChat(selectedChat.ID, NetworkClass.login.id)
+            NetworkClass.net.deleteChat(selectedChat.ID, NetworkClass.login.id, Chat.user.id)
         End If
+
+    End Sub
+
+    Private Sub ChatPanel_Paint(sender As Object, e As PaintEventArgs) Handles ChatPanel.Paint
 
     End Sub
 End Class

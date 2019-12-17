@@ -164,7 +164,6 @@ Public Class NetServer
                     Dim userID As Integer = req.Data.Item("UserID")
                     Dim recieverId As Integer = req.Data.Item("reciever")
 
-
                     Dim success As Integer = OnDeleteChat(chat, userID)
 
                     Dim data As New ConnectionData("delete chat")

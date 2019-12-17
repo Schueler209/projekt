@@ -207,10 +207,11 @@ Public Class NetClient
 
     End Sub
 
-    Sub deleteChat(Chatid As Integer, Userid As Integer)
+    Sub deleteChat(Chatid As Integer, Userid As Integer, recieverid As Integer)
         Dim res As New ConnectionData("delete Chat")
         res.addData("chat", Chatid)
         res.addData("UserID", Userid)
+        res.addData("reciever", recieverid)
         connector.send(res)
     End Sub
 
