@@ -36,33 +36,35 @@ Module Module1
         checkCommand.Connection = conn
 
         Dim reader = checkCommand.ExecuteReader
-
-        If reader.HasRows Then
-            Return Nothing
-        Else
-            Dim insertCommand As New OleDbCommand("INSERT INTO Users ([Name],Username,[Password],Colour) VALUES (@displayname,@username,@password,@colour); ")
-            Dim command As New OleDbCommand("SELECT @@IDENTITY")
-            insertCommand.Connection = conn
-            insertCommand.Parameters.Add("@displayname", OleDbType.Char).Value = name
-            insertCommand.Parameters.Add("@username", OleDbType.Char).Value = username
-            insertCommand.Parameters.Add("@password", OleDbType.Char).Value = password
-            insertCommand.Parameters.Add("@colour", OleDbType.Char).Value = colour
-            insertCommand.CommandType = CommandType.Text
-            insertCommand.ExecuteNonQuery()
-            command.Connection = conn
-            Return New User(username, name, command.ExecuteScalar(), colour)
+        If reader IsNot Nothing Then
+            If reader.HasRows Then
+                Return Nothing
+            Else
+                Dim insertCommand As New OleDbCommand("INSERT INTO Users ([Name],Username,[Password],Colour) VALUES (@displayname,@username,@password,@colour); ")
+                Dim command As New OleDbCommand("SELECT @@IDENTITY")
+                insertCommand.Connection = conn
+                insertCommand.Parameters.Add("@displayname", OleDbType.Char).Value = name
+                insertCommand.Parameters.Add("@username", OleDbType.Char).Value = username
+                insertCommand.Parameters.Add("@password", OleDbType.Char).Value = password
+                insertCommand.Parameters.Add("@colour", OleDbType.Char).Value = colour
+                insertCommand.CommandType = CommandType.Text
+                insertCommand.ExecuteNonQuery()
+                command.Connection = conn
+                Return New User(username, name, command.ExecuteScalar(), colour)
+            End If
         End If
-
     End Function
 
 
     Public Function CheckLogin(username As String, password As String) As User
         Dim reader = ReaderQuery("SELECT ID, [name], Colour FROM Users WHERE Username = '" & username & "'And [Password] = '" & password & "'")
-        If reader.HasRows Then
-            reader.Read()
-            Return New User(username, reader.GetString(1), reader.GetInt32(0), reader.GetInt32(2))
-        Else
-            Return Nothing
+        If reader IsNot Nothing Then
+            If reader.HasRows Then
+                reader.Read()
+                Return New User(username, reader.GetString(1), reader.GetInt32(0), reader.GetInt32(2))
+            Else
+                Return Nothing
+            End If
         End If
     End Function
 
@@ -151,13 +153,16 @@ Module Module1
     Public Function getMessages(ChatID As Integer) As Message()
         Dim conn As New OleDbConnection(ConnectionStr)
         conn.Open()
+
         Dim reader = ReaderQuery("SELECT Message, Datum, UserID FROM Messages WHERE ChatID = " & ChatID)
-        Dim messages As New List(Of Message)
-        Do While reader.Read
-            Dim msg As New Message(getUser(reader.GetInt32(2)), ChatID, reader.GetDateTime(1), reader.GetString(0))
-            messages.Add(msg)
-        Loop
-        Return messages.ToArray()
+        If reader IsNot Nothing Then
+            Dim messages As New List(Of Message)
+            Do While reader.Read
+                Dim msg As New Message(getUser(reader.GetInt32(2)), ChatID, reader.GetDateTime(1), reader.GetString(0))
+                messages.Add(msg)
+            Loop
+            Return messages.ToArray()
+        End If
     End Function
 
 
@@ -165,25 +170,27 @@ Module Module1
     Public Function changeSettings(ID As Integer, NewName As String, Password As String, NewPassword As String, Colour As Integer) As Boolean
 
         Dim reader = ReaderQuery("SELECT ID FROM Users WHERE ID = " & ID & " And [Password] = '" & Password & "'")
-        If reader.HasRows Then
+        If reader IsNot Nothing Then
+            If reader.HasRows Then
 
-            If NewPassword = "" Then
-                NewPassword = Password
-            End If
+                If NewPassword = "" Then
+                    NewPassword = Password
+                End If
 
-            Dim conn As New OleDbConnection(ConnectionStr)
-            conn.Open()
-            Dim updatecommand As New OleDbCommand("UPDATE Users SET Name = '" & NewName & "', [Password] = '" & NewPassword & "', Colour = '" & Colour & "' WHERE ID = " & ID & "")
-            updatecommand.Connection = conn
-            Try
-                updatecommand.ExecuteNonQuery()
-            Catch ex As Exception
-                Console.WriteLine(ex.Message)
+                Dim conn As New OleDbConnection(ConnectionStr)
+                conn.Open()
+                Dim updatecommand As New OleDbCommand("UPDATE Users SET Name = '" & NewName & "', [Password] = '" & NewPassword & "', Colour = '" & Colour & "' WHERE ID = " & ID & "")
+                updatecommand.Connection = conn
+                Try
+                    updatecommand.ExecuteNonQuery()
+                Catch ex As Exception
+                    Console.WriteLine(ex.Message)
+                    Return False
+                End Try
+                Return True
+            Else
                 Return False
-            End Try
-            Return True
-        Else
-            Return False
+            End If
         End If
 
 
