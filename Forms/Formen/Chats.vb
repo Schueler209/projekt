@@ -4,6 +4,36 @@ Public Class Chats
 
     Private chats As New List(Of Chat)
 
+    Private Sub Chat_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        Me.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath)
+
+        ChatArea.Hide()
+        NetworkClass.net.getChats(NetworkClass.login.id, AddressOf onGetChats)
+
+        NetworkClass.net.OnMessage = AddressOf OnRecieveMessage
+        NetworkClass.net.OnDeleteChat = AddressOf ondeletechat
+        NetworkClass.net.OnTTTRequest = AddressOf ChatArea.onTicTacToeRequest
+        NetworkClass.net.OnNewChat = AddressOf onNewChat
+
+
+    End Sub
+
+    Private Sub showChats()
+        ltbKontakte.Items.Clear()
+        For Each chatten As Chat In chats
+            ltbKontakte.Items.Add(chatten.user.name)
+        Next
+    End Sub
+
+    Sub onNewChat(res As Chat)
+        If res IsNot Nothing Then
+            addChatToList(res)
+            AddFriend.Close()
+        End If
+
+    End Sub
+
     Private Sub ondeletechat(delete As Integer)
         If delete >= 0 Then
             If ChatArea.Chat.ID = delete Then
@@ -28,31 +58,7 @@ Public Class Chats
             End If
 
         End If
-
-
-
     End Sub
-
-    Private Sub Chat_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-        Me.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath)
-
-        ChatArea.Hide()
-        NetworkClass.net.getChats(NetworkClass.login.id, AddressOf onGetChats)
-
-        NetworkClass.net.OnMessage = AddressOf OnRecieveMessage
-        NetworkClass.net.OnDeleteChat = AddressOf ondeletechat
-        NetworkClass.net.OnTTTRequest = AddressOf ChatArea.onTicTacToeRequest
-
-    End Sub
-
-    Private Sub showChats()
-        ltbKontakte.Items.Clear()
-        For Each chatten As Chat In chats
-            ltbKontakte.Items.Add(chatten.user.name)
-        Next
-    End Sub
-
 
     Sub OnRecieveMessage(msg As Message)
 
@@ -108,8 +114,6 @@ Public Class Chats
         ltbKontakte.Items.Clear()
 
         showChats()
-
-        ltbKontakte.SelectedIndex = 0
     End Sub
 
     Private Sub Chats_Resize(sender As Object, e As EventArgs) Handles Me.Resize

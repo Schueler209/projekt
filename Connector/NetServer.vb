@@ -25,7 +25,7 @@ Public Class NetServer
     'Event für Freunde senden
     Public OnChats As Func(Of Integer, Chat())
     'Event für Neue Freunde
-    Public OnNewChat As Func(Of Integer, Integer, Chat)
+    Public OnNewChat As Func(Of Integer, Integer, Tuple(Of Chat, User))
     'Event für alle Nachrichten
     Public OnMessages As Func(Of Integer, Message())
     'Event für Nachricht senden
@@ -90,17 +90,22 @@ Public Class NetServer
                 If OnNewChat IsNot Nothing Then
                     Dim idself As Integer = req.Data.Item("IDself")
                     Dim idfriend As Integer = req.Data.Item("IDfriend")
-                    Dim Chat As Chat = OnNewChat(idself, idfriend)
+                    Dim res As Tuple(Of Chat, User) = OnNewChat(idself, idfriend)
+                    Dim Chat As Chat = res.Item1
+                    Dim sender As User = res.Item2
 
                     Dim data As New ConnectionData("NewChat")
                     data.addData("success", Chat)
 
                     connector.send(client, data)
 
-                    'If loggedIn.ContainsKey(idfriend) Then
+                    If loggedIn.ContainsKey(idfriend) Then
+                        Chat.user = sender
+                        Dim data2 As New ConnectionData("NewChat")
+                        data2.addData("success", Chat)
 
-                    '    connector.send(loggedIn(idfriend), data)
-                    'End If
+                        connector.send(loggedIn(idfriend), data2)
+                    End If
 
                 End If
             Case "messages"

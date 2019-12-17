@@ -163,13 +163,12 @@ Public Class NetClient
     End Sub
 
     'NewChat
-    Sub NewChat(idself As Integer, idfriend As Integer, callback As Action(Of Chat))
+    Sub NewChat(idself As Integer, idfriend As Integer)
         Dim data As New Dictionary(Of String, Object)
         Dim res As New ConnectionData("NewChat")
         res.addData("IDself", idself)
         res.addData("IDfriend", idfriend)
         connector.send(res)
-        OnNewChat = callback
     End Sub
 
     'Messages bekommen

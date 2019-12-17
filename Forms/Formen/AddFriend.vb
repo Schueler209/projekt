@@ -40,13 +40,7 @@ Public Class AddFriend
             Dim selecteduser As User = filteredUsers(ltbAlleBenutzer.SelectedIndex)
             If selecteduser IsNot Nothing Then
                 Console.WriteLine(selecteduser.benutzername)
-                NetworkClass.net.NewChat(NetworkClass.login.id, selecteduser.id, Sub(res As Chat)
-                                                                                     If res IsNot Nothing Then
-                                                                                         Chats.addChatToList(res)
-                                                                                         Me.Close()
-                                                                                     End If
-
-                                                                                 End Sub)
+                NetworkClass.net.NewChat(NetworkClass.login.id, selecteduser.id)
             End If
         End If
 

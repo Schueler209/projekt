@@ -8,6 +8,7 @@ Public Class ChatArea
     End Sub
 
     Private selectedChat As Chat
+    Private elapsedSeconds As Integer = 0
     Public Property Chat As Chat
         Get
             Return selectedChat
@@ -82,20 +83,28 @@ Public Class ChatArea
     End Sub
 
     Private Sub SendMessage()
-        If txtEingabe.Text.ToLower = "ttt" Then
-            TicTacToe.isInitiator = True
-            TicTacToe.opponentId = Chat.user.id
-            TicTacToe.Show()
+        If elapsedSeconds <= 0 Then
+            If txtEingabe.Text.ToLower = "ttt" Then
+                TicTacToe.isInitiator = True
+                TicTacToe.opponentId = Chat.user.id
+                TicTacToe.Show()
 
-            txtEingabe.Clear()
-        ElseIf txtEingabe.Text.Length > 500 Then
-            MsgBox("Deine Eingabe darf maximal 500 Zeichen lang sein!")
-        ElseIf txtEingabe.Text.Trim().Length Then
+                txtEingabe.Clear()
+            ElseIf txtEingabe.Text.Length > 500 Then
+                MsgBox("Deine Eingabe darf maximal 500 Zeichen lang sein!")
+            ElseIf txtEingabe.Text.Trim().Length Then
 
-            NetworkClass.net.SendMessage(NetworkClass.login.id, selectedChat.ID, txtEingabe.Text.Trim())
-            txtEingabe.Clear()
+                NetworkClass.net.SendMessage(NetworkClass.login.id, selectedChat.ID, txtEingabe.Text.Trim())
+                txtEingabe.Clear()
 
+                btnSenden.Text = "Warte [2]"
+                elapsedSeconds = 2
+                btnSenden.Enabled = False
+                chatTimer.Start()
+
+            End If
         End If
+
 
     End Sub
 
@@ -125,6 +134,30 @@ Public Class ChatArea
     End Sub
 
     Private Sub ChatPanel_Paint(sender As Object, e As PaintEventArgs) Handles ChatPanel.Paint
+
+    End Sub
+
+    Private Sub chatTimer_Tick(sender As Object, e As EventArgs) Handles chatTimer.Tick
+
+        Console.WriteLine(elapsedSeconds)
+
+        elapsedSeconds = elapsedSeconds - 1
+        btnSenden.Text = "Warte [" & elapsedSeconds & "]"
+        If elapsedSeconds <= 0 Then
+            btnSenden.Enabled = True
+            btnSenden.Text = "Senden"
+            chatTimer.Stop()
+        End If
+    End Sub
+
+    Private Sub txtEingabe_TextChanged(sender As Object, e As EventArgs) Handles txtEingabe.TextChanged
+        If txtEingabe.Text.Length > 500 Then
+            btnSenden.Enabled = False
+        ElseIf txtEingabe.Text.Trim().Length < 1 Then
+            btnSenden.Enabled = False
+        Else
+            btnSenden.Enabled = True
+        End If
 
     End Sub
 End Class

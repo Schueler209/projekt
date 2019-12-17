@@ -71,7 +71,7 @@ Module Module1
         Return getAll(ignore)
     End Function
     'Chats erstellen
-    Public Function AddFriend(ID As Integer, ID2 As Integer) As Chat
+    Public Function AddFriend(ID As Integer, ID2 As Integer) As Tuple(Of Chat, User)
 
         If areFriends(ID, ID2) Then
             Return Nothing
@@ -93,15 +93,15 @@ Module Module1
             End Try
             Dim command As New OleDbCommand("SELECT @@IDENTITY")
             command.Connection = conn
-            Console.WriteLine(ID2)
 
-            Dim user As User = getUser(ID2)
+            Dim user1 As User = getUser(ID)
+            Dim user2 As User = getUser(ID2)
 
-            If user Is Nothing Then
+            If user2 Is Nothing Then
                 Return Nothing
             End If
 
-            Return New Chat(command.ExecuteScalar(), user, DateTime.Now)
+            Return New Tuple(Of Chat, User)(New Chat(command.ExecuteScalar(), user2, DateTime.Now), user1)
 
         End If
     End Function

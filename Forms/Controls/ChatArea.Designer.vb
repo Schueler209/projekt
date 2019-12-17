@@ -22,12 +22,14 @@ Partial Class ChatArea
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.lblChatpartner = New System.Windows.Forms.Label()
         Me.btnSenden = New System.Windows.Forms.Button()
         Me.txtEingabe = New System.Windows.Forms.TextBox()
         Me.ChatScrollPanel = New System.Windows.Forms.Panel()
         Me.ChatPanel = New System.Windows.Forms.Panel()
         Me.btnKonaktEntfernen = New System.Windows.Forms.Button()
+        Me.chatTimer = New System.Windows.Forms.Timer(Me.components)
         Me.ChatScrollPanel.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -99,6 +101,10 @@ Partial Class ChatArea
         Me.btnKonaktEntfernen.Text = "Entfernen"
         Me.btnKonaktEntfernen.UseVisualStyleBackColor = False
         '
+        'chatTimer
+        '
+        Me.chatTimer.Interval = 1000
+        '
         'ChatArea
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -123,4 +129,5 @@ Partial Class ChatArea
     Friend WithEvents ChatScrollPanel As Panel
     Friend WithEvents ChatPanel As Panel
     Friend WithEvents btnKonaktEntfernen As Button
+    Friend WithEvents chatTimer As Timer
 End Class

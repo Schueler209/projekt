@@ -22,7 +22,7 @@ Public Class MessageControl
         If isOwn Then
 
             Label2.Text = ""
-        Else
+        ElseIf msg.user IsNot Nothing Then
 
             Label2.Text = msg.user.name & ":"
 
