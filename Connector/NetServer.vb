@@ -119,22 +119,24 @@ Public Class NetServer
 
                     Dim sendmsg As Tuple(Of Message, Integer()) = OnSendMessage(id, idchat, message)
 
+                    If sendmsg IsNot Nothing Then
+                        Dim res As New ConnectionData("message")
+                        res.addData("message", sendmsg.Item1)
+                        connector.send(client, res)
 
-                    Dim res As New ConnectionData("message")
-                    res.addData("message", sendmsg.Item1)
-                    connector.send(client, res)
-
-                    If sendmsg.Item1 IsNot Nothing Then
-                        For Each reciever As Integer In sendmsg.Item2
-                            If loggedIn.ContainsKey(reciever) Then
-                                Dim data As New ConnectionData("message")
-                                data.addData("message", sendmsg.Item1)
-                                connector.send(loggedIn(reciever), data)
-                            End If
-                        Next
+                        If sendmsg.Item1 IsNot Nothing Then
+                            For Each reciever As Integer In sendmsg.Item2
+                                If loggedIn.ContainsKey(reciever) Then
+                                    Dim data As New ConnectionData("message")
+                                    data.addData("message", sendmsg.Item1)
+                                    connector.send(loggedIn(reciever), data)
+                                End If
+                            Next
 
 
+                        End If
                     End If
+
                 End If
 
             Case "loggedOut"
@@ -163,7 +165,6 @@ Public Class NetServer
                     Dim chat As Integer = req.Data.Item("chat")
                     Dim userID As Integer = req.Data.Item("UserID")
                     Dim recieverId As Integer = req.Data.Item("reciever")
-
 
                     Dim success As Integer = OnDeleteChat(chat, userID)
 
