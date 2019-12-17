@@ -21,7 +21,6 @@ Public Class Settings
 
         NetworkClass.net.OnSettings = AddressOf onsettings
 
-
     End Sub
     Public Sub onsettings(settings As Boolean)
         If settings Then
