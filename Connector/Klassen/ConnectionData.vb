@@ -51,7 +51,7 @@ Friend Class ConnectionData
             val = DirectCast(formatter.Deserialize(M), ConnectionData)
         Catch e As SerializationException
             Console.WriteLine("Failed to serialize. Reason: " & e.Message)
-            Throw
+
         End Try
 
         Return val

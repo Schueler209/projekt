@@ -130,7 +130,7 @@ Module Module1
             updatecommand.ExecuteNonQuery()
         Catch ex As Exception
             Console.WriteLine(ex.Message)
-            Return Nothing
+            Return New Tuple(Of Message, Integer())(Nothing, Nothing)
         End Try
 
         Dim msg As New Message(getUser(UserID), ChatID, Date.Now, Message)
