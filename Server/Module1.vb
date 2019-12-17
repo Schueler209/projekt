@@ -56,7 +56,7 @@ Module Module1
 
     Public Function CheckLogin(username As String, password As String) As User
         Dim reader = ReaderQuery("SELECT ID, [name], Colour FROM Users WHERE Username = '" & username & "'And [Password] = '" & password & "'")
-        If reader IsNot Nothing And reader.HasRows Then
+        If reader IsNot Nothing AndAlso reader.HasRows Then
             reader.Read()
             Return New User(username, reader.GetString(1), reader.GetInt32(0), reader.GetInt32(2))
         Else
@@ -113,21 +113,21 @@ Module Module1
     Public Function AddMessage(UserID As Integer, ChatID As Integer, Message As String) As Tuple(Of Message, Integer())
         Try
             Dim conn As New OleDbConnection(ConnectionStr)
-        conn.Open()
+            conn.Open()
 
-        Dim insertcommand As New OleDbCommand("INSERT INTO Messages (ChatID, UserID, Message, Datum) VALUES (@ChatID, @UserID, @Message, @Datum);")
-        insertcommand.Connection = conn
-        insertcommand.Parameters.Add("@ChatID", OleDbType.Integer).Value = ChatID
-        insertcommand.Parameters.Add("@UserID", OleDbType.Integer).Value = UserID
-        insertcommand.Parameters.Add("@Message", OleDbType.Char).Value = Message
-        insertcommand.Parameters.Add("@Datum", OleDbType.Date).Value = Date.Now
-        insertcommand.CommandType = CommandType.Text
+            Dim insertcommand As New OleDbCommand("INSERT INTO Messages (ChatID, UserID, Message, Datum) VALUES (@ChatID, @UserID, @Message, @Datum);")
+            insertcommand.Connection = conn
+            insertcommand.Parameters.Add("@ChatID", OleDbType.Integer).Value = ChatID
+            insertcommand.Parameters.Add("@UserID", OleDbType.Integer).Value = UserID
+            insertcommand.Parameters.Add("@Message", OleDbType.Char).Value = Message
+            insertcommand.Parameters.Add("@Datum", OleDbType.Date).Value = Date.Now
+            insertcommand.CommandType = CommandType.Text
 
             insertcommand.ExecuteNonQuery()
 
             Dim updatecommand As New OleDbCommand("UPDATE Chats SET Datum = '" & Date.Now & "'" & " WHERE ID = " & ChatID & "")
             updatecommand.Connection = conn
-        updatecommand.ExecuteNonQuery()
+            updatecommand.ExecuteNonQuery()
         Catch ex As Exception
             Console.WriteLine(ex.Message)
             Return Nothing
@@ -162,7 +162,7 @@ Module Module1
     'Namen ändern
     Public Function changeSettings(ID As Integer, NewName As String, Password As String, NewPassword As String, Colour As Integer) As Boolean
         Dim reader = ReaderQuery("SELECT ID FROM Users WHERE ID = " & ID & " And [Password] = '" & Password & "'")
-        If reader IsNot Nothing And reader.HasRows Then
+        If reader IsNot Nothing AndAlso reader.HasRows Then
             If NewPassword = "" Then
                 NewPassword = Password
             End If
