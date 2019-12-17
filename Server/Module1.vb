@@ -111,8 +111,8 @@ Module Module1
     End Function
     'Nachricht schicken
     Public Function AddMessage(UserID As Integer, ChatID As Integer, Message As String) As Tuple(Of Message, Integer())
-
-        Dim conn As New OleDbConnection(ConnectionStr)
+        Try
+            Dim conn As New OleDbConnection(ConnectionStr)
         conn.Open()
 
         Dim insertcommand As New OleDbCommand("INSERT INTO Messages (ChatID, UserID, Message, Datum) VALUES (@ChatID, @UserID, @Message, @Datum);")
@@ -123,19 +123,14 @@ Module Module1
         insertcommand.Parameters.Add("@Datum", OleDbType.Date).Value = Date.Now
         insertcommand.CommandType = CommandType.Text
 
-        Try
             insertcommand.ExecuteNonQuery()
+
+            Dim updatecommand As New OleDbCommand("UPDATE Chats SET Datum = '" & Date.Now & "'" & " WHERE ID = " & ChatID & "")
+            updatecommand.Connection = conn
+        updatecommand.ExecuteNonQuery()
         Catch ex As Exception
             Console.WriteLine(ex.Message)
             Return Nothing
-        End Try
-
-        Dim updatecommand As New OleDbCommand("UPDATE Chats SET Datum = '" & Date.Now & "'" & " WHERE ID = " & ChatID & "")
-        updatecommand.Connection = conn
-        Try
-            updatecommand.ExecuteNonQuery()
-        Catch ex As Exception
-            Console.WriteLine(ex.Message)
         End Try
 
         Dim msg As New Message(getUser(UserID), ChatID, Date.Now, Message)
