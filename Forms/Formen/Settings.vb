@@ -6,6 +6,7 @@ Public Class Settings
         NetworkClass.net.OnSettings = AddressOf onsettings
         txtName.Text = NetworkClass.login.name
         lblUsername.Text = "Dein Benutzername: " & NetworkClass.login.benutzername
+        Profilfarbe1.SelectedColour = NetworkClass.login.colour
         lblFehler.Text = ""
     End Sub
 
