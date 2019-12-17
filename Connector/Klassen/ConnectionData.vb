@@ -46,7 +46,7 @@ Friend Class ConnectionData
     Shared Function Serialized(bytes As Byte()) As ConnectionData
         Dim M As New MemoryStream(bytes, False)
         Dim formatter As New BinaryFormatter
-        Dim val
+        Dim val As ConnectionData = Nothing
         Try
             val = DirectCast(formatter.Deserialize(M), ConnectionData)
         Catch e As SerializationException

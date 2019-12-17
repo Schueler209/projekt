@@ -8,7 +8,6 @@ Public Class ChatArea
     End Sub
 
     Private selectedChat As Chat
-    Private elapsedSeconds As Integer = 0
     Public Property Chat As Chat
         Get
             Return selectedChat
@@ -81,9 +80,9 @@ Public Class ChatArea
 
         ChatPanel.ScrollControlIntoView(messagecontrol)
     End Sub
-
+    Private blockNewMessage = False
     Private Sub SendMessage()
-        If elapsedSeconds <= 0 Then
+        If Not blockNewMessage Then
             If txtEingabe.Text.ToLower = "ttt" Then
                 TicTacToe.isInitiator = True
                 TicTacToe.opponentId = Chat.user.id
@@ -97,15 +96,12 @@ Public Class ChatArea
                 NetworkClass.net.SendMessage(NetworkClass.login.id, selectedChat.ID, txtEingabe.Text.Trim())
                 txtEingabe.Clear()
 
-                btnSenden.Text = "Warte [2]"
-                elapsedSeconds = 2
+                blockNewMessage = True
                 btnSenden.Enabled = False
                 chatTimer.Start()
 
             End If
         End If
-
-
     End Sub
 
 
@@ -133,21 +129,12 @@ Public Class ChatArea
 
     End Sub
 
-    Private Sub ChatPanel_Paint(sender As Object, e As PaintEventArgs) Handles ChatPanel.Paint
-
-    End Sub
-
     Private Sub chatTimer_Tick(sender As Object, e As EventArgs) Handles chatTimer.Tick
 
-        Console.WriteLine(elapsedSeconds)
-
-        elapsedSeconds = elapsedSeconds - 1
-        btnSenden.Text = "Warte [" & elapsedSeconds & "]"
-        If elapsedSeconds <= 0 Then
-            btnSenden.Enabled = True
-            btnSenden.Text = "Senden"
-            chatTimer.Stop()
-        End If
+        btnSenden.Enabled = True
+        btnSenden.Text = "Senden"
+        blockNewMessage = False
+        chatTimer.Stop()
     End Sub
 
     Private Sub txtEingabe_TextChanged(sender As Object, e As EventArgs) Handles txtEingabe.TextChanged

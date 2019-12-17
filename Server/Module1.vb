@@ -37,6 +37,7 @@ Module Module1
 
         Dim reader = checkCommand.ExecuteReader
         If reader IsNot Nothing And reader.HasRows Then
+            conn.Close()
             Return Nothing
         Else
             Dim insertCommand As New OleDbCommand("INSERT INTO Users ([Name],Username,[Password],Colour) VALUES (@displayname,@username,@password,@colour); ")
@@ -49,7 +50,10 @@ Module Module1
             insertCommand.CommandType = CommandType.Text
             insertCommand.ExecuteNonQuery()
             command.Connection = conn
-            Return New User(username, name, command.ExecuteScalar(), colour)
+            Dim user As New User(username, name, command.ExecuteScalar(), colour)
+            reader.Close()
+            conn.Close()
+            Return user
         End If
     End Function
 
@@ -58,7 +62,9 @@ Module Module1
         Dim reader = ReaderQuery("SELECT ID, [name], Colour FROM Users WHERE Username = '" & username & "'And [Password] = '" & password & "'")
         If reader IsNot Nothing AndAlso reader.HasRows Then
             reader.Read()
-            Return New User(username, reader.GetString(1), reader.GetInt32(0), reader.GetInt32(2))
+            Dim user As New User(username, reader.GetString(1), reader.GetInt32(0), reader.GetInt32(2))
+            reader.Close()
+            Return user
         Else
             Return Nothing
         End If
@@ -89,6 +95,7 @@ Module Module1
                 insertCommand.ExecuteNonQuery()
             Catch ex As Exception
                 Console.WriteLine(ex.Message)
+                conn.Close()
                 Return Nothing
             End Try
             Dim command As New OleDbCommand("SELECT @@IDENTITY")
@@ -96,12 +103,13 @@ Module Module1
 
             Dim user1 As User = getUser(ID)
             Dim user2 As User = getUser(ID2)
-
+            Dim newChatID = command.ExecuteScalar()
+            conn.Close()
             If user2 Is Nothing Then
                 Return Nothing
             End If
 
-            Return New Tuple(Of Chat, User)(New Chat(command.ExecuteScalar(), user2, DateTime.Now), user1)
+            Return New Tuple(Of Chat, User)(New Chat(newChatID, user2, DateTime.Now), user1)
 
         End If
     End Function
@@ -128,7 +136,9 @@ Module Module1
             Dim updatecommand As New OleDbCommand("UPDATE Chats SET Datum = '" & Date.Now & "'" & " WHERE ID = " & ChatID & "")
             updatecommand.Connection = conn
             updatecommand.ExecuteNonQuery()
+            conn.Close()
         Catch ex As Exception
+
             Console.WriteLine(ex.Message)
             Return Nothing
         End Try
@@ -143,9 +153,6 @@ Module Module1
 
     Public Function getMessages(ChatID As Integer) As Message()
         Try
-            Dim conn As New OleDbConnection(ConnectionStr)
-            conn.Open()
-
             Dim reader = ReaderQuery("SELECT Message, Datum, UserID FROM Messages WHERE ChatID = " & ChatID)
             If reader IsNot Nothing Then
                 Dim messages As New List(Of Message)
@@ -153,6 +160,7 @@ Module Module1
                     Dim msg As New Message(getUser(reader.GetInt32(2)), ChatID, reader.GetDateTime(1), reader.GetString(0))
                     messages.Add(msg)
                 Loop
+                reader.Close()
                 Return messages.ToArray()
             Else
                 Return Nothing
@@ -178,6 +186,7 @@ Module Module1
             updatecommand.Connection = conn
             Try
                 updatecommand.ExecuteNonQuery()
+                reader.Close()
             Catch ex As Exception
                 Console.WriteLine(ex.Message)
                 Return False
@@ -196,6 +205,7 @@ Module Module1
         deletecommand.Connection = conn
         Try
             deletecommand.ExecuteNonQuery()
+            conn.Close()
         Catch ex As Exception
             Console.WriteLine(ex.Message)
             Return Nothing

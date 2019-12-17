@@ -10,10 +10,13 @@ Module DBUtils
         Try
             command.Connection = conn
             conn.Open()
-            Return command.ExecuteReader
+            Dim reader = command.ExecuteReader
+            Return reader
         Catch ex As Exception
             Console.WriteLine(ex.Message)
+            Return Nothing
         End Try
+        Return Nothing
     End Function
 
 
@@ -57,8 +60,10 @@ Module DBUtils
                 End If
                 friendlist.Add(friendID)
             Loop
+            reader.Close()
             Return friendlist.ToArray()
         Else
+            reader.Close()
             Return {}
         End If
 
@@ -71,8 +76,10 @@ Module DBUtils
             If friendID = UserID Then
                 friendID = reader.GetInt32(1)
             End If
+            reader.Close()
             Return friendID
         End If
+        reader.Close()
         Return Nothing
     End Function
     'Alle Chats auflisten
@@ -87,8 +94,10 @@ Module DBUtils
                 End If
                 friendlist.Add(New Chat(reader.GetInt32(0), getUser(friendID), reader.GetDateTime(3)))
             Loop
+            reader.Close()
             Return friendlist.ToArray()
         Else
+            reader.Close()
             Return Nothing
         End If
 
@@ -105,8 +114,10 @@ Module DBUtils
                     userlist.Add(New User(reader.GetString(1), reader.GetString(2), id, reader.GetInt32(3)))
                 End If
             Loop
+            reader.Close()
             Return userlist.ToArray()
         Else
+            reader.Close()
             Return Nothing
         End If
     End Function
