@@ -130,7 +130,7 @@ Module Module1
             updatecommand.ExecuteNonQuery()
         Catch ex As Exception
             Console.WriteLine(ex.Message)
-            Return New Tuple(Of Message, Integer())(Nothing, Nothing)
+            Return Nothing
         End Try
 
         Dim msg As New Message(getUser(UserID), ChatID, Date.Now, Message)
@@ -142,20 +142,26 @@ Module Module1
     End Function
 
     Public Function getMessages(ChatID As Integer) As Message()
-        Dim conn As New OleDbConnection(ConnectionStr)
-        conn.Open()
+        Try
+            Dim conn As New OleDbConnection(ConnectionStr)
+            conn.Open()
 
-        Dim reader = ReaderQuery("SELECT Message, Datum, UserID FROM Messages WHERE ChatID = " & ChatID)
-        If reader IsNot Nothing Then
-            Dim messages As New List(Of Message)
-            Do While reader.Read
-                Dim msg As New Message(getUser(reader.GetInt32(2)), ChatID, reader.GetDateTime(1), reader.GetString(0))
-                messages.Add(msg)
-            Loop
-            Return messages.ToArray()
-        Else
-            Return Nothing
-        End If
+            Dim reader = ReaderQuery("SELECT Message, Datum, UserID FROM Messages WHERE ChatID = " & ChatID)
+            If reader IsNot Nothing Then
+                Dim messages As New List(Of Message)
+                Do While reader.Read
+                    Dim msg As New Message(getUser(reader.GetInt32(2)), ChatID, reader.GetDateTime(1), reader.GetString(0))
+                    messages.Add(msg)
+                Loop
+                Return messages.ToArray()
+            Else
+                Return Nothing
+            End If
+        Catch ex As Exception
+            Console.WriteLine(ex.Message)
+            Return {}
+        End Try
+
     End Function
 
 
