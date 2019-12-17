@@ -26,13 +26,17 @@ Public Class ChatArea
     Private Sub recievemessages(msg As Message())
         ' Alle bisherigen Controls entfernen
         ChatPanel.Controls.Clear()
-        For Each item In msg
-            addMessage(item)
+        If msg IsNot Nothing Then
+            For Each item In msg
+                addMessage(item)
 
-        Next
+            Next
 
-        ' Scrollen
-        ChatPanel.VerticalScroll.Value = ChatPanel.VerticalScroll.Maximum
+            ' Scrollen
+            ChatPanel.VerticalScroll.Value = ChatPanel.VerticalScroll.Maximum
+
+        End If
+
 
     End Sub
 
@@ -54,7 +58,10 @@ Public Class ChatArea
     End Sub
 
     Public Sub addMessage(msg As Message)
-        Dim isOwn = msg.user.id = NetworkClass.login.id
+        Dim isOwn = False
+        If msg.user IsNot Nothing Then
+            isOwn = msg.user.id = NetworkClass.login.id
+        End If
 
         ChatPanel.VerticalScroll.Value = ChatPanel.VerticalScroll.Minimum
 

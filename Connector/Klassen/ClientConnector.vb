@@ -64,7 +64,7 @@ Friend Class ClientConnector
     Private Sub recieveThreadCompleted(sender As BackgroundWorker, e As RunWorkerCompletedEventArgs)
 
         ' Wenn verbindung abbricht
-        If CType(e.Result, ConnectionData).Type = "ConnectionLost" Then
+        If e.Result Is Nothing OrElse CType(e.Result, ConnectionData).Type = "ConnectionLost" Then
             ' Schließe die Verbindung
             disconnect()
             ' sende Disconnect Event

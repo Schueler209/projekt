@@ -71,11 +71,14 @@ Public Class Chats
     End Sub
 
     Private Sub onGetChats(FriendChats As Chat())
-        chats = FriendChats.ToList()
-        showChats()
-        If FriendChats.Length > 0 Then
-            ltbKontakte.SelectedIndex = 0
+        If FriendChats IsNot Nothing Then
+            chats = FriendChats.ToList()
+            showChats()
+            If FriendChats.Length > 0 Then
+                ltbKontakte.SelectedIndex = 0
+            End If
         End If
+
 
     End Sub
 
